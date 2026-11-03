@@ -1,0 +1,35 @@
+﻿node_modules/
+dist/
+out/
+.env
+.env.*
+!.env.example
+*.log
+*.pfx
+*.p12
+*.pem
+
+# Electron dependencies
+node_modules/
+
+# Build outputs
+release/
+output/
+dist/
+out/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.pem
+
+# System files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-03",
+  "timezone": "Europe/Rome",
+  "dependencyInstall": "npm ci --ignore-scripts; official Electron installation restored; npm ls --all has no invalid dependencies",
+  "unitTests": { "command": "npm test", "passed": 47, "failed": 0 },
+  "sourceDesktopTests": { "command": "npm run test:ui", "passed": 6, "failed": 0 },
+  "productionBuild": { "command": "npm run build", "exitCode": 0 },
+  "asarBuild": {
+    "command": "npm exec electron-builder -- --win --dir --config.directories.output=output/security-build --config.win.signAndEditExecutable=false",
+    "exitCode": 0,
+    "scope": "Validation directory build; executable resource editing/signing skipped; historical release installers unchanged"
+  },
+  "packagedDesktopTests": {
+    "command": "N7M_PACKAGED_TEST=1 N7M_PACKAGED_DIR=D:/email-manager-app/output/security-build/win-unpacked npm run test:ui",
+    "passed": 6,
+    "failed": 0
+  },
+  "verifiedAsarContents": {
+    "xlsxImporterAndWorker": true,
+    "minimatchCompatibilityAdapter": "1.0.1",
+    "officialMinimatchEngine": "11.0.4",
+    "uuid": "11.1.1",
+    "jszip": "3.10.2"
+  },
+  "npmAudit": { "critical": 0, "high": 0, "moderate": 0, "low": 0, "total": 0 },
+  "note": "Initial report/audit/secret scan are retained as historical evidence; this is a repair validation record, not a claim of exhaustive absence of vulnerabilities."
+}

@@ -1,0 +1,82 @@
+{
+  "name": "n7m-custom-email-management",
+  "version": "1.3.0",
+  "description": "N7M - Custom Email Management",
+  "main": "electron/main.cjs",
+  "author": "N7M",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"",
+    "build": "vite build",
+    "start": "electron .",
+    "dist": "npm run build && electron-builder --win nsis",
+    "dist:portable": "npm run build && electron-builder --win portable zip",
+    "test": "node --test tests/model.test.mjs tests/vault.test.cjs tests/xlsx.test.cjs tests/dependencies.test.cjs",
+    "test:ui": "playwright test",
+    "dist:all": "npm run build && electron-builder --win nsis portable zip"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "lucide-react": "1.34.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "jszip": "3.10.2",
+    "minimatch": "file:vendor/n7m-minimatch-compat-1.0.1.tgz"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@vitejs/plugin-react": "6.1.0",
+    "autoprefixer": "10.5.4",
+    "concurrently": "10.0.6",
+    "electron": "45.2.1",
+    "electron-builder": "26.18.0",
+    "postcss": "8.5.32",
+    "tailwindcss": "3.4.17",
+    "vite": "8.3.5",
+    "wait-on": "9.1.0"
+  },
+  "build": {
+    "appId": "com.emailmanager.desktop",
+    "productName": "N7M - Custom Email Management",
+    "icon": "assets/2.ico",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "src/model.mjs",
+      "src/mutations.mjs",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-NoInstall.${ext}"
+    },
+    "nsis": {
+      "artifactName": "${productName}-${version}-Setup.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "N7M - Custom Email Management"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-Portable.${ext}",
+      "requestExecutionLevel": "user"
+    }
+  },
+  "type": "module",
+  "overrides": {
+    "uuid": "11.1.1",
+    "minimatch": "$minimatch"
+  }
+}
