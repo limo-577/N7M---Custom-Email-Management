@@ -33,3 +33,9 @@ npm-debug.log*
 # System files
 .DS_Store
 Thumbs.db
+
+# Test results and cache
+test-results/
+playwright-report/
+coverage/
+.cache/
