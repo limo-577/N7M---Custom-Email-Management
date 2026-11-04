@@ -3,8 +3,6 @@ name: Windows Build and Release
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
   workflow_dispatch:
@@ -37,7 +35,7 @@ jobs:
         run: npm test
 
       - name: Build Windows packages
-        run: npm run dist:all -- --publish never
+        run: npm run dist:all
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
 
