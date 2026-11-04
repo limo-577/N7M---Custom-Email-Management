@@ -17,6 +17,7 @@ const instanceLock = app.requestSingleInstanceLock();
 if (!instanceLock) app.quit();
 const isDev = !app.isPackaged;
 let mainWindow, toolbarWindow, model, mutations, vault;
+let startupPromise;
 let copiedCredential = '', clipboardTimer;
 const opening = new Set();
 function windows() { return [mainWindow, toolbarWindow].filter(win => win && !win.isDestroyed()); }
@@ -165,9 +166,11 @@ handle('open-toolbar', () => { createWindow(true); return {}; });
 handle('close-toolbar', () => { toolbarWindow?.close(); return {}; });
 handle('set-toolbar-always-on-top', value => { toolbarWindow?.setAlwaysOnTop(Boolean(value)); return {}; });
 handle('open-main-window', () => { createWindow(); return {}; }, { authenticated: false });
-if (instanceLock) app.whenReady().then(async () => {
-  model = await import(pathToFileURL(path.join(__dirname, '..', 'src', 'model.mjs')).href);
-  mutations = await import(pathToFileURL(path.join(__dirname, '..', 'src', 'mutations.mjs')).href);
+if (instanceLock) startupPromise = app.whenReady().then(async () => {
+  [model, mutations] = await Promise.all([
+    import(pathToFileURL(path.join(__dirname, '..', 'src', 'model.mjs')).href),
+    import(pathToFileURL(path.join(__dirname, '..', 'src', 'mutations.mjs')).href),
+  ]);
   vault = new VaultStore(app.getPath('userData'), model.normalizeState);
   const session = require('electron').session.defaultSession;
   session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
@@ -176,7 +179,17 @@ if (instanceLock) app.whenReady().then(async () => {
   powerMonitor.on('suspend', lockVault);
   createWindow();
 });
-app.on('second-instance', () => { if (model) createWindow(); });
-app.on('activate', () => { if (model) createWindow(); });
+function revealMainWindow() {
+  // A repeated click can arrive while the first process is still initializing.
+  // Wait for the vault and IPC dependencies rather than opening a half-ready UI.
+  if (vault) createWindow();
+  else startupPromise?.then(() => createWindow()).catch(() => {});
+}
+startupPromise?.catch(error => {
+  dialog.showErrorBox(APP_NAME, `启动未能完成，请重新打开软件。\n${error.message}`);
+  app.quit();
+});
+app.on('second-instance', revealMainWindow);
+app.on('activate', revealMainWindow);
 app.on('before-quit', () => { xlsxImporter.dispose(); clearCredentialClipboard(); vault?.lock(); });
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });

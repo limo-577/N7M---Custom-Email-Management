@@ -1,6 +1,6 @@
 # N7M - Custom Email Management
 
-Windows 桌面邮箱与浏览器账号管理工具，当前版本 **1.3.0**。
+Windows 桌面邮箱与浏览器账号管理工具，当前版本 **1.3.1**。
 
 ## 账号管理
 
@@ -71,8 +71,18 @@ npm run dist:all
 
 输出 Windows x64 三种分发形式：
 
-- `release/N7M - Custom Email Management-1.3.0-Setup.exe`：安装版。
-- `release/N7M - Custom Email Management-1.3.0-Portable.exe`：单文件免安装版。双击启动会先解压到系统临时目录，退出后清理，启动时需稍等片刻。
-- `release/N7M - Custom Email Management-1.3.0-NoInstall.zip`：解压免安装版。完整解压后运行同目录的主 EXE，保留 DLL、resources、locales 等配套文件，日常启动更快。
+- `release/N7M - Custom Email Management-1.3.1-Setup.exe`：安装版。
+- `release/N7M - Custom Email Management-1.3.1-Portable.exe`：单文件免安装版。首次运行显示启动进度并准备运行文件，完成后保留运行文件缓存；同一版本后续启动直接复用缓存，重复点击会唤起同一个程序窗口。
+- `release/N7M - Custom Email Management-1.3.1-NoInstall.zip`：解压免安装版。完整解压后运行同目录的主 EXE，保留 DLL、resources、locales 等配套文件，日常启动更快。
 
 开发版桌面流程测试使用独立目录与测试账号；指定 `N7M_PACKAGED_TEST=1` 可对 `release/win-unpacked` 的实际打包程序运行同一套验证。
+
+## 启动优化（1.3.1）
+
+单文件版不再每次启动都解压完整程序。运行文件缓存在 `%LOCALAPPDATA%/N7M/RuntimeCache/` 下，缓存按版本和构建内容区分，完成准备后才写入完成标记；中断的准备过程不会被当作可用缓存。启动器在准备期间提供进度，并阻止重复点击并发解压。
+
+缓存只包含程序运行文件，账号加密资料仍保存在原来的 `%APPDATA%/email-manager/`。启动优化没有降低密码加密参数，也不会记住软件密码或跳过锁定。安装版和解压版同样精简了运行文件，并在应用初始化期间提供启动文字反馈。
+
+Windows 打包通过 `build/build-windows.cjs` 使用缓存启动器模板 `build/portable-fast.nsi`。构建适配器只在当前构建进程替换固定版本 electron-builder 的 portable 模板，不修改 node_modules；升级打包工具时会检查兼容性，避免静默退回旧启动方式。
+
+本机验证：旧单文件版两次启动到密码框为 28.35 秒和 26.38 秒；1.3.1 完整首次准备约 15.26 秒，0.84 秒内显示启动提示，完成缓存后再次启动约 0.72 秒。已验证准备窗口和正式程序最小化后重复点击都恢复原窗口，没有新增程序页面，缓存文件没有重新解压改写。构建适配器另有 `node --test build/launcher.test.cjs` 检查。

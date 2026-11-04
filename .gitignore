@@ -39,3 +39,5 @@ test-results/
 playwright-report/
 coverage/
 .cache/
+.startup-qa/
+build/.fixture/

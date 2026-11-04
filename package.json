@@ -9,17 +9,14 @@
     "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"",
     "build": "vite build",
     "start": "electron .",
-    "dist": "npm run build && electron-builder --win nsis",
-    "dist:portable": "npm run build && electron-builder --win portable zip",
+    "dist": "npm run build && node build/build-windows.cjs nsis",
+    "dist:portable": "npm run build && node build/build-windows.cjs portable zip",
     "test": "node --test tests/model.test.mjs tests/vault.test.cjs tests/xlsx.test.cjs tests/dependencies.test.cjs",
     "test:ui": "playwright test",
-    "dist:all": "npm run build && electron-builder --win nsis portable zip"
+    "dist:all": "npm run build && node build/build-windows.cjs nsis portable zip"
   },
   "dependencies": {
     "exceljs": "4.4.0",
-    "lucide-react": "1.34.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
     "jszip": "3.10.2",
     "minimatch": "file:vendor/n7m-minimatch-compat-1.0.1.tgz"
   },
@@ -33,7 +30,10 @@
     "postcss": "8.5.32",
     "tailwindcss": "3.4.17",
     "vite": "8.3.5",
-    "wait-on": "9.1.0"
+    "wait-on": "9.1.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "lucide-react": "1.34.0"
   },
   "build": {
     "appId": "com.emailmanager.desktop",
@@ -48,7 +48,8 @@
       "electron/**/*",
       "src/model.mjs",
       "src/mutations.mjs",
-      "package.json"
+      "package.json",
+      "!node_modules/exceljs/dist/**"
     ],
     "win": {
       "target": [
@@ -71,7 +72,8 @@
     },
     "portable": {
       "artifactName": "${productName}-${version}-Portable.${ext}",
-      "requestExecutionLevel": "user"
+      "requestExecutionLevel": "user",
+      "useZip": true
     }
   },
   "type": "module",
