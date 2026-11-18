@@ -12,6 +12,17 @@ const command = code => ({ code, error: null, signal: null });
 const findings = () => ({ ok: false, advisory: risk.ADVISORY, findings: Object.entries(risk.EXPECTED).map(([installationPath, version]) => ({
   installationPath, version, dev: true, probes: attacks.map(attack => ({ pattern: attack.pattern, options: attack.options || {}, milliseconds: 2000, error: 'ETIMEDOUT', status: null, signal: 'SIGTERM', stderr: '' }))
 })) });
+test('review eligibility requires fresh boundary evidence and never claims package approval or matcher repair', () => {
+  const root = path.resolve(__dirname, '..');
+  const now = Date.parse(JSON.parse(fs.readFileSync(path.join(root, 'security-audit/2026-11-18-withdrawal/retrieval.json'), 'utf8').replace(/^\uFEFF/, '')).completedAt) + 1;
+  const input = { root, now, rawAudit: JSON.stringify(clean()), rawProduction: JSON.stringify(clean()), rawProbes: JSON.stringify(findings()),
+    full: command(0), production: command(0), probes: command(1), protection: { ...command(0), containment: { assignedBeforeStart: true, killDescendantsOnClose: true } },
+    protectionOutput: Buffer.from('# tests 8\n# pass 8\n# fail 0\n# skipped 0\n') };
+  const result = policy.review(input);
+  assert.equal(result.guardedBuildEligible, true); assert.equal(result.releaseEligible, false); assert.equal(result.publicationAuthorized, false);
+  assert.equal(result.performance.timeouts, 24); assert.equal(result.performance.matcherFixed, false);
+  for (const changed of [{ protection: command(1) }, { protectionOutput: Buffer.from('# tests 8\n# pass 7\n# fail 0\n# skipped 1\n') }, { protection: undefined }]) assert.throws(() => policy.review({ ...input, ...changed }), /boundary/);
+});
 test('current zero audit is accepted as zero, unknown findings and invalid executions are refused', () => {
   policy.cleanAudit(JSON.stringify(clean()), command(0));
   for (const modify of [r => { r.vulnerabilities.unknown = { severity: 'low' }; }, r => { r.metadata.vulnerabilities.high = 1; }, r => { r.error = {}; }, r => { delete r.auditReportVersion; }]) {

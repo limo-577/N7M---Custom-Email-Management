@@ -44,27 +44,48 @@ evidence are rejected. Withdrawal evidence is checked for identity, hash, origin
 timestamp and a seven-day maximum age, with no automatic renewal.
 
 `reviewCompleted` means evidence collection and classification succeeded.
-`releaseEligible` is separate. Reproducible timeouts keep strict packaging blocked.
-The controller's current spawn timeout does not prove CPU/memory containment of
-all descendant Windows processes. This is an explicit unresolved blocker, not an
-accepted risk. No new signature or production authorization is created.
+`guardedBuildEligible` requires eight freshly executed CJS/ESM boundary and
+Windows resource-limit tests without skips. Review `releaseEligible` remains
+false; only a completed strict build and final payload verification can set it
+true. Raw matcher timeouts are never relabeled as passes.
+
+The build-only preload restricts patterns: no extglobs, regex grouping, nested or
+range braces, ambiguous repeated wildcards, arbitrary regex helpers or external
+private parse APIs. Public and internal matcher entries are wrapped before Node
+snapshots CJS exports for ESM. Long patterns, arrays and matcher inputs fail.
+Unsupported legitimate patterns also block instead of changing semantics.
+Only distribution inherits this preload; raw diagnostics use the real matcher.
+
+Every controller step joins a Windows Job Object before its suspended process
+resumes: 2 GiB committed memory per process, 6 GiB aggregate committed memory,
+64 active processes, 600 seconds aggregate CPU and a per-step wall deadline
+(20 minutes for distribution). No breakaway is enabled. Closing the job kills
+remaining descendants, including after normal root exit. Real CPU, memory,
+wall-deadline and orphan-cleanup tests verify enforcement. Launcher failure
+blocks; no uncontained fallback exists. This is a resource budget, not a proof
+of linear matching or a sandbox for executing hostile repository code.
+
+Distribution requires proof that all three installed matcher copies actually
+validated inputs. Rejections fail even if a dependency catches the exception.
+Final static verification still checks Setup, Portable and ZIP payloads. No
+risk signature or production authorization is generated. The normal route
+requires clean audits and mandatory controls, not an advisory exception.
 The old withdrawn-advisory signature route is inapplicable to an audit containing
 zero findings and is not silently repurposed as performance-risk approval.
 
 ## Minimum conditions for any performance exception
 
-Before another release attempt, implement and verify either a restricted glob
-boundary across all actual CJS/ESM entry points (including derived patterns and
-raw-regex helper APIs), or OS-enforced process-tree CPU/time/memory containment.
-Keep legitimate build glob controls and malicious-vector tests isolated. Record
-unknown entry points as blockers; a wrapper around only one picomatch copy is
-insufficient. Preserve installer static verification and unfiltered audit output.
+The boundary and resource limits must not be relaxed to make a build pass.
+Unknown copies, uncovered imports, unsupported patterns, skipped tests and any
+containment failure block. Keep legitimate glob controls and malicious cases
+isolated, and retain unfiltered audits and installer static verification.
 
-Any remaining bounded risk then requires a separate explicit performance-risk
-decision by the actual approver, bound to the new commit, lock/install hashes,
-fresh real audit and all probe/containment evidence, one UUID, one durable external
-ledger receipt, at most seven days, nonrenewing and revocable. No such policy or
-authorization is automatically signed here. Audit findings continue to block.
+Any request to accept input outside the enforced boundary or exceed its budget
+requires a separate explicit performance-risk decision and implementation review
+by the actual approver: new commit, lock/install hashes, fresh real audit and
+all probe/containment evidence, one UUID, one durable external ledger receipt,
+at most seven days, nonrenewing and revocable. No such bypass or authorization
+is implemented or automatically signed here. Audit findings continue to block.
 
 Local diagnostic test/package results are not release authorization. Existing
 v1.8.1 must remain untouched; no tag, push or GitHub Release is authorized.

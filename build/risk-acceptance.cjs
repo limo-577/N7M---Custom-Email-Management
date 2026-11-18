@@ -147,6 +147,7 @@ function verifyReview(root, directory, context, now = Date.now()) {
   for (const entry of state.files) requireThat(sha(fs.readFileSync(path.join(directory, safeRelative(entry.file)))) === entry.sha256, 'Prepared raw evidence changed');
   const status = JSON.parse(fs.readFileSync(path.join(directory, 'audit-status.json')));
   if (status.currentRiskReviewSha256) requireThat(sha(fs.readFileSync(path.join(directory, 'current-risk-review.json'))) === status.currentRiskReviewSha256, 'Current performance-risk evidence changed');
+  if (status.boundaryTestsSha256) requireThat(sha(fs.readFileSync(path.join(directory, 'build-boundary-tests.stdout'))) === status.boundaryTestsSha256, 'Build boundary evidence changed');
   return { directory: path.relative(root, directory).replaceAll('\\', '/'), sha256: sha(bytes) };
 }
 function checkInputs(root) {

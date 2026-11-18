@@ -54,12 +54,14 @@ test('workflow npm build command and manifest targets are accepted by the actual
   const buildStep = workflow.jobs.build.steps.find(step => step.name === 'Build Windows packages');
   // Fail if workflow arguments diverge from the wrapper again (for example,
   // forwarding unsupported --publish never from a previous electron-builder CLI).
-  const invocation = /^npm run (dist(?::[\w-]+)?)(?: -- (.+))?$/.exec(buildStep.run.trim());
-  assert.ok(invocation, 'CI must use a known npm distribution script');
-  const script = manifest.scripts[invocation[1]];
+  assert.equal(buildStep.run.trim(), 'node build/guarded-distribution.cjs', 'CI must use the resource-contained glob boundary');
+  const guardedSource = fs.readFileSync(path.join(root, 'build/guarded-distribution.cjs'), 'utf8');
+  assert.match(guardedSource, /boundedStep\(/); assert.match(guardedSource, /glob-build-guard\.cjs/);
+  assert.match(guardedSource, /'run', 'dist:all'/);
+  const script = manifest.scripts['dist:all'];
   const wrapper = /^npm run build && node build\/build-windows\.cjs(?: (.*))?$/.exec(script);
   assert.ok(wrapper, 'Distribution script must invoke the reviewed build wrapper');
-  const args = [wrapper[1], invocation[2]].filter(Boolean).join(' ').trim().split(/\s+/).filter(Boolean);
+  const args = wrapper[1].trim().split(/\s+/).filter(Boolean);
   assert.deepEqual(parseArguments(args).targetNames, ['nsis', 'portable', 'zip']);
   assert.ok(workflow.jobs.build.steps.some(step => step.run === 'npm test'));
 });
@@ -68,10 +70,14 @@ test('release builds gate on accepted-risk policy and current vulnerability audi
   const steps = workflow.jobs.build.steps;
   const install = steps.findIndex(step => step.run === 'npm ci');
   const policy = steps.findIndex(step => step.run === 'npm run check:dependencies');
-  const audit = steps.findIndex(step => step.run === 'npm audit --audit-level=low --json > npm-audit-raw.json');
-  const build = steps.findIndex(step => step.run === 'npm run dist:all');
+  const audit = steps.findIndex(step => step.name === 'Audit dependency vulnerabilities');
+  const build = steps.findIndex(step => step.run === 'node build/guarded-distribution.cjs');
   assert.ok(install >= 0 && install < policy && policy < audit && audit < build);
   assert.equal(steps[audit].if, '${{ !cancelled() }}');
+  assert.match(steps[audit].run, /npm audit --audit-level=low --json > \.risk-build\/strict-release\/npm-audit-raw.json/);
+  assert.match(steps[audit].run, /exit \$auditCode/);
+  const boundary = steps.findIndex(step => step.run === 'node build/ci-current-review.cjs');
+  assert.ok(audit < boundary && boundary < build);
   const verify = steps.findIndex(step => step.run === 'node build/verify-release.cjs --output release --report .risk-build/strict-release/artifact-verification.json');
   const upload = steps.findIndex(step => step.with?.name === 'N7M-Windows-x64');
   assert.ok(build < verify && verify < upload);
@@ -98,7 +104,7 @@ test('CI uses the locally verified toolchain and preserves failed raw audit repo
       assert.equal(setup.with['node-version'], '24.13.0');
       assert.ok(job.steps.some(step => step.run === 'npm install --global npm@11.6.2 --ignore-scripts'));
       if (configuration === workflows['controlled-build.yml']) continue;
-      const evidence = job.steps.find(step => step.with?.path?.split(/\s+/).includes('npm-audit-raw.json'));
+      const evidence = job.steps.find(step => step.with?.path?.split(/\s+/).includes(configuration === workflow ? '.risk-build/strict-release/**' : 'npm-audit-raw.json'));
       assert.equal(evidence.if, '${{ !cancelled() }}');
       assert.equal(evidence.with['if-no-files-found'], 'error');
       assert.ok(job.steps.every(step => !step['continue-on-error']));
@@ -113,7 +119,7 @@ test('CI uses the locally verified toolchain and preserves failed raw audit repo
     const checkout = candidate.steps.findIndex(step => step.uses?.startsWith('actions/checkout@'));
     assert.ok(preserve >= 0 && preserve < checkout, 'Windows checkouts must preserve canonical reviewed source bytes');
   }
-  const isolated = steps.find(step => step.run === 'npm run --silent check:picomatch > picomatch-probes.json');
+  const isolated = steps.find(step => step.run === 'node build/ci-current-review.cjs');
   assert.equal(isolated.if, '${{ !cancelled() }}');
 });
 

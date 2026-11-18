@@ -7,6 +7,7 @@ const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 const risk = require('./risk-acceptance.cjs');
 const currentRisk = require('./current-risk-review.cjs');
+const { boundedStep } = require('./bounded-step.cjs');
 const ROOT = path.resolve(__dirname, '..');
 function options(args) {
   const result = { mode: 'strict' };
@@ -38,13 +39,9 @@ function contextFromEnvironment(runId, ledger) {
 }
 function append(file, value) { fs.appendFileSync(file, JSON.stringify(value) + '\n'); }
 function runStep({ name, executable, args, output, env, timeout = 600000 }) {
-  const stdout = fs.openSync(path.join(output, `${name}.stdout`), 'wx');
-  const stderr = fs.openSync(path.join(output, `${name}.stderr`), 'wx');
   const startedAt = new Date().toISOString();
-  let child;
-  try { child = spawnSync(executable, args, { cwd: ROOT, env, windowsHide: true, timeout, killSignal: 'SIGKILL', stdio: ['ignore', stdout, stderr] }); }
-  finally { fs.closeSync(stdout); fs.closeSync(stderr); }
-  const result = { name, command: [executable, ...args], startedAt, finishedAt: new Date().toISOString(), code: child.status, signal: child.signal, error: child.error?.code || null };
+  const child = boundedStep({ name, executable, args, output, env, cwd: ROOT, timeout });
+  const result = { name, command: [executable, ...args], startedAt, finishedAt: new Date().toISOString(), code: child.status, signal: child.signal, error: child.error?.code || null, containment: child.containment };
   append(path.join(output, 'commands.jsonl'), result);
   console.log(`${name}: exit ${child.status}${child.error ? ` (${child.error.code})` : ''}`);
   return result;
@@ -128,12 +125,16 @@ async function main(args = process.argv.slice(2)) {
   fs.writeFileSync(path.join(output, 'audit-status.json'), JSON.stringify(reports, null, 2) + '\n');
   let currentDecision;
   if (full.code === 0 && ['strict', 'review'].includes(opts.mode)) {
+    const protection = step('build-boundary-tests', ['--test', '--test-reporter=tap', 'tests/glob-build-guard.test.cjs', 'tests/bounded-step.test.cjs']);
+    must(protection);
     currentDecision = currentRisk.review({ root: ROOT, rawAudit,
       rawProduction: fs.readFileSync(path.join(output, 'audit-production.stdout')),
-      rawProbes: fs.readFileSync(path.join(output, 'picomatch-probes.stdout')), full, production, probes });
+      rawProbes: fs.readFileSync(path.join(output, 'picomatch-probes.stdout')), full, production, probes,
+      protection, protectionOutput: fs.readFileSync(path.join(output, 'build-boundary-tests.stdout')) });
     fs.writeFileSync(path.join(output, 'current-risk-review.json'), JSON.stringify(currentDecision, null, 2) + '\n', { flag: 'wx' });
     // Bind this additional decision to the exact bytes of the existing sealed review.
     reports.currentRiskReviewSha256 = risk.sha(fs.readFileSync(path.join(output, 'current-risk-review.json')));
+    reports.boundaryTestsSha256 = risk.sha(fs.readFileSync(path.join(output, 'build-boundary-tests.stdout')));
     fs.writeFileSync(path.join(output, 'audit-status.json'), JSON.stringify(reports, null, 2) + '\n');
   }
   if (context.kind === 'local-verification' && ['strict', 'review'].includes(opts.mode)) risk.sealReview(ROOT, output, context);
@@ -147,7 +148,10 @@ async function main(args = process.argv.slice(2)) {
     risk.inspectAudit(rawAudit, JSON.parse(fs.readFileSync(path.join(ROOT, 'package-lock.json'))));
     console.log('Review evidence collected. No exception authorized and no build allowed.'); return;
   }
+  let buildInstallation;
   function recheck() {
+    risk.requireThat(risk.stable(source) === risk.stable(risk.sourceState(ROOT)), 'Reviewed source changed during the controlled build');
+    if (buildInstallation) risk.requireThat(buildInstallation === risk.installationState(ROOT), 'Installed dependencies changed during tests or distribution');
     if (!envelope) return;
     risk.requireThat(!fs.existsSync(path.join(ledger, `${envelope.statement.id}.revoked.json`)), 'Authorization revoked during build');
     if (context.kind === 'github') risk.requireThat(process.env.N7M_RISK_REVOKED === 'false', 'GitHub authorization missing or revoked');
@@ -158,8 +162,8 @@ async function main(args = process.argv.slice(2)) {
     }
   }
   if (opts.mode === 'strict') {
-    if (currentDecision) risk.requireThat(currentDecision.releaseEligible, 'Current audit is clean, but the separate performance-risk gate remains blocked; see current-risk-review.json');
-    must(full); must(probes);
+    if (currentDecision) risk.requireThat(currentDecision.guardedBuildEligible, 'Current audit is clean, but the separate performance-risk gate remains blocked; see current-risk-review.json');
+    must(full); if (!currentDecision) must(probes);
     const parsed = JSON.parse(rawAudit);
     risk.requireThat(parsed.auditReportVersion === 2 && !parsed.error && parsed.metadata?.vulnerabilities?.total === 0, 'Strict audit must be clean');
   } else {
@@ -177,15 +181,17 @@ async function main(args = process.argv.slice(2)) {
     console.log(`ONE-RUN ACCEPTED BUILD-TIME RISK: ${risk.ADVISORY}; ${approval.count} high findings remain; NOT FIXED.`);
   }
   recheck(); must(step('electron-runtime', [path.join(ROOT, 'node_modules/electron/install.js')]));
+  buildInstallation = risk.installationState(ROOT);
   recheck(); must(npm('tests', ['test']));
   recheck();
   const artifactDirectory = path.join(ROOT, 'release', `controlled-${context.runId}`);
   risk.requireThat(!fs.existsSync(artifactDirectory), 'Artifact output already exists; refuse overwrite');
-  must(npm('dist-all', ['run', 'dist:all', '--', '--output', artifactDirectory], 1200000));
+  const distribution = require('./guarded-distribution.cjs').build(artifactDirectory, output);
   recheck(); must(step('verify-artifacts', [path.join(ROOT, 'build/verify-release.cjs'), '--output', artifactDirectory, '--report', path.join(output, 'artifact-verification.json')]));
   recheck();
   const result = { ...reports, completedAt: new Date().toISOString(), artifactDirectory, riskDecision: approval || { mode: 'strict', acceptedRisk: false },
-    publicationAuthorized: false, authorizationConsumed: !!envelope, vulnerabilityFixed: false };
+    distribution, installationSha256: buildInstallation, lockSha256: risk.sha(fs.readFileSync(path.join(ROOT, 'package-lock.json'))),
+    releaseEligible: true, publicationAuthorized: false, authorizationConsumed: !!envelope, vulnerabilityFixed: false };
   fs.writeFileSync(path.join(output, 'build-result.json'), JSON.stringify(result, null, 2) + '\n');
   console.log('Verified build completed. Publication is a separate explicit decision.');
 }

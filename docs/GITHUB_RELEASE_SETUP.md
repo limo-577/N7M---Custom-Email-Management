@@ -1,6 +1,10 @@
 # GitHub 发布与一次性风险批准配置
 
-本指南以本仓库实际 YAML 和代码为准，机器可读对照见 `security-audit/release-preparation/workflow-contract.json`。不包含生产密钥、真实签名或自动授权。
+本指南不包含生产密钥、真实签名或自动授权。security-audit/release-preparation/workflow-contract.json 是历史审核快照，当前以 YAML 为准。
+
+**2026-11-18 撤回后更新：** 当前完整/生产审计为 0，历史 18 high 证据不变。正常严格路线保留完整审计原始退出码和 JSON，单独采集仍退出 1 的原始探测，执行八项 glob/Windows Job Object 边界测试；打包必须使用 node build/guarded-distribution.cjs，随后静态核验三个归档。安全证据上传路径为 .risk-build/strict-release/**。未知发现、未知路径、守卫拒绝、资源限制和覆盖检查失败均阻断，不使用 continue-on-error。
+
+当前采用本地 review/strict 构建后独立发布，见 LOCAL_RELEASE_1.8.2.md，不需要风险环境。以下签名/环境章节为**历史 18 high 通告例外路线参考**；当前零发现审计不能按历史路线签发例外，也不得据此声称当前仍有 18 high。没有批准任何放宽新性能边界的例外。
 
 ## 先区分两个工作流
 
@@ -9,7 +13,7 @@
 | `.github/workflows/release.yml` | `v*` 标签 push 或手动；构建只有 contents:read，标签发布任务才有 contents:write | **未声明环境** | 完整严格审计和 ReDoS 门禁通过才构建；只有标签 push 才自动发布同次运行的包。手动执行不发布 |
 | `.github/workflows/controlled-build.yml` | 仅本仓库 main 的 workflow_dispatch；contents:read、actions:read | mode=strict 用 `strict-build`；mode=picomatch-once 用 `picomatch-risk-acceptance` | 只生成供另行审核的构建和证据，**没有 Release 发布步骤或写权限** |
 
-所以配置例外环境不会改变 release.yml 的严格门禁。当前 18 high 和实际 ReDoS 探测仍会阻断普通标签发布。不要创建新标签试图绕过，更不能移动/重推已有 v1.8.1。
+所以配置例外环境不会改变 release.yml 的严格门禁。撤回前 18 high 曾阻断普通发布；当前按真实审计、输入约束和受控资源边界判定。不要创建新标签试图绕过，更不能移动/重推已有 v1.8.1。
 
 ## 仓库管理员需要执行的操作
 

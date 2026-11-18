@@ -53,22 +53,29 @@ function inspectProbes(bytes, command) {
   risk.requireThat(report.ok === (timeouts === 0) && command.code === (report.ok ? 0 : 1), 'Probe status was misrepresented');
   return { cases: Object.keys(risk.EXPECTED).length * attacks.length, timeouts, matcherFixed: false, rawExit: command.code };
 }
-function review({ root, rawAudit, rawProduction, rawProbes, full, production, probes, now }) {
+function review({ root, rawAudit, rawProduction, rawProbes, full, production, probes, protection, protectionOutput, now }) {
   cleanAudit(rawAudit, full); cleanAudit(rawProduction, production);
   const advisory = withdrawal(root, now);
   risk.checkLock(JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'))));
   risk.checkInputs(root);
   const performance = inspectProbes(rawProbes, probes);
+  const tap = String(protectionOutput || '');
+  risk.requireThat(protection?.code === 0 && !protection.error && !protection.signal &&
+    protection.containment?.assignedBeforeStart === true && protection.containment?.killDescendantsOnClose === true &&
+    /^# tests 8\r?$/m.test(tap) && /^# pass 8\r?$/m.test(tap) && /^# fail 0\r?$/m.test(tap) && /^# skipped 0\r?$/m.test(tap), 'Fresh, contained glob-boundary and resource-limit tests are required');
   return { schemaVersion: 1, reviewedAt: new Date(now || Date.now()).toISOString(), audit: { full: 0, production: 0 },
     advisory, performance, reviewCompleted: true, publicationAuthorized: false,
-    releaseEligible: performance.timeouts === 0,
+    releaseEligible: false, guardedBuildEligible: true,
     reachability: { repositoryConfigPinned: true, environmentOverridesStripped: true,
-      externalGlobInputInReviewedConfiguration: false, allTransitiveCallSitesConstrained: false },
-    blockers: performance.timeouts ? ['Raw matcher timeouts remain reproducible. Reviewed configuration contains no external glob input, but this does not prove every transitive matcher entry point is constrained.',
-      'The current controller timeout does not establish a Windows process-tree CPU/memory limit. No new performance-risk acceptance has been issued.'] : [],
+      externalGlobInputInReviewedConfiguration: false, arbitraryMatcherSafetyProven: false,
+      mandatoryBuildOnlyGlobRestriction: true, mandatoryWindowsProcessTreeContainment: true },
+    blockers: [],
+    protection: { tests: 8, stdoutSha256: risk.sha(protectionOutput), containment: protection.containment,
+      releaseConditions: ['Distribution must inherit the restrictive glob preload', 'All three actual matcher installations must be observed guarded',
+        'No rejected pattern, command failure, resource-limit failure or unknown dependency is allowed', 'All three final archives must pass static payload inspection'] },
     historicalEvidence: 'security-audit/2026-11-18 (unchanged; historical 18 high is not the current audit)',
     riskAcceptance: { automatic: false, withdrawnAdvisoryAuthorizationApplicable: false,
-      requiredBeforeException: ['Separate performance-risk policy review', 'Demonstrated enforcement and resource containment for every real build path',
+      requiredBeforeException: ['Any request to relax the enforced input/resource boundary needs a separate performance-risk policy review', 'Demonstrated enforcement and resource containment for every real build path',
         'Fresh commit/lock/install/audit/probe evidence', 'Explicit independent approval, maximum seven days, one run, separate durable ledger'] } };
 }
 module.exports = { cleanAudit, withdrawal, inspectProbes, review };
