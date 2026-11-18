@@ -1,0 +1,5 @@
+{
+  "code": 1,
+  "stderr": "AssertionError [ERR_ASSERTION]: Forbidden loose runtime package: /node_modules/vite\n    at inspectLoose (D:\\email-manager-app\\build\\verify-release.cjs:64:14)\n    at inspectLoose (D:\\email-manager-app\\build\\verify-release.cjs:65:32)\n    at main (D:\\email-manager-app\\build\\verify-release.cjs:68:3)\n    at Object.<anonymous> (D:\\email-manager-app\\build\\verify-release.cjs:125:1)\n    at Module._compile (node:internal/modules/cjs/loader:1761:14)\n    at Object..js (node:internal/modules/cjs/loader:1893:10)\n    at Module.load (node:internal/modules/cjs/loader:1481:32)\n    at Module._load (node:internal/modules/cjs/loader:1300:12)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n",
+  "reportCreated": false
+}

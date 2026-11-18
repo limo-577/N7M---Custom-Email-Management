@@ -55,21 +55,25 @@ function installPortableTemplate() {
 function parseArguments(args) {
   const targetNames = [];
   let prepackaged;
+  let output;
   for (let index = 0; index < args.length; index++) {
     const argument = args[index];
     if (argument === '--prepackaged') {
       if (!args[index + 1] || args[index + 1].startsWith('--')) throw new Error('--prepackaged requires a directory');
       prepackaged = path.resolve(args[++index]);
+    } else if (argument === '--output') {
+      if (!args[index + 1] || args[index + 1].startsWith('--')) throw new Error('--output requires a directory');
+      output = path.resolve(args[++index]);
     } else if (['nsis', 'portable', 'zip', 'dir'].includes(argument)) targetNames.push(argument);
     else throw new Error(`Unsupported build argument: ${argument}`);
   }
-  return { targetNames: targetNames.length ? [...new Set(targetNames)] : ['nsis', 'portable', 'zip'], prepackaged };
+  return { targetNames: targetNames.length ? [...new Set(targetNames)] : ['nsis', 'portable', 'zip'], prepackaged, ...(output ? { output } : {}) };
 }
 async function main(args = process.argv.slice(2)) {
-  const { targetNames, prepackaged } = parseArguments(args);
+  const { targetNames, prepackaged, output } = parseArguments(args);
   installPortableTemplate();
   const { build, Platform, Arch } = require('electron-builder');
-  return build({ targets: Platform.WINDOWS.createTarget(targetNames, Arch.x64), publish: 'never', ...(prepackaged ? { prepackaged } : {}) });
+  return build({ targets: Platform.WINDOWS.createTarget(targetNames, Arch.x64), publish: 'never', ...(prepackaged ? { prepackaged } : {}), ...(output ? { config: { directories: { output } } } : {}) });
 }
 module.exports = { installPortableTemplate, parseArguments, runtimeBuildHash, main };
 if (require.main === module) main().catch(error => { console.error(error); process.exitCode = 1; });

@@ -1,0 +1,7 @@
+{
+  "checkedAt": "2026-11-18T08:56:54.608Z",
+  "url": "https://api.github.com/repos/limo-577/N7M---Custom-Email-Management/environments/picomatch-risk-acceptance",
+  "status": 404,
+  "authenticated": false,
+  "body": "{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/deployments/environments#get-an-environment\",\"status\":\"404\"}"
+}

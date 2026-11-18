@@ -1,0 +1,126 @@
+name: Controlled one-run Windows build
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Strict by default. Exception requires a separately signed authorization for this run.
+        required: true
+        type: choice
+        default: strict
+        options:
+          - strict
+          - picomatch-once
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.repository == 'limo-577/N7M---Custom-Email-Management' && github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    timeout-minutes: 30
+    environment: ${{ inputs.mode == 'picomatch-once' && 'picomatch-risk-acceptance' || 'strict-build' }}
+    permissions:
+      contents: read
+      actions: read # Required only to verify environment protection via GitHub API.
+    steps:
+      - name: Setup verified Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24.13.0"
+
+      # No repository code is executed before authenticating the approved SHA.
+      # The signing private key is NEVER installed on the runner.
+      - name: Authenticate one-run approval before checkout
+        env:
+          BUILD_MODE: ${{ inputs.mode }}
+          RISK_ENVELOPE: ${{ secrets.N7M_RISK_AUTHORIZATION }}
+          RISK_PUBLIC_KEY: ${{ vars.N7M_RISK_PUBLIC_KEY }}
+          RISK_REVOKED: ${{ vars.N7M_RISK_REVOKED }}
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          @'
+          const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+          const demand = (ok, message) => { if (!ok) throw Error(message); };
+          const stable = value => JSON.stringify(value, (_key, item) => item && typeof item === 'object' && !Array.isArray(item) ? Object.fromEntries(Object.keys(item).sort().map(key => [key, item[key]])) : item);
+          (async () => {
+            demand(['strict', 'picomatch-once'].includes(process.env.BUILD_MODE), 'Unknown mode');
+            demand(process.env.GITHUB_EVENT_NAME === 'workflow_dispatch' && process.env.GITHUB_REF === 'refs/heads/main', 'Untrusted event/ref');
+            demand(process.env.GITHUB_REPOSITORY === 'limo-577/N7M---Custom-Email-Management', 'Untrusted repository');
+            if (process.env.BUILD_MODE === 'strict') return;
+            demand(process.env.RISK_REVOKED === 'false', 'Missing or revoked approval');
+            demand(process.env.GITHUB_RUN_ATTEMPT === '1', 'Reruns are prohibited');
+            const envelope = JSON.parse(process.env.RISK_ENVELOPE || 'null');
+            demand(envelope?.statement && typeof envelope.signature === 'string', 'Missing signed approval');
+            const key = crypto.createPublicKey(process.env.RISK_PUBLIC_KEY || '');
+            demand(key.asymmetricKeyType === 'ed25519' && crypto.verify(null, Buffer.from(stable(envelope.statement)), key, Buffer.from(envelope.signature, 'base64')), 'Invalid approval signature');
+            const s = envelope.statement, c = s.context;
+            demand(s.commit === process.env.GITHUB_SHA && /^[a-f0-9]{40}$/.test(s.commit), 'Approval commit mismatch');
+            demand(c?.kind === 'github' && c.repository === process.env.GITHUB_REPOSITORY && c.runId === process.env.GITHUB_RUN_ID && c.attempt === '1' && c.event === 'workflow_dispatch' && c.ref === 'refs/heads/main' && c.workflowRef === process.env.GITHUB_WORKFLOW_REF, 'Approval run mismatch');
+            const start = Date.parse(s.issuedAt), end = Date.parse(s.expiresAt);
+            demand(Number.isFinite(start) && Number.isFinite(end) && Date.now() >= start && Date.now() < end && end > start && end - start <= 7 * 86400000, 'Approval expired or longer than seven days');
+            const response = await fetch('https://api.github.com/repos/limo-577/N7M---Custom-Email-Management/environments/picomatch-risk-acceptance', {
+              headers: { accept: 'application/vnd.github+json', authorization: `Bearer ${process.env.GH_READ_TOKEN}`, 'X-GitHub-Api-Version': '2026-03-10' }, redirect: 'error', signal: AbortSignal.timeout(10000)
+            });
+            demand(response.ok, `Cannot verify protected environment: HTTP ${response.status}`);
+            const environment = await response.json();
+            demand(environment.name === 'picomatch-risk-acceptance' && environment.protection_rules?.some(rule => rule.type === 'required_reviewers' && rule.prevent_self_review === true && rule.reviewers?.length > 0), 'Independent environment review is required');
+            const out = path.join(process.env.RUNNER_TEMP, 'n7m-approval'); fs.mkdirSync(out);
+            fs.writeFileSync(path.join(out, 'envelope.json'), JSON.stringify(envelope), { flag: 'wx' });
+            fs.writeFileSync(path.join(out, 'public-key.pem'), process.env.RISK_PUBLIC_KEY, { flag: 'wx' });
+            fs.writeFileSync(path.join(out, 'environment.json'), JSON.stringify(environment), { flag: 'wx' });
+            console.log('Authenticated a single-run build-time risk acceptance; the CVE is NOT fixed.');
+          })().catch(error => { console.error(error.message); process.exitCode = 1; });
+          '@ | node
+
+      - name: Preserve exact reviewed source bytes
+        run: git config --global core.autocrlf false
+
+      - name: Checkout approved source only
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          submodules: false
+          lfs: false
+
+      - name: Use verified npm version
+        run: npm install --global npm@11.6.2 --ignore-scripts
+
+      - name: Run strict or explicitly authorized controlled build
+        env:
+          BUILD_MODE: ${{ inputs.mode }}
+          N7M_RISK_REVOKED: ${{ vars.N7M_RISK_REVOKED }}
+        run: |
+          if ($env:BUILD_MODE -eq 'strict') {
+            node build/controlled-build.cjs --mode strict
+          } elseif ($env:BUILD_MODE -eq 'picomatch-once') {
+            node build/controlled-build.cjs --mode picomatch-once --envelope "$env:RUNNER_TEMP/n7m-approval/envelope.json" --public-key "$env:RUNNER_TEMP/n7m-approval/public-key.pem" --ledger "$env:RUNNER_TEMP/n7m-risk-ledger"
+          } else {
+            throw 'Unsupported controlled build mode'
+          }
+
+      - name: Preserve raw audit, high findings, decision and artifact evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: N7M-controlled-evidence-${{ github.run_id }}
+          path: |
+            .risk-build/
+            ${{ runner.temp }}/n7m-approval/
+            ${{ runner.temp }}/n7m-risk-ledger/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload verified one-run build for separate publication review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: N7M-controlled-Windows-${{ github.run_id }}
+          path: |
+            release/controlled-${{ github.run_id }}/*-Setup.exe
+            release/controlled-${{ github.run_id }}/*-Portable.exe
+            release/controlled-${{ github.run_id }}/*-NoInstall.zip
+          if-no-files-found: error
+          retention-days: 7

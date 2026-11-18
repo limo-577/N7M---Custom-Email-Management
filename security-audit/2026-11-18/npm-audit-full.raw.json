@@ -1,0 +1,381 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@electron/rebuild": {
+      "name": "@electron/rebuild",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "node-gyp"
+      ],
+      "effects": [
+        "app-builder-lib"
+      ],
+      "range": ">=4.0.1",
+      "nodes": [
+        "node_modules/@electron/rebuild"
+      ],
+      "fixAvailable": {
+        "name": "electron-builder",
+        "version": "26.0.20",
+        "isSemVerMajor": true
+      }
+    },
+    "@vitejs/plugin-react": {
+      "name": "@vitejs/plugin-react",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "vite"
+      ],
+      "effects": [],
+      "range": ">=6.0.0-beta.0",
+      "nodes": [
+        "node_modules/@vitejs/plugin-react"
+      ],
+      "fixAvailable": {
+        "name": "@vitejs/plugin-react",
+        "version": "5.2.0",
+        "isSemVerMajor": true
+      }
+    },
+    "anymatch": {
+      "name": "anymatch",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "picomatch"
+      ],
+      "effects": [],
+      "range": ">=3.0.0",
+      "nodes": [
+        "node_modules/anymatch"
+      ],
+      "fixAvailable": true
+    },
+    "app-builder-lib": {
+      "name": "app-builder-lib",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@electron/rebuild",
+        "dmg-builder",
+        "electron-builder-squirrel-windows"
+      ],
+      "effects": [
+        "dmg-builder",
+        "electron-builder",
+        "electron-builder-squirrel-windows"
+      ],
+      "range": ">=26.1.0",
+      "nodes": [
+        "node_modules/app-builder-lib"
+      ],
+      "fixAvailable": {
+        "name": "electron-builder",
+        "version": "26.0.20",
+        "isSemVerMajor": true
+      }
+    },
+    "chokidar": {
+      "name": "chokidar",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "anymatch",
+        "readdirp"
+      ],
+      "effects": [
+        "tailwindcss"
+      ],
+      "range": "3.0.0 - 3.6.0",
+      "nodes": [
+        "node_modules/chokidar"
+      ],
+      "fixAvailable": {
+        "name": "tailwindcss",
+        "version": "4.3.5",
+        "isSemVerMajor": true
+      }
+    },
+    "dmg-builder": {
+      "name": "dmg-builder",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "app-builder-lib"
+      ],
+      "effects": [
+        "electron-builder"
+      ],
+      "range": ">=26.1.0",
+      "nodes": [
+        "node_modules/dmg-builder"
+      ],
+      "fixAvailable": {
+        "name": "electron-builder",
+        "version": "26.0.20",
+        "isSemVerMajor": true
+      }
+    },
+    "electron-builder": {
+      "name": "electron-builder",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "app-builder-lib",
+        "dmg-builder"
+      ],
+      "effects": [],
+      "range": "19.25.0 || >=26.1.0",
+      "nodes": [
+        "node_modules/electron-builder"
+      ],
+      "fixAvailable": {
+        "name": "electron-builder",
+        "version": "26.0.20",
+        "isSemVerMajor": true
+      }
+    },
+    "electron-builder-squirrel-windows": {
+      "name": "electron-builder-squirrel-windows",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "app-builder-lib"
+      ],
+      "effects": [],
+      "range": ">=26.1.0",
+      "nodes": [
+        "node_modules/electron-builder-squirrel-windows"
+      ],
+      "fixAvailable": true
+    },
+    "fast-glob": {
+      "name": "fast-glob",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "micromatch"
+      ],
+      "effects": [],
+      "range": ">=3.0.0",
+      "nodes": [
+        "node_modules/fast-glob"
+      ],
+      "fixAvailable": true
+    },
+    "fdir": {
+      "name": "fdir",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "picomatch"
+      ],
+      "effects": [],
+      "range": ">=5.2.1",
+      "nodes": [
+        "node_modules/tinyglobby/node_modules/fdir"
+      ],
+      "fixAvailable": true
+    },
+    "micromatch": {
+      "name": "micromatch",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "picomatch"
+      ],
+      "effects": [
+        "fast-glob",
+        "tailwindcss"
+      ],
+      "range": ">=4.0.0",
+      "nodes": [
+        "node_modules/micromatch"
+      ],
+      "fixAvailable": {
+        "name": "tailwindcss",
+        "version": "4.3.5",
+        "isSemVerMajor": true
+      }
+    },
+    "node-gyp": {
+      "name": "node-gyp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "tinyglobby"
+      ],
+      "effects": [
+        "@electron/rebuild"
+      ],
+      "range": ">=11.2.0",
+      "nodes": [
+        "node_modules/node-gyp"
+      ],
+      "fixAvailable": {
+        "name": "electron-builder",
+        "version": "26.0.20",
+        "isSemVerMajor": true
+      }
+    },
+    "picomatch": {
+      "name": "picomatch",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1247710,
+          "name": "picomatch",
+          "dependency": "picomatch",
+          "title": "picomatch vulnerable to ReDoS through single-branch repeated extglobs",
+          "url": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+          "severity": "high",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=4.0.7"
+        }
+      ],
+      "effects": [
+        "anymatch",
+        "fdir",
+        "micromatch",
+        "readdirp",
+        "tinyglobby",
+        "vite"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/picomatch",
+        "node_modules/tinyglobby/node_modules/picomatch",
+        "node_modules/vite/node_modules/picomatch"
+      ],
+      "fixAvailable": {
+        "name": "vite",
+        "version": "6.2.7",
+        "isSemVerMajor": true
+      }
+    },
+    "readdirp": {
+      "name": "readdirp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "picomatch"
+      ],
+      "effects": [
+        "chokidar"
+      ],
+      "range": "3.0.0 - 3.6.0",
+      "nodes": [
+        "node_modules/readdirp"
+      ],
+      "fixAvailable": {
+        "name": "tailwindcss",
+        "version": "4.3.5",
+        "isSemVerMajor": true
+      }
+    },
+    "sucrase": {
+      "name": "sucrase",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "tinyglobby"
+      ],
+      "effects": [],
+      "range": ">=3.35.1",
+      "nodes": [
+        "node_modules/sucrase"
+      ],
+      "fixAvailable": true
+    },
+    "tailwindcss": {
+      "name": "tailwindcss",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "chokidar",
+        "fast-glob",
+        "micromatch"
+      ],
+      "effects": [],
+      "range": "<=0.0.0-oxide-insiders.ff2c25f || 2.1.0-canary.1 - 3.4.19",
+      "nodes": [
+        "node_modules/tailwindcss"
+      ],
+      "fixAvailable": {
+        "name": "tailwindcss",
+        "version": "4.3.5",
+        "isSemVerMajor": true
+      }
+    },
+    "tinyglobby": {
+      "name": "tinyglobby",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "fdir",
+        "picomatch"
+      ],
+      "effects": [
+        "node-gyp",
+        "sucrase"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/tinyglobby"
+      ],
+      "fixAvailable": {
+        "name": "electron-builder",
+        "version": "26.0.20",
+        "isSemVerMajor": true
+      }
+    },
+    "vite": {
+      "name": "vite",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "picomatch",
+        "tinyglobby"
+      ],
+      "effects": [
+        "@vitejs/plugin-react"
+      ],
+      "range": ">=6.3.0-beta.0",
+      "nodes": [
+        "node_modules/vite"
+      ],
+      "fixAvailable": {
+        "name": "vite",
+        "version": "6.2.7",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 18,
+      "critical": 0,
+      "total": 18
+    },
+    "dependencies": {
+      "prod": 91,
+      "dev": 404,
+      "optional": 53,
+      "peer": 11,
+      "peerOptional": 0,
+      "total": 496
+    }
+  }
+}

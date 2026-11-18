@@ -1,0 +1,403 @@
+{
+  "version": "1.8.1",
+  "releaseEligible": false,
+  "reason": "Static payload verification only. Any risk acceptance and publication approval are separate; CVE-2026-112366 is unresolved.",
+  "sourceFilesMatched": 20,
+  "runtimePackages": [
+    {
+      "name": "@fast-csv/format",
+      "version": "4.3.5"
+    },
+    {
+      "name": "@fast-csv/parse",
+      "version": "4.3.6"
+    },
+    {
+      "name": "@isaacs/nonrecursive-glob-match",
+      "version": "1.1.0"
+    },
+    {
+      "name": "@types/node",
+      "version": "14.18.63"
+    },
+    {
+      "name": "abort-controller",
+      "version": "3.0.0"
+    },
+    {
+      "name": "archiver",
+      "version": "8.0.0"
+    },
+    {
+      "name": "async",
+      "version": "3.2.6"
+    },
+    {
+      "name": "b4a",
+      "version": "1.9.0"
+    },
+    {
+      "name": "balanced-match",
+      "version": "4.0.4"
+    },
+    {
+      "name": "bare-buffer",
+      "version": "3.7.2"
+    },
+    {
+      "name": "bare-events",
+      "version": "2.9.2"
+    },
+    {
+      "name": "bare-fs",
+      "version": "4.8.4"
+    },
+    {
+      "name": "bare-path",
+      "version": "3.1.3"
+    },
+    {
+      "name": "bare-stream",
+      "version": "2.13.4"
+    },
+    {
+      "name": "bare-url",
+      "version": "2.5.7"
+    },
+    {
+      "name": "base64-js",
+      "version": "1.5.1"
+    },
+    {
+      "name": "bluebird",
+      "version": "3.7.2"
+    },
+    {
+      "name": "brace-expansion",
+      "version": "5.0.13"
+    },
+    {
+      "name": "buffer",
+      "version": "6.0.3"
+    },
+    {
+      "name": "buffer-crc32",
+      "version": "1.0.0"
+    },
+    {
+      "name": "compress-commons",
+      "version": "7.0.1"
+    },
+    {
+      "name": "core-util-is",
+      "version": "1.0.3"
+    },
+    {
+      "name": "crc-32",
+      "version": "1.2.2"
+    },
+    {
+      "name": "crc32-stream",
+      "version": "7.0.1"
+    },
+    {
+      "name": "dayjs",
+      "version": "1.11.23"
+    },
+    {
+      "name": "duplexer2",
+      "version": "0.1.4"
+    },
+    {
+      "name": "readable-stream",
+      "version": "2.3.8"
+    },
+    {
+      "name": "string_decoder",
+      "version": "1.1.1"
+    },
+    {
+      "name": "event-target-shim",
+      "version": "5.0.1"
+    },
+    {
+      "name": "events",
+      "version": "3.3.0"
+    },
+    {
+      "name": "events-universal",
+      "version": "1.0.1"
+    },
+    {
+      "name": "exceljs-hardened",
+      "version": "5.1.1"
+    },
+    {
+      "name": "readable-stream",
+      "version": "3.6.2"
+    },
+    {
+      "name": "fast-csv",
+      "version": "4.3.6"
+    },
+    {
+      "name": "fast-fifo",
+      "version": "1.3.2"
+    },
+    {
+      "name": "fs-extra",
+      "version": "11.3.1"
+    },
+    {
+      "name": "graceful-fs",
+      "version": "4.2.11"
+    },
+    {
+      "name": "hash-wasm",
+      "version": "4.13.0"
+    },
+    {
+      "name": "ieee754",
+      "version": "1.2.1"
+    },
+    {
+      "name": "immediate",
+      "version": "3.0.6"
+    },
+    {
+      "name": "inherits",
+      "version": "2.0.4"
+    },
+    {
+      "name": "is-stream",
+      "version": "4.0.1"
+    },
+    {
+      "name": "isarray",
+      "version": "1.0.0"
+    },
+    {
+      "name": "jsonfile",
+      "version": "6.2.1"
+    },
+    {
+      "name": "jszip",
+      "version": "3.10.2"
+    },
+    {
+      "name": "readable-stream",
+      "version": "2.3.8"
+    },
+    {
+      "name": "string_decoder",
+      "version": "1.1.1"
+    },
+    {
+      "name": "lazystream",
+      "version": "1.0.1"
+    },
+    {
+      "name": "readable-stream",
+      "version": "2.3.8"
+    },
+    {
+      "name": "string_decoder",
+      "version": "1.1.1"
+    },
+    {
+      "name": "lie",
+      "version": "3.3.0"
+    },
+    {
+      "name": "lodash.escaperegexp",
+      "version": "4.1.2"
+    },
+    {
+      "name": "lodash.groupby",
+      "version": "4.6.0"
+    },
+    {
+      "name": "lodash.isboolean",
+      "version": "3.0.3"
+    },
+    {
+      "name": "lodash.isequal",
+      "version": "4.5.0"
+    },
+    {
+      "name": "lodash.isfunction",
+      "version": "3.0.9"
+    },
+    {
+      "name": "lodash.isnil",
+      "version": "4.0.0"
+    },
+    {
+      "name": "lodash.isundefined",
+      "version": "3.0.1"
+    },
+    {
+      "name": "lodash.uniq",
+      "version": "4.5.0"
+    },
+    {
+      "name": "@n7m/minimatch-compat",
+      "version": "1.0.2"
+    },
+    {
+      "name": "minimatch",
+      "version": "11.0.9"
+    },
+    {
+      "name": "node-int64",
+      "version": "0.4.0"
+    },
+    {
+      "name": "normalize-path",
+      "version": "3.0.0"
+    },
+    {
+      "name": "pako",
+      "version": "1.0.11"
+    },
+    {
+      "name": "process",
+      "version": "0.11.10"
+    },
+    {
+      "name": "process-nextick-args",
+      "version": "2.0.1"
+    },
+    {
+      "name": "readable-stream",
+      "version": "4.8.0"
+    },
+    {
+      "name": "readdir-glob",
+      "version": "3.0.0"
+    },
+    {
+      "name": "minimatch",
+      "version": "11.0.9"
+    },
+    {
+      "name": "safe-buffer",
+      "version": "5.1.2"
+    },
+    {
+      "name": "saxes",
+      "version": "5.0.1"
+    },
+    {
+      "name": "setimmediate",
+      "version": "1.0.5"
+    },
+    {
+      "name": "streamx",
+      "version": "2.28.1"
+    },
+    {
+      "name": "string_decoder",
+      "version": "1.3.0"
+    },
+    {
+      "name": "safe-buffer",
+      "version": "5.2.1"
+    },
+    {
+      "name": "tar-stream",
+      "version": "3.2.2"
+    },
+    {
+      "name": "teex",
+      "version": "1.0.1"
+    },
+    {
+      "name": "text-decoder",
+      "version": "1.2.7"
+    },
+    {
+      "name": "tmp",
+      "version": "0.2.7"
+    },
+    {
+      "name": "universalify",
+      "version": "2.0.1"
+    },
+    {
+      "name": "unzipper",
+      "version": "0.12.5"
+    },
+    {
+      "name": "util-deprecate",
+      "version": "1.0.2"
+    },
+    {
+      "name": "xmlchars",
+      "version": "2.2.0"
+    },
+    {
+      "name": "zip-stream",
+      "version": "7.0.5"
+    }
+  ],
+  "excludedDevelopmentMatchers": true,
+  "excludedOldExceljsAndBrowserBundle": true,
+  "method": "Static archive extraction; installer was not executed.",
+  "artifacts": [
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Setup.exe",
+      "bytes": 123933446,
+      "sha256": "d119a19386401bd5ccd07e51ba628abc25488a0e5dbdd231a6e56040c25b163f",
+      "outerEntries": 10,
+      "contents": [
+        {
+          "entry": "resources/app.asar",
+          "bytes": 17011593,
+          "sha256": "dfde71572ae62cce1b319217d207a04bb25be9f4027fcd4bfc66a28124454019"
+        },
+        {
+          "entry": "N7M - Custom Email Management.exe",
+          "bytes": 250184704,
+          "sha256": "f646080f08cce64489a6e1e5e72f0e33ada097d7b2d53acbb8dd294f71d3f42e"
+        }
+      ]
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Portable.exe",
+      "bytes": 163093687,
+      "sha256": "531b08184a129632c28bbd3f2c465688786b5317f567ef2cd069fa8430ccd23a",
+      "outerEntries": 74,
+      "contents": [
+        {
+          "entry": "resources/app.asar",
+          "bytes": 17011593,
+          "sha256": "dfde71572ae62cce1b319217d207a04bb25be9f4027fcd4bfc66a28124454019"
+        },
+        {
+          "entry": "N7M - Custom Email Management.exe",
+          "bytes": 250184704,
+          "sha256": "f646080f08cce64489a6e1e5e72f0e33ada097d7b2d53acbb8dd294f71d3f42e"
+        }
+      ]
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-NoInstall.zip",
+      "bytes": 157752692,
+      "sha256": "d30465ec59f36a672bd6849d7e5edb8b9d1b835f11044aa60ed70158d402c2b5",
+      "outerEntries": 74,
+      "contents": [
+        {
+          "entry": "resources/app.asar",
+          "bytes": 17011593,
+          "sha256": "dfde71572ae62cce1b319217d207a04bb25be9f4027fcd4bfc66a28124454019"
+        },
+        {
+          "entry": "N7M - Custom Email Management.exe",
+          "bytes": 250184704,
+          "sha256": "f646080f08cce64489a6e1e5e72f0e33ada097d7b2d53acbb8dd294f71d3f42e"
+        }
+      ]
+    }
+  ]
+}

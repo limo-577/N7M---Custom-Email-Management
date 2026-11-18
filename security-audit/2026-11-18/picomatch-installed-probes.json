@@ -1,0 +1,256 @@
+{
+  "ok": false,
+  "advisory": "GHSA-fc5q-39xc-vjpf",
+  "scope": "Regression vectors only; passing is not proof of general RegExp safety.",
+  "findings": [
+    {
+      "installationPath": "node_modules/picomatch",
+      "version": "2.3.2",
+      "dev": true,
+      "probes": [
+        {
+          "pattern": "+(*a)",
+          "options": {},
+          "milliseconds": 2017,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*)b",
+          "options": {},
+          "milliseconds": 2006,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(a*)b",
+          "options": {},
+          "milliseconds": 2008,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*a|b)b",
+          "options": {},
+          "milliseconds": 2018,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(@(*a))",
+          "options": {},
+          "milliseconds": 2010,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*a)",
+          "options": {
+            "capture": true
+          },
+          "milliseconds": 2010,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+([*a)",
+          "options": {},
+          "milliseconds": 2020,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+([*a])",
+          "options": {
+            "nobracket": true
+          },
+          "milliseconds": 2011,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "installationPath": "node_modules/tinyglobby/node_modules/picomatch",
+      "version": "4.0.7",
+      "dev": true,
+      "probes": [
+        {
+          "pattern": "+(*a)",
+          "options": {},
+          "milliseconds": 2011,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*)b",
+          "options": {},
+          "milliseconds": 2009,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(a*)b",
+          "options": {},
+          "milliseconds": 2017,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*a|b)b",
+          "options": {},
+          "milliseconds": 2020,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(@(*a))",
+          "options": {},
+          "milliseconds": 2014,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*a)",
+          "options": {
+            "capture": true
+          },
+          "milliseconds": 2009,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+([*a)",
+          "options": {},
+          "milliseconds": 2009,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+([*a])",
+          "options": {
+            "nobracket": true
+          },
+          "milliseconds": 2007,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        }
+      ]
+    },
+    {
+      "installationPath": "node_modules/vite/node_modules/picomatch",
+      "version": "4.0.7",
+      "dev": true,
+      "probes": [
+        {
+          "pattern": "+(*a)",
+          "options": {},
+          "milliseconds": 2015,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*)b",
+          "options": {},
+          "milliseconds": 2018,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(a*)b",
+          "options": {},
+          "milliseconds": 2010,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*a|b)b",
+          "options": {},
+          "milliseconds": 2018,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(@(*a))",
+          "options": {},
+          "milliseconds": 2007,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+(*a)",
+          "options": {
+            "capture": true
+          },
+          "milliseconds": 2009,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+([*a)",
+          "options": {},
+          "milliseconds": 2022,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        },
+        {
+          "pattern": "+([*a])",
+          "options": {
+            "nobracket": true
+          },
+          "milliseconds": 2014,
+          "status": null,
+          "signal": "SIGKILL",
+          "error": "ETIMEDOUT",
+          "stderr": ""
+        }
+      ]
+    }
+  ]
+}

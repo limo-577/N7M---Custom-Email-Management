@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-18",
+  "head": "5f890b0e0a762f16f09e3cad61812a816df4b3a3",
+  "tag": "5f890b0e0a762f16f09e3cad61812a816df4b3a3",
+  "mainHistoryUnchanged": true,
+  "version": "1.8.1",
+  "lockUnchanged": true,
+  "protectedFilesUnchanged": [
+    "security-audit/dependency-policy.json",
+    "vendor/n7m-minimatch-compat-1.0.2.tgz"
+  ],
+  "oldArtifactsUnchanged": [
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Portable.exe",
+      "sha256": "e367355c71070f8aefea56f557c95e24894f925b0d3729224c30ab2825343878"
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Setup.exe",
+      "sha256": "f9773e07a589cb3d27f48c9c99683c4331fca541830a44915f59793d6ed2665b"
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-NoInstall.zip",
+      "sha256": "feb06d75c7b73f08b01d3a1dbbc01e9e4a122435a51d97c1a7bc85f83f0e047d"
+    }
+  ],
+  "productionAuthorization": false,
+  "publicationAuthorized": false,
+  "vulnerabilityFixed": false,
+  "localTestAuthorization": {
+    "id": "8b7f03e8-00e5-4d2f-b188-b0651732e2ae",
+    "kind": "local-verification",
+    "consumed": true,
+    "revoked": true,
+    "privateKeyDeleted": true,
+    "commit": "f185ecb3c1f9eeda5185da781665af4f929b2c51",
+    "expiresAt": "2026-11-18T10:07:09.716Z"
+  },
+  "fullAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 18,
+    "critical": 0,
+    "total": 18
+  },
+  "fullAuditRawSha256": "9dc4e3476b491f02d169df70e6abcd71194afa75df5c7a73154ed11b4c380aaa",
+  "tests": {
+    "command": [
+      "npm",
+      "test"
+    ],
+    "startedAt": "2026-11-18T09:13:08.710Z",
+    "finishedAt": "2026-11-18T09:13:56.358Z",
+    "code": 0,
+    "node": "v24.13.0",
+    "passed": 188,
+    "failed": 0
+  },
+  "focusedTestsPassed": 24,
+  "endToEndAllChecksPassed": true,
+  "deliveryDirectory": "D:\\email-manager-app\\release\\controlled-validation-09c91741-7419-45f0-ba71-81ac7d4a4cf3",
+  "finalArtifacts": [
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Setup.exe",
+      "bytes": 123933446,
+      "sha256": "d119a19386401bd5ccd07e51ba628abc25488a0e5dbdd231a6e56040c25b163f",
+      "outerEntries": 10,
+      "contents": [
+        {
+          "entry": "resources/app.asar",
+          "bytes": 17011593,
+          "sha256": "dfde71572ae62cce1b319217d207a04bb25be9f4027fcd4bfc66a28124454019"
+        },
+        {
+          "entry": "N7M - Custom Email Management.exe",
+          "bytes": 250184704,
+          "sha256": "f646080f08cce64489a6e1e5e72f0e33ada097d7b2d53acbb8dd294f71d3f42e"
+        }
+      ]
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Portable.exe",
+      "bytes": 163093687,
+      "sha256": "531b08184a129632c28bbd3f2c465688786b5317f567ef2cd069fa8430ccd23a",
+      "outerEntries": 74,
+      "contents": [
+        {
+          "entry": "resources/app.asar",
+          "bytes": 17011593,
+          "sha256": "dfde71572ae62cce1b319217d207a04bb25be9f4027fcd4bfc66a28124454019"
+        },
+        {
+          "entry": "N7M - Custom Email Management.exe",
+          "bytes": 250184704,
+          "sha256": "f646080f08cce64489a6e1e5e72f0e33ada097d7b2d53acbb8dd294f71d3f42e"
+        }
+      ]
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-NoInstall.zip",
+      "bytes": 157752692,
+      "sha256": "d30465ec59f36a672bd6849d7e5edb8b9d1b835f11044aa60ed70158d402c2b5",
+      "outerEntries": 74,
+      "contents": [
+        {
+          "entry": "resources/app.asar",
+          "bytes": 17011593,
+          "sha256": "dfde71572ae62cce1b319217d207a04bb25be9f4027fcd4bfc66a28124454019"
+        },
+        {
+          "entry": "N7M - Custom Email Management.exe",
+          "bytes": 250184704,
+          "sha256": "f646080f08cce64489a6e1e5e72f0e33ada097d7b2d53acbb8dd294f71d3f42e"
+        }
+      ]
+    }
+  ],
+  "githubEnvironmentStatus": 404,
+  "source": [
+    {
+      "file": "build/risk-acceptance.cjs",
+      "sha256": "79cb10cf6acb3cd99878de31088271fa186fff6b70554553a1d299dc95374807"
+    },
+    {
+      "file": "build/controlled-build.cjs",
+      "sha256": "b11c457cd50d697fccd2da7d947148753172b3942c0fd2fcbb6366001c03f396"
+    },
+    {
+      "file": "build/verify-release.cjs",
+      "sha256": "81fa94a6512319d20a48dccdcc153f106bb6a29c1d8b1b58781c810eca5a0c6a"
+    },
+    {
+      "file": "build/ci.test.cjs",
+      "sha256": "0e02bd4b3e807788a4f54005eda4313d034b40187f1fa664fb7d23551d2cd859"
+    },
+    {
+      "file": "tests/risk-acceptance.test.cjs",
+      "sha256": "8503a52379857e1318f96ba2de8b52bfc23bf2e7e6f068806d350f2e257e40b8"
+    },
+    {
+      "file": ".github/workflows/controlled-build.yml",
+      "sha256": "ffe3518e2a94967a63d701b1f22915ba83a63bf3a43d4ec100c77cea10a94677"
+    },
+    {
+      "file": ".github/workflows/release.yml",
+      "sha256": "8c6ff70b6ca35a517811111b4ae9943c83dfb0daa4fa38bd42ef4f124ccaf22e"
+    },
+    {
+      "file": "security-audit/picomatch-build-inputs.json",
+      "sha256": "e1f7ee98ddf5a4973f8b0ba684588dd51ecb2a8aa2ba56d1b58bbba730313619"
+    },
+    {
+      "file": "package.json",
+      "sha256": "f024789b1f50990daad7e204b4b8a2783d2901251f7993a82a4cb2a3d5063522"
+    }
+  ]
+}

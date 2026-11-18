@@ -1,0 +1,150 @@
+[
+  {
+    "name": "npm-ci",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "ci"
+    ],
+    "startedAt": "2026-11-18T15:05:07.827Z",
+    "finishedAt": "2026-11-18T15:05:29.948Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "dependency-policy",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "run",
+      "check:dependencies"
+    ],
+    "startedAt": "2026-11-18T15:05:29.955Z",
+    "finishedAt": "2026-11-18T15:05:30.326Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "audit-full",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "audit",
+      "--audit-level=low",
+      "--json"
+    ],
+    "startedAt": "2026-11-18T15:05:30.329Z",
+    "finishedAt": "2026-11-18T15:05:31.813Z",
+    "code": 1,
+    "expected": 1
+  },
+  {
+    "name": "audit-production",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "audit",
+      "--omit=dev",
+      "--audit-level=low",
+      "--json"
+    ],
+    "startedAt": "2026-11-18T15:05:31.815Z",
+    "finishedAt": "2026-11-18T15:05:32.721Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "picomatch-probes",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "run",
+      "--silent",
+      "check:picomatch"
+    ],
+    "startedAt": "2026-11-18T15:05:32.728Z",
+    "finishedAt": "2026-11-18T15:06:21.396Z",
+    "code": 1,
+    "expected": 1
+  },
+  {
+    "name": "electron-runtime",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\node_modules\\electron\\install.js"
+    ],
+    "startedAt": "2026-11-18T15:06:21.401Z",
+    "finishedAt": "2026-11-18T15:06:27.709Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "npm-test",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "test"
+    ],
+    "startedAt": "2026-11-18T15:06:27.713Z",
+    "finishedAt": "2026-11-18T15:07:16.418Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "vite-build-1",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "run",
+      "build"
+    ],
+    "startedAt": "2026-11-18T15:07:16.421Z",
+    "finishedAt": "2026-11-18T15:07:20.728Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "vite-build-2",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "run",
+      "build"
+    ],
+    "startedAt": "2026-11-18T15:07:20.733Z",
+    "finishedAt": "2026-11-18T15:07:22.197Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "dist-all",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+      "run",
+      "dist:all",
+      "--",
+      "--output",
+      "release/preparation-reviewed"
+    ],
+    "startedAt": "2026-11-18T15:07:22.207Z",
+    "finishedAt": "2026-11-18T15:09:58.939Z",
+    "code": 0,
+    "expected": 0
+  },
+  {
+    "name": "verify-artifacts",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\build\\verify-release.cjs",
+      "--output",
+      "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\release\\preparation-reviewed",
+      "--report",
+      "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\.risk-build\\artifact-verification.json"
+    ],
+    "startedAt": "2026-11-18T15:09:58.946Z",
+    "finishedAt": "2026-11-18T15:10:05.644Z",
+    "code": 0,
+    "expected": 0
+  }
+]

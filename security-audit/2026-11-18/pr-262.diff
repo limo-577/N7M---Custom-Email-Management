@@ -1,0 +1,169 @@
+diff --git a/lib/parse.js b/lib/parse.js
+index 0bb4116..ec74921 100644
+--- a/lib/parse.js
++++ b/lib/parse.js
+@@ -284,7 +284,7 @@ const repeatedExtglobRecursion = pattern => {
+   return depth;
+ };
+ 
+-const analyzeRepeatedExtglob = (body, options) => {
++const analyzeRepeatedExtglob = (body, options, hasWildcard) => {
+   if (options.maxExtglobRecursion === false) {
+     return { risky: false };
+   }
+@@ -343,6 +343,38 @@ const analyzeRepeatedExtglob = (body, options) => {
+       : { risky: true };
+   }
+ 
++  if (hasWildcard) {
++    if (!options.capture && branches.length === 1 &&
++        /^[A-Za-z0-9 ._-]*\*[A-Za-z0-9 ._-]*$/.test(branches[0])) {
++      return { risky: false, collapse: true };
++    }
++
++    if (!options.capture && branches.length === 1 && body === branches[0]) {
++      const match = /^([A-Za-z0-9_-]+)\*([A-Za-z0-9 ,_-]+)\*$/.exec(body);
++      if (match) {
++        return { risky: true, twoStars: { prefix: match[1], middle: match[2] } };
++      }
++    }
++
++    // For (prefix*|c)*, with c distinct from prefix's first character, the
++    // first prefix* branch absorbs every later branch: c*(prefix*)?.
++    // The distinct first characters make the boundary unambiguous.
++    if (!options.capture && body === branches.join('|')) {
++      const wildcards = branches.filter(branch => /^[A-Za-z0-9_-]+\*$/.test(branch));
++      const literals = branches.filter(branch => /^[A-Za-z0-9_-]$/.test(branch));
++      if (wildcards.length === 1 && literals.length === branches.length - 1 && literals.length > 0) {
++        const prefix = wildcards[0].slice(0, -1);
++        const nocase = String(options.flags || (options.nocase ? 'i' : '')).includes('i');
++        const first = nocase ? prefix[0].toLowerCase() : prefix[0];
++        if (!literals.some(value => (nocase ? value.toLowerCase() : value) === first)) {
++          return { risky: true, trailingStar: { prefix, literals: [...new Set(literals)].join('') } };
++        }
++      }
++    }
++
++    return { risky: true };
++  }
++
+   return { risky: false };
+ };
+ 
+@@ -539,7 +571,30 @@ const parse = (input, options) => {
+   const extglobClose = token => {
+     const literal = input.slice(token.startIndex, state.index + 1);
+     const body = input.slice(token.startIndex + 2, state.index);
+-    const analysis = analyzeRepeatedExtglob(body, opts);
++    // Use the parser's actual tokens: a separate scan can disagree about
++    // unmatched brackets, escapes, quotes, or options such as nobracket.
++    const hasWildcard = tokens.slice(token.tokensIndex + 2).some((item, index, bodyTokens) =>
++      (item.type === 'star' || item.type === 'globstar') && item.value !== '' &&
++      !(bodyTokens[index + 1] && bodyTokens[index + 1].type === 'paren' && bodyTokens[index + 1].value === '(' && bodyTokens[index + 1].extglob === true)
++    );
++    const analysis = analyzeRepeatedExtglob(body, opts, hasWildcard);
++
++    if (analysis.twoStars && (token.type === 'plus' || token.type === 'star')) {
++      const prefix = utils.escapeRegex(analysis.twoStars.prefix);
++      const middle = utils.escapeRegex(analysis.twoStars.middle);
++      const unit = opts.bash === true ? '.' : QMARK;
++      const tail = opts.bash === true ? '.*?' : STAR;
++      const output = `${prefix}(?:(?!${middle})${unit})*${middle}${tail}`;
++      analysis.safeOutput = token.type === 'star' ? `(?:${output})?` : output;
++    }
++
++    if (analysis.trailingStar && (token.type === 'plus' || token.type === 'star')) {
++      const head = `[${utils.escapeRegex(analysis.trailingStar.literals)}]`;
++      const tail = utils.escapeRegex(analysis.trailingStar.prefix) + (opts.bash === true ? '.*?' : STAR);
++      analysis.safeOutput = token.type === 'star'
++        ? `${head}*(?:${tail})?`
++        : `(?:${head}*${tail}|${head}+)`;
++    }
+ 
+     if ((token.type === 'plus' || token.type === 'star') && analysis.risky) {
+       const safeOutput = analysis.safeOutput
+@@ -565,6 +620,10 @@ const parse = (input, options) => {
+       return;
+     }
+ 
++    if (analysis.collapse === true && (token.type === 'plus' || token.type === 'star')) {
++      token.close = token.type === 'plus' ? ')' : ')?';
++    }
++
+     let output = token.close + (opts.capture ? ')' : '');
+     let rest;
+ 
+diff --git a/test/options.repeated-wildcards.js b/test/options.repeated-wildcards.js
+new file mode 100644
+index 0000000..cfdea0c
+--- /dev/null
++++ b/test/options.repeated-wildcards.js
+@@ -0,0 +1,68 @@
++'use strict';
++
++const assert = require('assert');
++const { spawnSync } = require('child_process');
++const picomatch = require('..');
++
++describe('repeated wildcard extglobs', () => {
++  it('should preserve ordinary wildcard and alternative matches', () => {
++    for (const options of [{}, { dot: true }, { windows: true }, { bash: true }, { nocase: true }]) {
++      assert(picomatch('*(a*|b)', options)('ax'));
++      assert(picomatch('+(a*|b)', options)('bbab'));
++      assert(picomatch('+(ab*|c)', options)('ccabcc'));
++      assert(picomatch('*(a*|b)', options)('bbb'));
++      assert(!picomatch('*(a*|b)', options)('cx'));
++      assert(picomatch('*/*(W*, *)*', options)('my/folder (Work, Accts)'));
++      assert(picomatch('+(W*, *)', options)('W, W, '));
++      assert(picomatch('+(*a)', options)('aaa'));
++      assert(picomatch('+(a*b)', options)('abab'));
++      assert(picomatch('+([*])', options)('***'));
++      assert(picomatch('+("*")', options)('***'));
++      assert(picomatch('+(\\*)', options)('***'));
++    }
++    assert(picomatch('*(A*|b)', { nocase: true })('ax'));
++    assert(picomatch('*(A*|b)', { flags: 'i' })('ax'));
++  });
++
++  it('should retain the explicit opt-out and literalize unsafe capture forms', () => {
++    // Unsupported alternative shapes must not be normalized by trimming them.
++    assert(!picomatch('+(a*| b)')('ab'));
++    assert(picomatch('+(a*| b)')('+(a*| b)'));
++    const options = { capture: true };
++    assert(picomatch('+(*a)', options)('+(*a)'));
++    assert(!picomatch('+(*a)', options)('aaa'));
++    assert(/\)[+*]/.test(picomatch.makeRe('+(*a)', { maxExtglobRecursion: false }).source));
++  });
++
++  it('should finish direct, alternative and parser-option regressions within a deadline', function() {
++    this.timeout(10000);
++    // A blocked regexp cannot interrupt its own event loop; bound it from outside.
++    const script = [
++      "const assert = require('assert');",
++      `const pm = require(${JSON.stringify(require.resolve('..'))});`,
++      "const input = 'a'.repeat(60000) + '/';",
++      "const patterns = ['+(*a)', '*(*a)', '+(*)b', '+(a*)b', '+(@(*a))', '+(@(*)a)', '+(*a|b)', '+(*a|b)b', '*(*a|b)b', '+(a*a*a*a*a*)', '*(a*|b)z', '+(a*|b)z'];",
++      'for (const options of [{}, { dot: true }, { windows: true }, { bash: true }, { capture: true }]) {',
++      '  for (const pattern of patterns) {',
++      '    console.log(pattern, JSON.stringify(options));',
++      '    assert.strictEqual(pm(pattern, options)(input), false);',
++      '  }',
++      '}',
++      "for (const options of [{ nocase: true }, { flags: 'i' }]) {",
++      "  assert.strictEqual(pm('+(A*|a)', options)(input), false);",
++      "  assert.strictEqual(pm('*(A*|a)', options)(input), false);",
++      '}',
++      'for (const options of [{}, { nobracket: true }]) {',
++      "  assert.strictEqual(pm('+([*a)', options)('[a'.repeat(10000) + '!'), false);",
++      "  assert.strictEqual(pm('+([*a])', options)('[a]'.repeat(10000) + '!'), false);",
++      '}',
++      "assert.strictEqual(pm('+(W*, *)z')('W, '.repeat(10000) + '!'), false);",
++      "assert.strictEqual(pm('*(W*, *)z')('W, '.repeat(10000) + '!'), false);"
++    ].join('\n');
++    const result = spawnSync(process.execPath, ['-e', script], {
++      encoding: 'utf8', timeout: 2000, killSignal: 'SIGKILL'
++    });
++    assert.ifError(result.error);
++    assert.strictEqual(result.status, 0, result.stderr + result.stdout);
++  });
++});

@@ -1,0 +1,1047 @@
+[
+  {
+    "pr": 235,
+    "major": 4,
+    "url": "https://github.com/micromatch/picomatch/pull/235",
+    "state": "closed",
+    "merged": false,
+    "head": "0150ed18b7971894bfd1824c8f96d6b63c70ad1f",
+    "base": "9fab7bf61913ea334c4203ed321c426cfde44a42",
+    "updated_at": "2026-11-17T18:00:08Z",
+    "sourceSha256": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+    "patchedSha256": "cb0abec27579ed10bd7cba39d612825a01a0e1a2635e6b32769a2ccf3f8cdcac",
+    "compatibilityChanges": [
+      {
+        "pattern": "+(*)c",
+        "input": "abc",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "*(a*|b)",
+        "input": "ax",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a)",
+        "input": "aaa",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            ""
+          ]
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*b)",
+        "input": "abab",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*| b)",
+        "input": "ab",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a|b)",
+        "input": "aba",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a)",
+        "input": "aba",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "b"
+          ]
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*b*c*d*e*f*g*h*)z",
+        "input": "abcdefghz",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      }
+    ],
+    "hostile": [
+      {
+        "pattern": "+(*a)",
+        "options": {},
+        "milliseconds": 81,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*)b",
+        "options": {},
+        "milliseconds": 80,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*)b",
+        "options": {},
+        "milliseconds": 80,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a|b)b",
+        "options": {},
+        "milliseconds": 82,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(@(*a))",
+        "options": {},
+        "milliseconds": 79,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a)",
+        "options": {
+          "capture": true
+        },
+        "milliseconds": 78,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a)",
+        "options": {},
+        "milliseconds": 1012,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+([*a])",
+        "options": {
+          "nobracket": true
+        },
+        "milliseconds": 1015,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(a*a*a*a*a*a*a*a*)b",
+        "milliseconds": 93,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      }
+    ],
+    "accepted": false
+  },
+  {
+    "pr": 254,
+    "major": 4,
+    "url": "https://github.com/micromatch/picomatch/pull/254",
+    "state": "open",
+    "merged": false,
+    "head": "c63a5bf4e61dbdb81bc41e97dc2616c30acce337",
+    "base": "9fab7bf61913ea334c4203ed321c426cfde44a42",
+    "updated_at": "2026-11-18T00:52:39Z",
+    "sourceSha256": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+    "patchedSha256": "ccbcc9bb1333c4e03324fef8c729ea20979ef4f7b99d8f75c941abfec04b1cfd",
+    "compatibilityChanges": [
+      {
+        "pattern": "+(*a)",
+        "input": "aaa",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            ""
+          ]
+        },
+        "after": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            "aa"
+          ]
+        }
+      },
+      {
+        "pattern": "+(*a)",
+        "input": "aba",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "b"
+          ]
+        },
+        "after": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "ab"
+          ]
+        }
+      }
+    ],
+    "hostile": [
+      {
+        "pattern": "+(*a)",
+        "options": {},
+        "milliseconds": 87,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*)b",
+        "options": {},
+        "milliseconds": 88,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*)b",
+        "options": {},
+        "milliseconds": 88,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a|b)b",
+        "options": {},
+        "milliseconds": 1018,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(@(*a))",
+        "options": {},
+        "milliseconds": 1018,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(*a)",
+        "options": {
+          "capture": true
+        },
+        "milliseconds": 80,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a)",
+        "options": {},
+        "milliseconds": 90,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a])",
+        "options": {
+          "nobracket": true
+        },
+        "milliseconds": 154,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*a*a*a*a*a*a*a*)b",
+        "milliseconds": 1006,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      }
+    ],
+    "accepted": false
+  },
+  {
+    "pr": 257,
+    "major": 4,
+    "url": "https://github.com/micromatch/picomatch/pull/257",
+    "state": "open",
+    "merged": false,
+    "head": "4e4892e0ac6c374ec3d9e4dc430101da9a20a37b",
+    "base": "9fab7bf61913ea334c4203ed321c426cfde44a42",
+    "updated_at": "2026-11-18T00:52:40Z",
+    "sourceSha256": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+    "patchedSha256": "350e4f7e0336ef364bf5ecd9944ec05c8896d872e7f4834a0017da979b586779",
+    "compatibilityChanges": [
+      {
+        "pattern": "+(*a)",
+        "input": "aaa",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            ""
+          ]
+        },
+        "after": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            "aa"
+          ]
+        }
+      },
+      {
+        "pattern": "+(*a)",
+        "input": "aba",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "b"
+          ]
+        },
+        "after": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "ab"
+          ]
+        }
+      }
+    ],
+    "hostile": [
+      {
+        "pattern": "+(*a)",
+        "options": {},
+        "milliseconds": 95,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*)b",
+        "options": {},
+        "milliseconds": 92,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*)b",
+        "options": {},
+        "milliseconds": 1017,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(*a|b)b",
+        "options": {},
+        "milliseconds": 1023,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(@(*a))",
+        "options": {},
+        "milliseconds": 1011,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(*a)",
+        "options": {
+          "capture": true
+        },
+        "milliseconds": 80,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a)",
+        "options": {},
+        "milliseconds": 1013,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+([*a])",
+        "options": {
+          "nobracket": true
+        },
+        "milliseconds": 1025,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      },
+      {
+        "pattern": "+(a*a*a*a*a*a*a*a*)b",
+        "milliseconds": 1016,
+        "status": null,
+        "signal": "SIGKILL",
+        "error": "ETIMEDOUT",
+        "stderr": ""
+      }
+    ],
+    "accepted": false
+  },
+  {
+    "pr": 262,
+    "major": 4,
+    "url": "https://github.com/micromatch/picomatch/pull/262",
+    "state": "open",
+    "merged": false,
+    "head": "3222059ac27492d9c0147fee5c65f751bbd851ab",
+    "base": "9fab7bf61913ea334c4203ed321c426cfde44a42",
+    "updated_at": "2026-11-18T02:50:40Z",
+    "sourceSha256": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+    "patchedSha256": "ba3ceada5df0d77ae7eda03820aed62aa07f564c921e9490368799b96762f007",
+    "compatibilityChanges": [
+      {
+        "pattern": "+(*a)",
+        "input": "aaa",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            ""
+          ]
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*| b)",
+        "input": "ab",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a|b)",
+        "input": "aba",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a)",
+        "input": "aba",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "b"
+          ]
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*b*c*d*e*f*g*h*)z",
+        "input": "abcdefghz",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      }
+    ],
+    "hostile": [
+      {
+        "pattern": "+(*a)",
+        "options": {},
+        "milliseconds": 85,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*)b",
+        "options": {},
+        "milliseconds": 82,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*)b",
+        "options": {},
+        "milliseconds": 80,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a|b)b",
+        "options": {},
+        "milliseconds": 83,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(@(*a))",
+        "options": {},
+        "milliseconds": 84,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a)",
+        "options": {
+          "capture": true
+        },
+        "milliseconds": 80,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a)",
+        "options": {},
+        "milliseconds": 81,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a])",
+        "options": {
+          "nobracket": true
+        },
+        "milliseconds": 86,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*a*a*a*a*a*a*a*)b",
+        "milliseconds": 79,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      }
+    ],
+    "accepted": false
+  },
+  {
+    "pr": 263,
+    "major": 2,
+    "url": "https://github.com/micromatch/picomatch/pull/263",
+    "state": "open",
+    "merged": false,
+    "head": "9ca61909ab0ec680953e21bac80a6e825e1ede81",
+    "base": "81cba8d4b767cab3cb29d26eb4f691eed75b73b2",
+    "updated_at": "2026-11-17T21:19:10Z",
+    "sourceSha256": "3a91656f440069aa8f8e15c9d695b9f6b2209df1eab2be8127c72cbcca45ff5f",
+    "patchedSha256": "a792e65a98dc4764f60bba740e9677e45060be91da933cd7738349daf27924f5",
+    "compatibilityChanges": [
+      {
+        "pattern": "+(*a)",
+        "input": "aaa",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aaa",
+            ""
+          ]
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*| b)",
+        "input": "ab",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a|b)",
+        "input": "aba",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(*a)",
+        "input": "aba",
+        "options": {
+          "capture": true
+        },
+        "before": {
+          "matched": true,
+          "captures": [
+            "aba",
+            "b"
+          ]
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      },
+      {
+        "pattern": "+(a*b*c*d*e*f*g*h*)z",
+        "input": "abcdefghz",
+        "before": {
+          "matched": true,
+          "captures": []
+        },
+        "after": {
+          "matched": false,
+          "captures": null
+        }
+      }
+    ],
+    "hostile": [
+      {
+        "pattern": "+(*a)",
+        "options": {},
+        "milliseconds": 83,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*)b",
+        "options": {},
+        "milliseconds": 83,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*)b",
+        "options": {},
+        "milliseconds": 86,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a|b)b",
+        "options": {},
+        "milliseconds": 89,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(@(*a))",
+        "options": {},
+        "milliseconds": 97,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(*a)",
+        "options": {
+          "capture": true
+        },
+        "milliseconds": 97,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a)",
+        "options": {},
+        "milliseconds": 186,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+([*a])",
+        "options": {
+          "nobracket": true
+        },
+        "milliseconds": 99,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      },
+      {
+        "pattern": "+(a*a*a*a*a*a*a*a*)b",
+        "milliseconds": 90,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "stderr": "",
+        "results": [
+          {
+            "matched": false,
+            "captures": null
+          }
+        ]
+      }
+    ],
+    "accepted": false
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "derivedFrom": [
+    ".github/workflows/release.yml",
+    ".github/workflows/controlled-build.yml"
+  ],
+  "release": {
+    "environments": [],
+    "buildPermissions": {
+      "contents": "read"
+    },
+    "publisherPermissions": {
+      "contents": "write"
+    },
+    "publishCondition": "github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')",
+    "strictAudit": "npm audit --audit-level=low --json > npm-audit-raw.json"
+  },
+  "controlled": {
+    "environmentExpression": "${{ inputs.mode == 'picomatch-once' && 'picomatch-risk-acceptance' || 'strict-build' }}",
+    "exceptionEnvironment": "picomatch-risk-acceptance",
+    "strictEnvironment": "strict-build",
+    "modeDefault": "strict",
+    "modeOptions": [
+      "strict",
+      "picomatch-once"
+    ],
+    "permissions": {
+      "contents": "read",
+      "actions": "read"
+    },
+    "preflightEnvironment": {
+      "RISK_ENVELOPE": {
+        "context": "environment secret",
+        "name": "N7M_RISK_AUTHORIZATION"
+      },
+      "RISK_PUBLIC_KEY": {
+        "context": "environment variable",
+        "name": "N7M_RISK_PUBLIC_KEY"
+      },
+      "RISK_REVOKED": {
+        "context": "environment variable",
+        "name": "N7M_RISK_REVOKED"
+      }
+    },
+    "publishes": false,
+    "runAttempt": "1",
+    "ref": "refs/heads/main",
+    "workflowRef": "limo-577/N7M---Custom-Email-Management/.github/workflows/controlled-build.yml@refs/heads/main"
+  }
+}

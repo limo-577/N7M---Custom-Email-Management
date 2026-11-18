@@ -1,0 +1,13 @@
+{
+  "command": [
+    "npm",
+    "audit",
+    "--omit=dev",
+    "--json"
+  ],
+  "start": "2026-11-18T08:02:04.629Z",
+  "end": "2026-11-18T08:02:05.573Z",
+  "node": "v24.13.0",
+  "code": 0,
+  "signal": null
+}

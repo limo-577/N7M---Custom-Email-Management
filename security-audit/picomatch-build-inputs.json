@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-18",
+  "externalGlobInputs": false,
+  "review": "Tailwind content uses fixed ./index.html and ./src/**/*.{js,jsx,ts,tsx}. Vite and the Windows wrapper use repository-defined commands/patterns. No workflow glob input, external checkout, downloaded source artifact or dependency build cache is accepted. All source content must match the approved clean commit.",
+  "files": {
+    "tailwind.config.js": "b24d0028daf2b29bceb3aee3ea4ab2bbb3ecc3e47ccfeeab1944d169c060e9e9",
+    "vite.config.js": "eb09ec323a64dd9a7a334e1edcfbd8adea38804a4f426714c2e84955e9a07e9c",
+    "postcss.config.js": "082f9a07aae22ae329bfc652d405ba5a704cba1ee86f4b78c7c70f98d628a610",
+    "build/build-windows.cjs": "f772afff85199da0361e655f7f65f919a2f775724336c5484bb6b83154a8603b",
+    "build/portable-fast.nsi": "efe9ff9dca5faaabf199af4391d26df7540a76480f3fd55d8d1b1656fbbe0d71"
+  }
+}

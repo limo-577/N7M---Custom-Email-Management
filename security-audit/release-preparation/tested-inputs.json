@@ -1,0 +1,1136 @@
+{
+  "testedTree": "2ff2ea7bb14dfe9ea0e10dcf44b7e8a46da924e8",
+  "notACommit": true,
+  "scope": "Manifest only, no test snapshot, keys or binaries. Check unchanged entries against the final commit; only listed report metadata changed after execution.",
+  "documentationOnlyDifferences": [
+    "security-audit/release-preparation/EVIDENCE_SCOPE.md",
+    "security-audit/release-preparation/curation.json"
+  ],
+  "entries": [
+    {
+      "file": ".github/workflows/controlled-build.yml",
+      "gitBlob": "26cfe30796f19dcef0935d23536b0297f583d980",
+      "mode": "100644"
+    },
+    {
+      "file": ".github/workflows/dependency-review.yml",
+      "gitBlob": "f34e24dab66a2efc75dfcc1102a505757eb7f271",
+      "mode": "100644"
+    },
+    {
+      "file": ".github/workflows/release.yml",
+      "gitBlob": "5e31eb0595052ef4b4bd1ad2a42ada5c00d5d1fc",
+      "mode": "100644"
+    },
+    {
+      "file": ".gitignore",
+      "gitBlob": "17816651c1d68c033ed4e431a21eddedc64e9f36",
+      "mode": "100644"
+    },
+    {
+      "file": "N7M-新手图册.pdf",
+      "gitBlob": "05774adcad5ced211855e40b7e1333286b30a358",
+      "mode": "100644"
+    },
+    {
+      "file": "README.md",
+      "gitBlob": "578709f6585b6c9f4e4b54e7b56a2e7214d07a25",
+      "mode": "100644"
+    },
+    {
+      "file": "SECURITY-AUDIT-2026-11-17.md",
+      "gitBlob": "f382d75d85701a7d7c6ace665a1b933d78f79aac",
+      "mode": "100644"
+    },
+    {
+      "file": "SECURITY-AUDIT.md",
+      "gitBlob": "2d3ab3e902fd881867596031ebb0c76d04344b25",
+      "mode": "100644"
+    },
+    {
+      "file": "assets/2.ico",
+      "gitBlob": "b18f404a8363666d0f49a5b185250b4fd2803992",
+      "mode": "100644"
+    },
+    {
+      "file": "build/build-windows.cjs",
+      "gitBlob": "13eb46f31db3080adedb7445494bcfad1bba43c0",
+      "mode": "100644"
+    },
+    {
+      "file": "build/check-dependencies.cjs",
+      "gitBlob": "9ebd0cec12e6beff7cad77ea0b2ced7417006c72",
+      "mode": "100644"
+    },
+    {
+      "file": "build/check-picomatch.cjs",
+      "gitBlob": "9006d39efd29047d78e4008c80b4f33c8083801d",
+      "mode": "100644"
+    },
+    {
+      "file": "build/check-release-scope.cjs",
+      "gitBlob": "47205e41cd12f8dd6a7e675a6c0f4cdeb7baeaf6",
+      "mode": "100644"
+    },
+    {
+      "file": "build/ci.test.cjs",
+      "gitBlob": "4d2602fa95920558669dd6adfea9501959fd531e",
+      "mode": "100644"
+    },
+    {
+      "file": "build/controlled-build.cjs",
+      "gitBlob": "69521752f110289be1cc61c2abd99396637a1dd8",
+      "mode": "100644"
+    },
+    {
+      "file": "build/launcher.test.cjs",
+      "gitBlob": "b4a0ecf6ff83f46214c7c7c15827b765e680c0ef",
+      "mode": "100644"
+    },
+    {
+      "file": "build/picomatch-probe.cjs",
+      "gitBlob": "e3ee72296b78cffff8381763d75eeb96e1974cd7",
+      "mode": "100644"
+    },
+    {
+      "file": "build/portable-fast.nsi",
+      "gitBlob": "a67abe0b812ee354f325f387b3ddad70a27f74e1",
+      "mode": "100644"
+    },
+    {
+      "file": "build/risk-acceptance.cjs",
+      "gitBlob": "e44b094a29845d989f5695cdbb00c0b111ef7b38",
+      "mode": "100644"
+    },
+    {
+      "file": "build/verify-release.cjs",
+      "gitBlob": "4e21b7115c7896b693e60d907a0f299a187560c3",
+      "mode": "100644"
+    },
+    {
+      "file": "docs/GITHUB_RELEASE_SETUP.md",
+      "gitBlob": "79d5d4625df5f88eba0bca9b849d99dd2cc604ad",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/argon2-worker.cjs",
+      "gitBlob": "00f210b317af8855e62191b1d5806fa7da150dbf",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/argon2.cjs",
+      "gitBlob": "af4d02b82c6db4695e6b0ac2680507e51f289856",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/backup.cjs",
+      "gitBlob": "6bd40ef64a774b2ccd669cc6ebc1cfeec94ce0a3",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/browser-controller.cjs",
+      "gitBlob": "c01751431fd6d0ebe069b6430d544f3bfb396399",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/browser-launch.cjs",
+      "gitBlob": "53e1f5c5a28fdb9444fc43ce49afebfa15f0c8aa",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/browser-windows.cjs",
+      "gitBlob": "353fa28c18f56d253f0ec8923107537adab8dd16",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/browser-windows.ps1",
+      "gitBlob": "06665fdc73b558bfa2d55ff8d34557885a50505d",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/edit-sessions.cjs",
+      "gitBlob": "65b21d87957a49908b14f728fac9936d0326f82b",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/main.cjs",
+      "gitBlob": "23b2199e7af5be5f2b7c64fbf64dd041d8a104e7",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/preload.cjs",
+      "gitBlob": "8e09b00d3df7c4eb9ef96b5f1291a1fe4477847d",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/security.cjs",
+      "gitBlob": "c9816f98e8c57dfd0e3f7461272c4a104dc3b87a",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/totp.cjs",
+      "gitBlob": "9615b5989e77b2c7682309cead3df65d88bee411",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/vault.cjs",
+      "gitBlob": "4a59d7e4c3dbd5c3100fc85e30fc71b7080e97d2",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/xlsx-import.cjs",
+      "gitBlob": "9cff29ab3e58a6b00596775b2dbffd8284e0c08a",
+      "mode": "100644"
+    },
+    {
+      "file": "electron/xlsx-worker.cjs",
+      "gitBlob": "33380faf2ee254fbe1748bbd6f1858fc65b72b01",
+      "mode": "100644"
+    },
+    {
+      "file": "index.html",
+      "gitBlob": "46aa419bee53dfbb7fce35505e487b459ed58ab8",
+      "mode": "100644"
+    },
+    {
+      "file": "package-lock.json",
+      "gitBlob": "33152c5600a3cdd2641cd4821784b4a4734c1474",
+      "mode": "100644"
+    },
+    {
+      "file": "package.json",
+      "gitBlob": "bb9dac5b78ddf033460175556005f3adb183dc30",
+      "mode": "100644"
+    },
+    {
+      "file": "playwright.config.mjs",
+      "gitBlob": "e91665f73b5853955475776195967a554f8ed537",
+      "mode": "100644"
+    },
+    {
+      "file": "postcss.config.js",
+      "gitBlob": "ba80730477d1dd22b1484282d594f2e5dda4785a",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/build.txt",
+      "gitBlob": "10e379acd5b4f35878a43bb2e303da764c0465c2",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/collect-current.cjs",
+      "gitBlob": "22a75793d444581ee90285f646e078ea352cdc64",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/crypto-review.md",
+      "gitBlob": "367f565af17af1292551d8ed512bdcc88f180da1",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/dependencies.json",
+      "gitBlob": "9a1624bbb639b3e130823375825726fac329e180",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/dependency-policy-check.txt",
+      "gitBlob": "7130a19164c665b764f650ccbd5fc6c016ea79ba",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/dependency-tests.txt",
+      "gitBlob": "6c311ff2151e49e8ad4056c8c1cfa88d0c58dfa2",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/developer-decisions.json",
+      "gitBlob": "f827247e004bd0951b96bdf0a70735b9d5e6bb8b",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/direct-package-searches.json",
+      "gitBlob": "5f74491ac84053eb218f1b874b4ea1d5eec16d6a",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/exceljs-registry.json",
+      "gitBlob": "0fe01cb230879d782bc1f3dce39ed8ddd9c8327c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/exceljs-reporter-advisories.json",
+      "gitBlob": "c3371f05cf43a6699cd1271015b06cb953d5a8c8",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/exceljs-x14-probe.cjs",
+      "gitBlob": "4c363b7bb18f6a80a172eaaf4572759d3f843005",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/exceljs-x14-probe.json",
+      "gitBlob": "1b7f62b784877c09b4598222bfcfa62505a1efb2",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/hash-wasm-4.13.0.tgz",
+      "gitBlob": "71f995203412cada271dc91fb509b366c7924c4b",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/hash-wasm-integrity.json",
+      "gitBlob": "bdc883373a1dd9135614751096384b0d0cb1478e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/hash-wasm-pack.json",
+      "gitBlob": "3762c2168b6211134fdcb572dfa63c74f007aa2e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/hash-wasm-registry.json",
+      "gitBlob": "bef5ed7a9c48065d4e4593a273e1ff3f30dec565",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/minimatch-fix-registry.json",
+      "gitBlob": "a971dc8989c9a5b0939a849a997e297d80eed9f8",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/minimatch-pack.json",
+      "gitBlob": "a1f4d12f7af3fceba3dc616582ed404e3388fb09",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/minimatch-reporter-advisories.json",
+      "gitBlob": "b7cc152cccbcc87b7e302064f22d6238ddae5514",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/npm-audit-after.json",
+      "gitBlob": "a2fb7b03a69b414d2c5e9380eec373cc8380daaa",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/npm-audit-final.json",
+      "gitBlob": "a2fb7b03a69b414d2c5e9380eec373cc8380daaa",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/npm-audit.json",
+      "gitBlob": "a2fb7b03a69b414d2c5e9380eec373cc8380daaa",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/osv-querybatch.json",
+      "gitBlob": "b3882f6fc16ac77763284b392ce8b0a01e67cd92",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/package-build.txt",
+      "gitBlob": "92f041cdcf87df4210546fc8a13ba9cc3d39c4ea",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/package-lock.json.before-minimatch-fix",
+      "gitBlob": "f4dd1510517268667082a930a5e8fb8c213bc91e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/package.json.before-minimatch-fix",
+      "gitBlob": "8bebe64d6900a36025f004141e989ed560a0ae8b",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/scan-secrets.cjs",
+      "gitBlob": "7ca46fb0380a2b4b7f8a387e6d93b915622468e3",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/scope-manifest.json",
+      "gitBlob": "a3200d3b49a3df05554ffe057fbf082a9c926cec",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/secret-scan.json",
+      "gitBlob": "a1e4b5a1cbd3c41412a15f16580b85a06e4d896f",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/security-audit__dependency-policy.json.before-minimatch-fix",
+      "gitBlob": "66281fd58ce1e30c74e23769f13d758a2683140c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/transitive-search-0.json",
+      "gitBlob": "dd68b3848643e381ef1f57742ed71fb48d92187a",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/transitive-search-1.json",
+      "gitBlob": "366e30c8694f59d7d38d04805a6c5ea4373b7292",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/transitive-search-2.json",
+      "gitBlob": "8d00f95bbf89d11f0791dfa94514163ee640e0c6",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/transitive-search-3.json",
+      "gitBlob": "944a5d1e937d536f7871e8ee64606b6fa230fd2c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/unit-tests.txt",
+      "gitBlob": "f29f99f422e6b60bebebf0d75104887c25f65230",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-16/vendor__minimatch-compat__package.json.before-minimatch-fix",
+      "gitBlob": "acea6253f66e7d270a2c5784013e97c9f3f51773",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-audit-engine-clean.json",
+      "gitBlob": "3489507bc41fca04922f2b770c8b0c62c347f104",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-audit-engine.json",
+      "gitBlob": "d840cef6068733936552b1c4d39f5143b1c03932",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-audit-patched.json",
+      "gitBlob": "d840cef6068733936552b1c4d39f5143b1c03932",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-audit.json",
+      "gitBlob": "adc3f9cf8cb7270a7ba1f1f0e7ce4ac5b250cd6f",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-probes.json",
+      "gitBlob": "d1b94e5edcf7d08d06bec10afd22889669132b21",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/collect-current.cjs",
+      "gitBlob": "af5af347c5a47f05ad4bc5a5fee7727a8c12e42e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/dependencies.json",
+      "gitBlob": "9383176f0ff0dbd0b70b791e11cb46797475e5cb",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/developer-decisions.json",
+      "gitBlob": "0c88ccc1411f39e12607637a3377c772c5cffd71",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/evaluate-candidate.cjs",
+      "gitBlob": "90b796e4ae90047cc52a182b69f7532e81328249",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/exceljs-hardened-registry.json",
+      "gitBlob": "f1cdb1cd277394facd0c659e5f4d6cbd77fff629",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/migration-evaluation.md",
+      "gitBlob": "462ac11b7cb9b442615e5c8e63f430f0d98dc068",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/npm-audit-final.json",
+      "gitBlob": "ce7ae3c181018cab52dfe1c208e75cddae94f0f3",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/npm-audit-online.json",
+      "gitBlob": "a2fb7b03a69b414d2c5e9380eec373cc8380daaa",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/npm-audit.json",
+      "gitBlob": "a24ced9fb3e7f7dc46efefa01ccf860d5be7c05f",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/osv-querybatch.json",
+      "gitBlob": "7dfc5ffd2f793bb82fcba803d2b9eb9fa7177f4c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/packaged-verification.json",
+      "gitBlob": "0aab630e2d11c0d9338c0b8c15454f4ef91e8904",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/probe-candidate.cjs",
+      "gitBlob": "f41deaba3a7b41a3aa6530307efe7cfedfae6d03",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/query-osv.cjs",
+      "gitBlob": "f1ab034e376e468baa3e02cf6090a45efa4317b6",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/scan-secrets.cjs",
+      "gitBlob": "fb19be8ca51d8141c33f01640e4b689acab47dcc",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/scope-manifest.json",
+      "gitBlob": "3d13f0ac8e2674836dc98408947eb13003ce63b4",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/secret-scan.json",
+      "gitBlob": "6081a60214611265c4d2fced5ae1d26b7d66201a",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/update-migration-policy.cjs",
+      "gitBlob": "471db96061f937f6120b077b840c02c22cfebe72",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/verification-final.json",
+      "gitBlob": "7a97ef057bff440d82b388306be03f79f07096ee",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/verify-package.cjs",
+      "gitBlob": "4abf52e4e48daf977fa332be7c87e5f33bea89b6",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/verify-zip.cjs",
+      "gitBlob": "d03464ef0ca1082f5c3c63a8e8f7f484cb61e917",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-17/zip-verification.json",
+      "gitBlob": "45ac2f389dc7796aeb21db4b9b7416757b49a715",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/README.md",
+      "gitBlob": "a6e84fa346fa276623324cf4652a1e0ef6a80985",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/RESULTS.md",
+      "gitBlob": "ac2d1e8d2381e44e92adb1823c99405cb7318205",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/expiry-refused.stderr",
+      "gitBlob": "1be7b18ff360730ab1c057420f730d32f0e6361e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/final-artifact-verification.json",
+      "gitBlob": "6452aeb76fcc2f6bbd79453baa305c52e3a9400c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/focused-tests-final.stdout",
+      "gitBlob": "3fec62010e54899a1b657d6a0e41f77ed049c2d4",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/github-environment-check.json",
+      "gitBlob": "2f3416f54438b12a23bdcd852831d472ff38cc74",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/negative-payload-test.json",
+      "gitBlob": "73fe13e871820031067d8deab21ced7c848ae93c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-audit-full.raw.json",
+      "gitBlob": "7dd3d5568202e31ddc71871ef288c8bc1ab708d0",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-audit-production.raw.json",
+      "gitBlob": "555fd480f51e71705cab4becde20e3bf5588cf59",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-test-final.result.json",
+      "gitBlob": "0bbd5c2f7adc79e8f2938a46775c46eaf0686822",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-test-final.stdout",
+      "gitBlob": "1bf8ffec9353cfea4b6c98bbd4207c5d0b949863",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/replay-refused.stderr",
+      "gitBlob": "53e66ce8ccfa838cc583698c37820cab72be7a88",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/revocation-refused.stderr",
+      "gitBlob": "bce02cc81a8ab3309e35a218d2d5b6dddbaebd2d",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/verification-summary.json",
+      "gitBlob": "718b31db69f0a5c3e09069e9f9441da5cd5ff18b",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/PICOMATCH-LICENSE",
+      "gitBlob": "3608dca25e30b572b6ad6935c8c7918bf70e3d2f",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/README.md",
+      "gitBlob": "ef2df3092df1d966435dc4a59b3cc685a5e560ec",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/advisory.json",
+      "gitBlob": "d313888dced5fed023b0e98154ede8be97963df4",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/artifact-verification.json",
+      "gitBlob": "d902ce93fd58e63a6058c3991b44e9a47d47ccb2",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-full.result.json",
+      "gitBlob": "34da0495b0ccc272e61b6d7df43e7f54cc24f6ed",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-production.result.json",
+      "gitBlob": "3fc9296399a07484aa451944ad7b12b259148c22",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/candidate-evaluation.json",
+      "gitBlob": "3ee526b2b1c02ac7b4c0133be64847982929473e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/evaluate-picomatch.cjs",
+      "gitBlob": "926f4b8da3b044dee663dcf114075ad229e2c0f0",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-audit-full.raw.json",
+      "gitBlob": "2b7cae1673daed4cccc6e1b2cd43bf55b9b2892e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-audit-production.raw.json",
+      "gitBlob": "555fd480f51e71705cab4becde20e3bf5588cf59",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-ci.result.json",
+      "gitBlob": "d1116ef12bbe862d0befa8c3f4041f69c4917884",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-ci.stderr.txt",
+      "gitBlob": "7d7681a46799afb79ead05873fc712dfd2d3b83b",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-ci.stdout.txt",
+      "gitBlob": "a7869e4db1fe87263a3330119e8376da28d61d5c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-explain.txt",
+      "gitBlob": "34e33db3e189c1c2cfff281b80c8996f2bc4221d",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-installed-probes.json",
+      "gitBlob": "98616522710e7f19dae933e501e28278b84dc073",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-registry.json",
+      "gitBlob": "337b52265afa8a24bb946fff586ae556594494ef",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-tree.json",
+      "gitBlob": "54eb92e8c3ff5b442067334acf6ce6eeafbf411d",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/policy.result.json",
+      "gitBlob": "05b15433322bcf5fa687c24981679959a4aca6ee",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/policy.stdout.txt",
+      "gitBlob": "f2b763fc43b29970c359412dd8d7f8868f4e4391",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-235.diff",
+      "gitBlob": "988925bc425f5a20a12674fecbc55c6268ff864c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-235.json",
+      "gitBlob": "14d52cdba8e0cb77a403f1989a2c268ba712929d",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-254.diff",
+      "gitBlob": "d7cceca3757533f9dc824e31d965b2514bd4dcdd",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-254.json",
+      "gitBlob": "abaa7f2e84fc5eb6031b69fb5c6bf5fa69123f36",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-257.diff",
+      "gitBlob": "3797f38e3506d5f98dfe380b22c2ef64691f9600",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-257.json",
+      "gitBlob": "04a20509910d609887f7638dea456c9da3dbe402",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-262.diff",
+      "gitBlob": "3a3af043f2c3f8535dd80c790675867798ebaed3",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-262.json",
+      "gitBlob": "4aea2a14f3401670704afc81bf0911522d0b3843",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-263.diff",
+      "gitBlob": "a40ee76d18f60a425f97692e044d478173e432af",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-263.json",
+      "gitBlob": "1eb0a2a3190375eff675d7a34a0f9353b9b3afb0",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests-final.result.json",
+      "gitBlob": "8cd1daffc7be51395deb0d66a54ea291faba549e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests-final.stdout.txt",
+      "gitBlob": "ebdb4409a65762129dd75e3b55a07e24f64ee5cb",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/2026-11-18/verification-summary.json",
+      "gitBlob": "995be034972d13e82e8f201011b6fc1b4a737fa6",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/collect.cjs",
+      "gitBlob": "a263ac1d632ed5185abae561759823c5b64652da",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/dependencies-before-fix.json",
+      "gitBlob": "bea04da71c315f58f2e3bafe3fef25d433473ce8",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/dependencies.json",
+      "gitBlob": "e51a882e9fb397dc4d7061cba97db8e633c899e4",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/dependency-changes.json",
+      "gitBlob": "306ab6bb471ae6d56e6f0204cdd3a40063dfa638",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/dependency-policy-online.txt",
+      "gitBlob": "1ee1117eddf8f11261889044e137f165c7e09747",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/dependency-policy.json",
+      "gitBlob": "405a81ec05330a819722821dabbed7ba4a71ea65",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/generate-current-report.cjs",
+      "gitBlob": "2929d34eeb0aa6b4c480f69f9419b67fd3acdaa7",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/initial-report.md",
+      "gitBlob": "8ebb742de734128f2efc7a056e0156844ec63c50",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/npm-audit-after.json",
+      "gitBlob": "578e7a9d42903a1072437d339c2d7915a408fd9e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/npm-audit-current.json",
+      "gitBlob": "b34b282365468015d76e1a419eda8c436396e615",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/npm-audit.json",
+      "gitBlob": "237786eb5d7edea9e383e9003637cf1f54746e41",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/picomatch-build-inputs.json",
+      "gitBlob": "f634de5d60a01a035ebaea9fd469d3f06df615bc",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/recheck-2026-11-04.cjs",
+      "gitBlob": "8ceb249d0ec9833327ca3a19c44c453847ca8b8c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/release-preparation/EVIDENCE_SCOPE.md",
+      "gitBlob": "821401dc2b210385d273b79d25f57e795ff88be0",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/release-preparation/canonical-inputs.json",
+      "gitBlob": "aa3904c27e8426fd660ac9184d981865e8e8425b",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/release-preparation/curation.json",
+      "gitBlob": "80d3c3cf9af09904cee35cc416242c5de2957721",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/release-preparation/workflow-contract.json",
+      "gitBlob": "5242806399fd78fe83854afb79e86378e20dd691",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/report-2026-11-03.md",
+      "gitBlob": "a7e66f56b7f3b8cd16591d1038d8e8ae14ea6ec8",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/report-2026-11-04-before-followups.md",
+      "gitBlob": "92c9ed84de4551284c9939968817980e5adc1b4e",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/report-current.json",
+      "gitBlob": "1a02930b9a603b542e5584f97771cf99c5207cb2",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/secret-scan-current.json",
+      "gitBlob": "8f291a832f6914072256ed1fe63631459af22eae",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/secret-scan.json",
+      "gitBlob": "e7454e111909136ce62e307cd035bc7b07621c8c",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/update-inventory.cjs",
+      "gitBlob": "05d8a7ea6cba59cb99366671a330bbc766340250",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/verification-current.json",
+      "gitBlob": "83a620e1ed3807f42145cf5d262f1e35947ac40d",
+      "mode": "100644"
+    },
+    {
+      "file": "security-audit/verification.json",
+      "gitBlob": "83f62a60845b5fdfb74ede74c76ea284dbfe36ba",
+      "mode": "100644"
+    },
+    {
+      "file": "src/AuthGate.jsx",
+      "gitBlob": "141679d4517c4b7f210af489ff6ad1bebf60be3f",
+      "mode": "100644"
+    },
+    {
+      "file": "src/BackupModal.jsx",
+      "gitBlob": "7d00b16501346eb4c83077b1eb872cf72b2611ce",
+      "mode": "100644"
+    },
+    {
+      "file": "src/BatchEntryModal.jsx",
+      "gitBlob": "f8fa0c22fc5ba120abef8149078f975390fa5ea3",
+      "mode": "100644"
+    },
+    {
+      "file": "src/BulkEditModal.jsx",
+      "gitBlob": "3fc0e55b09b4cc29ad9dbafb3ab632824420fc5d",
+      "mode": "100644"
+    },
+    {
+      "file": "src/EmailManager.jsx",
+      "gitBlob": "0325dcbe67ff7acbdc213c7a63b93bd08405c012",
+      "mode": "100644"
+    },
+    {
+      "file": "src/ExistingAccountsPanel.jsx",
+      "gitBlob": "b185838abd31fe88ecabcf39f56ca9a46044c59a",
+      "mode": "100644"
+    },
+    {
+      "file": "src/ProfileHelp.jsx",
+      "gitBlob": "38beeb7e3c1d576ed04a3cc59bf730f22f9cd9d3",
+      "mode": "100644"
+    },
+    {
+      "file": "src/account-view.mjs",
+      "gitBlob": "2a7a7b48bd51137be210f4a8c7c84fea730651a4",
+      "mode": "100644"
+    },
+    {
+      "file": "src/backup-modal.css",
+      "gitBlob": "846425e437f03971a2ed56cae98af7b541a24f22",
+      "mode": "100644"
+    },
+    {
+      "file": "src/batch-entry.css",
+      "gitBlob": "2ad41c1122a2bcda5f6f6b3b5ed4f5d04680e095",
+      "mode": "100644"
+    },
+    {
+      "file": "src/batch-entry.mjs",
+      "gitBlob": "3e605042cc08d4461c8ebf16b10bf1d9a7cf2bc2",
+      "mode": "100644"
+    },
+    {
+      "file": "src/bulk-edit.css",
+      "gitBlob": "d128f7f7e34907d2bca253936f38a69da9df9382",
+      "mode": "100644"
+    },
+    {
+      "file": "src/bulk-edit.mjs",
+      "gitBlob": "276050024f394f2c01b8e9a94da59412d7647ecd",
+      "mode": "100644"
+    },
+    {
+      "file": "src/existing-accounts.css",
+      "gitBlob": "1d102cda2c753145be786ff4fc18e928dc338606",
+      "mode": "100644"
+    },
+    {
+      "file": "src/index.css",
+      "gitBlob": "a92341a60e56ee81eecf5a05c8fa7b2ae44e991a",
+      "mode": "100644"
+    },
+    {
+      "file": "src/main.jsx",
+      "gitBlob": "4e885bea1be6c5f67dd9bc1b3ba27da6b2d6663a",
+      "mode": "100644"
+    },
+    {
+      "file": "src/model.mjs",
+      "gitBlob": "03f9bf8459a41ba4b689c75b82897fef2983f994",
+      "mode": "100644"
+    },
+    {
+      "file": "src/mutations.mjs",
+      "gitBlob": "15926854856baf17b442688c60e8d86699053569",
+      "mode": "100644"
+    },
+    {
+      "file": "src/profile-help.css",
+      "gitBlob": "c95cc7212fc67ede9c24a47bf3cbd5ce77dc6231",
+      "mode": "100644"
+    },
+    {
+      "file": "tailwind.config.js",
+      "gitBlob": "a9c22c1a317dd15c43d9e677e8a5ccaef2532959",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/account-view.test.mjs",
+      "gitBlob": "b982a683ae748bcc93cffd5a6882310843c7189d",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/background-electron.cjs",
+      "gitBlob": "3ef952463182e8cd9ec98bb02e82d588ba980c2b",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/backup-routing.spec.cjs",
+      "gitBlob": "fdf44df10eeb88096db3a5df5c0f5d439a4f7501",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/batch-entry.test.mjs",
+      "gitBlob": "13ac3007e9608ad64c670a0250d4b6f387eb4fa0",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/browser-controller.test.cjs",
+      "gitBlob": "faf88a982889aae9677b0f7716fefdf500f1a8c3",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/browser-launch-firefox.test.cjs",
+      "gitBlob": "eda18fe899899270d88fa08d8eda255f5d006a95",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/browser-windows-native.test.cjs",
+      "gitBlob": "1191f79b12f0a596d5d610affddbf93f2d30f8b5",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/browser-windows.test.cjs",
+      "gitBlob": "3a7c8e349e2515e031715575ff6892ccc30f454b",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/bulk-edit.test.mjs",
+      "gitBlob": "899fc3cb53cff376a16b45b489d192f768e32d8e",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/dependencies.test.cjs",
+      "gitBlob": "412b23600b01b6fa8ad83d3edb8fde784a5452ea",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/dependency-policy.test.cjs",
+      "gitBlob": "73fc22d956a2b5012623304d74d25ede027ff5c8",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/desktop.spec.cjs",
+      "gitBlob": "7cbdb76a7c295b52eb7b2fa28413a22880bb5f4e",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/edit-mutations.test.mjs",
+      "gitBlob": "aa96722a918a3309df1c99e31f5fdb24e528a743",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/edit-sessions.test.cjs",
+      "gitBlob": "a06b328a3211caeb7cc42683fb14b9fa994d4413",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/fixtures/browser-window-fixture.cs",
+      "gitBlob": "49351a4472db5687dce6738a1d7319b3b8437bb9",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/group-rename.spec.cjs",
+      "gitBlob": "d5c1ee088d62943d01805ee53fcdba486f5d70a7",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/model.test.mjs",
+      "gitBlob": "0090364a9d32604a8ddcc4722b6b9405e7ce3701",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/picomatch-isolation.test.cjs",
+      "gitBlob": "2ed9dc612d8040749b8b6578d4de3cbb41671195",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/risk-acceptance.test.cjs",
+      "gitBlob": "950b3ba7106dd5f1702005a21b35b37aecdb8784",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/sensitive-flow.spec.cjs",
+      "gitBlob": "100b2e44dd43e8363237d7d34673b053db0c3e82",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/sorting-toolbar.spec.cjs",
+      "gitBlob": "3120dc8b077a66ad5d550959e5b09308f06e944e",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/vault-backup.test.cjs",
+      "gitBlob": "785131b09f5d7a5fdc461dc81c16d176da8db101",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/vault.test.cjs",
+      "gitBlob": "01be5a65bb9188546bc40de595105cd895683ea1",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/window-tracking.spec.cjs",
+      "gitBlob": "cc71263a691d273f37d76c180a8336bb08766843",
+      "mode": "100644"
+    },
+    {
+      "file": "tests/xlsx.test.cjs",
+      "gitBlob": "acc89389f29fd23a5dc909caa45cdb312ed00b56",
+      "mode": "100644"
+    },
+    {
+      "file": "vendor/minimatch-compat/SECURITY.md",
+      "gitBlob": "01d86d59e561eeddc86c63223363c3605a84bf63",
+      "mode": "100644"
+    },
+    {
+      "file": "vendor/minimatch-compat/index.cjs",
+      "gitBlob": "ae36d2503c16c62bdccbe7acaef6caf6337aa52c",
+      "mode": "100644"
+    },
+    {
+      "file": "vendor/minimatch-compat/package.json",
+      "gitBlob": "3dc9dabee1d224e9098e32d670ae80b4b5127e5a",
+      "mode": "100644"
+    },
+    {
+      "file": "vendor/n7m-minimatch-compat-1.0.1.tgz",
+      "gitBlob": "adc758603720c1c5f8434e29a119cde26c45a1d1",
+      "mode": "100644"
+    },
+    {
+      "file": "vendor/n7m-minimatch-compat-1.0.2.tgz",
+      "gitBlob": "3ce5ddc28f50991f50756cc11206be21d19a4f36",
+      "mode": "100644"
+    },
+    {
+      "file": "vite.config.js",
+      "gitBlob": "b6fbf957863900922552a24d463140c29fe71ada",
+      "mode": "100644"
+    }
+  ]
+}

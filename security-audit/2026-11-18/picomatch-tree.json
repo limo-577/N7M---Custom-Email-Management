@@ -1,0 +1,86 @@
+{
+  "version": "1.8.1",
+  "name": "n7m-custom-email-management",
+  "dependencies": {
+    "tailwindcss": {
+      "version": "3.4.17",
+      "resolved": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.4.17.tgz",
+      "overridden": false,
+      "dependencies": {
+        "chokidar": {
+          "version": "3.6.0",
+          "resolved": "https://registry.npmjs.org/chokidar/-/chokidar-3.6.0.tgz",
+          "overridden": false,
+          "dependencies": {
+            "anymatch": {
+              "version": "3.1.3",
+              "resolved": "https://registry.npmjs.org/anymatch/-/anymatch-3.1.3.tgz",
+              "overridden": false,
+              "dependencies": {
+                "picomatch": {
+                  "version": "2.3.2"
+                }
+              }
+            },
+            "readdirp": {
+              "version": "3.6.0",
+              "resolved": "https://registry.npmjs.org/readdirp/-/readdirp-3.6.0.tgz",
+              "overridden": false,
+              "dependencies": {
+                "picomatch": {
+                  "version": "2.3.2"
+                }
+              }
+            }
+          }
+        },
+        "micromatch": {
+          "version": "4.0.8",
+          "resolved": "https://registry.npmjs.org/micromatch/-/micromatch-4.0.8.tgz",
+          "overridden": false,
+          "dependencies": {
+            "picomatch": {
+              "version": "2.3.2",
+              "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-2.3.2.tgz",
+              "overridden": false
+            }
+          }
+        }
+      }
+    },
+    "vite": {
+      "version": "8.3.7",
+      "resolved": "https://registry.npmjs.org/vite/-/vite-8.3.7.tgz",
+      "overridden": false,
+      "dependencies": {
+        "picomatch": {
+          "version": "4.0.7",
+          "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+          "overridden": false
+        },
+        "tinyglobby": {
+          "version": "0.2.17",
+          "resolved": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
+          "overridden": false,
+          "dependencies": {
+            "fdir": {
+              "version": "6.5.0",
+              "resolved": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
+              "overridden": false,
+              "dependencies": {
+                "picomatch": {
+                  "version": "4.0.7"
+                }
+              }
+            },
+            "picomatch": {
+              "version": "4.0.7",
+              "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.7.tgz",
+              "overridden": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

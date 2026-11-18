@@ -1,0 +1,102 @@
+picomatch@2.3.2 dev
+node_modules/picomatch
+  picomatch@"^2.0.4" from anymatch@3.1.3
+  node_modules/anymatch
+    anymatch@"~3.1.2" from chokidar@3.6.0
+    node_modules/chokidar
+      chokidar@"^3.6.0" from tailwindcss@3.4.17
+      node_modules/tailwindcss
+        dev tailwindcss@"3.4.17" from the root project
+  picomatch@"^2.3.1" from micromatch@4.0.8
+  node_modules/micromatch
+    micromatch@"^4.0.8" from fast-glob@3.3.3
+    node_modules/fast-glob
+      fast-glob@"^3.3.2" from tailwindcss@3.4.17
+      node_modules/tailwindcss
+        dev tailwindcss@"3.4.17" from the root project
+    micromatch@"^4.0.8" from tailwindcss@3.4.17
+    node_modules/tailwindcss
+      dev tailwindcss@"3.4.17" from the root project
+  picomatch@"^2.2.1" from readdirp@3.6.0
+  node_modules/readdirp
+    readdirp@"~3.6.0" from chokidar@3.6.0
+    node_modules/chokidar
+      chokidar@"^3.6.0" from tailwindcss@3.4.17
+      node_modules/tailwindcss
+        dev tailwindcss@"3.4.17" from the root project
+
+picomatch@4.0.7 dev peer
+node_modules/tinyglobby/node_modules/picomatch
+  picomatch@"^4.0.4" from tinyglobby@0.2.17
+  node_modules/tinyglobby
+    tinyglobby@"^0.2.12" from node-gyp@12.4.0
+    node_modules/node-gyp
+      node-gyp@"^12.2.0" from @electron/rebuild@4.2.1
+      node_modules/@electron/rebuild
+        @electron/rebuild@"^4.2.1" from app-builder-lib@26.18.0
+        node_modules/app-builder-lib
+          app-builder-lib@"26.18.0" from dmg-builder@26.18.0
+          node_modules/dmg-builder
+            peer dmg-builder@"26.18.0" from app-builder-lib@26.18.0
+            dmg-builder@"26.18.0" from electron-builder@26.18.0
+            node_modules/electron-builder
+              dev electron-builder@"26.18.0" from the root project
+          app-builder-lib@"26.18.0" from electron-builder@26.18.0
+          node_modules/electron-builder
+            dev electron-builder@"26.18.0" from the root project
+          app-builder-lib@"26.18.0" from electron-builder-squirrel-windows@26.18.0
+          node_modules/electron-builder-squirrel-windows
+            peer electron-builder-squirrel-windows@"26.18.0" from app-builder-lib@26.18.0
+    tinyglobby@"^0.2.11" from sucrase@3.35.1
+    node_modules/sucrase
+      sucrase@"^3.35.0" from tailwindcss@3.4.17
+      node_modules/tailwindcss
+        dev tailwindcss@"3.4.17" from the root project
+    tinyglobby@"^0.2.17" from vite@8.3.7
+    node_modules/vite
+      dev vite@"8.3.7" from the root project
+      peer vite@"^8.0.0" from @vitejs/plugin-react@6.1.0
+      node_modules/@vitejs/plugin-react
+        dev @vitejs/plugin-react@"6.1.0" from the root project
+  peerOptional picomatch@"^3 || ^4" from fdir@6.5.0
+  node_modules/tinyglobby/node_modules/fdir
+    fdir@"^6.5.0" from tinyglobby@0.2.17
+    node_modules/tinyglobby
+      tinyglobby@"^0.2.12" from node-gyp@12.4.0
+      node_modules/node-gyp
+        node-gyp@"^12.2.0" from @electron/rebuild@4.2.1
+        node_modules/@electron/rebuild
+          @electron/rebuild@"^4.2.1" from app-builder-lib@26.18.0
+          node_modules/app-builder-lib
+            app-builder-lib@"26.18.0" from dmg-builder@26.18.0
+            node_modules/dmg-builder
+              peer dmg-builder@"26.18.0" from app-builder-lib@26.18.0
+              dmg-builder@"26.18.0" from electron-builder@26.18.0
+              node_modules/electron-builder
+                dev electron-builder@"26.18.0" from the root project
+            app-builder-lib@"26.18.0" from electron-builder@26.18.0
+            node_modules/electron-builder
+              dev electron-builder@"26.18.0" from the root project
+            app-builder-lib@"26.18.0" from electron-builder-squirrel-windows@26.18.0
+            node_modules/electron-builder-squirrel-windows
+              peer electron-builder-squirrel-windows@"26.18.0" from app-builder-lib@26.18.0
+      tinyglobby@"^0.2.11" from sucrase@3.35.1
+      node_modules/sucrase
+        sucrase@"^3.35.0" from tailwindcss@3.4.17
+        node_modules/tailwindcss
+          dev tailwindcss@"3.4.17" from the root project
+      tinyglobby@"^0.2.17" from vite@8.3.7
+      node_modules/vite
+        dev vite@"8.3.7" from the root project
+        peer vite@"^8.0.0" from @vitejs/plugin-react@6.1.0
+        node_modules/@vitejs/plugin-react
+          dev @vitejs/plugin-react@"6.1.0" from the root project
+
+picomatch@4.0.7 dev
+node_modules/vite/node_modules/picomatch
+  picomatch@"^4.0.7" from vite@8.3.7
+  node_modules/vite
+    dev vite@"8.3.7" from the root project
+    peer vite@"^8.0.0" from @vitejs/plugin-react@6.1.0
+    node_modules/@vitejs/plugin-react
+      dev @vitejs/plugin-react@"6.1.0" from the root project

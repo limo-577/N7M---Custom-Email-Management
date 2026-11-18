@@ -14,11 +14,15 @@ jobs:
   build:
     name: Build Windows x64
     runs-on: windows-latest
+    timeout-minutes: 30
 
     permissions:
       contents: read
 
     steps:
+      - name: Preserve reviewed source bytes
+        run: git config --global core.autocrlf false
+
       - name: Checkout source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -27,18 +31,36 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: "24"
+          node-version: "24.13.0"
           cache: npm
+
+      - name: Use verified npm version
+        run: npm install --global npm@11.6.2 --ignore-scripts
+
+      - name: Show Node and npm versions
+        run: |
+          node --version
+          npm --version
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Verify installation preserves the committed lockfile
+        run: git diff --exit-code -- package.json package-lock.json
 
       - name: Check accepted dependency risks
         run: npm run check:dependencies
 
       - name: Audit dependency vulnerabilities
         if: ${{ !cancelled() }}
-        run: npm audit --audit-level=low
+        run: npm audit --audit-level=low --json > npm-audit-raw.json
+
+      - name: Check isolated picomatch ReDoS regressions
+        if: ${{ !cancelled() }}
+        run: npm run --silent check:picomatch > picomatch-probes.json
+
+      - name: Install the pinned Electron runtime for tests
+        run: node node_modules/electron/install.js
 
       - name: Run tests
         run: npm test
@@ -48,6 +70,9 @@ jobs:
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
 
+      - name: Verify final installer payloads exclude development matchers
+        run: node build/verify-release.cjs --output release --report .risk-build/strict-release/artifact-verification.json
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
@@ -56,6 +81,19 @@ jobs:
             release/*-Setup.exe
             release/*-Portable.exe
             release/*-NoInstall.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Preserve unfiltered security audit evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: N7M-security-audit
+          include-hidden-files: true
+          path: |
+            npm-audit-raw.json
+            picomatch-probes.json
+            .risk-build/strict-release/artifact-verification.json
           if-no-files-found: error
           retention-days: 30
 

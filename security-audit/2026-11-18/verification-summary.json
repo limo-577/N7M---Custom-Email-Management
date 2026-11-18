@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-18",
+  "head": "5f890b0e0a762f16f09e3cad61812a816df4b3a3",
+  "tag": "5f890b0e0a762f16f09e3cad61812a816df4b3a3",
+  "lockUnchanged": true,
+  "originals": [
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Portable.exe",
+      "sha256": "e367355c71070f8aefea56f557c95e24894f925b0d3729224c30ab2825343878"
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Setup.exe",
+      "sha256": "f9773e07a589cb3d27f48c9c99683c4331fca541830a44915f59793d6ed2665b"
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-NoInstall.zip",
+      "sha256": "feb06d75c7b73f08b01d3a1dbbc01e9e4a122435a51d97c1a7bc85f83f0e047d"
+    }
+  ],
+  "releaseEligible": false,
+  "securityFixComplete": false,
+  "version": "1.8.1",
+  "checks": {
+    "npmCi": 0,
+    "dependencyPolicy": 0,
+    "fullAudit": 1,
+    "productionAudit": 0,
+    "tests": {
+      "passed": 171,
+      "failed": 0
+    },
+    "finalCiTests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "build": 0,
+    "distAll": 0,
+    "artifactPayloadVerification": 0,
+    "picomatchRegression": 1
+  }
+}

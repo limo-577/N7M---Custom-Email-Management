@@ -1,0 +1,6 @@
+
+> n7m-custom-email-management@1.8.1 check:dependencies
+> node build/check-dependencies.cjs
+
+Dependency policy check passed. 5 existing deprecated packages remain explicitly accepted until review on 2026-12-04.
+exceljs-hardened 5.1.1 maintenance risk remains accepted; offline lockfile validation only. Run npm audit separately; no audit result is filtered.

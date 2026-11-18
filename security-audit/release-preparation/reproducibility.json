@@ -1,0 +1,335 @@
+{
+  "tree": "2ff2ea7bb14dfe9ea0e10dcf44b7e8a46da924e8",
+  "runtimeFilesIdentical": true,
+  "runtimeFileCount": 73,
+  "frontendFiles": [
+    {
+      "file": "assets/index-Fgm9AWFu.css",
+      "sha256": "ed855680d145ed9d5bd70fcd77ca4cfbccd402f84b7451278d1301f923aae3e6"
+    },
+    {
+      "file": "assets/index-XEicoa9s.js",
+      "sha256": "b94d5b96c5b36cc94c0911bedec487994e950935974ce0b5ec8967deffa9113c"
+    },
+    {
+      "file": "index.html",
+      "sha256": "439012b4e08884e0b5b121b3a59a8057814a56a5ef3245fedf2966e579ceddd0"
+    }
+  ],
+  "runtimeFiles": [
+    {
+      "file": "chrome_100_percent.pak",
+      "sha256": "576ee32df5f75b87961d553b3211002810a9f77fdf7d34d3c20d390366e317f5"
+    },
+    {
+      "file": "chrome_200_percent.pak",
+      "sha256": "b193854268392f42623adde73efd8bc328ed8b159820946b5395a6223e51ae1f"
+    },
+    {
+      "file": "d3dcompiler_47.dll",
+      "sha256": "f5c95e919b4ffa1ac71049cd45b9f986d2965e6888395ca2806337985334fa56"
+    },
+    {
+      "file": "dxcompiler.dll",
+      "sha256": "f9423f08212401e1a8f4b3213c6ebb1b9a37e212f0533e5989d90780141aa35d"
+    },
+    {
+      "file": "electron_wer.dll",
+      "sha256": "9ebd83426b4990f66bf2bff1537e102e6b6517cc7d08141e9cec1a411dd8af68"
+    },
+    {
+      "file": "ffmpeg.dll",
+      "sha256": "f035e9879a6d43519467a8d761d2ea643ac63ed89d448eab9aac86bc38c4809f"
+    },
+    {
+      "file": "icudtl.dat",
+      "sha256": "e1ed8f674bb8449731b79cae956042da59f9ecbd37c8d3f86586a22b4836e5b2"
+    },
+    {
+      "file": "LICENSE.electron.txt",
+      "sha256": "5154e165bd6c2cc0cfbcd8916498c7abab0497923bafcd5cb07673fe8480087d"
+    },
+    {
+      "file": "LICENSES.chromium.html",
+      "sha256": "7dac8267ac6da8d959cfe88f5f055b18a397f10230380b5329125e167bf5639b"
+    },
+    {
+      "file": "locales/af.pak",
+      "sha256": "10121e47f8fe41355dd8f4475907be7adea7f5b25459aa53c9f3ef07dafef05c"
+    },
+    {
+      "file": "locales/am.pak",
+      "sha256": "5150bc6cfc63844816e305b9645cb8e15587ff826a2be1d8639f2087bfb0a5da"
+    },
+    {
+      "file": "locales/ar.pak",
+      "sha256": "47b9c22bca50b46fa06848d2e8ec779de75377d93a684b3bfb9f203dc78a084c"
+    },
+    {
+      "file": "locales/bg.pak",
+      "sha256": "3f9d18988748118895dc026e4f56a442f078d3a5d564000d177a52ce934346b7"
+    },
+    {
+      "file": "locales/bn.pak",
+      "sha256": "e2d4d1c81b0218849880b01c896d1d92c2a28347860cb4d5f37d4c777e4aa7cb"
+    },
+    {
+      "file": "locales/ca.pak",
+      "sha256": "50481315db5c44cd7b0804059a22652c79ab8cd8617afe837cc4c61ff073eb93"
+    },
+    {
+      "file": "locales/cs.pak",
+      "sha256": "cdd8eb041d9e2231e737c5cacae51034d3e3935e2c33d31d216caa17e5d941ff"
+    },
+    {
+      "file": "locales/da.pak",
+      "sha256": "cdf0ea6c9f400af2374c88e50e0cd0a33d9a1ee58db797ad15f7b1ad99890a96"
+    },
+    {
+      "file": "locales/de.pak",
+      "sha256": "e2616265df1c57101339cde08a704a5f212a5c7446b187227a26326dc939a2be"
+    },
+    {
+      "file": "locales/el.pak",
+      "sha256": "f8e4cc68aed45935d7311bd98627fce5934ffcc151d109093de689696c890ec0"
+    },
+    {
+      "file": "locales/en-GB.pak",
+      "sha256": "e2cf3bd4d2ec7f900c710346362b03bdedf0a46285fd32d9cf6b8fab373b2f20"
+    },
+    {
+      "file": "locales/en-US.pak",
+      "sha256": "de43db43fe0072543ab225f6d762cce3656a1639bf9e25f371fe0e80d9eabba7"
+    },
+    {
+      "file": "locales/es-419.pak",
+      "sha256": "9abcee391a295fa79e389b16c6843e42884bfa548fbdd62a85a18a321e4b317f"
+    },
+    {
+      "file": "locales/es.pak",
+      "sha256": "a15d9687d249228faf9953f2da7dd946ab6caaec0e477a692a57ec2150fdfc86"
+    },
+    {
+      "file": "locales/et.pak",
+      "sha256": "9a8f5574c2a9931e6bd2eb2c021e2132d39a6f569e8fdc40a8475e5a8c0a776a"
+    },
+    {
+      "file": "locales/fa.pak",
+      "sha256": "eda1e584f110cacb61fbe38ddecdb8247ed8a1e4cb7e5f5cfa39e4d8e84387f5"
+    },
+    {
+      "file": "locales/fi.pak",
+      "sha256": "a3e8bcb525568ba1e1908e8cc57b9e05b3ee3d9245cd74894d0fb485eb79a9a7"
+    },
+    {
+      "file": "locales/fil.pak",
+      "sha256": "808d6f4620a9c4fee771dfcf39f382db42e83f1e66fe206f93797b86c22dea24"
+    },
+    {
+      "file": "locales/fr.pak",
+      "sha256": "b0ef60e0ce35a31f4fe8fdc3e6658f65671d3669ac642f003971bf2052cf8003"
+    },
+    {
+      "file": "locales/gu.pak",
+      "sha256": "71d29958f321c014b0d36625c9e7d5af7e42e5ab2d753ecd6bceaf02b64d652d"
+    },
+    {
+      "file": "locales/he.pak",
+      "sha256": "7edfc0e9033ad6e451e175e14d2fba4a158129cbbf45c768314d86c6e1f1b207"
+    },
+    {
+      "file": "locales/hi.pak",
+      "sha256": "e55d2c94104b5e4329c5f254cf670caa6414ca1137af260e86adeff986f4292f"
+    },
+    {
+      "file": "locales/hr.pak",
+      "sha256": "96506f22e560e838ae740bfd72e07ad7a484d4af2d52816a64b9b35742dbf5b3"
+    },
+    {
+      "file": "locales/hu.pak",
+      "sha256": "0d44b7669e37805786b3fe637f2291654c2698b8ec8b57ddec17c1cf4bea5857"
+    },
+    {
+      "file": "locales/id.pak",
+      "sha256": "7111a5623ece2362e16be5a785030a9a628937ab680db34c9dbab6ae7926d0e6"
+    },
+    {
+      "file": "locales/it.pak",
+      "sha256": "b78bca99c590f45b660ce446a0a094e3d7a101c987965ac4e697f79685c230c9"
+    },
+    {
+      "file": "locales/ja.pak",
+      "sha256": "239445223165dd02d8f1a048a7740e5b8cd845491965f17b92ccf57eea29ba66"
+    },
+    {
+      "file": "locales/kn.pak",
+      "sha256": "cc9903cb7a98ac81c08b33d3f88e88f35b290eaf0f5eaa8fab67395b330d88f0"
+    },
+    {
+      "file": "locales/ko.pak",
+      "sha256": "d3d22df64bab98e36e5a5635e98b33323af0a4b7f1a649bc049e1a753cd70ccb"
+    },
+    {
+      "file": "locales/lt.pak",
+      "sha256": "2fe1400fc3e0010f30955171124c9c8bf0fbab6aaddfce967b997bdc31fa2977"
+    },
+    {
+      "file": "locales/lv.pak",
+      "sha256": "3ed091a6dbba7b8a5a4beff7191918f84ee0a7de23004d76f57826104094f02b"
+    },
+    {
+      "file": "locales/ml.pak",
+      "sha256": "6e3480887885349cd3198c2f608da25bc7722dbad7c1fba695f95e0e6d564b36"
+    },
+    {
+      "file": "locales/mr.pak",
+      "sha256": "7bb875ecd2f725eb037758e261dea1d53c2c6668ccbc6b10fedbb427d0947b8d"
+    },
+    {
+      "file": "locales/ms.pak",
+      "sha256": "e0a46e0f40cf0c197c2a1fcb2adca421a93d2ade3d1333b99489f8b7d4a335d3"
+    },
+    {
+      "file": "locales/nb.pak",
+      "sha256": "754820b5f3ec2a19f5a0177026541654bba2a9394a665cd3006e049edd71881d"
+    },
+    {
+      "file": "locales/nl.pak",
+      "sha256": "dbabd93d91e2097a2796279c9f011059881a40e778e8a9c77f0e5822b99b3fa7"
+    },
+    {
+      "file": "locales/pl.pak",
+      "sha256": "364ac77a3f7f3aed3f42016b12a4c140dc7e89b0ff197cddfa968269a414cb62"
+    },
+    {
+      "file": "locales/pt-BR.pak",
+      "sha256": "23ca3e85325305114c0cb1fb5a4701644450666bfa7fd596d5d8f1c407509340"
+    },
+    {
+      "file": "locales/pt-PT.pak",
+      "sha256": "3221980cfcc761036ab340c903d17630379e2b592736abe4e2d2513c5cbdcd1d"
+    },
+    {
+      "file": "locales/ro.pak",
+      "sha256": "c8bac592c3f94d10da90e072ef6940108916d18c3fd6782a182635707435393b"
+    },
+    {
+      "file": "locales/ru.pak",
+      "sha256": "88d2779bbe1c8b8427ca9d78d23c53663e506910435dbdf88a949dc4ca91964b"
+    },
+    {
+      "file": "locales/sk.pak",
+      "sha256": "15e26d007f346410e90ef313c4d09b1c02b11808eeb018559c7ae7b3ef77812d"
+    },
+    {
+      "file": "locales/sl.pak",
+      "sha256": "4e9d2aa291c653c0b3a92c973e1d5d1ecd1b6c1cc64b569c0ae37a28b6d46bcd"
+    },
+    {
+      "file": "locales/sr.pak",
+      "sha256": "fee1debf9c49f2beea7990258cb55483eb30841642c2e7c0ea540472682cf2f0"
+    },
+    {
+      "file": "locales/sv.pak",
+      "sha256": "5cd184cc67d1fa6d4f8c82f0809d803bb8f4c61d07d676e54808e6ced09e9b68"
+    },
+    {
+      "file": "locales/sw.pak",
+      "sha256": "813bd56c6c8e0b13b61f15efe8bc7d14d0e670c0dce93efdda3cc428cf989e63"
+    },
+    {
+      "file": "locales/ta.pak",
+      "sha256": "6ef6497441c04f7dcc18caa552d961c5f22e8b369c97a6632bca6b57d6bd7876"
+    },
+    {
+      "file": "locales/te.pak",
+      "sha256": "301a6b26e82540bc6079c1e210f575950b1dbd8c03437a7817d8446c06c755e7"
+    },
+    {
+      "file": "locales/th.pak",
+      "sha256": "acf2778d5abda266d91a534d8ceb14cfe2fe34bc41a157c4b7a2058ba778ccbb"
+    },
+    {
+      "file": "locales/tr.pak",
+      "sha256": "e3b2168d566124c306d8ecff00b1ba0e54c282958ec8d5bcf9d94cbe638008f6"
+    },
+    {
+      "file": "locales/uk.pak",
+      "sha256": "e9d26214e799ec895304952223dd3a5d13d3041e3984378c710fef5626d4d880"
+    },
+    {
+      "file": "locales/ur.pak",
+      "sha256": "f4d5f15daf9f3dd422f52421b93f0b5f6791a9928facb0e1b6dfd894a3814281"
+    },
+    {
+      "file": "locales/vi.pak",
+      "sha256": "9836065474cd9f4e0f351f472361fda7de790a6e27f5e67f8dc564465b8df029"
+    },
+    {
+      "file": "locales/zh-CN.pak",
+      "sha256": "acb310d33c01f59bad314c4210b6546dfcfc90b12ca34a96f8289f90f6a01b58"
+    },
+    {
+      "file": "locales/zh-TW.pak",
+      "sha256": "56b39b119f9dc0e38e8c67a556a02cbe877d9e00833c8922f05d8faee80bcb13"
+    },
+    {
+      "file": "N7M - Custom Email Management.exe",
+      "sha256": "872101c1a8617d524b835051e3f53a9c168a2e6ec57ab6f6b0c6c131b427d741"
+    },
+    {
+      "file": "resources/app.asar",
+      "sha256": "d4b70b118170b0cdd890fb2656a336bd63d88d9efa140b9685d6789357eaac6e"
+    },
+    {
+      "file": "resources/elevate.exe",
+      "sha256": "9b1fbf0c11c520ae714af8aa9af12cfd48503eedecd7398d8992ee94d1b4dc37"
+    },
+    {
+      "file": "resources.pak",
+      "sha256": "e76eeae66e4b4ac97f76a9a17260705f7f82d52c6bfe868dc0775cc9715d07ab"
+    },
+    {
+      "file": "snapshot_blob.bin",
+      "sha256": "7cbf6f6f4dacb2d7bc33fa58802586967fb1a67881ca3b4b57f035d7a4aaeb84"
+    },
+    {
+      "file": "v8_context_snapshot.bin",
+      "sha256": "adce42fc0dc2dd4da6afd7aac60715764c928c8029fd3f551a71a9400f1372c0"
+    },
+    {
+      "file": "vk_swiftshader_icd.json",
+      "sha256": "32d83ff113fef532a9f97e0d2831f8656628ab1c99e9060f0332b1532839afd9"
+    },
+    {
+      "file": "vk_swiftshader.dll",
+      "sha256": "2601880d950b0f76d3d44b2fa23b9076b722c2be6f2d1e2972f1c1c2cf176c16"
+    },
+    {
+      "file": "vulkan-1.dll",
+      "sha256": "f23002eefe4824cf6724d7ae63e9f2dd1f5119d53a64b542394ab528c64b0d2b"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Setup.exe",
+      "firstSha256": "dfabcdb265a8ca0391d6e2b3f3036af3e15c8b9cb6efc254278c92b48a2833f7",
+      "rebuildSha256": "754fe0467665f6b8ba7bfea5e967b78393132cc74bac85fd52a289b92236efbe",
+      "bitIdentical": false
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-Portable.exe",
+      "firstSha256": "303cf330d1672b45237846b5adfdaeafd3eedd3ac197fd757037bc473785aad1",
+      "rebuildSha256": "e6bba57aadc9ce0d87c0d24f06d2e3ad39b8c69fe22b109c9bfcb2668e365723",
+      "bitIdentical": false
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.1-NoInstall.zip",
+      "firstSha256": "8c635014331e7dad4174c63ccd2066213722e2644ed853d7649a213769604eb8",
+      "rebuildSha256": "72c0f59b2bac710909e72d79e943a80401799e0ef5b720462994184f837eefa6",
+      "bitIdentical": false
+    }
+  ],
+  "publicationAuthorized": false,
+  "productionAuthorization": false
+}

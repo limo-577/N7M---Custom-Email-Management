@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-18",
+  "version": "1.8.1",
+  "validatedSourceTree": "2ff2ea7bb14dfe9ea0e10dcf44b7e8a46da924e8",
+  "note": "This is a Git tree, NOT an authorizable commit SHA. Final commit adds only report/evidence metadata; executable inputs are checked against this tree.",
+  "node": "v24.13.0",
+  "npm": "11.6.2",
+  "sourceUnchangedDuringBuild": true,
+  "lockSha256": "d84d05fb69daef713726fb3ed25b5bb0550b342f8a26971cf756df3aeb620426",
+  "fullAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 18,
+    "critical": 0,
+    "total": 18
+  },
+  "productionAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "fullAuditRawSha256": "71e07cce1769d338fc85e4eaa2b7fc722aad4cde813dded7d5ca69e2749d2ee4",
+  "strictGate": "BLOCKED: full audit and isolated picomatch regression remain failing; no exception applied.",
+  "tests": {
+    "total": 188,
+    "passed": 188,
+    "failed": 0
+  },
+  "frontendReproducible": true,
+  "runtimeReproducible": true,
+  "runtimeFiles": 73,
+  "installerBitReproducible": false,
+  "staticVerification": {
+    "sourceFilesMatched": 20,
+    "runtimePackages": 84,
+    "excludedDevelopmentMatchers": true
+  },
+  "deliveryDirectory": "release/commit-review-2ff2ea7bb14d",
+  "productionAuthorization": false,
+  "publicationAuthorized": false,
+  "vulnerabilityFixed": false,
+  "githubEnvironmentVerified": false,
+  "githubLastReadStatus": 404
+}

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "check:dependencies"
+  ],
+  "start": "2026-11-18T08:02:00.038Z",
+  "end": "2026-11-18T08:02:03.197Z",
+  "node": "v24.13.0",
+  "code": 0,
+  "signal": null
+}

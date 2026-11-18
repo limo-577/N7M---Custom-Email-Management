@@ -1,0 +1,14 @@
+{
+  "name": "verify-rebuild",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\build\\verify-release.cjs",
+    "--output",
+    "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\release\\preparation-rebuilt",
+    "--report",
+    "D:\\email-manager-app\\.risk-build\\preparation-run\\candidate\\.risk-build\\rebuilt-artifact-verification.json"
+  ],
+  "startedAt": "2026-11-18T15:14:11.601Z",
+  "finishedAt": "2026-11-18T15:14:18.643Z",
+  "code": 0
+}

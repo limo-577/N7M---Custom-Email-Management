@@ -1,0 +1,92 @@
+diff --git a/lib/parse.js b/lib/parse.js
+index 0bb4116..d54275b 100644
+--- a/lib/parse.js
++++ b/lib/parse.js
+@@ -284,6 +284,14 @@ const repeatedExtglobRecursion = pattern => {
+   return depth;
+ };
+ 
++// A branch led by a plain `*` absorbs any prefix within the path segment, so
++// repeating it adds nothing: `*a*a` is already a `*a`. The branch must not be
++// able to match `/` (no `/`, `**` or brackets such as `[[:punct:]]`), or the
++// leading star could not absorb an earlier repetition.
++const isStarLedBranch = branch => {
++  return branch[0] === '*' && branch[1] !== '(' && !/\/|\*\*|\[/.test(branch);
++};
++
+ const analyzeRepeatedExtglob = (body, options) => {
+   if (options.maxExtglobRecursion === false) {
+     return { risky: false };
+@@ -343,6 +351,14 @@ const analyzeRepeatedExtglob = (body, options) => {
+       : { risky: true };
+   }
+ 
++  // `+(*a)` compiles to `(?:[^/]*?a)+`, which backtracks exponentially on
++  // inputs like `aaaa!`. When every branch is star-led the repetition is
++  // redundant, so `+(...)` can close like `@(...)` and `*(...)` like `?(...)`
++  // without changing what the pattern matches.
++  if (branches.every(isStarLedBranch)) {
++    return { risky: false, redundantRepeat: true };
++  }
++
+   return { risky: false };
+ };
+ 
+@@ -565,6 +581,11 @@ const parse = (input, options) => {
+       return;
+     }
+ 
++    if (analysis.redundantRepeat) {
++      if (token.type === 'plus') token.close = EXTGLOB_CHARS['@'].close;
++      if (token.type === 'star') token.close = EXTGLOB_CHARS['?'].close;
++    }
++
+     let output = token.close + (opts.capture ? ')' : '');
+     let rest;
+ 
+diff --git a/test/options.maxExtglobRecursion.js b/test/options.maxExtglobRecursion.js
+index 9bf2fdb..0b1243b 100644
+--- a/test/options.maxExtglobRecursion.js
++++ b/test/options.maxExtglobRecursion.js
+@@ -142,6 +142,30 @@ describe('options.maxExtglobRecursion', () => {
+     assert(isMatch('+(a|aa)x', '+(a|aa)@(x)'));
+     assert(!isMatch('aaax', '+(a|aa)@(x)'));
+   });
++  it('should drop the redundant repetition from star-led repeated extglobs', () => {
++    // Regression: `+(*a)` compiled to `(?:[^/]*?a)+`, which backtracks
++    // exponentially. A star-led branch already absorbs earlier repetitions, so
++    // `+(...)` closes like `@(...)` and `*(...)` like `?(...)` with the same matches.
++    assert.strictEqual(makeRe('+(*a)').source, '^(?:(?=.)(?:[^/]*?a))$');
++    assert.strictEqual(makeRe('*(*a)').source, '^(?:(?=.)(?:[^/]*?a)?)$');
++    assert.strictEqual(
++      makeRe('+(*a|*b)').source,
++      '^(?:(?=.)(?:[^/]*?a|[^/]*?b))$'
++    );
++
++    assert(isMatch('aaa', '+(*a)'));
++    assert(isMatch('xbxa', '+(*a|*b)'));
++    assert(isMatch('foo.js', '*(*.js|*.ts)'));
++    assert(!isMatch('a/a', '+(*a)'));
++    assert(!isMatch('a'.repeat(64) + '!', '+(*a)'));
++    assert(!isMatch('a'.repeat(64) + '!', '*(*a)'));
++  });
++
++  it('should keep the repetition when a star-led branch can match a slash', () => {
++    assert.strictEqual(makeRe('+(*/a)').source, '^(?:(?=.)(?:[^/]*?\\/a)+)$');
++    assert(isMatch('x/ay/a', '+(*/a)'));
++  });
++
+   it('should disable the safeguard when maxExtglobRecursion is false', () => {
+     assert(
+       /\(\?:a\|aa\)\+/.test(
+@@ -153,5 +177,10 @@ describe('options.maxExtglobRecursion', () => {
+         makeRe('+(+(a))', { maxExtglobRecursion: false }).source
+       )
+     );
++    assert(
++      /\(\?:\[\^\/\]\*\?a\)\+/.test(
++        makeRe('+(*a)', { maxExtglobRecursion: false }).source
++      )
++    );
+   });
+ });

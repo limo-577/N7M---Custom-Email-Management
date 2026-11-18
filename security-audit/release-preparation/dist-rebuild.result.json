@@ -1,0 +1,15 @@
+{
+  "name": "dist-rebuild",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js",
+    "run",
+    "dist:all",
+    "--",
+    "--output",
+    "release/preparation-rebuilt"
+  ],
+  "startedAt": "2026-11-18T15:11:35.570Z",
+  "finishedAt": "2026-11-18T15:14:11.597Z",
+  "code": 0
+}

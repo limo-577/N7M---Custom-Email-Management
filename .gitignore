@@ -51,3 +51,7 @@ build/.fixture/
 
 # Generated security audit text logs
 /security-audit/2026-11-17/*.txt
+
+# Runtime audit reports, authorization envelopes and one-use receipts.
+# Keep the authority's private key and durable ledger outside the checkout.
+/.risk-build/

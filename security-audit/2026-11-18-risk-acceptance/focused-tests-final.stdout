@@ -1,0 +1,32 @@
+✔ all CI actions use full commit SHAs and builds retain only read permissions (2.3426ms)
+✔ write permissions are isolated to tag-push publication of the same run artifact (0.2942ms)
+✔ workflow npm build command and manifest targets are accepted by the actual Windows wrapper (0.3747ms)
+✔ release builds gate on accepted-risk policy and current vulnerability audit after installation (0.1779ms)
+✔ weekly dependency review is read-only and never builds, publishes or sends messages (0.2112ms)
+✔ CI uses the locally verified toolchain and preserves failed raw audit reports (0.259ms)
+✔ verification packages can use a separate output without overwriting previous releases (0.4287ms)
+✔ exception workflow is manual, strict by default, independently protected and never publishes (0.2687ms)
+✔ strict is the default and missing/unknown/duplicate modes cannot enable an exception (0.9351ms)
+✔ signed one-run acceptance reports all 18 high findings without claiming a fix (191.8766ms)
+✔ expiry boundary, future activation and durations over seven days fail closed (1.454ms)
+✔ invalid dates and stale review evidence fail closed (0.8842ms)
+✔ unknown high and low advisories cannot be hidden inside the existing affected chain (2.4419ms)
+✔ new dependencies, changed versions and production applicability are refused (5.082ms)
+✔ new audit paths, rootless cycles, malformed reports and false zero totals are refused (2.5849ms)
+✔ lockfile SHA, fixed commit and exact raw audit bytes are pinned (580.9188ms)
+✔ signature forgery, missing evidence and mismatched evidence hashes are refused (385.8285ms)
+✔ uncommitted/unreviewed external input invalidates the trusted source checkout (449.9968ms)
+✔ path traversal, shell metacharacters and environment glob/Node injection are refused or stripped (1.1725ms)
+✔ wrong repository, different run and reruns cannot reuse an authorization (0.9113ms)
+✔ acceptance is atomically consumed once and revocation also blocks unspent authorizations (10.719ms)
+✔ issuance requires explicit risk acknowledgement and revocation requires an explicit ledger (0.7437ms)
+✔ simultaneous consumers cannot both acquire the same one-run authorization (93.6948ms)
+✔ same-run continuation refuses altered installation, raw evidence and stale preparation (1183.0579ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3942.5755

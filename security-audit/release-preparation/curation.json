@@ -1,0 +1,794 @@
+{
+  "date": "2026-11-18",
+  "archiveIgnored": true,
+  "archiveRelative": ".risk-build/release-preparation-archive-20261118",
+  "policy": "Keep primary raw audit, exit codes, patch provenance and regression/artifact evidence. Exclude signed test envelopes, keys, receipts, snapshots, before-copies and duplicate/generated investigation files. No original evidence deleted.",
+  "decisions": [
+    {
+      "file": "security-audit/2026-11-18/advisory.json",
+      "action": "retain",
+      "sha256": "cc99706e61047047b6690db94abb98b5940d007196775c12902c0f79d8aedbd5"
+    },
+    {
+      "file": "security-audit/2026-11-18/artifact-verification.json",
+      "action": "retain",
+      "sha256": "ad30a1e70ceb4cee95a8652617068b4478690ceb6b4ae52167cac50c7ec5c02e"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-full.result.json",
+      "action": "retain",
+      "sha256": "157df85ef546a8a953b88b30bc69aa2b9cb96bb6316d7456ddf571b94a04dd52"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-full.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-full.stdout.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-production.result.json",
+      "action": "retain",
+      "sha256": "887815c85e7a70c8e90f30383752f6146ddbe3567de1a04d44ae307de3d780e6"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-production.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/audit-production.stdout.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/before",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/build.result.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/build.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/build.stdout.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/candidate-evaluation.json",
+      "action": "retain",
+      "sha256": "c099c11769363cf496434a8791f927f24d2b0106f6ad7b4d2bc56d7cb92de57d"
+    },
+    {
+      "file": "security-audit/2026-11-18/ci-tests-final.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/COMMIT_MESSAGE.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/dependencies-installed.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/dist-all.result.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/dist-all.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/dist-all.stdout.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/evaluate-picomatch.cjs",
+      "action": "retain",
+      "sha256": "042ca2868180974ceaed491aca448750142bd5510bb4cef54a73aa7c67cea69e"
+    },
+    {
+      "file": "security-audit/2026-11-18/evidence-sha256.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/head-before.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/lockfile-review.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-audit-full.raw.json",
+      "action": "retain",
+      "sha256": "f98660f8324328f3eec6117dcb750d0307ad2e46df8d75b06eaf2be8253f7871"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-audit-production.raw.json",
+      "action": "retain",
+      "sha256": "e67f97341ff6359c0e345254116e3c8488443acf7b9f4af20a0689ab7924de3f"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-ci.result.json",
+      "action": "retain",
+      "sha256": "c6555e75b371f6458ac06167423e31a771d1e6118b58356345252a8478b6d56a"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-ci.stderr.txt",
+      "action": "retain",
+      "sha256": "9d0a65b05ee4ac39e14f65bb94ce3ef01c1d4e4cddb4c9799b7cf2ce7415c9a7"
+    },
+    {
+      "file": "security-audit/2026-11-18/npm-ci.stdout.txt",
+      "action": "retain",
+      "sha256": "880ef562f8060aac3cbd481582c6332b7cec576a278ffaf096c712e64f80e1eb"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-check.result.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-check.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-check.stdout.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-explain.txt",
+      "action": "retain",
+      "sha256": "69172fe6fbcf1defcdb4083753f388275f13a96b16c212fea2be1adfba98ebff"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-installed-probes.json",
+      "action": "retain",
+      "sha256": "436b1531e7701ca603ba67bbe6ed90eb277f7bb214be0ded88d842bdd40fa99f"
+    },
+    {
+      "file": "security-audit/2026-11-18/PICOMATCH-LICENSE",
+      "action": "retain",
+      "sha256": "d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-registry.json",
+      "action": "retain",
+      "sha256": "f5b19326b62bc9009139f82d9b3400421edf9fc0ade0212d49d1bac349659d77"
+    },
+    {
+      "file": "security-audit/2026-11-18/picomatch-tree.json",
+      "action": "retain",
+      "sha256": "d7485779273e298da03d7632d620000c8cd9dd64d7bd7439f28b745a3b942159"
+    },
+    {
+      "file": "security-audit/2026-11-18/policy.result.json",
+      "action": "retain",
+      "sha256": "3b9c3be73686d14e2a831bfcf0b1844bd7f5b38a5953fc56961ed2c37c530085"
+    },
+    {
+      "file": "security-audit/2026-11-18/policy.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/policy.stdout.txt",
+      "action": "retain",
+      "sha256": "b53f08b4424085b027d03d0cff7a6550dafbd7d406233010908fb79bdf91f54c"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-235-base-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-235-head-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-235.diff",
+      "action": "retain",
+      "sha256": "46f15f8f0bddcf54efde468db92ddeb3f3a0cf6db53f2ac09fbbacd4270c122c"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-235.json",
+      "action": "retain",
+      "sha256": "d8fe6430bbda323ba2bc4ee8b8f4ccb2bc0b8e5f296c1a61135a68f3376ba459"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-254-base-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-254-head-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-254.diff",
+      "action": "retain",
+      "sha256": "d050f6caa72bdd0fbb627b5aff02ed1e48e4d1f952f05b9937013e75ab21df87"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-254.json",
+      "action": "retain",
+      "sha256": "e280c7e8aef281f51bd919c8a38ea94257e48aaec8e45d07241a2453bf7e32a3"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-257-base-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-257-head-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-257.diff",
+      "action": "retain",
+      "sha256": "0fcb6b01d51f6bcbbbffa8dceacc2c02fd48c52f0754f318839cac81e40b38dc"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-257.json",
+      "action": "retain",
+      "sha256": "faca2991a6861bbe725da05aea4fa93ea33ea76ff691d4130739231a9a971fcb"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-262-base-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-262-head-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-262.diff",
+      "action": "retain",
+      "sha256": "926ed81829fc77d95275aee8f21b4fc5672d314308bc78862a6f617e2242a243"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-262.json",
+      "action": "retain",
+      "sha256": "3bbe090c9b676265a74af204910791f01faf2ffa600c251607c04d5a83538e32"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-263-base-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-263-head-parse.js",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-263.diff",
+      "action": "retain",
+      "sha256": "f611682c0295b195f13d16799f4e98d4b308dd5d56df7339f00075f6a60b7eca"
+    },
+    {
+      "file": "security-audit/2026-11-18/pr-263.json",
+      "action": "retain",
+      "sha256": "8388131987c55b1be5b18f79192a372fcad9ed30d24f8be416578397abbc04d6"
+    },
+    {
+      "file": "security-audit/2026-11-18/README.md",
+      "action": "retain",
+      "sha256": "47d1187b4929ddf7c57abaf39f64dc1ac2256edf032b28f71458d9685f6652a1"
+    },
+    {
+      "file": "security-audit/2026-11-18/run-command.cjs",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/status-before.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/tag-v1.8.1-before.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests-final.result.json",
+      "action": "retain",
+      "sha256": "036c7bed30cd9adf9840a9cc82b74f57dc9a81087a58a52541e83b2b6ce68efb"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests-final.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests-final.stdout.txt",
+      "action": "retain",
+      "sha256": "c347c54b9f16fd0e053404cc9548b4ee20e8f80aba472ea42b37c9db23e39fc4"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests.result.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests.stderr.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/tests.stdout.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/verification-summary.json",
+      "action": "retain",
+      "sha256": "8aca833642dc3c32a3603e34af5fa561a931c829403d7a362bcdbfb4d0180e39"
+    },
+    {
+      "file": "security-audit/2026-11-18/verify-artifacts.cjs",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18/worktree-before.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/8b7f03e8-00e5-4d2f-b188-b0651732e2ae.consumed.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/8b7f03e8-00e5-4d2f-b188-b0651732e2ae.revoked.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-artifact-verification.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-audit-full.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-audit-full.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-audit-production.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-audit-production.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-audit-status.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-build-result.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-build.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-build.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-commands.jsonl",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-consumption-receipt.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-dependency-policy.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-dependency-policy.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-dist-all.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-dist-all.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-electron-runtime.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-electron-runtime.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-empty-global.npmrc",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-empty.npmrc",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-install.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-install.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-picomatch-probes.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-picomatch-probes.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-preceding-review-commands.jsonl",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-risk-decision.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-tests.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-tests.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-verify-artifacts.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/accepted-verify-artifacts.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/authorization.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/base-head.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/base-tag.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/before",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/ci-final.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/COMMIT_MESSAGE.txt",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/evidence-sha256.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/expiry-refused.stderr",
+      "action": "retain",
+      "sha256": "ff81d6610ee1a4111f4856f8065b4d8cb402795da8623d3bd1c2076497fc43db"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/expiry-refused.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/failed-attempt-1",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/failed-attempt-2-raw-audit-changed",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/final-artifact-verification.json",
+      "action": "retain",
+      "sha256": "6a14ca8b9956467e76564480d14e9c3cba98d33df05013cbe7a687b231b4ab9d"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/focused-tests-final.stdout",
+      "action": "retain",
+      "sha256": "81465db6297d0aa08a0b63117cbbdaa3739c5cbc781ff38a766c86ae04711e31"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/github-environment-check.json",
+      "action": "retain",
+      "sha256": "f900146cf00cf21610acafb3b6784bfc0eef50a98cea89dfe3d9301e56bc90df"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/issue-local-only.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/issue-local-only.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/local-test-public.pem",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/negative-payload-test.json",
+      "action": "retain",
+      "sha256": "56456a390dcba031d4e2d7cb4ea1e00a1c4f08982dd879e15678c3879ef1d6b9"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-audit-full.raw.json",
+      "action": "retain",
+      "sha256": "9dc4e3476b491f02d169df70e6abcd71194afa75df5c7a73154ed11b4c380aaa"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-audit-production.raw.json",
+      "action": "retain",
+      "sha256": "e67f97341ff6359c0e345254116e3c8488443acf7b9f4af20a0689ab7924de3f"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-test-final.result.json",
+      "action": "retain",
+      "sha256": "96b856be5e1565e2c25bdf754adc83c5c62083849d2340909e8344bd8e3f35eb"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-test-final.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/npm-test-final.stdout",
+      "action": "retain",
+      "sha256": "ba1ddc1f9a1609a805799d54b9cb028a1f278980bc41c401adbf05b9d8091f23"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/README.md",
+      "action": "retain",
+      "sha256": "3e64fc38ae87a0d6ac6ea5853c5aad08194f5e7d4536b97195c43e48904f0e3f"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/replay-refused.stderr",
+      "action": "retain",
+      "sha256": "f70a8e2df9876748dbf50195080f8c048909d138ea804391c7f1b965ac470cc2"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/replay-refused.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/RESULTS.md",
+      "action": "retain",
+      "sha256": "9ec77221768e11ee769122253b3f4a921f49bc78aee0b06e550a2ac5b0b47f2a"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/revocation-refused.stderr",
+      "action": "retain",
+      "sha256": "ff466dbfbac2bc5ee830d46951d582d00032c87dbd4362840ac45f43a8b1724c"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/revocation-refused.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/revoke-after-build.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/revoke-after-build.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/strict-default.stderr",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/strict-default.stdout",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/validation-result.json",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/verification-summary.json",
+      "action": "retain",
+      "sha256": "000f1591c1fea801fde06b7b625e49fafe6cc177b49fee24c398f513c39360a8"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/verify-controlled.cjs",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-18-risk-acceptance/worktree-before.patch",
+      "action": "archive-locally-not-submit"
+    },
+    {
+      "file": "security-audit/2026-11-17/actions-search.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "dbe5f27ff28825ed35bb9bef4910ee9c0f16e32f4f60c165efa87c205e0f8313"
+    },
+    {
+      "file": "security-audit/2026-11-17/build.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "4ef437413cf6dd5c41655eaf37461a436a7af6b83d005dcc108eac82d76cd366"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-install-engine-clean.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "4d4962cf0ad059964c10ec04512c623eae7f6f995313bcb6ed5aedd8878e1ab4"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-install-engine.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "9a979a572e7f2d7313e6b8290f93467fc4904c01e992dbb97e16e44850074c57"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-install-patched.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "921431327a08d013ee4976bc952276865f9a43da5bcd308ff9a4b77876c97a9e"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-install.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "6ee525c8d467c7507744ccf614c0f94459eebdc85863672ab60272f0951e5f26"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-tests-engine-clean.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "3911a9fbdc8a6371f7d72a72e592fc1297240de721e858a112d4ff9d4d9fd88c"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-tests-engine.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "fa411d2de2031edb203b6d15fe7241a44457df48e93e4b9ef9a84ed636e004f6"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-tests-patched-final.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "a4997c06d97558fae13c6a788510dba0f5c9646d3505c8de413db5baaa1b0ea4"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-tests-patched.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "5203951066e9aaba998bb36872160487383ff7414eeefc38fb98675f6d410026"
+    },
+    {
+      "file": "security-audit/2026-11-17/candidate-tests.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "811672e8f8639a6e8fb2aefcb89a913c35fe69918b73b7d1445f1c3ed8e665f2"
+    },
+    {
+      "file": "security-audit/2026-11-17/direct-search-0.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "1dbdf36c5cdf5c40928cb9ca542914e04d35af5489ea1dbd6ad6caee9fef70d6"
+    },
+    {
+      "file": "security-audit/2026-11-17/direct-search-12.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "93b4cc61af01450a2d6589548215df567a1c33b66aabe6d3540bac1e016bb217"
+    },
+    {
+      "file": "security-audit/2026-11-17/direct-search-15.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "5bceea21e2aa4c1e196b4b797cea05057e13dc8586e0eab5c65556eb06b81037"
+    },
+    {
+      "file": "security-audit/2026-11-17/direct-search-3.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "b6a7bb0b9f4c87502b32fe7cb3ba03afa648e3383c84e51e475fc1837ff49d9f"
+    },
+    {
+      "file": "security-audit/2026-11-17/direct-search-6.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "2b7f9480c836ce22ea9a62bb013389051dfe1dc4ee28e33195b8e23373ea95ec"
+    },
+    {
+      "file": "security-audit/2026-11-17/direct-search-9.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "170e3fd06cfa253fccc3e66d999d13dfc71d4a4069b3ff2dde6883d58ca6bbba"
+    },
+    {
+      "file": "security-audit/2026-11-17/lock-final.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "3cf6c71ae3d77cda88c0095c904a384525b1e1d633ebe723843b6a0a9e2175ef"
+    },
+    {
+      "file": "security-audit/2026-11-17/migration-install.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "d3b7a14a00366881bd2207134b1e4b76b1e045a7609d375f7204d40198a886af"
+    },
+    {
+      "file": "security-audit/2026-11-17/packaged-ui.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "fb4229918a5320bdec35c8e9134f910859ea506027222e30310b18ab5cf82780"
+    },
+    {
+      "file": "security-audit/2026-11-17/packages-final.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "6ca2a7977b0b20b37478aeeffdcf3dbc29f0b5756c3979b9b62bf36bee0973b2"
+    },
+    {
+      "file": "security-audit/2026-11-17/policy-final.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "51abcb0941ea645fcaac233ef0f7aa80407ee4b9b295dfcd224404881f23c671"
+    },
+    {
+      "file": "security-audit/2026-11-17/secret-scan-final-log.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "d6deba1706b14eb460b7e28aea1158c21880168b9d0a10b43b2d09bc2a295a6d"
+    },
+    {
+      "file": "security-audit/2026-11-17/secret-scan-log.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "15ac8124142d39f4343d4c0cbafef42468a981da6e0ef92c0a4b27674a59518e"
+    },
+    {
+      "file": "security-audit/2026-11-17/tests-after.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "ed26ca005a457f18e46067306b9f9ec6cbe88fbaf15decc21a084581cbdcb868"
+    },
+    {
+      "file": "security-audit/2026-11-17/tests-final.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "f3b011239b99a3b260539b42021ec0ec1eb6192ba5a90cc222cea45912dad284"
+    },
+    {
+      "file": "security-audit/2026-11-17/tests-migrated.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "2f7374840d1dfc8fef5e3348d8d0455cbd51a89c85ddc128fa658bc4196b6225"
+    },
+    {
+      "file": "security-audit/2026-11-17/tests.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "c63d63682c714ff0a6fdb62ac13a4b04b2899ca6a6210a48d16ecd9d7d06569a"
+    },
+    {
+      "file": "security-audit/2026-11-17/transitive-search-0.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "6681066a3b08ad02b7b10ffb1455d2e30a3053722692b8e4ca591720598b8c22"
+    },
+    {
+      "file": "security-audit/2026-11-17/transitive-search-1.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "cdcd2d5eda2fdde03469e255e6816f8fae7feabe00c6c932a06ebbb9ac8fbeb6"
+    },
+    {
+      "file": "security-audit/2026-11-17/transitive-search-2.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "6b95418ea933f10f0fd8329a97e2c912d634f56e356961f8708ef5a06be1ba57"
+    },
+    {
+      "file": "security-audit/2026-11-17/transitive-search-3.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "ebb341d5fb627de91db6fb223fb27c4d44d07eba9169814f4131e958d4ebde76"
+    },
+    {
+      "file": "security-audit/2026-11-17/ui-tests-final.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "94bb3dc524db9f0bb6eb2d96586adab373e9a8528c481546c09d82149358ed97"
+    },
+    {
+      "file": "security-audit/2026-11-17/ui-tests-migrated.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "c91895f7c7a712905a2a0416a078f8cb4357ab63c0a6c3ab463b5d481600d6bd"
+    },
+    {
+      "file": "security-audit/2026-11-17/ui-tests-online.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "4f78076d566e4313cc676504f763719f75d4af417efccd6a9fa32b467d6a5f21"
+    },
+    {
+      "file": "security-audit/2026-11-17/ui-tests.txt",
+      "action": "archive-existing-ignored-derived-log",
+      "sha256": "00cf6f1c0b2a6f26df7db526aae9b3cf31f01b1e782922662909f2e71b1bc428"
+    }
+  ]
+}

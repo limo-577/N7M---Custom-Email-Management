@@ -2,6 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
+const os = require('node:os');
 const { promisify } = require('util');
 const { createRequire } = require('module');
 const { spawnSync } = require('child_process');
@@ -9,7 +10,9 @@ const minimatch = require('minimatch');
 const excelRequire = createRequire(require.resolve('exceljs-hardened'));
 
 function fixture() {
-  const parent = path.resolve(__dirname, '../test-results');
+  // ASAR's unpack glob examines an absolute path. Keep fixture semantics
+  // independent of a hidden checkout parent such as .codex or .risk-build.
+  const parent = os.tmpdir();
   fs.mkdirSync(parent, { recursive: true });
   const dir = fs.mkdtempSync(path.join(parent, 'dependency-'));
   fs.mkdirSync(path.join(dir, 'nested'));

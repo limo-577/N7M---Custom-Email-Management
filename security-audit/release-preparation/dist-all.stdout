@@ -1,0 +1,38 @@
+
+> n7m-custom-email-management@1.8.1 dist:all
+> npm run build && node build/build-windows.cjs nsis portable zip --output release/preparation-reviewed
+
+
+> n7m-custom-email-management@1.8.1 build
+> vite build
+
+[36mvite v8.3.7 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 1819 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.12 kB │ gzip:  0.65 kB
+dist/assets/index-Fgm9AWFu.css   54.86 kB │ gzip: 11.75 kB
+dist/assets/index-XEicoa9s.js   303.89 kB │ gzip: 92.51 kB
+
+[32m✓ built in 851ms[39m
+  • electron-builder  version=26.18.0 os=10.0.26300
+  • loaded configuration  file=package.json ("build" field)
+  • executing @electron/rebuild  electronVersion=45.2.1 arch=x64 buildFromSource=false workspaceRoot=D:\email-manager-app\.risk-build\preparation-run\candidate projectDir=./ appDir=./
+  • installing native dependencies  arch=x64
+  • completed installing native dependencies
+  • packaging       platform=win32 arch=x64 electron=45.2.1 appOutDir=release\preparation-reviewed\win-unpacked
+  • downloaded      label=electron progress=100%
+  • downloaded electron zip extracted successfully  output=D:\email-manager-app\.risk-build\preparation-run\candidate\release\preparation-reviewed\win-unpacked
+  • searching for node modules  pm=npm searchDir=D:\email-manager-app\.risk-build\preparation-run\candidate
+  • duplicate dependency references  dependencies=["string_decoder@1.3.0","brace-expansion@5.0.13","streamx@2.28.1","streamx@2.28.1","abort-controller@3.0.0","buffer@6.0.3","string_decoder@1.3.0","abort-controller@3.0.0","buffer@6.0.3","string_decoder@1.3.0","abort-controller@3.0.0","buffer@6.0.3","string_decoder@1.3.0","jszip@3.10.2"]
+  • updating asar integrity executable resource  executablePath=release\preparation-reviewed\win-unpacked\N7M - Custom Email Management.exe
+  • no code signing certificate configured, signing is skipped  path=release\preparation-reviewed\win-unpacked\N7M - Custom Email Management.exe
+  • building        target=zip arch=x64 file=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-NoInstall.zip
+  • building        target=nsis file=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-Setup.exe archs=x64 oneClick=false perMachine=false
+  • no code signing certificate configured, signing is skipped  path=C:\Users\ASUS\AppData\Local\Temp\t-gbQikj\elevate-staging-1\resources\elevate.exe
+  • no code signing certificate configured, signing is skipped  path=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-Setup.__uninstaller.exe
+  • no code signing certificate configured, signing is skipped  path=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-Setup.exe
+  • building block map  blockMapFile=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-Setup.exe.blockmap
+  • building        target=portable file=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-Portable.exe archs=x64
+  • no code signing certificate configured, signing is skipped  path=release\preparation-reviewed\N7M - Custom Email Management-1.8.1-Portable.exe
