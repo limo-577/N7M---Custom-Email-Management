@@ -160,6 +160,17 @@ test('same-run continuation refuses altered installation, raw evidence and stale
   assert.throws(() => risk.verifyReview(directory, prepared, context), /raw evidence changed/);
   fs.writeFileSync(raw, 'fixture evidence');
   assert.deepEqual(risk.verifyReview(directory, prepared, context), original);
+  const statusFile = path.join(prepared, 'audit-status.json');
+  const decisionFile = path.join(prepared, 'current-risk-review.json');
+  fs.writeFileSync(decisionFile, JSON.stringify({ releaseEligible: false }));
+  fs.writeFileSync(statusFile, JSON.stringify({ currentRiskReviewSha256: risk.sha(fs.readFileSync(decisionFile)) }));
+  // Seal this variant separately, preserving the original review evidence.
+  const variant = path.join(directory, '.risk-build/prepared-current-test'); fs.mkdirSync(variant);
+  for (const file of [...risk.REVIEW_FILES, 'current-risk-review.json']) fs.copyFileSync(path.join(prepared, file), path.join(variant, file));
+  risk.sealReview(directory, variant, context);
+  fs.writeFileSync(path.join(variant, 'current-risk-review.json'), JSON.stringify({ releaseEligible: true }));
+  assert.throws(() => risk.verifyReview(directory, variant, context), /performance-risk evidence changed/);
+  fs.writeFileSync(statusFile, '{}');
   const state = JSON.parse(fs.readFileSync(path.join(prepared, 'review-state.json')));
   assert.throws(() => risk.verifyReview(directory, prepared, context, Date.parse(state.completedAt) + 3600000), /stale/);
 });

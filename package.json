@@ -11,7 +11,7 @@
     "start": "electron .",
     "dist": "npm run build && node build/build-windows.cjs nsis",
     "dist:portable": "npm run build && node build/build-windows.cjs portable zip",
-    "test": "node --test tests/model.test.mjs tests/account-view.test.mjs tests/batch-entry.test.mjs tests/bulk-edit.test.mjs tests/edit-mutations.test.mjs tests/edit-sessions.test.cjs tests/browser-windows.test.cjs tests/browser-controller.test.cjs tests/browser-launch-firefox.test.cjs tests/vault.test.cjs tests/vault-backup.test.cjs tests/xlsx.test.cjs tests/dependencies.test.cjs build/launcher.test.cjs build/ci.test.cjs tests/dependency-policy.test.cjs tests/picomatch-isolation.test.cjs tests/risk-acceptance.test.cjs",
+    "test": "node --test tests/model.test.mjs tests/account-view.test.mjs tests/batch-entry.test.mjs tests/bulk-edit.test.mjs tests/edit-mutations.test.mjs tests/edit-sessions.test.cjs tests/browser-windows.test.cjs tests/browser-controller.test.cjs tests/browser-launch-firefox.test.cjs tests/vault.test.cjs tests/vault-backup.test.cjs tests/xlsx.test.cjs tests/dependencies.test.cjs build/launcher.test.cjs build/ci.test.cjs tests/dependency-policy.test.cjs tests/picomatch-isolation.test.cjs tests/risk-acceptance.test.cjs tests/current-risk-review.test.cjs",
     "test:ui": "playwright test",
     "dist:all": "npm run build && node build/build-windows.cjs nsis portable zip",
     "check:dependencies": "node build/check-dependencies.cjs",

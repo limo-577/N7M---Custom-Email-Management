@@ -6,6 +6,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 const risk = require('./risk-acceptance.cjs');
+const currentRisk = require('./current-risk-review.cjs');
 const ROOT = path.resolve(__dirname, '..');
 function options(args) {
   const result = { mode: 'strict' };
@@ -125,8 +126,22 @@ async function main(args = process.argv.slice(2)) {
   const reports = { fullAuditExit: full.code, productionAuditExit: production.code, isolatedProbeExit: probes.code,
     rawAuditSha256: risk.sha(rawAudit), vulnerabilityFixed: false, source, mode: opts.mode };
   fs.writeFileSync(path.join(output, 'audit-status.json'), JSON.stringify(reports, null, 2) + '\n');
+  let currentDecision;
+  if (full.code === 0 && ['strict', 'review'].includes(opts.mode)) {
+    currentDecision = currentRisk.review({ root: ROOT, rawAudit,
+      rawProduction: fs.readFileSync(path.join(output, 'audit-production.stdout')),
+      rawProbes: fs.readFileSync(path.join(output, 'picomatch-probes.stdout')), full, production, probes });
+    fs.writeFileSync(path.join(output, 'current-risk-review.json'), JSON.stringify(currentDecision, null, 2) + '\n', { flag: 'wx' });
+    // Bind this additional decision to the exact bytes of the existing sealed review.
+    reports.currentRiskReviewSha256 = risk.sha(fs.readFileSync(path.join(output, 'current-risk-review.json')));
+    fs.writeFileSync(path.join(output, 'audit-status.json'), JSON.stringify(reports, null, 2) + '\n');
+  }
   if (context.kind === 'local-verification' && ['strict', 'review'].includes(opts.mode)) risk.sealReview(ROOT, output, context);
   if (opts.mode === 'review') {
+    if (currentDecision) {
+      console.log(`Review completed: current full/production audits 0; historical advisory withdrawn; ${currentDecision.performance.timeouts} isolated timeouts; releaseEligible=${currentDecision.releaseEligible}. No risk approval or publication authorization issued.`);
+      return;
+    }
     risk.requireThat(full.code === 1 && !full.error && !full.signal, 'Review requires a valid vulnerability report');
     risk.checkLock(JSON.parse(fs.readFileSync(path.join(ROOT, 'package-lock.json'))));
     risk.inspectAudit(rawAudit, JSON.parse(fs.readFileSync(path.join(ROOT, 'package-lock.json'))));
@@ -143,6 +158,7 @@ async function main(args = process.argv.slice(2)) {
     }
   }
   if (opts.mode === 'strict') {
+    if (currentDecision) risk.requireThat(currentDecision.releaseEligible, 'Current audit is clean, but the separate performance-risk gate remains blocked; see current-risk-review.json');
     must(full); must(probes);
     const parsed = JSON.parse(rawAudit);
     risk.requireThat(parsed.auditReportVersion === 2 && !parsed.error && parsed.metadata?.vulnerabilities?.total === 0, 'Strict audit must be clean');

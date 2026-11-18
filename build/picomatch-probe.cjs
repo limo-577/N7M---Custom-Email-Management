@@ -4,6 +4,10 @@ const { spawnSync } = require('node:child_process');
 // Both compilation and matching stay in a disposable process. A timer inside
 // that process cannot interrupt a synchronous RegExp execution.
 function probe(modulePath, cases, { timeout = 2000 } = {}) {
+  if (!Number.isInteger(timeout) || timeout < 100 || timeout > 10000) throw Error('Probe timeout must be 100..10000 milliseconds');
+  // A preload must never replace the real matcher and turn a raw regression
+  // into a misleading success. Match compilation remains in this child only.
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !['NODE_OPTIONS', 'NODE_PATH'].includes(key.toUpperCase())));
   const script = `
     const pm = require(process.argv[1]);
     const cases = JSON.parse(process.argv[2]);
@@ -16,7 +20,7 @@ function probe(modulePath, cases, { timeout = 2000 } = {}) {
   `;
   const start = performance.now();
   const child = spawnSync(process.execPath, ['--max-old-space-size=128', '-e', script, modulePath, JSON.stringify(cases)], {
-    timeout, killSignal: 'SIGKILL', windowsHide: true, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024
+    env, timeout, killSignal: 'SIGKILL', windowsHide: true, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024
   });
   const result = { milliseconds: Math.round(performance.now() - start), status: child.status, signal: child.signal,
     error: child.error?.code || null, stderr: child.stderr || '' };

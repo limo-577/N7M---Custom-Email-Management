@@ -145,6 +145,8 @@ function verifyReview(root, directory, context, now = Date.now()) {
   requireThat(state.installationSha256 === installationState(root), 'Prepared installed dependencies changed');
   requireThat(stable(state.files.map(value => value.file)) === stable(REVIEW_FILES), 'Prepared evidence set changed');
   for (const entry of state.files) requireThat(sha(fs.readFileSync(path.join(directory, safeRelative(entry.file)))) === entry.sha256, 'Prepared raw evidence changed');
+  const status = JSON.parse(fs.readFileSync(path.join(directory, 'audit-status.json')));
+  if (status.currentRiskReviewSha256) requireThat(sha(fs.readFileSync(path.join(directory, 'current-risk-review.json'))) === status.currentRiskReviewSha256, 'Current performance-risk evidence changed');
   return { directory: path.relative(root, directory).replaceAll('\\', '/'), sha256: sha(bytes) };
 }
 function checkInputs(root) {
