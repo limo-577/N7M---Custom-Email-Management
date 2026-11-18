@@ -61,6 +61,9 @@ function wrap(original, filename) {
 const originalLoad = Module._load;
 function privateEntry(filename, parentFile) {
   const match = /^(.*[\\/]node_modules[\\/]picomatch)[\\/]lib[\\/](?!picomatch\.js$|constants\.js$).+\.js$/.exec(filename);
+  // Micromatch imports the string/path escaping utilities, not the parser. This
+  // exact installed caller remains covered by the lock and installation hashes.
+  if (match && filename === path.join(match[1], 'lib/utils.js') && parentFile === path.resolve(__dirname, '../node_modules/micromatch/index.js')) return;
   if (match && !parentFile?.startsWith(match[1] + path.sep)) reject('external private matcher API');
 }
 if (typeof Module.registerHooks !== 'function') reject('synchronous CJS/ESM loader hooks unavailable');

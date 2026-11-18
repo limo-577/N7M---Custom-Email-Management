@@ -53,6 +53,8 @@ The build-only preload restricts patterns: no extglobs, regex grouping, nested o
 range braces, ambiguous repeated wildcards, arbitrary regex helpers or external
 private parse APIs. Public and internal matcher entries are wrapped before Node
 snapshots CJS exports for ESM. Long patterns, arrays and matcher inputs fail.
+Micromatch's exact locked caller may import the string/path escaping utilities;
+direct private parse imports remain forbidden and this compatibility is tested.
 Unsupported legitimate patterns also block instead of changing semantics.
 Only distribution inherits this preload; raw diagnostics use the real matcher.
 

@@ -31,6 +31,8 @@ for (const location of Object.keys(require('../build/risk-acceptance.cjs').EXPEC
     }
     assert.throws(()=>require(${JSON.stringify(privateEntry)}),{code:'BUILD_GLOB_REFUSED'});
     await assert.rejects(import(require('node:url').pathToFileURL(${JSON.stringify(privateEntry)})),{code:'BUILD_GLOB_REFUSED'});
+    const micromatch=require('micromatch');assert.equal(micromatch.isMatch('src/a.js','**/*.js'),true);
+    assert.throws(()=>micromatch.makeRe('+(*a)'),{code:'BUILD_GLOB_REFUSED'});
     console.log('guarded');})().catch(e=>{console.error(e);process.exitCode=1})`);
     assert.equal(result.error, undefined); assert.equal(result.status, 0, result.stderr); assert.equal(result.stdout.trim(), 'guarded');
     }

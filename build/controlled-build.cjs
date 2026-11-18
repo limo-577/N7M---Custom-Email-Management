@@ -195,5 +195,5 @@ async function main(args = process.argv.slice(2)) {
   fs.writeFileSync(path.join(output, 'build-result.json'), JSON.stringify(result, null, 2) + '\n');
   console.log('Verified build completed. Publication is a separate explicit decision.');
 }
-if (require.main === module) main().catch(error => { console.error(`CONTROLLED BUILD REFUSED: ${error.message}`); process.exitCode = 1; });
 module.exports = { options, cleanEnvironment, contextFromEnvironment, main };
+if (require.main === module) main().catch(error => { console.error(`CONTROLLED BUILD REFUSED: ${error.message}`); process.exitCode = 1; });
