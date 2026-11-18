@@ -6,6 +6,7 @@ const { promisify } = require('util');
 const { createRequire } = require('module');
 const { spawnSync } = require('child_process');
 const minimatch = require('minimatch');
+const excelRequire = createRequire(require.resolve('exceljs-hardened'));
 
 function fixture() {
   const parent = path.resolve(__dirname, '../test-results');
@@ -21,7 +22,7 @@ function fixture() {
 const forward = value => value.replace(/\\/g, '/');
 
 test('minimatch adapter uses the patched engine for callable, named and legacy set matching', () => {
-  assert.equal(require('minimatch-engine/package.json').version, '11.0.4');
+  assert.equal(require('minimatch-engine/package.json').version, '11.0.9');
   assert.equal(minimatch('nested/a.txt', '**/*.txt'), true);
   assert.equal(minimatch.minimatch('nested/a.js', '**/*.txt'), false);
   assert.deepEqual(minimatch.match(['a.js', 'a.txt'], '*.txt'), ['a.txt']);
@@ -35,6 +36,14 @@ test('minimatch adapter uses the patched engine for callable, named and legacy s
   assert.deepEqual('a.txt'.match(segment), ['a.txt']);
   assert.equal('a.js'.match(segment), null);
   assert.equal(new minimatch.Minimatch('**').set[0][0], minimatch.GLOBSTAR);
+});
+
+test('patched literal escaping never turns leading negation/comment text into a glob operator', () => {
+  for (const literal of ['!secret.txt', '#notes.md']) {
+    const pattern = minimatch.escape(literal);
+    assert.equal(minimatch(literal, pattern), true);
+    assert.equal(minimatch('other.txt', pattern), false);
+  }
 });
 
 test('patched preprocessing rejects amplification within an explicit expansion budget', () => {
@@ -58,7 +67,7 @@ test('glob 7, filelist and readdir-glob preserve recursive, dot and exclusion pa
   assert.deepEqual(files.map(file => path.basename(file)), ['a.txt']);
   const matches = await new Promise((resolve, reject) => {
     const files = [];
-    require('readdir-glob')(dir, { pattern: '**/*.txt', nodir: true, ignore: 'nested/**' })
+    excelRequire('readdir-glob')(dir, { pattern: '**/*.txt', nodir: true, ignore: 'nested/**' })
       .on('match', file => files.push(forward(file.relative)))
       .on('end', () => resolve(files.sort())).on('error', reject);
   });
@@ -67,7 +76,7 @@ test('glob 7, filelist and readdir-glob preserve recursive, dot and exclusion pa
 
 test('archiver glob and rimraf use the patched matcher without changing inclusion/deletion scope', async () => {
   const dir = fixture();
-  const archive = require('archiver')('zip');
+  const archive = new (excelRequire('archiver').ZipArchive)();
   const chunks = [];
   const complete = new Promise((resolve, reject) => {
     archive.on('data', chunk => chunks.push(chunk));
@@ -110,12 +119,8 @@ test('electron-builder file filters preserve positive, negative and dot-file pat
   assert.equal(filter(path.join(root, 'src/main.jsx'), file), false);
 });
 
-test('uuid 11 rejects short buffers and ExcelJS conditional-formatting round trips remain compatible', async () => {
-  const uuid = require('uuid');
-  assert.equal(require('uuid/package.json').version, '11.1.1');
-  assert.equal(uuid.validate(uuid.v4()), true);
-  assert.throws(() => uuid.v5('test', uuid.v5.DNS, Buffer.alloc(8), 4), RangeError);
-  const ExcelJS = require('exceljs');
+test('security-maintained fork and modern matcher keep conditional-formatting round trips compatible', async () => {
+  const ExcelJS = require('exceljs-hardened');
   const book = new ExcelJS.Workbook(), sheet = book.addWorksheet('Accounts');
   sheet.addRows([['邮箱链接', '浏览器', '编号'], ['dependency@example.com', 'Chrome', 1]]);
   sheet.getCell('C2').numFmt = '000';
@@ -123,6 +128,8 @@ test('uuid 11 rejects short buffers and ExcelJS conditional-formatting round tri
   const loaded = new ExcelJS.Workbook(); await loaded.xlsx.load(await book.xlsx.writeBuffer());
   assert.equal(loaded.worksheets[0].getCell('A2').text, 'dependency@example.com');
   assert.equal(loaded.worksheets[0].getCell('C2').numFmt, '000');
-  const excelRequire = createRequire(require.resolve('exceljs'));
-  assert.equal(excelRequire('uuid/package.json').version, '11.1.1');
+  assert.equal(require('exceljs-hardened/package.json').version, '5.1.1');
+  const modernRequire = createRequire(excelRequire.resolve('readdir-glob'));
+  assert.equal(modernRequire('minimatch/package.json').version, '11.0.9');
+  assert.equal(typeof modernRequire('minimatch').Minimatch, 'function');
 });

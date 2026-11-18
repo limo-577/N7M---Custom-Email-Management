@@ -1,0 +1,230 @@
+{
+  "date": "2026-11-04",
+  "version": "1.3.1",
+  "head": "2e44f78bc03f887b26d757b46041a049a381edde",
+  "hasUncommittedChanges": true,
+  "fixed": 11,
+  "governed": 1,
+  "follow": 0,
+  "acceptedMaintenanceRisks": 1,
+  "policyReviewDue": "2026-12-04",
+  "directDependencies": {
+    "runtime": 3,
+    "development": 14,
+    "total": 17
+  },
+  "lockedInstallationEntries": 566,
+  "verification": {
+    "date": "2026-11-04",
+    "timezone": "Europe/Rome",
+    "version": "1.3.1",
+    "head": "2e44f78bc03f887b26d757b46041a049a381edde",
+    "scope": "Follow-up fixes: ignore rules, pinned CI actions, least-privilege publication and build-argument regression; D03 retained by explicit developer risk acceptance with enforced dependency policy.",
+    "sourceDesktopTests": {
+      "command": "npm run test:ui",
+      "passed": 6,
+      "failed": 0
+    },
+    "build": {
+      "command": "npm run build",
+      "exitCode": 0
+    },
+    "packagedDesktopTests": {
+      "directory": "release/win-unpacked",
+      "passed": 6,
+      "failed": 0,
+      "reusedEarlierSameDay": true,
+      "note": "Current security runtime modules byte-compared unchanged against the 1.3.1 ASAR tested earlier today; no new installer build or remote CI run."
+    },
+    "npmAudit": {
+      "critical": 0,
+      "high": 0,
+      "moderate": 0,
+      "low": 0,
+      "total": 0
+    },
+    "directDependencies": {
+      "runtime": 3,
+      "development": 14,
+      "total": 17
+    },
+    "lockedInstallationEntries": 566,
+    "releaseVerification": {
+      "asarVersion": "1.3.1",
+      "asarBytes": 11662326,
+      "applicationFilesEqualToCurrentSourceAndDist": 13,
+      "zipAsarAndExecutableEqualToUnpacked": true,
+      "latestYmlSetupSha512Matches": true,
+      "authenticodeSetup": "NotSigned",
+      "authenticodePortable": "NotSigned",
+      "authenticodeUnpackedExecutable": "NotSigned",
+      "setupInstallerExecuted": false,
+      "artifactsRebuiltOrPublishedThisPass": false
+    },
+    "priorStartupEvidence": {
+      "file": ".startup-qa/cached-portable-1.3.1-release-verified.json",
+      "recordedAtUtc": "2026-11-04T13:11:49Z",
+      "pass": true,
+      "coldMs": 15255,
+      "cachedMs": 723,
+      "freshTimingMeasurementThisPass": false,
+      "currentRuntimeBuildHashMatchesRecord": "1f1ca338c13a558ad2879e196450a92e5c71babb4d3e6fd070a65093459d954d"
+    },
+    "reproducedCiFailure": {
+      "status": "Resolved upstream command retained and covered by wrapper/workflow regression test",
+      "workflow": ".github/workflows/release.yml",
+      "currentCommand": "npm run dist:all",
+      "previousFailure": "Unsupported build argument: --publish"
+    },
+    "note": "Four items fixed and one explicitly accepted risk now governed. npm audit is unfiltered; six deprecated packages remain. Signing/cache boundaries and remote CI verification remain separate.",
+    "nodeTests": {
+      "command": "npm test",
+      "passed": 63,
+      "failed": 0,
+      "includes": [
+        "application and vault",
+        "XLSX isolation",
+        "dependency compatibility",
+        "launcher",
+        "CI security",
+        "dependency policy"
+      ]
+    },
+    "dependencyPolicy": {
+      "local": "passed",
+      "online": "passed",
+      "acceptedOn": "2026-11-04",
+      "reviewBy": "2026-12-04",
+      "retainedDeprecatedPackages": 6,
+      "exceljs": "4.4.0",
+      "riskEliminated": false
+    },
+    "ci": {
+      "allActionsPinned": true,
+      "buildPermission": "contents:read",
+      "releasePermission": "contents:write only in tag-push release job",
+      "publisher": "softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64",
+      "publisherVersion": "v3.0.3",
+      "realRemoteRunTriggered": false,
+      "regressionTests": 5
+    }
+  },
+  "audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "cases": [
+    [
+      "C01",
+      "代码",
+      "Medium",
+      "IPC 主 frame 与精确页面来源校验",
+      "electron/main.cjs:50",
+      "已复核",
+      "来源白名单、解锁与操作代次检查仍保留。"
+    ],
+    [
+      "C02",
+      "代码",
+      "Medium",
+      "生产 CSP",
+      "vite.config.js:10",
+      "已复核",
+      "禁止内联脚本、eval、外部网络及多余页面能力；样式允许 inline 以兼容界面。"
+    ],
+    [
+      "C03",
+      "代码",
+      "Low",
+      "Electron 导航与权限边界",
+      "electron/main.cjs:63",
+      "已复核",
+      "webview、新窗口、导航与未使用权限限制未回退，sandbox / contextIsolation 保留。"
+    ],
+    [
+      "S01",
+      "密钥",
+      "Low",
+      "补齐敏感文件忽略规则",
+      ".gitignore:33",
+      "已修复",
+      "已补回 *.key、email-data.json*、email-vault.json*，连同既有环境文件和 PEM/PFX/P12 规则覆盖私钥及资料库副本；当前没有发现这些敏感文件被跟踪。新增规则不删除历史对象，也不能撤销实际泄露的凭据。"
+    ],
+    [
+      "D01",
+      "依赖",
+      "Medium",
+      "minimatch 使用官方修复引擎",
+      "package.json overrides；vendor/minimatch-compat/index.cjs",
+      "已复核",
+      "本地兼容包 1.0.1 委托官方 minimatch 11.0.4；适配旧 CommonJS、glob 7 分段匹配和 Windows 路径，实际匹配不回退旧解析器。"
+    ],
+    [
+      "D02",
+      "依赖",
+      "Medium",
+      "uuid 升级",
+      "package.json overrides.uuid",
+      "已复核",
+      "实际锁定 11.1.1；ExcelJS 使用 v4()，原公告针对 v3/v5/v6，未发现项目满足原利用条件，已消除受影响版本。"
+    ],
+    [
+      "C04",
+      "代码",
+      "Medium",
+      "Excel 线程隔离及资源预算",
+      "electron/xlsx-import.cjs；electron/xlsx-worker.cjs",
+      "已复核",
+      "15 秒终止、实际流式解压计量、全部工作表预算、锁定/取消终止与固定错误文案仍保留。"
+    ],
+    [
+      "D03",
+      "依赖",
+      "Low",
+      "ExcelJS 与弃用包维护风险治理",
+      "security-audit/dependency-policy.json；build/check-dependencies.cjs",
+      "已治理（风险接受）",
+      "用户明确选择保留 ExcelJS 4.4.0 和 boolean、fstream、glob、inflight、lodash.isequal、rimraf 共 6 个弃用间接包。已建立精确版本政策、本地和 npm 官方注册表在线维护检查、每周只读 CI 与 30 日复核期限 2026-12-04；这是有期限的风险接受，不是移除弃用依赖或消除维护风险。"
+    ],
+    [
+      "C05",
+      "代码",
+      "Low",
+      "当前 1.3.1 分发物已更新",
+      "release/win-unpacked；1.3.1-NoInstall.zip",
+      "已复核",
+      "包内 13 个应用文件与当前代码/构建一致，ZIP 的 ASAR 和主 EXE 与 win-unpacked 一致。仅结案当前包缺少修复的问题，历史旧包和签名仍另行关注。"
+    ],
+    [
+      "CI01",
+      "代码",
+      "Medium",
+      "第三方 Action 固定完整提交",
+      ".github/workflows/release.yml:23",
+      "已修复",
+      "5 种第三方 Action 均固定到已核对的官方完整 SHA，包含 checkout、setup-node、upload-artifact、download-artifact 和用户批准升级的 softprops/action-gh-release v3.0.3（efb35369e0ad2afab669f228072c1b0d510eae64）。依赖复核工作流也使用固定提交，checkout 不保存凭据。"
+    ],
+    [
+      "CI02",
+      "代码",
+      "Medium",
+      "只读构建与最小权限发布隔离",
+      ".github/workflows/release.yml:63",
+      "已修复",
+      "安装依赖、测试和打包 job 仅有 contents: read；只有 v 标签 push 且构建完成才进入单独 contents: write 发布 job。写权限 job 仅下载本次运行产物并发布，不 checkout，也不执行仓库或依赖脚本。"
+    ],
+    [
+      "CI03",
+      "代码",
+      "Low",
+      "修正并固化 CI 打包入口",
+      ".github/workflows/release.yml:47",
+      "已修复",
+      "保留用户已修正的 npm run dist:all，不再向新包装器传入不支持的 --publish never；包装器本身固定 publish: never。回归测试解析实际 workflow、npm script 与包装器参数，启动器和 CI 测试已并入 npm test。此项是发布功能故障修复，不是宣称发现远程攻击。"
+    ]
+  ]
+}

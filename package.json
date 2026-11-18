@@ -1,6 +1,6 @@
 {
   "name": "n7m-custom-email-management",
-  "version": "1.3.1",
+  "version": "1.8.1",
   "description": "N7M - Custom Email Management",
   "main": "electron/main.cjs",
   "author": "N7M",
@@ -11,14 +11,17 @@
     "start": "electron .",
     "dist": "npm run build && node build/build-windows.cjs nsis",
     "dist:portable": "npm run build && node build/build-windows.cjs portable zip",
-    "test": "node --test tests/model.test.mjs tests/vault.test.cjs tests/xlsx.test.cjs tests/dependencies.test.cjs",
+    "test": "node --test tests/model.test.mjs tests/account-view.test.mjs tests/batch-entry.test.mjs tests/bulk-edit.test.mjs tests/edit-mutations.test.mjs tests/edit-sessions.test.cjs tests/browser-windows.test.cjs tests/browser-controller.test.cjs tests/browser-launch-firefox.test.cjs tests/vault.test.cjs tests/vault-backup.test.cjs tests/xlsx.test.cjs tests/dependencies.test.cjs build/launcher.test.cjs build/ci.test.cjs tests/dependency-policy.test.cjs",
     "test:ui": "playwright test",
-    "dist:all": "npm run build && node build/build-windows.cjs nsis portable zip"
+    "dist:all": "npm run build && node build/build-windows.cjs nsis portable zip",
+    "check:dependencies": "node build/check-dependencies.cjs",
+    "check:dependencies:online": "node build/check-dependencies.cjs --online"
   },
   "dependencies": {
-    "exceljs": "4.4.0",
+    "exceljs-hardened": "5.1.1",
+    "hash-wasm": "4.13.0",
     "jszip": "3.10.2",
-    "minimatch": "file:vendor/n7m-minimatch-compat-1.0.1.tgz"
+    "minimatch": "file:vendor/n7m-minimatch-compat-1.0.2.tgz"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
@@ -27,13 +30,14 @@
     "concurrently": "10.0.6",
     "electron": "45.2.1",
     "electron-builder": "26.18.0",
+    "lucide-react": "1.34.0",
     "postcss": "8.5.32",
-    "tailwindcss": "3.4.17",
-    "vite": "8.3.5",
-    "wait-on": "9.1.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "lucide-react": "1.34.0"
+    "tailwindcss": "3.4.17",
+    "vite": "8.3.7",
+    "wait-on": "9.1.0",
+    "yaml": "2.9.1"
   },
   "build": {
     "appId": "com.emailmanager.desktop",
@@ -49,7 +53,7 @@
       "src/model.mjs",
       "src/mutations.mjs",
       "package.json",
-      "!node_modules/exceljs/dist/**"
+      "!node_modules/exceljs-hardened/dist/**"
     ],
     "win": {
       "target": [
@@ -78,7 +82,9 @@
   },
   "type": "module",
   "overrides": {
-    "uuid": "11.1.1",
-    "minimatch": "$minimatch"
+    "minimatch": "$minimatch",
+    "readdir-glob@3.0.0": {
+      "minimatch": "11.0.9"
+    }
   }
 }

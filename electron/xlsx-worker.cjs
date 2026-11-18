@@ -86,9 +86,9 @@ async function parseWorkbook(input, limits) {
   const bytes = Buffer.from(input.buffer, input.byteOffset, input.byteLength);
   if (!bytes.length || bytes.length > limits.fileBytes) fail('LIMIT_FILE');
   await verifyArchive(bytes, limits);
-  // Load ExcelJS only after the streamed expansion check. This uses its Node
+  // Load the security-maintained fork only after the streamed expansion check. This uses its Node
   // entrypoint, so patched lockfile dependencies replace the old browser bundle.
-  const ExcelJS = require('exceljs');
+  const ExcelJS = require('exceljs-hardened');
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.load(bytes);
   if (workbook.worksheets.length > limits.sheets) fail('LIMIT_SHEETS');

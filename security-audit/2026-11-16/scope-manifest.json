@@ -1,0 +1,445 @@
+{
+  "date": "2026-11-16",
+  "head": "2e44f78bc03f887b26d757b46041a049a381edde",
+  "workingTreeModified": true,
+  "files": [
+    {
+      "file": ".github/workflows/dependency-review.yml",
+      "bytes": 993,
+      "lines": 42,
+      "sha256": "d851940357e5f160f2bf6a362f1ef14fcfe0abe3a555622579b0853eb752716f"
+    },
+    {
+      "file": ".github/workflows/release.yml",
+      "bytes": 2473,
+      "lines": 91,
+      "sha256": "d778120a36018f41b2afcc72699e8deac51475c2fa06d3f836a986fb03285299"
+    },
+    {
+      "file": ".gitignore",
+      "bytes": 433,
+      "lines": 48,
+      "sha256": "8245824e229c94310255664e0c0766d473d9f59075bdfa3d5a1cde5421d36adc"
+    },
+    {
+      "file": "README.md",
+      "bytes": 18780,
+      "lines": 129,
+      "sha256": "132f68ab43fdccacd18b1d65993d8f56c1f67cf779aa13c4b0313d0e51f9185d"
+    },
+    {
+      "file": "build/build-windows.cjs",
+      "bytes": 4433,
+      "lines": 76,
+      "sha256": "4f13bef8df1daecec829c7d976ae56a0649e2a12d3897a76c930a7570a24ec34"
+    },
+    {
+      "file": "build/check-dependencies.cjs",
+      "bytes": 7183,
+      "lines": 106,
+      "sha256": "6dee5147a356aefd544f312fcf05ed398f50eaef9496dc288ce37130e52d438c"
+    },
+    {
+      "file": "build/ci.test.cjs",
+      "bytes": 5664,
+      "lines": 88,
+      "sha256": "788c7dbf4c40fb5fea61e29a0cf0e3e01677906a660305c2611b105c76ed2166"
+    },
+    {
+      "file": "build/launcher.test.cjs",
+      "bytes": 2867,
+      "lines": 42,
+      "sha256": "e29d98f6b9881463dba6a839a614083229783c646556fdaf9095209b2a2943aa"
+    },
+    {
+      "file": "build/portable-fast.nsi",
+      "bytes": 11210,
+      "lines": 309,
+      "sha256": "19cfdaf1001236ddbcf3cf8765d60ad07fc65056b04f971728b07c7dd65f1680"
+    },
+    {
+      "file": "electron/argon2-worker.cjs",
+      "bytes": 810,
+      "lines": 19,
+      "sha256": "e269661e6d6f902fd6b8a6e715438dbf9e6c1b9f7fa7171fc5ef1579eeed5569"
+    },
+    {
+      "file": "electron/argon2.cjs",
+      "bytes": 2505,
+      "lines": 44,
+      "sha256": "2b3952ea78d82b62925920e93a8ecbd45ee6db75453852a222fe7585d6692756"
+    },
+    {
+      "file": "electron/backup.cjs",
+      "bytes": 3757,
+      "lines": 49,
+      "sha256": "5eb1b2f5423178a407316eb5865347981f579d089da82913e55307b052c29c6e"
+    },
+    {
+      "file": "electron/browser-controller.cjs",
+      "bytes": 5300,
+      "lines": 90,
+      "sha256": "da75becfa093b954a9ddf3a1216de15383e30ae2f07f9967443b5544b4c6c188"
+    },
+    {
+      "file": "electron/browser-launch.cjs",
+      "bytes": 8084,
+      "lines": 136,
+      "sha256": "f6a055e9a58c191a28e84411350de97fdb3f50cd7c65abce655392c355712315"
+    },
+    {
+      "file": "electron/browser-windows.cjs",
+      "bytes": 6647,
+      "lines": 104,
+      "sha256": "7bd60dd29189017d52cfa613b1fd66cf04d734f80f5dfd151f0a4b5d5bab621f"
+    },
+    {
+      "file": "electron/browser-windows.ps1",
+      "bytes": 8527,
+      "lines": 154,
+      "sha256": "0d6e2152f80d55d830ea66e938f53ce10c1beec66e627d756586a686c8401ef7"
+    },
+    {
+      "file": "electron/edit-sessions.cjs",
+      "bytes": 3281,
+      "lines": 43,
+      "sha256": "0155ace3ee44a9ed8a9b7af110488badb282b708fe0c87060a2898672d7e9678"
+    },
+    {
+      "file": "electron/main.cjs",
+      "bytes": 29596,
+      "lines": 450,
+      "sha256": "2a902dc40cafea35a3149c7d580c7be16f433260e3636d1b5c2153435b61d9e7"
+    },
+    {
+      "file": "electron/preload.cjs",
+      "bytes": 2759,
+      "lines": 40,
+      "sha256": "15d99291e21140776ee4292b6fceee41eb24c96bd9ce7d9ac38d095d2b353683"
+    },
+    {
+      "file": "electron/security.cjs",
+      "bytes": 812,
+      "lines": 20,
+      "sha256": "22b525c5dfb106136a8fbdb8d6e2b2a24da8bf9b57af5177bf386265e2c374a0"
+    },
+    {
+      "file": "electron/totp.cjs",
+      "bytes": 1240,
+      "lines": 27,
+      "sha256": "7edd1d2236dcab08d84fe7cbc4def0ea4d609eb678ef89ed360231151b6e2803"
+    },
+    {
+      "file": "electron/vault.cjs",
+      "bytes": 19430,
+      "lines": 344,
+      "sha256": "534e590cd488de51ee404e11a5f35f15907adc3f955abb101adfb24be2d114d2"
+    },
+    {
+      "file": "electron/xlsx-import.cjs",
+      "bytes": 4947,
+      "lines": 102,
+      "sha256": "6ab1fcd7680f192d2d84d069b57842927f95433e18a8effd6edce2d8caafd0b3"
+    },
+    {
+      "file": "electron/xlsx-worker.cjs",
+      "bytes": 7137,
+      "lines": 130,
+      "sha256": "7dc6ffd28395a9cbf1e73a4374f27f7224f1faea1625a4d03d23917ced2e78d0"
+    },
+    {
+      "file": "index.html",
+      "bytes": 641,
+      "lines": 13,
+      "sha256": "e71def32539274544b9f91d0484100831c11622821e89f42280de13f8ee51413"
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 274067,
+      "lines": 7798,
+      "sha256": "deaeed2e2a84e7521b7601cdd14ce175d25a934e924c4308833c8f09ff3b5954"
+    },
+    {
+      "file": "package.json",
+      "bytes": 2945,
+      "lines": 89,
+      "sha256": "a3ac88ff4c6590d750a09a40254b29de1a230b96eb303225e72fd79eed5cd1ae"
+    },
+    {
+      "file": "playwright.config.mjs",
+      "bytes": 354,
+      "lines": 7,
+      "sha256": "c81f15466eb102ac5f3bb5a7b0433a65de2bb8c2da8db62df4c2e6e6c3f3d69c"
+    },
+    {
+      "file": "postcss.config.js",
+      "bytes": 79,
+      "lines": 7,
+      "sha256": "082f9a07aae22ae329bfc652d405ba5a704cba1ee86f4b78c7c70f98d628a610"
+    },
+    {
+      "file": "src/AuthGate.jsx",
+      "bytes": 2418,
+      "lines": 20,
+      "sha256": "d4e3ea2efd7fbfcf4cf5b9561470b4d934f48ff7850615f0500592945b089d31"
+    },
+    {
+      "file": "src/BackupModal.jsx",
+      "bytes": 9433,
+      "lines": 68,
+      "sha256": "cac41f142dfe9902ec0b5d6eb1bece5fff0027c783ddd6e70e58b8849dbb6202"
+    },
+    {
+      "file": "src/BatchEntryModal.jsx",
+      "bytes": 15109,
+      "lines": 145,
+      "sha256": "95efe097ce8c45a921a60b223206f16a250486e8c9526baa1c3b458a6c73f8c3"
+    },
+    {
+      "file": "src/BulkEditModal.jsx",
+      "bytes": 14957,
+      "lines": 144,
+      "sha256": "6049daac08a7cbb3db3c3ce6c156755082bed059e6b9c4f3edd7d88a7092e3a3"
+    },
+    {
+      "file": "src/EmailManager.jsx",
+      "bytes": 59159,
+      "lines": 367,
+      "sha256": "3b5a1ac04ece85d00e02cc1a9a2a42b4515baf87684186c0913b47b49dff577b"
+    },
+    {
+      "file": "src/ExistingAccountsPanel.jsx",
+      "bytes": 8877,
+      "lines": 82,
+      "sha256": "c1e7dca8f0275cc245952a4691045de6e550e853a0b401a95810afc131a2aed5"
+    },
+    {
+      "file": "src/ProfileHelp.jsx",
+      "bytes": 2997,
+      "lines": 44,
+      "sha256": "46c0afd85d5fe2627d6ddfc8c52129307ec19c66ce7871351d18fa03bbe51baf"
+    },
+    {
+      "file": "src/account-view.mjs",
+      "bytes": 2009,
+      "lines": 45,
+      "sha256": "40d0e43fe3bc6467b6f36c8b50ea4860143f87eb162e74610f273098e0f3aa39"
+    },
+    {
+      "file": "src/backup-modal.css",
+      "bytes": 1993,
+      "lines": 16,
+      "sha256": "8e39bd3943a7d860f619db10bc357b8d8b80aab753174551ce988648c1d79c44"
+    },
+    {
+      "file": "src/batch-entry.css",
+      "bytes": 8419,
+      "lines": 99,
+      "sha256": "f2c5e896c97e6f234f7c8969baa324eef232177c0ec7e37692386a6e523a4aa4"
+    },
+    {
+      "file": "src/batch-entry.mjs",
+      "bytes": 5837,
+      "lines": 92,
+      "sha256": "11db6b86cbe52130c4b8f7059368ae3af3a3acada7fec2644fbf0c60193b3f49"
+    },
+    {
+      "file": "src/bulk-edit.css",
+      "bytes": 4986,
+      "lines": 48,
+      "sha256": "5046d2ebefc25a39a438996c7903999f8b47b00a8b845c321c11b8635ef1bd55"
+    },
+    {
+      "file": "src/bulk-edit.mjs",
+      "bytes": 6238,
+      "lines": 98,
+      "sha256": "32e2b5a08b5fb775ea8041e516b2cbfd7dbf8c5d1e441af7e3d90174dee4ea48"
+    },
+    {
+      "file": "src/existing-accounts.css",
+      "bytes": 5616,
+      "lines": 47,
+      "sha256": "a2bb353839ce3c7e28495c4b0f1cebc0c2f947023444e07c02e482306161ed37"
+    },
+    {
+      "file": "src/index.css",
+      "bytes": 33636,
+      "lines": 378,
+      "sha256": "325fc11604c79cb962e67275bd676922cb441e1d6bf7838867d0d940d18c6363"
+    },
+    {
+      "file": "src/main.jsx",
+      "bytes": 262,
+      "lines": 11,
+      "sha256": "ec359976b479460ad23953ea2b8d43e27935f53f3a764a1b029508d3cb166cb4"
+    },
+    {
+      "file": "src/model.mjs",
+      "bytes": 12367,
+      "lines": 205,
+      "sha256": "a168bae7af92c87591fedb044ec2a7c6333f9b3d48b75ccac113e59068dcc9e2"
+    },
+    {
+      "file": "src/mutations.mjs",
+      "bytes": 8938,
+      "lines": 132,
+      "sha256": "d5a7b4fee8007d12173aeb75ecdae8253d25cb20f3f613b3eb471a5f75954232"
+    },
+    {
+      "file": "src/profile-help.css",
+      "bytes": 2015,
+      "lines": 23,
+      "sha256": "cae6b40ead090c3e99b3fb4cb21585f600d4a71e4f679dc89d76d8bf7aea2672"
+    },
+    {
+      "file": "tailwind.config.js",
+      "bytes": 162,
+      "lines": 7,
+      "sha256": "b24d0028daf2b29bceb3aee3ea4ab2bbb3ecc3e47ccfeeab1944d169c060e9e9"
+    },
+    {
+      "file": "tests/account-view.test.mjs",
+      "bytes": 5714,
+      "lines": 101,
+      "sha256": "6d64810817feaa083111127502c7cb7ce2ebcea468d0a54a33d7bea16b721560"
+    },
+    {
+      "file": "tests/background-electron.cjs",
+      "bytes": 4704,
+      "lines": 78,
+      "sha256": "1055fd79d1d5676385ab5355bc18972d7fda694a844144c09eeea2adb86a763d"
+    },
+    {
+      "file": "tests/backup-routing.spec.cjs",
+      "bytes": 7343,
+      "lines": 82,
+      "sha256": "53fe874cca0a84d1c5b9baa219232ddb77fd7d39fcf22fe229ff6112ac931539"
+    },
+    {
+      "file": "tests/batch-entry.test.mjs",
+      "bytes": 7896,
+      "lines": 129,
+      "sha256": "642bd3a73482ed94cecf38a572eb66725500df3b47ae197ca8cf450bceb5c59f"
+    },
+    {
+      "file": "tests/browser-controller.test.cjs",
+      "bytes": 18971,
+      "lines": 315,
+      "sha256": "2a285f4bdb655527e30cb4338dbd002c1ebee29b364d6e1b79cfd8aa7fad97cf"
+    },
+    {
+      "file": "tests/browser-launch-firefox.test.cjs",
+      "bytes": 5667,
+      "lines": 63,
+      "sha256": "ba9b831061a4845359d878d1925ccb0931b4a7c2b012ac6f60fb78af3610ccf0"
+    },
+    {
+      "file": "tests/browser-windows-native.test.cjs",
+      "bytes": 8741,
+      "lines": 120,
+      "sha256": "39af506137a12fdc5784f957f66730e207361d44848be403b980f49b0b88e730"
+    },
+    {
+      "file": "tests/browser-windows.test.cjs",
+      "bytes": 8003,
+      "lines": 115,
+      "sha256": "373b5a6146f53848c749759f5f8f744d96483f37ec4eb775e20827a3d903d936"
+    },
+    {
+      "file": "tests/bulk-edit.test.mjs",
+      "bytes": 8954,
+      "lines": 131,
+      "sha256": "38d35b1636a07ece7d1ef5c0abff46cd9e64fdd1c20cb7f7b624d2dc7345342b"
+    },
+    {
+      "file": "tests/dependencies.test.cjs",
+      "bytes": 7531,
+      "lines": 137,
+      "sha256": "f032f93a63464d1bb58b58026b614a7cd527b27ff8973697a345471002d04565"
+    },
+    {
+      "file": "tests/dependency-policy.test.cjs",
+      "bytes": 4465,
+      "lines": 65,
+      "sha256": "12490c74ccd6a88f3b24d9128f78592ea4352a3214a8481a51f852c41daeb877"
+    },
+    {
+      "file": "tests/desktop.spec.cjs",
+      "bytes": 105472,
+      "lines": 1294,
+      "sha256": "16a0d97d175fc7636672f53c84e67db4145a338e3e5b169935fe524991176e35"
+    },
+    {
+      "file": "tests/edit-mutations.test.mjs",
+      "bytes": 7355,
+      "lines": 105,
+      "sha256": "ddd306f6a7fd844cda305d1137a4fb1ed2fa87e620039e9cba327f70d7cf4f1d"
+    },
+    {
+      "file": "tests/edit-sessions.test.cjs",
+      "bytes": 2731,
+      "lines": 34,
+      "sha256": "d3e460724553ded32ac01e5054c85489a8c5a9a68383d5e1724506678463fb4b"
+    },
+    {
+      "file": "tests/model.test.mjs",
+      "bytes": 22980,
+      "lines": 311,
+      "sha256": "579d01d444c670a1ca1dc13758916c483bbbe31ff164d7af3fc72fb267295497"
+    },
+    {
+      "file": "tests/sensitive-flow.spec.cjs",
+      "bytes": 5928,
+      "lines": 90,
+      "sha256": "14b5aae636d79a2eb52330bf85560ec71096eafae9153439cce7aec282bb123c"
+    },
+    {
+      "file": "tests/sorting-toolbar.spec.cjs",
+      "bytes": 14651,
+      "lines": 188,
+      "sha256": "01811ba5473f559bad87a42793a81fb5e52deb79ab545b91e0f50bdd8d8a2243"
+    },
+    {
+      "file": "tests/vault-backup.test.cjs",
+      "bytes": 19255,
+      "lines": 277,
+      "sha256": "64d3ecb2c060d58381b2358788a3db9ef1e437a847f5d386e34976de43a7a5f4"
+    },
+    {
+      "file": "tests/vault.test.cjs",
+      "bytes": 10429,
+      "lines": 151,
+      "sha256": "1ed0b6a74fa778f9b3ab063e405339239857d151ef153405f8a770bdaa06d1f3"
+    },
+    {
+      "file": "tests/window-tracking.spec.cjs",
+      "bytes": 16705,
+      "lines": 251,
+      "sha256": "aafdc7151dc0c3fa5f49b8a61b31cdc661b3818452474a3f449d2e701955d059"
+    },
+    {
+      "file": "tests/xlsx.test.cjs",
+      "bytes": 7810,
+      "lines": 136,
+      "sha256": "3b1971f934a021959bd8763ecd1b9f10fcd09909df4ffc8b679944e5fe9e3506"
+    },
+    {
+      "file": "vendor/minimatch-compat/index.cjs",
+      "bytes": 1450,
+      "lines": 31,
+      "sha256": "60cd3624fe4c9be0252d9f40bc4646fc3aa08766fbb3d024b2863a3fc1f418eb"
+    },
+    {
+      "file": "vendor/minimatch-compat/package.json",
+      "bytes": 289,
+      "lines": 12,
+      "sha256": "ac4c1329addb157a94602d1f8522f49d40d9d695b33e9153e4458e51fc273961"
+    },
+    {
+      "file": "vite.config.js",
+      "bytes": 679,
+      "lines": 21,
+      "sha256": "eb09ec323a64dd9a7a334e1edcfbd8adea38804a4f426714c2e84955e9a07e9c"
+    }
+  ]
+}

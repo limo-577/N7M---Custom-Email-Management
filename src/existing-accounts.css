@@ -1,0 +1,46 @@
+.existing-accounts-panel { display:flex; flex-direction:column; height:100%; min-height:0; min-width:0; background:#fbfdf9; color:#42664b; overflow:hidden; }
+.existing-accounts-head { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; padding:12px 12px 9px; flex-shrink:0; }
+.existing-accounts-head h3 { display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:15px; font-weight:600; color:#42694e; }
+.existing-accounts-head h3 small { font-size:12px; font-weight:400; color:#8c9d83; margin-left:3px; }
+.existing-accounts-head p { font-size:12px; line-height:1.6; color:#8c9f82; margin-top:4px; }
+.existing-accounts-head>.icon-button { width:28px; height:28px; margin-top:-3px; }
+.existing-accounts-filters { padding:0 12px 10px; border-bottom:1px solid #dce6dc; flex-shrink:0; }
+.existing-accounts-search { display:flex; align-items:center; gap:7px; border:1px solid #cfdfd0; background:#fff; color:#8ba28b; border-radius:5px; height:35px; padding:0 8px; }
+.existing-accounts-search>svg { flex-shrink:0; }
+.existing-accounts-search input { min-width:0; width:100%; height:100%; border:0; background:transparent; color:#41684c; font-size:13px; }
+.existing-accounts-search input::-webkit-search-cancel-button { display:none; }
+.existing-accounts-search input:focus-visible { outline:none; }
+.existing-accounts-search:focus-within { outline:2px solid #83b49d; outline-offset:1px; }
+.existing-accounts-search>button { display:flex; align-items:center; justify-content:center; padding:3px; color:#8ca38a; }
+.existing-accounts-selects { display:flex; align-items:center; gap:6px; margin-top:7px; }
+.existing-accounts-selects select { flex:1; min-width:0; width:0; height:31px; padding:5px 7px; color:#6d8966; font-size:12px; border:1px solid #d5e2d2; border-radius:5px; background:#fff; }
+.existing-reset { padding:5px 1px 5px 3px; font-size:12px; color:#749569; white-space:nowrap; }
+.existing-account-detail { margin:10px 12px 0; padding:9px 10px; border:1px solid #cddfcd; border-radius:6px; background:#fff; flex:0 1 auto; min-height:110px; max-height:48%; overflow:auto; overscroll-behavior:contain; }
+.existing-detail-heading { display:flex; align-items:center; justify-content:space-between; gap:6px; padding-bottom:6px; border-bottom:1px solid #edf2e9; }
+.existing-detail-heading strong { font-size:13px; font-weight:600; color:#4d7853; }
+.existing-detail-heading>button { display:flex; padding:2px; color:#92a58a; }
+.existing-account-detail dl { display:grid; grid-template-columns:58px minmax(0,1fr); gap:5px 8px; margin:8px 0 0; font-size:12px; line-height:1.65; }
+.existing-account-detail dt { color:#96a58d; }
+.existing-account-detail dd { margin:0; min-width:0; color:#5b7d56; display:flex; align-items:flex-start; gap:4px; overflow-wrap:anywhere; }
+.existing-account-detail dd>span { min-width:0; flex:1; }
+.existing-account-detail .existing-detail-notes { white-space:pre-wrap; }
+.existing-account-detail .existing-credential-state { color:#8b9c82; font-size:11px; }
+.existing-copy-button { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:21px; height:21px; padding:3px; border-radius:3px; color:#93a88c; }
+.existing-copy-button:hover { color:#3f7d5b; background:#edf5e9; }
+.existing-accounts-feedback { margin:7px 12px 0; color:#3c835e; font-size:12px; line-height:1.6; flex-shrink:0; }
+.existing-accounts-feedback.is-error { color:#a9604d; }
+.existing-accounts-results { flex:1 1 140px; min-height:80px; overflow:auto; margin-top:8px; padding:0 8px 7px; overscroll-behavior:contain; }
+.existing-account-row { display:block; width:100%; border:1px solid transparent; border-bottom-color:#e6eee0; padding:9px 7px; border-radius:5px; text-align:left; background:transparent; }
+.existing-account-row:hover { background:#f0f6eb; }
+.existing-account-row.is-selected { background:#eaf4e5; border-color:#bdd4b6; }
+.existing-row-email { display:block; font-size:13px; line-height:1.6; font-weight:500; color:#476f4b; overflow-wrap:anywhere; }
+.existing-row-meta { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 7px; margin-top:3px; font-size:11px; line-height:1.6; color:#89a07d; }
+.existing-row-meta small { font-size:11px; color:#96a98b; }
+.existing-row-notes { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-top:4px; color:#90a286; font-size:12px; line-height:1.6; overflow-wrap:anywhere; white-space:pre-wrap; }
+.existing-accounts-empty { padding:25px 10px; display:flex; flex-direction:column; align-items:center; gap:7px; text-align:center; color:#a0b194; }
+.existing-accounts-empty p { font-size:13px; color:#809a74; }.existing-accounts-empty small { font-size:12px; line-height:1.7; }.existing-accounts-empty button { font-size:12px; margin-top:3px; color:#4e8a68; }
+.existing-accounts-pagination { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px 8px; padding:8px 12px; border-top:1px solid #dce7d9; background:#f5f9f1; color:#91a486; font-size:11px; flex-shrink:0; }
+.existing-accounts-pagination>div { display:flex; align-items:center; gap:5px; }
+.existing-accounts-pagination button { display:flex; align-items:center; justify-content:center; width:23px; height:25px; border:1px solid #d5e3ce; border-radius:4px; background:#fff; color:#78966c; }
+.existing-accounts-pagination button:disabled { opacity:.35; }.existing-accounts-pagination small { font-size:11px; }
+@media(max-width:720px) { .existing-accounts-head{padding-top:10px}.existing-account-detail{max-height:160px}.existing-accounts-results{min-height:100px} }

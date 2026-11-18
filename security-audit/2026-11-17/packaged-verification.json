@@ -1,0 +1,23 @@
+{
+  "sourceFilesMatched": 20,
+  "forkVersion": "5.1.1",
+  "oldExcelJsAbsent": true,
+  "browserBundleExcluded": true,
+  "packages": [
+    {
+      "file": "N7M - Custom Email Management-1.8.0-NoInstall.zip",
+      "bytes": 157752572,
+      "sha256": "56cbbafa9d2ec5d0a88e2d7258b13e753ebb5737f50984b2873ab17d0721a285"
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.0-Portable.exe",
+      "bytes": 163093906,
+      "sha256": "a5f1f826389f1b06b0a07756b3d607e58ef9f3d1b4ce5109639bb6b5ebc2a4a6"
+    },
+    {
+      "file": "N7M - Custom Email Management-1.8.0-Setup.exe",
+      "bytes": 123935372,
+      "sha256": "ed3335dd68d68fbda43a617f6b3b02f16f0cab4c9b24d6f7ed275b75f275a73a"
+    }
+  ]
+}

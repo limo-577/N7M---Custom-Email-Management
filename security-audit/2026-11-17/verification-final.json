@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-17",
+  "projectVersion": "1.8.0",
+  "unitTests": { "passed": 167, "failed": 0, "evidence": "tests-migrated.txt" },
+  "desktopTests": { "passed": 27, "failed": 0, "evidence": "ui-tests-migrated.txt" },
+  "packagedSmoke": { "passed": 1, "failed": 0, "evidence": "packaged-ui.txt" },
+  "windowsPackages": { "status": "passed", "sourceFilesMatched": 20, "zipPayloadMatched": true, "evidence": ["packages-final.txt", "packaged-verification.json", "zip-verification.json"] },
+  "npmAudit": { "findings": 0, "evidence": "npm-audit-final.json" },
+  "osv": { "uniquePackageVersions": 463, "matches": 0, "evidence": "osv-querybatch.json" },
+  "dependencyPolicy": { "status": "passed", "deprecatedPackagesRemaining": 5, "reviewBy": "2026-12-04", "evidence": "policy-final.txt" },
+  "secretScan": { "findings": 0, "workingTreeTextFiles": 4352, "localHistoryBlobs": 185, "asarApplicationTextFiles": 19, "evidence": "secret-scan.json" },
+  "developerApproval": "developer-decisions.json",
+  "limitations": ["No external publication", "No interactive installer deployment", "Unsigned Windows packages", "Unofficial fork and five deprecated indirect dependencies retain maintenance/supply-chain risks", "Zero scanner findings are not proof of absence of vulnerabilities"]
+}

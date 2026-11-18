@@ -1,0 +1,14 @@
+
+> n7m-custom-email-management@1.8.0 build
+> vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 1819 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.12 kB │ gzip:  0.65 kB
+dist/assets/index-FrAER6oK.css   54.81 kB │ gzip: 11.73 kB
+dist/assets/index-Clo8_6gK.js   302.04 kB │ gzip: 92.09 kB
+
+✓ built in 3.85s

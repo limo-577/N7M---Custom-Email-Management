@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "acceptedOn": "2026-11-04",
+  "reviewBy": "2026-12-04",
+  "timezone": "Europe/Rome",
+  "decision": "Developer chose to retain ExcelJS and the six existing deprecated indirect packages, accepting the maintenance risk while adding dependency checks and explicit follow-up. This is not a claim that the packages were removed or became maintained.",
+  "deprecatedExceptions": [
+    {
+      "path": "node_modules/boolean",
+      "version": "3.2.0",
+      "reason": "Build-time app-builder-lib -> @electron/get 3 -> global-agent 3 / roarr 2. Removing it requires a major parent-chain change or additional compatibility work. Existing version only is accepted."
+    },
+    {
+      "path": "node_modules/fstream",
+      "version": "1.0.12",
+      "reason": "ExcelJS -> unzipper 0.10 -> fstream. Application imports XLSX through the bounded JSZip/Workbook.load worker path, not a filesystem extraction API. An unzipper 0.x upgrade still requires compatibility validation."
+    },
+    {
+      "path": "node_modules/glob",
+      "version": "7.2.3",
+      "reason": "ASAR 3 / ExcelJS archiver-utils / rimraf 2 use the legacy glob API. Its minimatch calls use the patched official 11.0.4 engine via the reviewed compatibility adapter. Replacing glob requires callback and traversal compatibility validation."
+    },
+    {
+      "path": "node_modules/inflight",
+      "version": "1.0.6",
+      "reason": "Legacy glob 7 dependency, used by trusted build/file patterns rather than account-controlled glob input. The upstream memory-leak/maintenance warning remains; removing it requires replacing glob 7."
+    },
+    {
+      "path": "node_modules/lodash.isequal",
+      "version": "4.5.0",
+      "reason": "ExcelJS -> fast-csv 4 format helper. The application CSV parser/exporter is its own reviewed implementation; it does not use ExcelJS CSV parsing. Removing this dependency requires a major fast-csv upgrade or an ExcelJS migration."
+    },
+    {
+      "path": "node_modules/rimraf",
+      "version": "2.6.3",
+      "reason": "ExcelJS fstream and build-time electron-winstaller -> temp 0.9 use its legacy callback API. It is not exposed as an arbitrary renderer filesystem operation. A current rimraf API is not a drop-in replacement."
+    }
+  ],
+  "protectedPackages": [
+    { "name": "exceljs", "versions": ["4.4.0"] },
+    { "name": "jszip", "versions": ["3.10.2"] },
+    { "name": "uuid", "versions": ["11.1.1"] },
+    { "name": "minimatch", "versions": ["11.0.4"] },
+    { "name": "@n7m/minimatch-compat", "versions": ["1.0.1"] }
+  ],
+  "manifestPins": {
+    "dependencies.exceljs": "4.4.0",
+    "dependencies.jszip": "3.10.2",
+    "dependencies.minimatch": "file:vendor/n7m-minimatch-compat-1.0.1.tgz",
+    "overrides.uuid": "11.1.1",
+    "overrides.minimatch": "$minimatch"
+  },
+  "exceljsMaintenance": {
+    "package": "exceljs",
+    "acceptedVersion": "4.4.0",
+    "registryEndpoint": "https://registry.npmjs.org/exceljs/latest",
+    "sources": [
+      "https://github.com/exceljs/exceljs/releases",
+      "https://github.com/exceljs/exceljs/blob/master/package.json"
+    ],
+    "risk": "The official package has no newer published stable version at review time. A long release gap is an accepted maintenance risk, not an assertion of a specific CVE or an official end-of-life announcement.",
+    "controls": [
+      "XLSX parsing runs in a single cancellable Node worker with a 15-second timeout and bounded V8 heap.",
+      "Before ExcelJS parsing, stream-decompressed bytes, ZIP entry count, paths and supported ZIP structure are checked.",
+      "Input is limited to 20 MiB, each expanded entry to 16 MiB and total expansion to 64 MiB.",
+      "Parsed sheets, rows, columns, cell count and returned text are bounded; locking cancels parsing.",
+      "The runtime uses the Node ExcelJS entrypoint; the old browser bundle is excluded from packaging.",
+      "Official minimatch and UUID security fixes remain pinned and compatibility-tested.",
+      "Run the unfiltered npm audit separately; this policy does not suppress vulnerabilities."
+    ],
+    "followUp": "Review a newly published ExcelJS version before changing the pin; otherwise revisit migration or explicit risk acceptance by the review date."
+  }
+}

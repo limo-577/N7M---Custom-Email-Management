@@ -1,117 +1,178 @@
-# 安全审核与修复复核报告
+> 当前 1.8.0 的审核、开发者批准的换库及验证结果请见 [2026-11-17 安全报告](SECURITY-AUDIT-2026-11-17.md)。以下保留历史 1.3.1 复核记录，不代表当前版本结论。
 
-日期：2026-11-03（Europe/Rome）。项目：N7M - Custom Email Management 1.3.0，目录 `D:\email-manager-app`。
+# N7M 邮箱管理 · 安全复核报告
 
-## 1. 项目概况与范围
+审核日期：2026-11-04（Europe/Rome）。版本：1.3.1。Git 基线 2e44f78bc03f887b26d757b46041a049a381edde，加当前工作区未提交修复。
 
-JavaScript（JSX / ESM / CommonJS），React 19、Electron 45、Vite 8、Tailwind CSS 3，npm 管理依赖。修复后 16 项直接依赖（6 运行时、10 开发），锁文件有 566 个非根安装条目，含重复版本和平台可选包。完整版本见 [依赖清单](security-audit/dependencies.json)。
+当前 1.3.1 的原安全修复与分发物已复核，依赖扫描 0 告警；未确认当前源码存在 Critical / High 可利用漏洞。本轮补齐敏感文件忽略规则并修复三类 CI 问题。D03 按用户选择完成治理并接受 1 项维护风险，复核期限 2026-12-04；没有待开发者决定的事项。
 
-审查范围：electron/*、src/*、依赖清单及锁文件、index.html、构建与测试配置、测试、README、.gitignore；初次另扫描 dist、release、test-results。未发现后端 API、数据库、浏览器扩展、移动应用或 CI workflow，因此没有对应的 SQL/NoSQL、服务端 CSRF/SSRF、扩展权限或 pull_request_target 实现可审查。
+共 12 项复核事项：11 项已修复 / 复核通过，1 项已治理（风险接受），0 项待处理；1 项维护风险仍保留，不等于修复了 11 个可直接利用漏洞。CI03 是发布功能故障。
 
-开发者已授权修复原暂缓的依赖升级和 Excel 资源隔离，本报告描述修复后状态。原逐文件结论与初次告警保存在 [初次报告](security-audit/initial-report.md) 和 [初次 npm audit](security-audit/npm-audit.json)，不能当作当前结果。
+## 问题汇总
 
-## 2. 问题汇总
+| 编号 | 类别 | 严重级别 | 问题 | 位置 | 状态 |
+| --- | --- | --- | --- | --- | --- |
+| C01 | 代码 | Medium | IPC 主 frame 与精确页面来源校验 | electron/main.cjs:50 | 已复核 |
+| C02 | 代码 | Medium | 生产 CSP | vite.config.js:10 | 已复核 |
+| C03 | 代码 | Low | Electron 导航与权限边界 | electron/main.cjs:63 | 已复核 |
+| S01 | 密钥 | Low | 补齐敏感文件忽略规则 | .gitignore:33 | 已修复 |
+| D01 | 依赖 | Medium | minimatch 使用官方修复引擎 | package.json overrides；vendor/minimatch-compat/index.cjs | 已复核 |
+| D02 | 依赖 | Medium | uuid 升级 | package.json overrides.uuid | 已复核 |
+| C04 | 代码 | Medium | Excel 线程隔离及资源预算 | electron/xlsx-import.cjs；electron/xlsx-worker.cjs | 已复核 |
+| D03 | 依赖 | Low | ExcelJS 与弃用包维护风险治理 | security-audit/dependency-policy.json；build/check-dependencies.cjs | 已治理（风险接受） |
+| C05 | 代码 | Low | 当前 1.3.1 分发物已更新 | release/win-unpacked；1.3.1-NoInstall.zip | 已复核 |
+| CI01 | 代码 | Medium | 第三方 Action 固定完整提交 | .github/workflows/release.yml:23 | 已修复 |
+| CI02 | 代码 | Medium | 只读构建与最小权限发布隔离 | .github/workflows/release.yml:63 | 已修复 |
+| CI03 | 代码 | Low | 修正并固化 CI 打包入口 | .github/workflows/release.yml:47 | 已修复 |
 
-未确认当前源码存在 Critical / High 可利用漏洞。共 9 项发现，7 项已修复或加固，2 项建议关注，无待开发者决定事项。最新完整 npm audit 为 **0 漏洞告警**；没有省略开发依赖或使用忽略规则。零告警不保证没有未知漏洞。
+## 逐项结论、利用条件和方案
 
-| 编号 | 类别 | 严重级别 | 位置 | 当前状态 |
-| --- | --- | --- | --- | --- |
-| C01 | 代码 | Medium | electron/main.cjs:49；electron/security.cjs:14 | 已修复：IPC 校验主 frame 和精确页面来源 |
-| C02 | 代码 | Medium | vite.config.js:6 | 已修复：生产 CSP |
-| C03 | 代码 | Low | electron/main.cjs:62、173 | 已加固：导航、webview 与权限集中限制 |
-| S01 | 密钥 | Low | .gitignore:8 | 已加固：敏感文件忽略规则；未发现真实泄露 |
-| D01 | 依赖 | Medium | package.json overrides；vendor/minimatch-compat/index.cjs | 已修复：官方匹配引擎升级至 11.0.4 |
-| D02 | 依赖 | Medium | package.json overrides.uuid | 已修复：uuid 升至 11.1.1 |
-| C04 | 代码 | Medium | electron/xlsx-import.cjs；electron/xlsx-worker.cjs；src/EmailManager.jsx 的 readFile | 已修复：隔离解析、实际解压计量与资源预算 |
-| D03 | 依赖 | Low | 锁文件 deprecated 字段；ExcelJS 4.4.0 | 建议关注：6 个弃用间接包、ExcelJS 发布滞后 |
-| C05 | 代码 | Low | release/ 中既有历史 EXE / ZIP | 建议关注：历史发布物未覆盖，发布前重新生成 |
+**C01 · IPC 主 frame 与精确页面来源校验**（Medium；已复核）
 
-评级按项目情境确定。IPC/CSP 等加固项仍需攻击者在非预期上下文执行代码才能形成利用链，不能仅凭恶意账号文本推导可直接利用。
+位置：electron/main.cjs:50。来源白名单、解锁与操作代次检查仍保留。
 
-## 3. 依赖审核与具体修复
+**C02 · 生产 CSP**（Medium；已复核）
 
-初次对全部直接依赖及关键间接包逐个进行 WebSearch，以 GitHub Advisory Database、上游公告和联网 npm audit 交叉核对。初次 21 项 Moderate 是两条底层公告传播到的包条目，不是 21 个独立漏洞。
+位置：vite.config.js:10。禁止内联脚本、eval、外部网络及多余页面能力；样式允许 inline 以兼容界面。
 
-| 直接依赖 | 修复后版本 / 来源 |
-| --- | --- |
-| exceljs | 4.4.0，仅 Node 工作线程使用 |
-| jszip | 3.10.2，新增明确运行依赖 |
-| minimatch | 本地 @n7m/minimatch-compat 1.0.1，实际引擎为官方 11.0.4 |
-| lucide-react | 1.34.0 |
-| react / react-dom | 各 19.2.8（分别计为一项直接依赖） |
-| @playwright/test | 1.64.1 |
-| @vitejs/plugin-react | 6.1.0 |
-| autoprefixer | 10.5.4 |
-| concurrently | 10.0.6 |
-| electron | 45.2.1 |
-| electron-builder | 26.18.0 |
-| postcss | 8.5.32 |
-| tailwindcss | 3.4.17 |
-| vite | 8.3.5 |
-| wait-on | 9.1.0 |
+**C03 · Electron 导航与权限边界**（Low；已复核）
 
-关键间接版本：minimatch-engine（npm alias，实际包名 minimatch）11.0.4、uuid 11.1.1、@electron/asar 3.4.1、@electron/universal 2.0.3、glob 7.2.3、archiver 5.3.2、unzipper 0.10.14 / 0.12.5、tar 7.5.22、ejs 3.1.10。所有实际路径及版本以 JSON 清单为准。
+位置：electron/main.cjs:63。webview、新窗口、导航与未使用权限限制未回退，sandbox / contextIsolation 保留。
 
-**D01：minimatch。** [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249) 描述攻击者可控 glob 在特定优化条件下导致 CPU/内存放大，公告修复版 11.0.1。旧分支适用性和原项目利用链在初审中仍有待确认部分；此次已直接移除旧匹配引擎，统一使用官方已修复版 11.0.4。
+**S01 · 补齐敏感文件忽略规则**（Low；已修复）
 
-新版导出和匹配对象与旧 glob 7 / ASAR / 目录比较工具不兼容。新增小型本地适配包，提供旧式可调用导出、Minimatch 子类、_glob / Symbol.match 和 Windows filelist 的路径选项适配；实际匹配委托官方非递归 Matcher.test()，没有复制旧模式解析、生成旧正则或重建 makeRe API。官方包经 minimatch-engine alias 固定版本，避免 override 递归替换自身。
+位置：.gitignore:33。已补回 *.key、email-data.json*、email-vault.json*，连同既有环境文件和 PEM/PFX/P12 规则覆盖私钥及资料库副本；当前没有发现这些敏感文件被跟踪。新增规则不删除历史对象，也不能撤销实际泄露的凭据。
 
-可审源码和说明在 [vendor/minimatch-compat](vendor/minimatch-compat/SECURITY.md)，本地安装归档为 vendor/n7m-minimatch-compat-1.0.1.tgz。使用归档避免打包依赖开发目录符号链接；锁文件保存完整性摘要。后续父依赖原生支持修复版时应移除适配层，新调用方需重新验证。
+**D01 · minimatch 使用官方修复引擎**（Medium；已复核）
 
-**D02：uuid。** [GHSA-w5hq-g745-h8pq](https://github.com/advisories/GHSA-w5hq-g745-h8pq) 涉及 v3/v5/v6 对外部 buf/offset 的检查；修复支线包括 11.1.1。ExcelJS 原先使用 v4()，应用使用 crypto.randomUUID()，初审未发现满足公告条件的利用路径。本次仍将锁定 uuid 从 8.3.2 升到 11.1.1，消除易受影响包版本。
+位置：package.json overrides；vendor/minimatch-compat/index.cjs。本地兼容包 1.0.1 委托官方 minimatch 11.0.4；适配旧 CommonJS、glob 7 分段匹配和 Windows 路径，实际匹配不回退旧解析器。
 
-**旧浏览器 bundle。** renderer 已删除 import('exceljs')，当前 XLSX 路径使用工作线程 require('exceljs') 的 Node 入口，因此实际运行采用更新后的锁定依赖。旧上游浏览器 bundle 不再进入 dist；不能声称 overrides 改写了它的内嵌代码。如果以后重新使用该入口，必须另行核查。
+**D02 · uuid 升级**（Medium；已复核）
 
-**High / Critical 公告核对。** [React RSC RCE](https://github.com/react/react/security/advisories/GHSA-xqc2-xf4c-x3h3) 涉及本项目未使用的 react-server-dom-*；[Electron 证书缓解](https://github.com/electron/electron/security/advisories/GHSA-jr5w-w6x2-84p9) 的 45 支线修复版为 45.0.0-beta.6，当前 45.2.1 不匹配；[Vite WebSocket 文件读取](https://github.com/advisories/GHSA-p9ff-h696-f583) 的 8 支线修复版 8.0.5，当前 8.3.5 不匹配；[tar 硬链接路径穿越](https://github.com/isaacs/node-tar/security/advisories/GHSA-34x7-hfp2-rc4v) 修复 >=7.5.7，当前 7.5.22 不匹配；[JSZip 路径穿越](https://github.com/advisories/GHSA-36fh-84j7-cv5h) 修复 3.8.0，当前 3.10.2 不匹配。
+位置：package.json overrides.uuid。实际锁定 11.1.1；ExcelJS 使用 v4()，原公告针对 v3/v5/v6，未发现项目满足原利用条件，已消除受影响版本。
 
-锁文件为移除本地 override 的旧元数据重新解析，包含符合父依赖 SemVer 范围的间接版本刷新和 hoist 变化，见 [变更证据](security-audit/dependency-changes.json)。完整最新扫描见 [修复后 npm audit](security-audit/npm-audit-after.json)。
+**C04 · Excel 线程隔离及资源预算**（Medium；已复核）
 
-仍有 6 个弃用间接包：boolean 3.2.0、fstream 1.0.12、glob 7.2.3、inflight 1.0.6、lodash.isequal 4.5.0、rimraf 2.6.3。弃用不等于已确认可利用漏洞。ExcelJS 官方发布页仍列 4.4.0 为 Latest，不能据此断言官方已宣布停止维护。未确认仿冒包；没有进行完整发布者历史溯源。
+位置：electron/xlsx-import.cjs；electron/xlsx-worker.cjs。15 秒终止、实际流式解压计量、全部工作表预算、锁定/取消终止与固定错误文案仍保留。
 
-## 4. 代码和密钥修复
+**D03 · ExcelJS 与弃用包维护风险治理**（Low；已治理（风险接受））
 
-**C01：IPC。** 统一校验应用窗口、主 frame、协议、host、完整路径和查询参数；开发仅允许本地 Vite 页，生产仅允许 dist/index.html。继续检查解锁状态和 generation，锁定可撤销未完成操作。
+位置：security-audit/dependency-policy.json；build/check-dependencies.cjs。用户明确选择保留 ExcelJS 4.4.0 和 boolean、fstream、glob、inflight、lodash.isequal、rimraf 共 6 个弃用间接包。已建立精确版本政策、本地和 npm 官方注册表在线维护检查、每周只读 CI 与 30 日复核期限 2026-12-04；这是有期限的风险接受，不是移除弃用依赖或消除维护风险。
 
-**C02/C03：CSP 与权限。** 生产默认拒绝外部网络、内联脚本、eval、frame、object、表单和 base，仅开放必要本地资源；style 保留 unsafe-inline 兼容界面。拦截新窗口、子 frame 导航、webview 和未使用权限。保留 contextIsolation / sandbox，关闭 nodeIntegration。Excel 使用 Node worker_threads，没有放宽 renderer worker-src 或启用 nodeIntegrationInWorker。
+**C05 · 当前 1.3.1 分发物已更新**（Low；已复核）
 
-**S01：敏感文件。** .gitignore 补充环境文件、私钥/证书容器和资料库文件，保留 .env.example 例外。初次 566 文件所检查凭据特征未命中，测试密码/TOTP 为明确样例。没有真实凭据需要迁移，因此未编造 .env.example 变量。模式扫描不能排除所有自定义凭据或历史泄露。
+位置：release/win-unpacked；1.3.1-NoInstall.zip。包内 13 个应用文件与当前代码/构建一致，ZIP 的 ASAR 和主 EXE 与 win-unpacked 一致。仅结案当前包缺少修复的问题，历史旧包和签名仍另行关注。
 
-**C04：Excel 隔离与预算。** 主进程管理单任务 Node 工作线程，ZIP 预检、解压与 ExcelJS 解析都移出主事件循环和界面。受控字节复制后转移给工作线程，预检与解析使用同一不可变输入；renderer 不能指定限额或 worker 路径。
+**CI01 · 第三方 Action 固定完整提交**（Medium；已修复）
 
-| 资源 | 上限 |
-| --- | --- |
-| 文件 / ZIP 项数 | 20 MiB / 512 项 |
-| 实际解压输出 | 单项 16 MiB、合计 64 MiB |
-| 工作表 | 30 张 |
-| 每表行 / 列 | 50,000 / 100 |
-| 总单元格 / 字符 | 250,000 / 4,000,000 |
-| 单元格文本 | 32,767 字符 |
-| 解析时间 | 15 秒 |
-| V8 老生代 / 新生代堆 | 192 MiB / 32 MiB |
+位置：.github/workflows/release.yml:23。5 种第三方 Action 均固定到已核对的官方完整 SHA，包含 checkout、setup-node、upload-artifact、download-artifact 和用户批准升级的 softprops/action-gh-release v3.0.3（efb35369e0ad2afab669f228072c1b0d510eae64）。依赖复核工作流也使用固定提交，checkout 不保存凭据。
 
-核对 ZIP central/local 目录与名称，拒绝路径穿越、重复路径、名称别名、重叠区域、ZIP64、分卷和加密 ZIP。流式计量实际解压块，不能用伪造的声明大小绕过；JSZip/ExcelJS 一致忽略的目录项不会在第二遍展开。所有工作表均受规模预算约束，veryHidden 仅在返回时排除。
+**CI02 · 只读构建与最小权限发布隔离**（Medium；已修复）
 
-取消、超时、锁定、窗口关闭/导航及退出时终止线程。终止后才释放并发槽；界面等待取消完成再导入新文件，防止旧结果恢复预览。错误不回显工作簿内容；失败不保存部分账号。多工作表、空列、编号补零和原隐藏表规则保留，CSV/TSV/粘贴逻辑不变。
+位置：.github/workflows/release.yml:63。安装依赖、测试和打包 job 仅有 contents: read；只有 v 标签 push 且构建完成才进入单独 contents: write 发布 job。写权限 job 仅下载本次运行产物并发布，不 checkout，也不执行仓库或依赖脚本。
 
-工作线程用于隔离资源消耗，不是任意代码执行的操作系统权限沙箱。[Node 官方文档](https://nodejs.org/api/worker_threads.html) 明确 resourceLimits 不限制全部 ArrayBuffer/外部分配；192 MiB 不是应用 RSS 硬上限，需要结合实际解压和输出预算。复杂合法文件也可能被拒绝，应拆分导入。
+**CI03 · 修正并固化 CI 打包入口**（Low；已修复）
 
-## 5. 开发者决定与验证
+位置：.github/workflows/release.yml:47。保留用户已修正的 npm run dist:all，不再向新包装器传入不支持的 --publish never；包装器本身固定 publish: never。回归测试解析实际 workflow、npm script 与包装器参数，启动器和 CI 测试已并入 npm test。此项是发布功能故障修复，不是宣称发现远程攻击。
 
-用户已授权并完成原两类暂缓事项，无待答复问题。没有删除功能、轮换密钥、修改加密资料格式或执行 audit fix --force。
+## 项目概况与本次范围
 
-- 干净 npm ci --ignore-scripts 安装成功，随后恢复官方 Electron 运行文件；npm ls 无 invalid。
-- npm test：**47 / 47 通过**，含 11 项 XLSX 安全测试、7 项真实依赖调用兼容测试。
-- npm run build：成功；浏览器 ExcelJS chunk 已移除，原体积警告消失。
-- npm run test:ui：源码模式 **6 / 6 通过**。
-- 实际 ASAR 打包成功，使用新包重跑完整桌面测试 **6 / 6 通过**，验证工作线程、升级后的依赖、生产 CSP 与原有功能。验证构建关闭了可执行文件资源编辑/签名，不作为正式发布安装包。
-- npm audit --json：完整依赖 **0 告警**，原始数据已保存。
+Windows 桌面邮箱及浏览器账号管理工具，版本 1.3.1；JavaScript / Electron 45 / React 19 / Vite 8 / Tailwind CSS 3。17 项直接依赖：3 项运行时、14 项开发依赖；React 等在构建时打入界面。锁文件 566 个安装条目，含重复版本与平台可选包。
 
-测试覆盖伪造解压大小、压缩炸弹、路径穿越/重复/加密标志、规模预算、固定错误、主事件循环响应、同步死循环超时、并发和取消后恢复。未运行耗尽整机资源的破坏性 OOM 样本。验证用新包位于 output/security-build，不覆盖或发布历史 release 安装包。
+本次以 Git 基线 2e44f78bc03f887b26d757b46041a049a381edde，加当前工作区未提交修复 为对象，复核 electron/*、src/*、全部测试、依赖与锁文件、构建配置、index.html、README、.gitignore，以及 build/* 和 .github/workflows/*。本轮已修复敏感文件忽略规则与三类 CI 问题，并为用户选择保留的维护风险建立政策检查。修改涉及工作流、忽略规则、npm 检查脚本与依赖政策；未改变应用业务逻辑、密码锁或 KDF 参数，不代表这些工作区变更已经提交或远端 CI 已成功。
 
-## 6. 剩余风险与后续建议
+未发现后端 API、数据库、浏览器扩展或移动应用；不凭空报告 SQL/NoSQL、服务端 CSRF/SSRF、扩展权限或移动 WebView 漏洞。新增工作流未使用 pull_request_target，也未发现把不可信事件字段直接拼接 shell。
 
-1. 跟踪上游修复与弃用依赖，父依赖支持新版 minimatch 后移除本地适配层。零告警不代替后续监测。
-2. 历史 release EXE/ZIP 不因源码变化更新；旧版 Electron 和签名状态仍待确认，发布前重新生成所有分发形式。考虑代码签名、ASAR 完整性和 Electron fuses。
-3. 未确认 SQL/eval/模板注入、可控 shell 调用、关闭 TLS 校验或当前资料库明文保存。浏览器用参数数组和 Profile 白名单、URL 仅 HTTP/HTTPS；React 转义文本；CSV 防公式且不含凭据；加密使用随机盐/nonce、scrypt 和 AES-GCM。
-4. JavaScript 字符串、崩溃转储、交换文件、备份和第三方剪贴板历史无法保证即时擦除；普通删除旧明文不能保证物理擦除，资料库持有者可离线猜弱密码。
-5. 当前没有 .git，无法核对历史跟踪状态或远端泄露；二进制原始字节扫描不等于完整解包或逆向。若真实密钥曾泄露，必须到平台作废并重新生成，只删代码或加 .gitignore 不够。
+## 本次确认的更新与修复
+
+1.3.1 的启动依赖改为并行准备，重复点击等待资料库和 IPC 初始化；启动反馈与便携版缓存未跳过密码锁，也未降低 scrypt 参数。原 IPC、生产 CSP、导航/权限限制和 Excel 隔离保留。
+
+build/build-windows.cjs 固定 electron-builder 26.18.0 并验证模板接口，只在当前构建进程替换模板。缓存身份由运行文件内容和启动器模板的 SHA-256 生成，拒绝链接/特殊文件，不只依赖版本号和时间戳。
+
+portable-fast.nsi 增加准备互斥、完成标记、必需文件与路径检查，使用新缓存代次，不覆盖正在运行的旧目录。当前 1.3.1 的安装版、便携版和 ZIP 均已生成；不能继续称只有上一轮验证目录中的包。
+
+运行时直接依赖已精简为 ExcelJS、JSZip 和本地 minimatch 兼容包，React / ReactDOM / Lucide 改为开发依赖；打包配置明确排除 ExcelJS 旧浏览器 dist。兼容包版本 1.0.1 与实际官方匹配引擎版本 11.0.4 必须区分。
+
+本轮补齐私钥及资料库忽略规则，固定所有第三方 Action 的官方完整 SHA；将只读构建与标签触发的最小写权限发布拆分，并对实际 CI 打包入口、权限、固定提交和依赖检查顺序增加回归覆盖。softprops 发布 Action 经用户批准升级至 v3.0.3。
+
+D03 按用户决定保留功能与现有 6 个弃用间接包；增加精确版本政策、本地 / 官方 npm 注册表在线检查、每周只读 CI，复核期限为 2026-12-04。npm test 现统一包含应用、启动器、CI 与依赖政策检查。
+
+## 依赖与已知漏洞复核
+
+本次完整 npm audit 为 0 告警，包含开发依赖；未用 omit、audit fix --force 或忽略规则掩盖结果。初次 21 项 Moderate 包告警来自两条底层公告，已修复；不能把该历史数字当作当前告警，也不能把零告警当作无未知漏洞保证。
+
+关键实际版本：minimatch-engine alias 对应官方 minimatch 11.0.4、uuid 11.1.1、JSZip 3.10.2、ExcelJS 4.4.0、Electron 45.2.1、Vite 8.3.5。全部直接与锁定安装版本见依赖清单；本轮为 CI 的 YAML 结构回归引入明确固定版本的开发依赖，不移除用户选择保留的维护风险依赖。
+
+minimatch 公告 GHSA-g3hv-75wg-m249 的修复版为 11.0.1；本项目使用 11.0.4。uuid 公告 GHSA-w5hq-g745-h8pq 的修复支线包括 11.1.1。原 React RSC 公告涉及本项目未安装的 react-server-dom-*；原 Electron/Vite/tar/JSZip 已核对公告范围不适用于当前版本。今日查询结果以 npm-audit-current.json 为准。
+
+维护政策精确记录 ExcelJS 和 6 个弃用包的版本与接受原因；本地检查验证声明 / 实际锁定版本和到期状态，在线模式额外查询 npm 官方注册表中的 ExcelJS 最新版本及弃用状态。每周只读 CI 检查政策和漏洞，不执行发布、不发送外部消息；到 2026-12-04 必须复核，不能无限期沿用例外。
+
+6 个弃用间接包仍然存在，inflight 还带内存泄漏弃用警告；ExcelJS 4.4.0 的维护滞后也没有因政策检查而消失。D03 为已治理（风险接受），保留 1 项明确维护风险；本轮没有重新做发布者身份和全部历史发行包的恶意行为溯源。
+
+## Excel、IPC 与资料库安全边界
+
+XLSX 在主进程管理的单个 Node 工作线程解析：输入 20 MiB，ZIP 最多 512 项，单项/总实际解压量 16/64 MiB；工作表 30 张，每表 50,000 行和 100 列，总单元格 250,000、总字符 4,000,000、单格 32,767 字符。全部表受预算约束，veryHidden 仅在返回时排除。
+
+解析 15 秒超时；取消、锁定、关闭/导航及退出会终止线程，等待终止后释放任务槽。ZIP 预检和解析用同一不可变字节，流式计量实际膨胀，固定错误不回显工作簿内容。V8 老生代 192 MiB 并不是进程 RSS 或 Buffer 总内存硬上限，线程隔离也不是任意代码执行的操作系统沙箱。
+
+资料库继续使用 AES-256-GCM、随机盐/nonce、scrypt 和固定参数验证。浏览器启动使用参数数组及 Profile 白名单，URL 限 HTTP/HTTPS；React 展示转义文本；CSV 防公式前缀且不导出密码/TOTP。未确认这些路径出现安全回退。
+
+## 密钥、Git 历史与忽略规则
+
+本次高置信特征扫描覆盖 63 个当前受跟踪/构建文本文件与 72 个去重的本地 Git 历史文本 blob，未命中所检查的真实密钥特征，当前敏感文件跟踪列表为空。证据仅保存路径/类别，不输出密钥值。
+
+本地 Git 历史确有 440 个 test-results 路径；当前已移除跟踪并忽略，但历史对象仍存在。路径数和去重 blob 数口径不同，不能声称“从未提交测试资料”，也不能把固定测试密码或 RFC TOTP 样例自动认定为真实凭据泄露。
+
+S01 本轮已补齐：既有 .env/.env.*、PEM/PFX/P12 规则保留，新增 *.key、email-data.json*、email-vault.json*。当前没有发现对应敏感文件被跟踪；忽略规则只预防今后误提交，不会删除 Git 历史或撤销泄露凭据。
+
+扫描未包含压缩/加密内部解码、二进制逆向、远端未获取 Git refs 或托管平台保留副本。若真实密钥曾提交或泄露，必须到对应平台作废并重建；只删除文件或增加 .gitignore 不够。
+
+## 分发物、签名与启动缓存
+
+release/win-unpacked/resources/app.asar 实际版本为 1.3.1，8 个 Electron 模块、3 个 dist 文件和 model/mutations 共 13 个应用文件与当前本地字节一致；1.3.1 ZIP 内 ASAR 和主 EXE 摘要与 win-unpacked 一致。打包 package.json 正常裁掉开发/脚本/构建字段，版本、入口和运行时依赖一致。
+
+Setup.exe、Portable.exe 和 win-unpacked 主 EXE 的 Authenticode 状态均为 NotSigned。这表示没有可信发布者签名，不等于程序不能运行；建议正式分发前签名。latest.yml 的 Setup SHA-512 与本地 Setup 一致，但普通摘要不能替代可信签名。
+
+缓存构建身份与较新的 .startup-qa/cached-portable-1.3.1-release-verified.json 对应；该记录的 pass:true、首次约 15.255 秒、缓存约 0.723 秒可关联当前载荷。这是已有 QA 证据，本轮没有重测启动速度，也不把较早失败记录称为全部通过。
+
+缓存复用只检查可写完成标记和必需文件存在，没有每次重新校验所有运行文件。若攻击者已能写同一用户缓存，可替换其运行文件；未发现跨用户写入或提权路径，不将其夸大为远程 High。构建内容哈希和 CRC 均不等于运行时完整性或签名验证。
+
+旧版 1.0～1.3.0 分发物仍存在；本次没有删除、重打包、上传或发布任何安装包，也未做 Setup 安装/升级/卸载验收。远端 Release 是否成功不能由本地文件或静态工作流推断。
+
+## 验证结果与优先跟进
+
+本次 npm test：63 / 63（失败 0）；源码桌面流程：6 / 6（失败 0）；今日先前相同载荷的打包桌面验收（本轮核对运行代码未变）：6 / 6（失败 0）；npm run build：成功。应用、启动器、CI 与依赖政策检查已合并进 npm test，按本轮验证记录的总数统计，不再另行叠加旧的单独 launcher 结果。
+
+CI03 已通过实际 workflow → npm script → Windows 包装器链路回归，固化不传 --publish never 的入口。CI 测试同时检查完整 Action SHA、只读构建、仅标签 push 发布、写权限 job 不执行仓库代码、产物同次运行、政策与 audit 顺序，以及每周只读复核。测试通过属于本地证据，不代表远端 Actions 或 Release 已经运行成功。
+
+S01 和 CI01 / CI02 / CI03 已修复并纳入常规检查。D03 已按用户选择治理并接受剩余风险：到 2026-12-04 复核，维护状态或版本发生变化时检查应提示处理。无需再把这 5 项称为未答复的取舍或待开发者决定。
+
+其余长期风险：JavaScript 字符串、崩溃转储、交换文件、备份和第三方剪贴板历史不能保证即时擦除；普通删除旧明文不能保证物理擦除；资料库持有者可离线猜测弱密码。
+
+## 全部直接依赖
+
+| 名称 | 清单版本 / 来源 | 类型 |
+| --- | --- | --- |
+| exceljs | 4.4.0 | 运行时 |
+| jszip | 3.10.2 | 运行时 |
+| minimatch | file:vendor/n7m-minimatch-compat-1.0.1.tgz | 运行时 |
+| @playwright/test | 1.64.1 | 开发 |
+| @vitejs/plugin-react | 6.1.0 | 开发 |
+| autoprefixer | 10.5.4 | 开发 |
+| concurrently | 10.0.6 | 开发 |
+| electron | 45.2.1 | 开发 |
+| electron-builder | 26.18.0 | 开发 |
+| lucide-react | 1.34.0 | 开发 |
+| postcss | 8.5.32 | 开发 |
+| react | 19.2.8 | 开发 |
+| react-dom | 19.2.8 | 开发 |
+| tailwindcss | 3.4.17 | 开发 |
+| vite | 8.3.5 | 开发 |
+| wait-on | 9.1.0 | 开发 |
+| yaml | 2.9.1 | 开发 |
+
+## 证据与来源
+
+[本次 npm audit](security-audit/npm-audit-current.json)、[依赖清单](security-audit/dependencies.json)、[本次凭据/历史扫描](security-audit/secret-scan-current.json)、[验证记录](security-audit/verification-current.json)、[已接受维护风险政策](security-audit/dependency-policy.json)。初审及上一轮数据保留在 security-audit，不作为今天重新验证的替代；远端 CI 成功不由本地检查推断。
+
+[minimatch 官方公告](https://github.com/advisories/GHSA-g3hv-75wg-m249)、[uuid 官方公告](https://github.com/advisories/GHSA-w5hq-g745-h8pq)。CI 最小权限和固定提交建议参考 [GitHub 官方安全使用指南](https://docs.github.com/en/actions/reference/security/secure-use)。线程内存边界参考 [Node 官方文档](https://nodejs.org/api/worker_threads.html)。

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "@n7m/minimatch-compat@1.0.2",
+    "name": "@n7m/minimatch-compat",
+    "version": "1.0.2",
+    "size": 1961,
+    "unpackedSize": 3959,
+    "shasum": "a73a5c4fa1bc341a4c272a292438c7c4f2e8ba9c",
+    "integrity": "sha512-ZTH4MD8HxRxe6zvaFDRWWRiZzacXFnBxfV5Gk7kw8kpTq/C2y/j5juIqX9aLz12O8onHmVU42/2xgXlwIfX8CQ==",
+    "filename": "n7m-minimatch-compat-1.0.2.tgz",
+    "files": [
+      {
+        "path": "SECURITY.md",
+        "size": 2220,
+        "mode": 420
+      },
+      {
+        "path": "index.cjs",
+        "size": 1450,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 289,
+        "mode": 420
+      }
+    ],
+    "entryCount": 3,
+    "bundled": []
+  }
+]

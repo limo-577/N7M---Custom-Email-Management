@@ -2,7 +2,7 @@
 
 The root npm override routes old and modern minimatch consumers through this
 small local package. All pattern matching, parsing and preprocessing use the
-official `minimatch` **11.0.4** package, installed under the `minimatch-engine`
+official `minimatch` **11.0.9** package, installed under the `minimatch-engine`
 npm alias. This is not a vendored copy of an affected minimatch implementation.
 The alias avoids an override recursively replacing its own engine dependency.
 
@@ -21,12 +21,16 @@ For `filelist` 1's `path.normalize()` patterns, the legacy list `match()` API
 defaults to Windows path separators on Windows, unless the caller explicitly
 sets a different option. Named engine APIs and direct matching stay upstream.
 
-The implementation fixes GHSA-g3hv-75wg-m249 by using the upstream patched
-engine, not by ignoring the advisory or filtering npm audit results.
+The implementation uses the upstream fixes for GHSA-g3hv-75wg-m249 and the
+November 2026 fixes for compilation complexity, escape semantics and cache
+retention. No advisory or npm audit result is ignored or filtered.
 References:
 
 - https://github.com/advisories/GHSA-g3hv-75wg-m249
-- https://github.com/isaacs/minimatch/releases/tag/v11.0.4
+- https://github.com/isaacs/minimatch/security/advisories/GHSA-cf2h-pxjq-68xw
+- https://github.com/isaacs/minimatch/security/advisories/GHSA-c859-jr93-m5j4
+- https://github.com/isaacs/minimatch/security/advisories/GHSA-hqmv-qgp3-jx75
+- https://github.com/isaacs/minimatch/releases/tag/v11.0.8
 
 Compatibility tests exercise the actual installed consumers, including glob,
 archiver/readdir-glob, rimraf, filelist, dir-compare, ASAR and builder filters.

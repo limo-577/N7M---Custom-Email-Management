@@ -1,11 +1,11 @@
 {
   "name": "@n7m/minimatch-compat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "CommonJS callable export adapter for the patched official minimatch engine",
   "main": "index.cjs",
   "license": "MIT",
   "dependencies": {
-    "minimatch-engine": "npm:minimatch@11.0.4"
+    "minimatch-engine": "npm:minimatch@11.0.9"
   }
 }

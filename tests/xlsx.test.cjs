@@ -3,8 +3,43 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 const JSZip = require('jszip');
-const ExcelJS = require('exceljs');
+const ExcelJS = require('exceljs-hardened');
 const { createXlsxImporter, LIMITS } = require('../electron/xlsx-import.cjs');
+
+test('installed XLSX parser does not pollute prototypes through x14 rules or defined names', async () => {
+  const { Worker } = require('node:worker_threads');
+  const workbook = new ExcelJS.Workbook(), sheet = workbook.addWorksheet('Probe');
+  sheet.addRows([[1], [2]]);
+  sheet.addConditionalFormatting({ ref: 'A1:A2', rules: [{ type: 'dataBar', cfvo: [{ type: 'min' }, { type: 'max' }], color: { argb: 'FF00FF00' } }] });
+  const original = await workbook.xlsx.writeBuffer();
+  for (const attack of ['x14', 'definedName']) {
+    const zip = await JSZip.loadAsync(original);
+    if (attack === 'x14') {
+      const file = 'xl/worksheets/sheet1.xml', xml = await zip.file(file).async('string');
+      const changed = xml.replace(/(<x14:cfRule\b[^>]*\bid=")[^"]+("[^>]*>)/, '$1__proto__$2');
+      assert.notEqual(changed, xml); zip.file(file, changed);
+    } else {
+      const file = 'xl/workbook.xml', xml = await zip.file(file).async('string');
+      const payload = '<definedName name="probe">__proto__!$A$1:$A$3</definedName>';
+      zip.file(file, xml.includes('</definedNames>') ? xml.replace('</definedNames>', payload + '</definedNames>')
+        : xml.replace('</workbook>', '<definedNames>' + payload + '</definedNames></workbook>'));
+    }
+    const bytes = await zip.generateAsync({ type: 'nodebuffer' });
+    const keys = await new Promise((resolve, reject) => {
+      const worker = new Worker(`
+        const {parentPort,workerData}=require('node:worker_threads');
+        const ExcelJS=require(workerData.library);
+        new ExcelJS.Workbook().xlsx.load(Buffer.from(workerData.bytes))
+          .then(()=>parentPort.postMessage(Object.keys(Object.prototype)))
+          .catch(()=>parentPort.postMessage(Object.keys(Object.prototype)));
+      `, { eval: true, workerData: { bytes, library: require.resolve('exceljs-hardened') }, resourceLimits: { maxOldGenerationSizeMb: 128 } });
+      const timer = setTimeout(() => { worker.terminate(); reject(new Error('Security regression timeout')); }, 10000);
+      worker.once('message', async value => { clearTimeout(timer); await worker.terminate(); resolve(value); });
+      worker.once('error', error => { clearTimeout(timer); reject(error); });
+    });
+    assert.deepEqual(keys, [], attack);
+  }
+});
 
 async function workbookBytes(build = workbook => workbook.addWorksheet('Accounts').addRows([['邮箱链接', '浏览器'], ['test@example.com', 'Chrome']])) {
   const workbook = new ExcelJS.Workbook(); build(workbook);

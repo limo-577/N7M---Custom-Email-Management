@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "acceptedOn": "2026-11-17",
+  "reviewBy": "2026-12-04",
+  "timezone": "Europe/Rome",
+  "decision": "Developer approved migration to unofficial exceljs-hardened 5.1.1 after compatibility and security evaluation. Five deprecated indirect packages remain accepted until the unchanged review deadline. Fork supply-chain and maintenance risks remain explicit.",
+  "deprecatedExceptions": [
+    {
+      "path": "node_modules/boolean",
+      "version": "3.2.0",
+      "reason": "Build-time app-builder-lib -> @electron/get 3 -> global-agent 3 / roarr 2. Removing it requires a major parent-chain change or additional compatibility work. Existing version only is accepted."
+    },
+    {
+      "path": "node_modules/glob",
+      "version": "7.2.3",
+      "reason": "Build-time ASAR 3 uses legacy glob 7, with patched minimatch 11.0.9 via the CommonJS compatibility adapter."
+    },
+    {
+      "path": "node_modules/inflight",
+      "version": "1.0.6",
+      "reason": "Legacy glob 7 dependency, used by trusted build/file patterns rather than account-controlled glob input. The upstream memory-leak/maintenance warning remains; removing it requires replacing glob 7."
+    },
+    {
+      "path": "node_modules/lodash.isequal",
+      "version": "4.5.0",
+      "reason": "exceljs-hardened -> fast-csv 4 retains this helper. Application CSV operations use the reviewed application parser/exporter."
+    },
+    {
+      "path": "node_modules/rimraf",
+      "version": "2.6.3",
+      "reason": "Build-time electron-winstaller -> temp uses the legacy callback API; no arbitrary renderer deletion operation is exposed."
+    }
+  ],
+  "protectedPackages": [
+    {
+      "name": "exceljs-hardened",
+      "versions": [
+        "5.1.1"
+      ]
+    },
+    {
+      "name": "jszip",
+      "versions": [
+        "3.10.2"
+      ]
+    },
+    {
+      "name": "minimatch",
+      "versions": [
+        "11.0.9"
+      ]
+    },
+    {
+      "name": "@n7m/minimatch-compat",
+      "versions": [
+        "1.0.2"
+      ]
+    }
+  ],
+  "manifestPins": {
+    "dependencies.jszip": "3.10.2",
+    "dependencies.minimatch": "file:vendor/n7m-minimatch-compat-1.0.2.tgz",
+    "overrides.minimatch": "$minimatch",
+    "dependencies.exceljs-hardened": "5.1.1"
+  },
+  "exceljsMaintenance": {
+    "package": "exceljs-hardened",
+    "acceptedVersion": "5.1.1",
+    "registryEndpoint": "https://registry.npmjs.org/exceljs-hardened/latest",
+    "sources": [
+      "https://github.com/mateocallec/exceljs-hardened",
+      "https://github.com/mateocallec/exceljs-hardened/security/advisories"
+    ],
+    "risk": "Unofficial unaffiliated fork explicitly approved by the developer. Short maintenance history and supply-chain trust remain risks. Deprecated indirect helpers are not declared maintained.",
+    "controls": [
+      "XLSX parsing runs in a single cancellable Node worker with a 15-second timeout and bounded V8 heap.",
+      "Before ExcelJS parsing, stream-decompressed bytes, ZIP entry count, paths and supported ZIP structure are checked.",
+      "Input is limited to 20 MiB, each expanded entry to 16 MiB and total expansion to 64 MiB.",
+      "Parsed sheets, rows, columns, cell count and returned text are bounded; locking cancels parsing.",
+      "The runtime uses the Node exceljs-hardened entrypoint; the old browser bundle is excluded from packaging.",
+      "Legacy adapter and modern official minimatch 11.0.9 remain pinned and compatibility-tested.",
+      "Run the unfiltered npm audit separately; this policy does not suppress vulnerabilities."
+    ],
+    "followUp": "Review newly published exceljs-hardened versions and advisories before changing the pin; revisit fork maintenance and deprecated dependencies by the existing review date."
+  },
+  "securityPatchReview": {
+    "date": "2026-11-16",
+    "minimatchEngine": "11.0.9",
+    "adapter": "1.0.2",
+    "advisories": [
+      "GHSA-cf2h-pxjq-68xw",
+      "GHSA-c859-jr93-m5j4",
+      "GHSA-hqmv-qgp3-jx75"
+    ],
+    "note": "Same-major security patch only; the existing ExcelJS and deprecated-package maintenance acceptance and review date are unchanged."
+  }
+}

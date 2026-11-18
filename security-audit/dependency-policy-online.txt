@@ -1,0 +1,6 @@
+
+> n7m-custom-email-management@1.3.1 check:dependencies:online
+> node build/check-dependencies.cjs --online
+
+Dependency policy check passed. 6 existing deprecated packages remain explicitly accepted until review on 2026-12-04.
+ExcelJS 4.4.0 maintenance risk remains accepted; official npm release checked. Run npm audit separately; no audit result is filtered.

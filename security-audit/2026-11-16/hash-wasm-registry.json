@@ -1,0 +1,27 @@
+{
+  "name": "hash-wasm",
+  "version": "4.13.0",
+  "repository": {
+    "url": "git+https://github.com/Daninet/hash-wasm.git",
+    "type": "git"
+  },
+  "homepage": "https://github.com/Daninet/hash-wasm#readme",
+  "scripts": {
+    "lint": "npx @biomejs/biome check lib test",
+    "test": "node --expose-gc ./node_modules/.bin/jest --coverage --logHeapUsage",
+    "build": "sh -c ./scripts/build.sh",
+    "prepublishOnly": "sh -c ./scripts/build.sh"
+  },
+  "dist.integrity": "sha512-GrWl7wsV46fKIXQZB5ebskLZLAmKL6d9RS0fspCxDeQyjoNu1AfTJTMLPOJyfzaQm0ldFiwFN21/w+sE/kgEFQ==",
+  "dist.tarball": "https://registry.npmjs.org/hash-wasm/-/hash-wasm-4.13.0.tgz",
+  "dist.signatures": [
+    {
+      "sig": "MEYCIQDNBz4LKdlxrnz/fTwk938MBStFyAwjZjrNqez4jgSrRQIhAIdCvOP02gPloXLpXEoh4lrt5bNtdBswJ9GYLLwUZhLe",
+      "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+    },
+    {
+      "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+      "sig": "MEUCIGtZcUm6KJ+l9egbF0JFAAWYGrNSaYAvrn6JXezSt9hzAiEAuV/9W/PdSnTo7hV4SHVPp54FHSfHAOJD+H34QrFx7H8="
+    }
+  ]
+}

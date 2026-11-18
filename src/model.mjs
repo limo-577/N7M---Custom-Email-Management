@@ -1,7 +1,36 @@
 export const APP_NAME = 'N7M - Custom Email Management';
 export const DEFAULT_SETTINGS = { cooldownHours: 24 };
-export const BROWSERS = ['Chrome', 'Edge', 'Brave', '系统默认'];
+export const BROWSERS = ['Chrome', 'Edge', 'Brave', 'Firefox', '系统默认'];
 export const text = (value) => String(value ?? '').trim();
+export function browserNameOf(value) {
+  const raw = text(value);
+  if (/^(?:firefox|mozilla firefox|火狐|火狐浏览器)$/i.test(raw)) return 'Firefox';
+  return BROWSERS.find(browser => browser.toLowerCase() === raw.toLowerCase()) || raw;
+}
+// A route is part of an account's identity. One mailbox can legitimately be
+// used in several browser profiles without those records overwriting each other.
+export function accountKey(entry) {
+  const browser = browserNameOf(entry?.browser);
+  let profile = text(entry?.profile);
+  const chromium = ['Chrome', 'Edge', 'Brave'].includes(browser);
+  if (chromium && /^\d+$/.test(profile)) profile = `Profile ${profile}`;
+  // Chromium profile directories live on Windows' case-insensitive filesystem;
+  // Firefox -P names are case-sensitive. Literal '+' is never URL-decoded.
+  if (chromium) profile = profile.toLowerCase();
+  return JSON.stringify([text(entry?.email).toLowerCase(), browser.toLowerCase(), profile]);
+}
+export function profileIssueOf(browser, profile) {
+  const value = text(profile);
+  if (!value || browser === '系统默认') return '';
+  if (browserNameOf(browser) === 'Firefox') {
+    // Firefox -P selects an existing, case-sensitive profile NAME rather than
+    // a Chromium directory. Accept common Unicode names but never paths or
+    // option-like values; command arguments are passed separately to spawn.
+    return value.length > 128 || /^-/.test(value) || /^[.]{1,2}$/.test(value) || /[\x00-\x1f\x7f"\\/<>:|?*]/.test(value)
+      ? 'Firefox Profile 名称无效，请复制 about:profiles 中的名称，不要填写目录路径' : '';
+  }
+  return /^[a-z\d _+-]+$/i.test(value) ? '' : 'Profile 格式无效';
+}
 export function tagsOf(value) {
   return [...new Set((Array.isArray(value) ? value : text(value).split(/[,，;；]/)).map(text).filter(Boolean))];
 }
@@ -22,6 +51,7 @@ export function issuesOf(entry) {
   const issues = [];
   if (!text(entry.browser)) issues.push('缺少浏览器');
   else if (!BROWSERS.includes(entry.browser)) issues.push('浏览器类型待确认');
+  else if (profileIssueOf(entry.browser, entry.profile)) issues.push(profileIssueOf(entry.browser, entry.profile));
   if (text(entry.launchUrl)) { try { webUrl(entry.launchUrl); } catch { issues.push('启动网址无效'); } }
   return issues;
 }
@@ -52,17 +82,34 @@ export function normalizeTotpSecret(value) {
   return unpadded;
 }
 export function normalizeEntry(entry) {
-  const browser = BROWSERS.find(b => b.toLowerCase() === text(entry.browser).toLowerCase()) || text(entry.browser);
+  const browser = browserNameOf(entry.browser);
+  const openedAt = Number(entry.openedAt);
   const normalized = { ...entry, id: entry.id || crypto.randomUUID(), email: text(entry.email), browser,
     displayId: text(entry.displayId), profile: text(entry.profile), launchUrl: text(entry.launchUrl),
     notes: text(entry.notes), group: text(entry.group), tags: tagsOf(entry.tags),
     cooldownHours: entry.cooldownHours == null || entry.cooldownHours === '' ? null : Number(entry.cooldownHours),
-    status: entry.status === 'used' ? 'used' : 'available', usedAt: Number(entry.usedAt) || null };
+    status: entry.status === 'used' ? 'used' : 'available', usedAt: Number(entry.usedAt) || null,
+    openedAt: Number.isFinite(openedAt) && openedAt > 0 ? openedAt : null };
   // Main-process snapshots deliberately omit raw credentials. Do not invent
   // blank secret fields in the renderer and accidentally erase saved secrets.
   if (Object.hasOwn(entry, 'password')) normalized.password = String(entry.password ?? '');
   if (Object.hasOwn(entry, 'totpSecret')) normalized.totpSecret = normalizeTotpSecret(entry.totpSecret);
   return normalized;
+}
+// Keep manual identifiers and existing gaps. Only missing identifiers receive
+// numbers, after the highest numeric identifier in the complete saved list.
+export function numberMissingEntries(entries) {
+  if (!entries.some(entry => !text(entry.displayId))) return entries;
+  let next = 0n, width = 3;
+  for (const entry of entries) {
+    const id = text(entry.displayId);
+    if (!/^\d+$/.test(id)) continue;
+    const number = BigInt(id);
+    if (number > next) next = number;
+    width = Math.max(width, Math.min(id.length, 80));
+  }
+  return entries.map(entry => text(entry.displayId) ? entry
+    : { ...entry, displayId: (++next).toString().padStart(width, '0') });
 }
 export function groupNamesOf(entries, catalog = []) {
   const explicit = Array.isArray(catalog) ? catalog : [];
@@ -123,7 +170,7 @@ export function rowsToEntries(rows) {
     let item = {};
     if (hasHeader) keys.forEach((key, i) => { if (key) item[key] = row[i]; });
     else {
-      const fourColumns = row.length >= 4 || /^profile\s*\d+$|^default$/i.test(text(row[2]));
+      const fourColumns = row.length >= 4 || /^profile(?:\s*|\+)\d+$|^default$/i.test(text(row[2]));
       const names = fourColumns ? ['email', 'browser', 'profile', 'displayId', 'launchUrl', 'notes', 'group', 'tags', 'cooldownHours'] : ['email', 'browser', 'displayId'];
       names.forEach((key, i) => { item[key] = row[i]; });
     }
@@ -133,11 +180,11 @@ export function rowsToEntries(rows) {
   });
 }
 export function mergeImport(existing, incoming) {
-  const seen = new Set(existing.map(e => e.email.toLowerCase()));
+  const seen = new Set(existing.map(accountKey));
   const added = []; let skipped = 0, invalid = 0;
   for (const entry of incoming) {
-    if (!entry.email) { invalid++; continue; }
-    const key = entry.email.toLowerCase();
+    if (!text(entry.email)) { invalid++; continue; }
+    const key = accountKey(entry);
     if (seen.has(key)) { skipped++; continue; }
     seen.add(key); added.push(entry);
   }

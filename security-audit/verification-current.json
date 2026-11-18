@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-04",
+  "timezone": "Europe/Rome",
+  "version": "1.3.1",
+  "head": "2e44f78bc03f887b26d757b46041a049a381edde",
+  "scope": "Follow-up fixes: ignore rules, pinned CI actions, least-privilege publication and build-argument regression; D03 retained by explicit developer risk acceptance with enforced dependency policy.",
+  "sourceDesktopTests": {
+    "command": "npm run test:ui",
+    "passed": 6,
+    "failed": 0
+  },
+  "build": {
+    "command": "npm run build",
+    "exitCode": 0
+  },
+  "packagedDesktopTests": {
+    "directory": "release/win-unpacked",
+    "passed": 6,
+    "failed": 0,
+    "reusedEarlierSameDay": true,
+    "note": "Current security runtime modules byte-compared unchanged against the 1.3.1 ASAR tested earlier today; no new installer build or remote CI run."
+  },
+  "npmAudit": {
+    "critical": 0,
+    "high": 0,
+    "moderate": 0,
+    "low": 0,
+    "total": 0
+  },
+  "directDependencies": {
+    "runtime": 3,
+    "development": 14,
+    "total": 17
+  },
+  "lockedInstallationEntries": 566,
+  "releaseVerification": {
+    "asarVersion": "1.3.1",
+    "asarBytes": 11662326,
+    "applicationFilesEqualToCurrentSourceAndDist": 13,
+    "zipAsarAndExecutableEqualToUnpacked": true,
+    "latestYmlSetupSha512Matches": true,
+    "authenticodeSetup": "NotSigned",
+    "authenticodePortable": "NotSigned",
+    "authenticodeUnpackedExecutable": "NotSigned",
+    "setupInstallerExecuted": false,
+    "artifactsRebuiltOrPublishedThisPass": false
+  },
+  "priorStartupEvidence": {
+    "file": ".startup-qa/cached-portable-1.3.1-release-verified.json",
+    "recordedAtUtc": "2026-11-04T13:11:49Z",
+    "pass": true,
+    "coldMs": 15255,
+    "cachedMs": 723,
+    "freshTimingMeasurementThisPass": false,
+    "currentRuntimeBuildHashMatchesRecord": "1f1ca338c13a558ad2879e196450a92e5c71babb4d3e6fd070a65093459d954d"
+  },
+  "reproducedCiFailure": {
+    "status": "Resolved upstream command retained and covered by wrapper/workflow regression test",
+    "workflow": ".github/workflows/release.yml",
+    "currentCommand": "npm run dist:all",
+    "previousFailure": "Unsupported build argument: --publish"
+  },
+  "note": "Four items fixed and one explicitly accepted risk now governed. npm audit is unfiltered; six deprecated packages remain. Signing/cache boundaries and remote CI verification remain separate.",
+  "nodeTests": {
+    "command": "npm test",
+    "passed": 63,
+    "failed": 0,
+    "includes": [
+      "application and vault",
+      "XLSX isolation",
+      "dependency compatibility",
+      "launcher",
+      "CI security",
+      "dependency policy"
+    ]
+  },
+  "dependencyPolicy": {
+    "local": "passed",
+    "online": "passed",
+    "acceptedOn": "2026-11-04",
+    "reviewBy": "2026-12-04",
+    "retainedDeprecatedPackages": 6,
+    "exceljs": "4.4.0",
+    "riskEliminated": false
+  },
+  "ci": {
+    "allActionsPinned": true,
+    "buildPermission": "contents:read",
+    "releasePermission": "contents:write only in tag-push release job",
+    "publisher": "softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64",
+    "publisherVersion": "v3.0.3",
+    "realRemoteRunTriggered": false,
+    "regressionTests": 5
+  }
+}

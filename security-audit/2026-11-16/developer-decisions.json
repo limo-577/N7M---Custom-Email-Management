@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-16",
+  "exceljs": {
+    "version": "4.4.0",
+    "decision": "Retain the current implementation and worker/resource limits; import trusted files only; record the newly disclosed prototype-pollution risk as remaining, not fixed.",
+    "source": "Explicit developer response in this audit chat",
+    "maintenanceReviewBy": "2026-12-04",
+    "note": "Does not postpone the existing dependency policy review deadline. No official ExcelJS patch is available in the registry checked for this audit. The 5.1.0 version on the disclosure repository belongs to exceljs-hardened, not exceljs."
+  },
+  "browserWindows": {
+    "decision": "Use strict matching. Launch is preserved, but windows without a verifiable target Profile are not associated or automatically closed. Reduced management for Firefox and system-default browser is accepted.",
+    "source": "Explicit developer response in this audit chat"
+  }
+}

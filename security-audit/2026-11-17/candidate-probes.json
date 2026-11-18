@@ -1,0 +1,39 @@
+{
+  "x14": {
+    "current": {
+      "loaded": true,
+      "pollutedKeys": [
+        "type",
+        "x14Id",
+        "cfvo",
+        "minLength",
+        "maxLength",
+        "border",
+        "gradient",
+        "negativeBarColorSameAsPositive",
+        "negativeBarBorderColorSameAsPositive",
+        "axisPosition",
+        "direction"
+      ]
+    },
+    "candidate": {
+      "loaded": true,
+      "pollutedKeys": []
+    }
+  },
+  "definedName": {
+    "current": {
+      "loaded": true,
+      "pollutedKeys": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "candidate": {
+      "loaded": true,
+      "pollutedKeys": []
+    }
+  },
+  "parentPrototypeUnchanged": true
+}

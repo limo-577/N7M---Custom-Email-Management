@@ -1,0 +1,22 @@
+{
+  "advisory": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-86ch-m4gp-r5xf",
+  "exceljs": "4.4.0",
+  "workerResult": {
+    "loaded": true,
+    "pollutedKeys": [
+      "type",
+      "x14Id",
+      "cfvo",
+      "minLength",
+      "maxLength",
+      "border",
+      "gradient",
+      "negativeBarColorSameAsPositive",
+      "negativeBarBorderColorSameAsPositive",
+      "axisPosition",
+      "direction"
+    ]
+  },
+  "parentPrototypeUnchanged": true,
+  "scope": "Direct xlsx.load reproduction inside disposable worker; application-specific preflight and UI not exercised by this probe."
+}

@@ -1,0 +1,23 @@
+✔ minimatch adapter uses the patched engine for callable, named and legacy set matching (12.5107ms)
+✔ patched literal escaping never turns leading negation/comment text into a glob operator (0.7385ms)
+✔ patched preprocessing rejects amplification within an explicit expansion budget (219.0347ms)
+✔ glob 7, filelist and readdir-glob preserve recursive, dot and exclusion patterns (66.3783ms)
+✔ archiver glob and rimraf use the patched matcher without changing inclusion/deletion scope (192.2391ms)
+✔ ASAR pack/unpack selection and dir-compare filters accept the legacy callable interface (95.8141ms)
+✔ electron-builder file filters preserve positive, negative and dot-file patterns (128.5812ms)
+✔ uuid 11 rejects short buffers and ExcelJS conditional-formatting round trips remain compatible (703.5076ms)
+✔ the reviewed lockfile has exactly six accepted deprecated packages and fixed security pins (17.7776ms)
+✔ new deprecated dependencies, including relocated copies, require explicit review (5.3138ms)
+✔ changed exception versions and removed deprecation metadata cannot silently bypass review (16.2454ms)
+✔ the monthly review date fails on the due date, with an actionable renewal message (13.6741ms)
+✔ aliases are checked by real package name and additional vulnerable protected versions fail (12.0062ms)
+✔ upstream release checks fail on a new version or deprecation without installing anything (0.7082ms)
+✔ network errors, invalid registry responses and altered endpoints fail closed (0.4438ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1604.5961

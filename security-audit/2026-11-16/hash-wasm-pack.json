@@ -1,0 +1,656 @@
+[
+  {
+    "id": "hash-wasm@4.13.0",
+    "name": "hash-wasm",
+    "version": "4.13.0",
+    "size": 541317,
+    "unpackedSize": 1802642,
+    "shasum": "714d58df2b630385ec6286833095b871e8d7e90e",
+    "integrity": "sha512-GrWl7wsV46fKIXQZB5ebskLZLAmKL6d9RS0fspCxDeQyjoNu1AfTJTMLPOJyfzaQm0ldFiwFN21/w+sE/kgEFQ==",
+    "filename": "hash-wasm-4.13.0.tgz",
+    "files": [
+      {
+        "path": ".vscode/settings.json",
+        "size": 34,
+        "mode": 420
+      },
+      {
+        "path": "CHANGELOG.md",
+        "size": 6853,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 1630,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 22678,
+        "mode": 420
+      },
+      {
+        "path": "biome.json",
+        "size": 690,
+        "mode": 420
+      },
+      {
+        "path": "dist/adler32.umd.min.js",
+        "size": 8000,
+        "mode": 420
+      },
+      {
+        "path": "dist/argon2.umd.min.js",
+        "size": 30094,
+        "mode": 420
+      },
+      {
+        "path": "dist/bcrypt.umd.min.js",
+        "size": 28760,
+        "mode": 420
+      },
+      {
+        "path": "dist/blake2b.umd.min.js",
+        "size": 16263,
+        "mode": 420
+      },
+      {
+        "path": "dist/blake2s.umd.min.js",
+        "size": 15306,
+        "mode": 420
+      },
+      {
+        "path": "dist/blake3.umd.min.js",
+        "size": 21722,
+        "mode": 420
+      },
+      {
+        "path": "dist/crc32.umd.min.js",
+        "size": 7457,
+        "mode": 420
+      },
+      {
+        "path": "dist/crc64.umd.min.js",
+        "size": 7944,
+        "mode": 420
+      },
+      {
+        "path": "dist/hmac.umd.min.js",
+        "size": 1990,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.esm.js",
+        "size": 271836,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.esm.min.js",
+        "size": 216120,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.umd.js",
+        "size": 283877,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.umd.min.js",
+        "size": 216041,
+        "mode": 420
+      },
+      {
+        "path": "dist/keccak.umd.min.js",
+        "size": 11300,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/adler32.d.ts",
+        "size": 485,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/argon2.d.ts",
+        "size": 2003,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/bcrypt.d.ts",
+        "size": 1226,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/blake2b.d.ts",
+        "size": 900,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/blake2s.d.ts",
+        "size": 900,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/blake3.d.ts",
+        "size": 856,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/crc32.d.ts",
+        "size": 618,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/crc64.d.ts",
+        "size": 594,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/hmac.d.ts",
+        "size": 364,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/index.d.ts",
+        "size": 791,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/keccak.d.ts",
+        "size": 630,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/lockedCreate.d.ts",
+        "size": 254,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/md4.d.ts",
+        "size": 388,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/md5.d.ts",
+        "size": 388,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/mutex.d.ts",
+        "size": 157,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/pbkdf2.d.ts",
+        "size": 997,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/ripemd160.d.ts",
+        "size": 414,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/scrypt.d.ts",
+        "size": 1114,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sha1.d.ts",
+        "size": 394,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sha3.d.ts",
+        "size": 624,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sha224.d.ts",
+        "size": 418,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sha256.d.ts",
+        "size": 418,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sha384.d.ts",
+        "size": 418,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sha512.d.ts",
+        "size": 418,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/sm3.d.ts",
+        "size": 388,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/util.d.ts",
+        "size": 831,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/WASMInterface.d.ts",
+        "size": 2266,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/whirlpool.d.ts",
+        "size": 412,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/xxhash3.d.ts",
+        "size": 964,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/xxhash32.d.ts",
+        "size": 679,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/xxhash64.d.ts",
+        "size": 968,
+        "mode": 420
+      },
+      {
+        "path": "dist/lib/xxhash128.d.ts",
+        "size": 972,
+        "mode": 420
+      },
+      {
+        "path": "dist/md4.umd.min.js",
+        "size": 9824,
+        "mode": 420
+      },
+      {
+        "path": "dist/md5.umd.min.js",
+        "size": 10712,
+        "mode": 420
+      },
+      {
+        "path": "dist/pbkdf2.umd.min.js",
+        "size": 3884,
+        "mode": 420
+      },
+      {
+        "path": "dist/ripemd160.umd.min.js",
+        "size": 15094,
+        "mode": 420
+      },
+      {
+        "path": "dist/scrypt.umd.min.js",
+        "size": 28565,
+        "mode": 420
+      },
+      {
+        "path": "dist/sha1.umd.min.js",
+        "size": 12807,
+        "mode": 420
+      },
+      {
+        "path": "dist/sha3.umd.min.js",
+        "size": 11296,
+        "mode": 420
+      },
+      {
+        "path": "dist/sha224.umd.min.js",
+        "size": 18419,
+        "mode": 420
+      },
+      {
+        "path": "dist/sha256.umd.min.js",
+        "size": 18419,
+        "mode": 420
+      },
+      {
+        "path": "dist/sha384.umd.min.js",
+        "size": 24000,
+        "mode": 420
+      },
+      {
+        "path": "dist/sha512.umd.min.js",
+        "size": 24000,
+        "mode": 420
+      },
+      {
+        "path": "dist/sm3.umd.min.js",
+        "size": 10836,
+        "mode": 420
+      },
+      {
+        "path": "dist/whirlpool.umd.min.js",
+        "size": 13262,
+        "mode": 420
+      },
+      {
+        "path": "dist/xxhash3.umd.min.js",
+        "size": 18080,
+        "mode": 420
+      },
+      {
+        "path": "dist/xxhash32.umd.min.js",
+        "size": 8880,
+        "mode": 420
+      },
+      {
+        "path": "dist/xxhash64.umd.min.js",
+        "size": 9386,
+        "mode": 420
+      },
+      {
+        "path": "dist/xxhash128.umd.min.js",
+        "size": 19973,
+        "mode": 420
+      },
+      {
+        "path": "jest.config.js",
+        "size": 250,
+        "mode": 420
+      },
+      {
+        "path": "lib/adler32.ts",
+        "size": 1493,
+        "mode": 420
+      },
+      {
+        "path": "lib/argon2.ts",
+        "size": 9958,
+        "mode": 420
+      },
+      {
+        "path": "lib/bcrypt.ts",
+        "size": 4739,
+        "mode": 420
+      },
+      {
+        "path": "lib/blake2b.ts",
+        "size": 3413,
+        "mode": 420
+      },
+      {
+        "path": "lib/blake2s.ts",
+        "size": 3412,
+        "mode": 420
+      },
+      {
+        "path": "lib/blake3.ts",
+        "size": 3373,
+        "mode": 420
+      },
+      {
+        "path": "lib/crc32.ts",
+        "size": 2059,
+        "mode": 420
+      },
+      {
+        "path": "lib/crc64.ts",
+        "size": 2831,
+        "mode": 420
+      },
+      {
+        "path": "lib/hmac.ts",
+        "size": 2013,
+        "mode": 420
+      },
+      {
+        "path": "lib/index.ts",
+        "size": 792,
+        "mode": 420
+      },
+      {
+        "path": "lib/keccak.ts",
+        "size": 2157,
+        "mode": 420
+      },
+      {
+        "path": "lib/lockedCreate.ts",
+        "size": 401,
+        "mode": 420
+      },
+      {
+        "path": "lib/md4.ts",
+        "size": 1396,
+        "mode": 420
+      },
+      {
+        "path": "lib/md5.ts",
+        "size": 1396,
+        "mode": 420
+      },
+      {
+        "path": "lib/mutex.ts",
+        "size": 459,
+        "mode": 420
+      },
+      {
+        "path": "lib/pbkdf2.ts",
+        "size": 3347,
+        "mode": 420
+      },
+      {
+        "path": "lib/ripemd160.ts",
+        "size": 1428,
+        "mode": 420
+      },
+      {
+        "path": "lib/scrypt.ts",
+        "size": 3689,
+        "mode": 420
+      },
+      {
+        "path": "lib/sha1.ts",
+        "size": 1403,
+        "mode": 420
+      },
+      {
+        "path": "lib/sha3.ts",
+        "size": 2145,
+        "mode": 420
+      },
+      {
+        "path": "lib/sha224.ts",
+        "size": 1445,
+        "mode": 420
+      },
+      {
+        "path": "lib/sha256.ts",
+        "size": 1445,
+        "mode": 420
+      },
+      {
+        "path": "lib/sha384.ts",
+        "size": 1446,
+        "mode": 420
+      },
+      {
+        "path": "lib/sha512.ts",
+        "size": 1446,
+        "mode": 420
+      },
+      {
+        "path": "lib/sm3.ts",
+        "size": 1396,
+        "mode": 420
+      },
+      {
+        "path": "lib/util.ts",
+        "size": 4996,
+        "mode": 420
+      },
+      {
+        "path": "lib/WASMInterface.ts",
+        "size": 8506,
+        "mode": 420
+      },
+      {
+        "path": "lib/whirlpool.ts",
+        "size": 1426,
+        "mode": 420
+      },
+      {
+        "path": "lib/xxhash3.ts",
+        "size": 3115,
+        "mode": 420
+      },
+      {
+        "path": "lib/xxhash32.ts",
+        "size": 2047,
+        "mode": 420
+      },
+      {
+        "path": "lib/xxhash64.ts",
+        "size": 3119,
+        "mode": 420
+      },
+      {
+        "path": "lib/xxhash128.ts",
+        "size": 3128,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 2332,
+        "mode": 420
+      },
+      {
+        "path": "rollup.config.mjs",
+        "size": 1940,
+        "mode": 420
+      },
+      {
+        "path": "src/adler32.c",
+        "size": 3818,
+        "mode": 420
+      },
+      {
+        "path": "src/argon2.c",
+        "size": 6351,
+        "mode": 420
+      },
+      {
+        "path": "src/bcrypt.c",
+        "size": 30088,
+        "mode": 420
+      },
+      {
+        "path": "src/blake2b.c",
+        "size": 8614,
+        "mode": 420
+      },
+      {
+        "path": "src/blake2s.c",
+        "size": 7907,
+        "mode": 420
+      },
+      {
+        "path": "src/blake3.c",
+        "size": 32964,
+        "mode": 420
+      },
+      {
+        "path": "src/crc32.c",
+        "size": 2536,
+        "mode": 420
+      },
+      {
+        "path": "src/crc64.c",
+        "size": 2235,
+        "mode": 420
+      },
+      {
+        "path": "src/hash-wasm.h",
+        "size": 2927,
+        "mode": 420
+      },
+      {
+        "path": "src/md4.c",
+        "size": 7924,
+        "mode": 420
+      },
+      {
+        "path": "src/md5.c",
+        "size": 9222,
+        "mode": 420
+      },
+      {
+        "path": "src/ripemd160.c",
+        "size": 8039,
+        "mode": 420
+      },
+      {
+        "path": "src/scrypt.c",
+        "size": 8602,
+        "mode": 420
+      },
+      {
+        "path": "src/sha1.c",
+        "size": 6270,
+        "mode": 420
+      },
+      {
+        "path": "src/sha3.c",
+        "size": 9530,
+        "mode": 420
+      },
+      {
+        "path": "src/sha256.c",
+        "size": 9721,
+        "mode": 420
+      },
+      {
+        "path": "src/sha512.c",
+        "size": 11034,
+        "mode": 420
+      },
+      {
+        "path": "src/sm3.c",
+        "size": 4671,
+        "mode": 420
+      },
+      {
+        "path": "src/whirlpool.c",
+        "size": 14646,
+        "mode": 420
+      },
+      {
+        "path": "src/xxhash3.c",
+        "size": 30010,
+        "mode": 420
+      },
+      {
+        "path": "src/xxhash32.c",
+        "size": 5287,
+        "mode": 420
+      },
+      {
+        "path": "src/xxhash64.c",
+        "size": 5618,
+        "mode": 420
+      },
+      {
+        "path": "src/xxhash128.c",
+        "size": 34956,
+        "mode": 420
+      },
+      {
+        "path": "tsconfig.build.json",
+        "size": 144,
+        "mode": 420
+      },
+      {
+        "path": "tsconfig.json",
+        "size": 306,
+        "mode": 420
+      }
+    ],
+    "entryCount": 128,
+    "bundled": []
+  }
+]

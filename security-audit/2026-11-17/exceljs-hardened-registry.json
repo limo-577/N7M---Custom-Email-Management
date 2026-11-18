@@ -1,0 +1,30 @@
+{
+  "version": "5.1.1",
+  "time": {
+    "created": "2026-08-23T01:29:38.530Z",
+    "modified": "2026-11-16T19:48:25.535Z",
+    "5.0.0": "2026-08-23T01:29:38.850Z",
+    "5.0.1": "2026-10-14T15:55:21.832Z",
+    "5.0.2": "2026-10-15T15:21:00.948Z",
+    "5.1.0": "2026-10-16T15:53:19.193Z",
+    "5.1.1": "2026-11-16T19:48:25.381Z"
+  },
+  "repository": {
+    "url": "git+https://github.com/mateocallec/exceljs-hardened.git",
+    "type": "git"
+  },
+  "dist.integrity": "sha512-yfd2zpegsN5+FE4pgJvBTk2hyxLQIovfYs8DO+NTyn2DnH7+tKXCDmFF/ePVbCUNtlslYp2kI8GiPPYtHX/Yyw==",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "tmp": "^0.2.0",
+    "dayjs": "^1.8.34",
+    "jszip": "^3.10.1",
+    "saxes": "^5.0.1",
+    "archiver": "^8.0.0",
+    "fast-csv": "^4.3.1",
+    "unzipper": "^0.12.5",
+    "readable-stream": "^3.6.0"
+  }
+}

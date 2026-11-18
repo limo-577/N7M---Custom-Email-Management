@@ -105,6 +105,11 @@ test('browser arguments omit absent startup URL and preserve explicit Profile ro
   assert.deepEqual(browserArgs({ profile: '' }, ''), ['--new-window']);
   assert.deepEqual(browserArgs({ profile: '43' }, ''), ['--profile-directory=Profile 43', '--new-window']);
   assert.deepEqual(browserArgs({ profile: 'Default' }, 'https://example.com/'), ['--profile-directory=Default', '--new-window', 'https://example.com/']);
+  for (const browser of ['Chrome', 'Edge', 'Brave']) {
+    assert.deepEqual(browserArgs({ browser, profile: 'Profile+21' }, ''), ['--profile-directory=Profile+21', '--new-window']);
+    assert.deepEqual(browserArgs({ browser, profile: 'Work+Team' }, ''), ['--profile-directory=Work+Team', '--new-window']);
+  }
+  assert.deepEqual(browserArgs({ browser: 'Firefox', profile: 'Work+Mail' }, ''), ['--new-instance', '-P', 'Work+Mail', '--new-window', 'about:blank']);
   assert.throws(() => browserArgs({ profile: 'Profile 1" --evil' }, ''), /Profile/);
 });
 test('legacy files edited or created by older builds after migration are preserved on unlock', async () => {

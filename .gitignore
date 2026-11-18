@@ -30,6 +30,10 @@ npm-debug.log*
 *.p12
 *.pem
 
+*.key
+email-data.json*
+email-vault.json*
+
 # System files
 .DS_Store
 Thumbs.db
@@ -41,3 +45,9 @@ coverage/
 .cache/
 .startup-qa/
 build/.fixture/
+
+# Local temporary and test files
+/tmp/
+
+# Generated security audit text logs
+/security-audit/2026-11-17/*.txt

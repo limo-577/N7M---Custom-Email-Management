@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-17",
+  "source": "Explicit developer replies in this chat",
+  "decisions": [
+    {
+      "stage": "evaluation",
+      "answer": "评估迁移到受维护的替代库（推荐，先验证兼容性）"
+    },
+    {
+      "stage": "migration",
+      "answer": "批准迁移到该非官方 fork，并继续验证（推荐）",
+      "package": "exceljs-hardened",
+      "version": "5.1.1",
+      "modernMinimatch": "11.0.9",
+      "retainedBoundary": "Keep the existing cancellable worker and all ZIP/workbook resource budgets; retain the legacy CommonJS matcher adapter for old build consumers.",
+      "disclosedRisks": "Unofficial unaffiliated fork, short maintenance history, supply-chain trust and remaining deprecated indirect dependencies."
+    }
+  ]
+}
