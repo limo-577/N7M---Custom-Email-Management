@@ -5,12 +5,11 @@ const crypto = require('node:crypto');
 const { boundedStep } = require('./bounded-step.cjs');
 const risk = require('./risk-acceptance.cjs');
 const { cleanEnvironment } = require('./controlled-build.cjs');
+const { outputPath, reportPath } = require('./release-paths.cjs');
 const ROOT = path.resolve(__dirname, '..');
 function build(output, evidence) {
   risk.checkInputs(ROOT);
-  output = path.resolve(output); evidence = path.resolve(evidence);
-  risk.requireThat((output === path.join(ROOT, 'release') || output.startsWith(path.join(ROOT, 'release') + path.sep)) &&
-    evidence.startsWith(path.join(ROOT, '.risk-build') + path.sep), 'Distribution and evidence paths must stay in generated checkout directories');
+  output = outputPath(ROOT, output, process.cwd()); evidence = reportPath(ROOT, evidence, process.cwd());
   risk.requireThat(!fs.existsSync(output) || fs.readdirSync(output).length === 0, 'Distribution output must be empty; refuse to overwrite packages');
   const log = path.join(evidence, 'glob-guard.jsonl');
   risk.requireThat(!fs.existsSync(log), 'Glob evidence already exists');

@@ -5,16 +5,12 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const { spawn, spawnSync } = require('node:child_process');
 const asar = require('@electron/asar');
+const { outputPath, reportPath, verificationPaths } = require('./release-paths.cjs');
 const root = path.resolve(__dirname, '..');
-const args = process.argv.slice(2);
-const value = name => args[args.indexOf(name) + 1];
-if (args.length !== 4 || !args.includes('--output') || !args.includes('--report')) throw Error('Usage: verify-release.cjs --output DIRECTORY --report FILE');
-const output = path.resolve(value('--output'));
-const report = path.resolve(value('--report'));
-if (!output.startsWith(path.join(root, 'release') + path.sep)) throw Error('Output must be under release/');
-if (!report.startsWith(path.join(root, '.risk-build') + path.sep)) throw Error('Report must be under .risk-build/');
+const { output, report } = verificationPaths(root, process.argv.slice(2), process.cwd());
 if (fs.existsSync(report)) throw Error('Refuse to overwrite artifact evidence');
 fs.mkdirSync(path.dirname(report), { recursive: true });
+reportPath(root, report);
 const manifest = require('../package.json');
 const lock = require('../package-lock.json');
 const sevenZip = path.join(process.env.ProgramFiles || 'C:/Program Files', '7-Zip/7z.exe');
@@ -65,7 +61,7 @@ async function main() {
       if (entry.isDirectory()) inspectLoose(path.join(directory, entry.name), name);
     }
   }
-  inspectLoose(path.join(output, 'win-unpacked'));
+  inspectLoose(outputPath(root, path.join(output, 'win-unpacked')));
   const archive = path.join(output, 'win-unpacked/resources/app.asar');
   const read = file => asar.extractFile(archive, file.replaceAll('/', path.sep));
   const packaged = JSON.parse(read('package.json'));
@@ -98,7 +94,7 @@ async function main() {
   const expected = Object.fromEntries(await Promise.all(['resources/app.asar', exe].map(async file => [file, await fileHash(path.join(output, 'win-unpacked', file))])));
   for (const kind of ['Setup.exe', 'Portable.exe', 'NoInstall.zip']) {
     const file = `${manifest.build.productName}-${manifest.version}-${kind}`;
-    const artifact = path.join(output, file);
+    const artifact = outputPath(root, path.join(output, file));
     assert.ok(fs.statSync(artifact).size > 1000000);
     const outerEntries = inspectArchive(artifact);
     let payload = artifact;
@@ -119,7 +115,8 @@ async function main() {
     reason: 'Static payload verification only. Any risk acceptance and publication approval are separate; CVE-2026-112366 is unresolved.',
     sourceFilesMatched: sourceFiles.length, runtimePackages, excludedDevelopmentMatchers: true,
     excludedOldExceljsAndBrowserBundle: true, method: 'Static archive extraction; installer was not executed.', artifacts: checks };
-  fs.writeFileSync(report, JSON.stringify(result, null, 2) + '\n');
+  reportPath(root, report);
+  fs.writeFileSync(report, JSON.stringify(result, null, 2) + '\n', { flag: 'wx' });
   console.log(JSON.stringify({ sourceFilesMatched: sourceFiles.length, runtimePackages: runtimePackages.length, artifacts: checks.map(value => ({file: value.file, sha256: value.sha256})), releaseEligible: false }));
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
