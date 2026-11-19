@@ -12,6 +12,20 @@ const workflows = Object.fromEntries(fs.readdirSync(workflowDirectory)
 const workflow = workflows['release.yml'];
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 
+test('release tags match the committed manifest and lockfile before installation', () => {
+  const { checkReleaseVersion } = require('./check-release-version.cjs');
+  const lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  const context = { event: 'push', ref: `refs/tags/v${manifest.version}` };
+  assert.equal(checkReleaseVersion(manifest, lock, context), manifest.version);
+  assert.equal(checkReleaseVersion(manifest, lock, { event: 'workflow_dispatch', ref: 'refs/heads/main' }), manifest.version);
+  assert.throws(() => checkReleaseVersion(manifest, lock, { event: 'push', ref: 'refs/tags/v0.0.0' }), /tag/);
+  assert.throws(() => checkReleaseVersion(manifest, { ...lock, version: '0.0.0' }, context), /versions/);
+  assert.throws(() => checkReleaseVersion(manifest, { ...lock, packages: { ...lock.packages, '': { ...lock.packages[''], version: '0.0.0' } } }, context), /versions/);
+  const steps = workflow.jobs.build.steps;
+  const check = steps.findIndex(step => step.run === 'node build/check-release-version.cjs');
+  assert.ok(check >= 0 && check < steps.findIndex(step => step.run === 'npm ci'));
+});
+
 test('all CI actions use full commit SHAs and builds retain only read permissions', () => {
   assert.deepEqual(workflow.jobs.build.permissions, { contents: 'read' });
   for (const [name, configuration] of Object.entries(workflows)) {

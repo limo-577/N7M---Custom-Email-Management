@@ -1,6 +1,6 @@
 # N7M - Custom Email Management
 
-Windows 桌面邮箱与浏览器账号管理工具，当前版本 **1.8.1**。
+Windows 桌面邮箱与浏览器账号管理工具，当前版本 **1.8.3**。
 
 ## 账号管理
 
@@ -99,9 +99,9 @@ npm run dist:all
 
 输出 Windows x64 三种分发形式：
 
-- `release/N7M - Custom Email Management-1.8.1-Setup.exe`：安装版。
-- `release/N7M - Custom Email Management-1.8.1-Portable.exe`：单文件免安装版。首次运行显示启动进度并准备运行文件，完成后保留运行文件缓存；同一版本后续启动直接复用缓存，重复点击会唤起同一个程序窗口。
-- `release/N7M - Custom Email Management-1.8.1-NoInstall.zip`：解压免安装版。完整解压后运行同目录的主 EXE，保留 DLL、resources、locales 等配套文件，日常启动更快。
+- `release/N7M - Custom Email Management-1.8.3-Setup.exe`：安装版。
+- `release/N7M - Custom Email Management-1.8.3-Portable.exe`：单文件免安装版。首次运行显示启动进度并准备运行文件，完成后保留运行文件缓存；同一版本后续启动直接复用缓存，重复点击会唤起同一个程序窗口。
+- `release/N7M - Custom Email Management-1.8.3-NoInstall.zip`：解压免安装版。完整解压后运行同目录的主 EXE，保留 DLL、resources、locales 等配套文件，日常启动更快。
 
 桌面流程测试使用独立目录、测试账号及隐藏窗口模式，不显示窗口、不抢焦点，且不实际启动浏览器或读写用户剪贴板；指定 `N7M_PACKAGED_TEST=1` 可通过相同版本 Electron 加载 `release/win-unpacked` 的打包 ASAR 运行同一套验证。隐藏模式只在同时指定 `N7M_TEST_BACKGROUND=1` 和隔离资料目录 `N7M_TEST_DATA_DIR` 时启用，普通软件启动不受影响。
 
@@ -125,4 +125,4 @@ Windows 打包通过 `build/build-windows.cjs` 使用缓存启动器模板 `buil
 
 2026-11-16 复核发现 ExcelJS 的工作簿加载路径存在新披露的原型污染风险。开发者选择保留现有解析实现与线程限额，**仅导入来源可信的 Excel 文件**。隔离工作线程可避免污染主进程的原型，但不能保证导入数据正确，也不能代替上游修复；`npm audit` 当前无告警不表示此风险已消除。具体公告、可达性与决定见 `SECURITY-AUDIT.md`。
 
-GitHub Actions 使用固定提交。构建任务仅有读权限；写仓库权限仅用于标签推送后的独立发布任务，发布任务不检出和执行项目代码。手动构建不发布。只读依赖检查工作流定期运行策略检查和 npm audit，不自动修改版本或创建发布。构建入口已固定禁止自动发布，CI 使用 `npm run dist:all`，不附加旧入口的 `--publish never` 参数。
+GitHub Actions 使用固定提交。构建任务仅有读权限；写仓库权限仅用于标签推送后的独立发布任务，发布任务不检出和执行项目代码。手动构建不发布。只读依赖检查工作流定期运行策略检查和 npm audit，不自动修改版本或创建发布。构建入口已固定禁止自动发布，CI 先核对标签与软件版本，再通过 `node build/guarded-distribution.cjs` 受控调用 `npm run dist:all`，不附加旧入口的 `--publish never` 参数。
